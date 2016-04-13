@@ -7,7 +7,7 @@
  *
  */
 function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
-    $urlRouterProvider.otherwise("/index/home");
+    $urlRouterProvider.otherwise("/pagina-principal");
 
     $ocLazyLoadProvider.config({
         // Set to true if you want to see what and when is dynamically loaded
@@ -15,22 +15,36 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
     });
 
     $stateProvider
+    .state('pagina_principal', {
+          url: "/pagina-principal",
+          templateUrl: "page/home/home.html",
+          data: { pageTitle: 'Pagina Principal' },
+          resolve: {
+              loadPlugin: function ($ocLazyLoad) {
+                  return $ocLazyLoad.load([
+                      {
+                          serie: true,
+                          name: 'angular-flot',
+                          files: [ 'js/plugins/flot/jquery.flot.js', 'js/plugins/flot/jquery.flot.time.js', 'js/plugins/flot/jquery.flot.tooltip.min.js', 'js/plugins/flot/jquery.flot.spline.js', 'js/plugins/flot/jquery.flot.resize.js', 'js/plugins/flot/jquery.flot.pie.js', 'js/plugins/flot/curvedLines.js', 'js/plugins/flot/angular-flot.js', ]
+                      },
+                      {
+                          files: ['css/plugins/iCheck/custom.css','js/plugins/iCheck/icheck.min.js']
+                      },
+                      {
+                          files: ['js/plugins/jvectormap/jquery-jvectormap-2.0.2.min.js', 'js/plugins/jvectormap/jquery-jvectormap-2.0.2.css']
+                      },
+                      {
+                          files: ['js/plugins/jvectormap/jquery-jvectormap-world-mill-en.js']
+                      },
+                      {
+                          name: 'ui.checkbox',
+                          files: ['js/bootstrap/angular-bootstrap-checkbox.js']
+                      }
+                  ]);
+              }
+          }
+      })
 
-        .state('index', {
-            abstract: true,
-            url: "/index",
-            templateUrl: "views/common/content.html",
-        })
-        .state('index.home', {
-            url: "/home",
-            templateUrl: "views/home/home.html",
-            data: { pageTitle: 'Home' }
-        })
-        .state('index.profile', {
-            url: "/profile",
-            templateUrl: "views/profile/profile.html",
-            data: { pageTitle: 'Profile' }
-        })
 }
 angular
     .module('inspinia')
