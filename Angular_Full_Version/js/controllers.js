@@ -219,7 +219,7 @@ function MainCtrl() {
     this.BarChart = {
         data: [5, 3, 9, 6, 5, 9, 7, 3, 5, 2, 4, 7, 3, 2, 7, 9, 6, 4, 5, 7, 3, 2, 1, 0, 9, 5, 6, 8, 3, 2, 1],
         options: {
-            fill: ["#1ab394", "#d7d7d7"],
+            fill: ["#3DADD0", "#d7d7d7"],
             width: 100
         }
     };
@@ -227,21 +227,21 @@ function MainCtrl() {
     this.BarChart2 = {
         data: [5, 3, 9, 6, 5, 9, 7, 3, 5, 2],
         options: {
-            fill: ["#1ab394", "#d7d7d7"]
+            fill: ["#3DADD0", "#d7d7d7"]
         }
     };
 
     this.BarChart3 = {
         data: [5, 3, 2, -1, -3, -2, 2, 3, 5, 2],
         options: {
-            fill: ["#1ab394", "#d7d7d7"]
+            fill: ["#3DADD0", "#d7d7d7"]
         }
     };
 
     this.LineChart = {
         data: [5, 9, 7, 3, 5, 2, 5, 3, 9, 6, 5, 9, 4, 7, 3, 2, 9, 8, 7, 4, 5, 1, 2, 9, 5, 4, 7],
         options: {
-            fill: '#1ab394',
+            fill: '#3DADD0',
             stroke: '#169c81',
             width: 64
         }
@@ -250,7 +250,7 @@ function MainCtrl() {
     this.LineChart2 = {
         data: [3, 2, 9, 8, 47, 4, 5, 1, 2, 9, 5, 4, 7],
         options: {
-            fill: '#1ab394',
+            fill: '#3DADD0',
             stroke: '#169c81',
             width: 64
         }
@@ -259,7 +259,7 @@ function MainCtrl() {
     this.LineChart3 = {
         data: [5, 3, 2, -1, -3, -2, 2, 3, 5, 2],
         options: {
-            fill: '#1ab394',
+            fill: '#3DADD0',
             stroke: '#169c81',
             width: 64
         }
@@ -268,7 +268,7 @@ function MainCtrl() {
     this.LineChart4 = {
         data: [5, 3, 9, 6, 5, 9, 7, 3, 5, 2],
         options: {
-            fill: '#1ab394',
+            fill: '#3DADD0',
             stroke: '#169c81',
             width: 64
         }
@@ -277,38 +277,38 @@ function MainCtrl() {
     this.PieChart = {
         data: [1, 5],
         options: {
-            fill: ["#1ab394", "#d7d7d7"]
+            fill: ["#3DADD0", "#d7d7d7"]
         }
     };
 
     this.PieChart2 = {
         data: [226, 360],
         options: {
-            fill: ["#1ab394", "#d7d7d7"]
+            fill: ["#3DADD0", "#d7d7d7"]
         }
     };
     this.PieChart3 = {
         data: [0.52, 1.561],
         options: {
-            fill: ["#1ab394", "#d7d7d7"]
+            fill: ["#3DADD0", "#d7d7d7"]
         }
     };
     this.PieChart4 = {
         data: [1, 4],
         options: {
-            fill: ["#1ab394", "#d7d7d7"]
+            fill: ["#3DADD0", "#d7d7d7"]
         }
     };
     this.PieChart5 = {
         data: [226, 134],
         options: {
-            fill: ["#1ab394", "#d7d7d7"]
+            fill: ["#3DADD0", "#d7d7d7"]
         }
     };
     this.PieChart6 = {
         data: [0.52, 1.041],
         options: {
-            fill: ["#1ab394", "#d7d7d7"]
+            fill: ["#3DADD0", "#d7d7d7"]
         }
     };
 };
@@ -386,7 +386,7 @@ function dashboardFlotOne() {
             borderWidth: 1,
             color: '#d5d5d5'
         },
-        colors: ["#1ab394", "#1C84C6"],
+        colors: ["#3DADD0", "#1C84C6"],
         xaxis: {
         },
         yaxis: {
@@ -483,7 +483,7 @@ function dashboardFlotTwo() {
             label: "Number of orders",
             grow:{stepMode:"linear"},
             data: data2,
-            color: "#1ab394",
+            color: "#3DADD0",
             bars: {
                 show: true,
                 align: "center",
@@ -525,7 +525,7 @@ function dashboardFlotTwo() {
             borderWidth: 0,
             color: '#d5d5d5'
         },
-        colors: ["#1ab394", "#464f88"],
+        colors: ["#3DADD0", "#464f88"],
         tooltip: true,
         xaxis: {
             mode: "time",
@@ -615,7 +615,7 @@ function dashboardFive() {
             borderWidth: 2,
             color: 'transparent'
         },
-        colors: ["#1ab394", "#1C84C6"],
+        colors: ["#3DADD0", "#1C84C6"],
         xaxis:{
         },
         yaxis: {
@@ -636,7 +636,7 @@ function dashboardFive() {
         type: 'line',
         width: '100%',
         height: '50',
-        lineColor: '#1ab394',
+        lineColor: '#3DADD0',
         fillColor: "transparent"
     };
 
@@ -645,7 +645,7 @@ function dashboardFive() {
         type: 'line',
         width: '100%',
         height: '50',
-        lineColor: '#1ab394',
+        lineColor: '#3DADD0',
         fillColor: "transparent"
     };
 
@@ -709,7 +709,7 @@ function flotChartCtrl() {
         xaxis: {
             tickDecimals: 0
         },
-        colors: ["#1ab394"],
+        colors: ["#3DADD0"],
         grid: {
             color: "#999999",
             hoverable: true,
@@ -760,12 +760,12 @@ function flotChartCtrl() {
         {
             label: "Sales 3",
             data: 15,
-            color: "#79d2c0"
+            color: "#80c9cc"
         },
         {
             label: "Sales 4",
             data: 52,
-            color: "#1ab394"
+            color: "#3DADD0"
         }
     ];
 
@@ -816,7 +816,7 @@ function flotChartCtrl() {
         xaxis: {
             tickDecimals: 0
         },
-        colors: ["#1ab394"],
+        colors: ["#3DADD0"],
         grid: {
             color: "#999999",
             hoverable: true,
@@ -881,7 +881,7 @@ function flotChartCtrl() {
         xaxis: {
             tickDecimals: 0
         },
-        colors: ["#1ab394"],
+        colors: ["#3DADD0"],
         grid: {
             color: "#999999",
             hoverable: true,
@@ -947,7 +947,7 @@ function flotChartCtrl() {
         legend: {
             position: 'sw'
         },
-        colors: ["#1ab394"],
+        colors: ["#3DADD0"],
         grid: {
             color: "#999999",
             hoverable: true,
@@ -992,7 +992,7 @@ function rickshawChartCtrl() {
      */
     var simpleChartSeries = [
         {
-            color: '#1ab394',
+            color: '#3DADD0',
             data: [
                 { x: 0, y: 40 },
                 { x: 1, y: 49 },
@@ -1021,8 +1021,8 @@ function rickshawChartCtrl() {
                 { x: 3, y: 20 },
                 { x: 4, y: 16 }
             ],
-            color: '#1ab394',
-            stroke: '#17997f'
+            color: '#3DADD0',
+            stroke: '#3793c8'
         },
         {
             data: [
@@ -1064,7 +1064,7 @@ function rickshawChartCtrl() {
                 { x: 3, y: 30 },
                 { x: 4, y: 32 }
             ],
-            color: '#1ab394'
+            color: '#3DADD0'
         }
     ];
 
@@ -1087,7 +1087,7 @@ function rickshawChartCtrl() {
                 { x: 3, y: 30 },
                 { x: 4, y: 32 }
             ],
-            color: '#1ab394'
+            color: '#3DADD0'
         },
         {
             data: [
@@ -1120,7 +1120,7 @@ function rickshawChartCtrl() {
                 { x: 3, y: 30 },
                 { x: 4, y: 32 }
             ],
-            color: '#1ab394'
+            color: '#3DADD0'
         }
     ];
 
@@ -1143,7 +1143,7 @@ function rickshawChartCtrl() {
                 { x: 3, y: 30 },
                 { x: 4, y: 32 }
             ],
-            color: '#1ab394'
+            color: '#3DADD0'
         },
         {
             data: [
@@ -1184,7 +1184,7 @@ function rickshawChartCtrl() {
                 { x: 9, y: 18 },
                 { x: 10, y: 16 }
             ],
-            color: '#1ab394'
+            color: '#3DADD0'
         }
     ]
 
@@ -1221,8 +1221,8 @@ function sparklineChartCtrl() {
     var inlineData = [34, 43, 43, 35, 44, 32, 44, 52, 25];
     var inlineOptions = {
         type: 'line',
-        lineColor: '#17997f',
-        fillColor: '#1ab394'
+        lineColor: '#3793c8',
+        fillColor: '#3DADD0'
     };
 
     /**
@@ -1231,7 +1231,7 @@ function sparklineChartCtrl() {
     var barSmallData = [5, 6, 7, 2, 0, -4, -2, 4];
     var barSmallOptions = {
         type: 'bar',
-        barColor: '#1ab394',
+        barColor: '#3DADD0',
         negBarColor: '#c6c6c6'
     };
 
@@ -1241,7 +1241,7 @@ function sparklineChartCtrl() {
     var smallPieData = [1, 1, 2];
     var smallPieOptions = {
         type: 'pie',
-        sliceColors: ['#1ab394', '#b3b3b3', '#e4f0fb']
+        sliceColors: ['#3DADD0', '#b3b3b3', '#e4f0fb']
     };
 
     /**
@@ -1250,7 +1250,7 @@ function sparklineChartCtrl() {
     var longLineData = [34, 43, 43, 35, 44, 32, 15, 22, 46, 33, 86, 54, 73, 53, 12, 53, 23, 65, 23, 63, 53, 42, 34, 56, 76, 15, 54, 23, 44];
     var longLineOptions = {
         type: 'line',
-        lineColor: '#17997f',
+        lineColor: '#3793c8',
         fillColor: '#ffffff'
     };
 
@@ -1260,7 +1260,7 @@ function sparklineChartCtrl() {
     var tristateData = [1, 1, 0, 1, -1, -1, 1, -1, 0, 0, 1, 1];
     var tristateOptions = {
         type: 'tristate',
-        posBarColor: '#1ab394',
+        posBarColor: '#3DADD0',
         negBarColor: '#bfbfbf'
     };
 
@@ -1270,7 +1270,7 @@ function sparklineChartCtrl() {
     var discreteData = [4, 6, 7, 7, 4, 3, 2, 1, 4, 4, 5, 6, 3, 4, 5, 8, 7, 6, 9, 3, 2, 4, 1, 5, 6, 4, 3, 7, ];
     var discreteOptions = {
         type: 'discrete',
-        lineColor: '#1ab394'
+        lineColor: '#3DADD0'
     };
 
     /**
@@ -1280,7 +1280,7 @@ function sparklineChartCtrl() {
     var pieCustomOptions = {
         type: 'pie',
         height: '150px',
-        sliceColors: ['#1ab394', '#b3b3b3', '#e4f0fb']
+        sliceColors: ['#3DADD0', '#b3b3b3', '#e4f0fb']
     };
 
     /**
@@ -1291,7 +1291,7 @@ function sparklineChartCtrl() {
         type: 'bar',
         barWidth: 8,
         height: '150px',
-        barColor: '#1ab394',
+        barColor: '#3DADD0',
         negBarColor: '#c6c6c6'
     };
 
@@ -1303,7 +1303,7 @@ function sparklineChartCtrl() {
         type: 'line',
         lineWidth: 1,
         height: '150px',
-        lineColor: '#17997f',
+        lineColor: '#3793c8',
         fillColor: '#ffffff'
     };
 
@@ -1712,20 +1712,20 @@ function chartJsCtrl() {
     this.polarData = [
         {
             value: 300,
-            color:"#a3e1d4",
-            highlight: "#1ab394",
+            color:"#80c9cc",
+            highlight: "#3DADD0",
             label: "App"
         },
         {
             value: 140,
             color: "#dedede",
-            highlight: "#1ab394",
+            highlight: "#3DADD0",
             label: "Software"
         },
         {
             value: 200,
             color: "#A4CEE8",
-            highlight: "#1ab394",
+            highlight: "#3DADD0",
             label: "Laptop"
         }
     ];
@@ -1755,20 +1755,20 @@ function chartJsCtrl() {
     this.doughnutData = [
         {
             value: 300,
-            color:"#a3e1d4",
-            highlight: "#1ab394",
+            color:"#80c9cc",
+            highlight: "#3DADD0",
             label: "App"
         },
         {
             value: 50,
             color: "#dedede",
-            highlight: "#1ab394",
+            highlight: "#3DADD0",
             label: "Software"
         },
         {
             value: 100,
             color: "#A4CEE8",
-            highlight: "#1ab394",
+            highlight: "#3DADD0",
             label: "Laptop"
         }
     ];
@@ -1984,7 +1984,7 @@ function GoogleMaps($scope) {
         zoom: 11,
         center: new google.maps.LatLng(40.6700, -73.9400),
         // Style for Google Maps
-        styles: [{"stylers":[{"hue":"#18a689"},{"visibility":"on"},{"invert_lightness":true},{"saturation":40},{"lightness":10}]}],
+        styles: [{"stylers":[{"hue":"#3794c8"},{"visibility":"on"},{"invert_lightness":true},{"saturation":40},{"lightness":10}]}],
         mapTypeId: google.maps.MapTypeId.ROADMAP
     };
 }
@@ -2580,7 +2580,7 @@ function metricsCtrl() {
         type: 'line',
         width: '100%',
         height: '60',
-        lineColor: '#1ab394',
+        lineColor: '#3DADD0',
         fillColor: "#ffffff"
     };
 
@@ -2589,7 +2589,7 @@ function metricsCtrl() {
         type: 'line',
         width: '100%',
         height: '60',
-        lineColor: '#1ab394',
+        lineColor: '#3DADD0',
         fillColor: "#ffffff"
     };
 
@@ -2615,14 +2615,14 @@ function metricsCtrl() {
     this.demo5Options = {
         type: 'pie',
         height: '140',
-        sliceColors: ['#1ab394', '#F5F5F5']
+        sliceColors: ['#3DADD0', '#F5F5F5']
     };
 
     this.demo6Data = [5, 3];
     this.demo6Options = {
         type: 'pie',
         height: '140',
-        sliceColors: ['#1ab394', '#F5F5F5']
+        sliceColors: ['#3DADD0', '#F5F5F5']
     };
 
     this.demo7Data = [2, 2];
