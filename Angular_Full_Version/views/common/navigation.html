@@ -25,7 +25,7 @@
                     IN+
                 </div>
             </li>
-            <li ng-class="{active: $state.includes('dashboards')}">
+            <!--<li ng-class="{active: $state.includes('dashboards')}">
                 <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">{{ 'DASHBOARD' | translate }}</span> <span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse" ng-class="{in: $state.includes('dashboards')}">
                     <li ui-sref-active="active"><a ui-sref="dashboards.dashboard_1">{{ 'DASHBOARD' | translate }} v.1</a></li>
@@ -51,32 +51,77 @@
                     <li ui-sref-active="active"><a ui-sref="charts.sparkline_chart">Sparkline Charts</a></li>
                 </ul>
             </li>
+            -->
+            <li ui-sref-active="active">
+                <a ui-sref="widgets"><i class="fa fa-globe"></i> <span class="nav-label">{{ 'HOME' | translate }}</span></a>
+            </li>
+            <li ui-sref-active="active">
+                <a ui-sref="app.profile_2"><i class="fa fa-user"></i> <span class="nav-label">{{ 'PROFILE' | translate }}</span></a>
+            </li>
+            <li ui-sref-active="active">
+                <a ui-sref="outlook"><i class="fa fa-envelope"></i><span class="nav-label"> {{ 'OUTLOOK' | translate}}</span></a>
+            </li>
+            
             <li ng-class="{active: $state.includes('mailbox')}">
                 <a ui-sref="inbox"><i class="fa fa-envelope"></i> <span class="nav-label">{{ 'MAILBOX' | translate }} </span><span class="label label-warning pull-right">16/24</span></a>
                 <ul class="nav nav-second-level collapse" ng-class="{in: $state.includes('mailbox')}">
-                    <li ui-sref-active="active"><a ui-sref="mailbox.inbox">Inbox</a></li>
-                    <li ui-sref-active="active"><a ui-sref="mailbox.email_view">Email view</a></li>
-                    <li ui-sref-active="active"><a ui-sref="mailbox.email_compose">Compose email</a></li>
-                    <li ui-sref-active="active"><a ui-sref="mailbox.email_template">Email template</a></li>
+                    <li ui-sref-active="active"><a ui-sref="mailbox.inbox">{{ 'INBOX' | translate}}</a></li>
+                    <li ui-sref-active="active"><a ui-sref="mailbox.email_view">{{ 'MAILVW' | translate}}</a></li>
+                    <li ui-sref-active="active"><a ui-sref="mailbox.email_compose">{{ 'MAILCOMPOSE' | translate}}</a></li>
+                    <li ui-sref-active="active"><a ui-sref="mailbox.email_template">{{ 'MAILTEMPLATE' | translate}}</a></li>
                 </ul>
             </li>
+            <!--
             <li ui-sref-active="active">
                 <a ui-sref="metrics"><i class="fa fa-pie-chart"></i> <span class="nav-label">{{ 'METRICS' | translate }}</span> </a>
             </li>
+            -->
+            
             <li ui-sref-active="active">
-                <a ui-sref="widgets"><i class="fa fa-flask"></i> <span class="nav-label">{{ 'WIDGETS' | translate }}</span></a>
+                <a ui-sref="app.contacts_2"><i class="fa fa-group"></i> <span class="nav-label">{{ 'CONTACTS' | translate }}</span></a>
             </li>
+            
+            <li ui-sref-active="active">
+                <a ui-sref="app.project_detail"><i class="fa fa-briefcase"></i> <span class="nav-label">{{ 'PROJDETAIL' | translate }}</span></a>
+            </li>
+            <li ui-sref-active="active">
+                <a ui-sref="app.teams_board"><i class="fa fa-tasks"></i> <span class="nav-label">{{ 'TEAMBOARD' | translate }}</span></a>
+            </li>
+            <li ui-sref-active="active">
+                <a ui-sref="app.calendar"><i class="fa fa-calendar"></i> <span class="nav-label">{{ 'CALENDAR' | translate }}</span></a>
+            </li>
+            <li ui-sref-active="active">
+                <a ui-sref="miscellaneous.forum_view"><i class="fa fa-copy"></i> <span class="nav-label">{{ 'FORUM' | translate }}</span></a>
+            </li>
+            
+            <li ui-sref-active="active">
+                <a ui-sref="app.vote_list"><i class="fa fa-check"></i> <span class="nav-label">{{ 'VOTELIST' | translate }}</span></a>
+            </li>
+            
+            <li ng-class="{active: $state.includes('forms')}">
+                <a href=""><i class="fa fa-book"></i> <span class="nav-label">{{ 'KB' | translate }}</span><span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level collapse" ng-class="{in: $state.includes('forms')}">
+                    <li ui-sref-active="active"><a ui-sref="forms.text_editor">{{ 'TXTEDITOR' | translate }}</a></li>
+                    <li ui-sref-active="active"><a ui-sref="forms.file_upload">{{ 'FILEUPLD' | translate}}</a></li>
+                </ul>
+            </li>
+            
+            
+            <!--
             <li ng-class="{active: $state.includes('forms')}">
                 <a href=""><i class="fa fa-edit"></i> <span class="nav-label">{{ 'FORMS' | translate }}</span><span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse" ng-class="{in: $state.includes('forms')}">
                     <li ui-sref-active="active"><a ui-sref="forms.basic_form">Basic form</a></li>
                     <li ui-sref-active="active"><a ui-sref="forms.advanced_plugins">Advanced Plugins</a></li>
                     <li ui-sref-active="active"><a ui-sref="forms.wizard.step_one">Wizard</a></li>
-                    <li ui-sref-active="active"><a ui-sref="forms.file_upload">File Upload</a></li>
                     <li ui-sref-active="active"><a ui-sref="forms.text_editor">Text Editor</a></li>
+                    <li ui-sref-active="active"><a ui-sref="forms.file_upload">File Upload</a></li>
+                    
                     <li ui-sref-active="active"><a ui-sref="forms.markdown">Markdown</a></li>
                 </ul>
             </li>
+-->
+            <!--
             <li ng-class="{active: $state.includes('app')}">
                 <a href=""><i class="fa fa-desktop"></i> <span class="nav-label">{{ 'APPVIEWS' | translate }}</span>  <span class="pull-right label label-primary">SPECIAL</span></a>
                 <ul class="nav nav-second-level collapse" ng-class="{in: $state.includes('app')}">
@@ -100,7 +145,8 @@
                     <li ui-sref-active="active"><a ui-sref="app.pin_board">Pin board</a></li>
                     <li ui-sref-active="active"><a ui-sref="app.invoice">Invoice</a></li>
                 </ul>
-            </li>
+            </li> -->
+            <!--
             <li ng-class="{active: $state.includes('pages')}">
                 <a href=""><i class="fa fa-files-o"></i> <span class="nav-label">{{ 'OTHERPAGES' | translate }}</span><span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse" ng-class="{in: $state.includes('pages')}">
@@ -143,7 +189,8 @@
                     <li ui-sref-active="active"><a ui-sref="miscellaneous.tour">Tour</a></li>
                 </ul>
             </li>
-            <li ng-class="{active: $state.includes('ui')}">
+            -->
+            <!--<li ng-class="{active: $state.includes('ui')}">
                 <a href=""><i class="fa fa-flask"></i> <span class="nav-label">{{ 'UIELEMENTS' | translate }}</span><span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse" ng-class="{in: $state.includes('ui')}">
                     <li ui-sref-active="active"><a ui-sref="ui.typography">Typography</a></li>
@@ -169,18 +216,7 @@
                     <li ui-sref-active="active"><a ui-sref="tables.nggrid">NG Grid</a></li>
                 </ul>
             </li>
-            <li ng-class="{active: $state.includes('commerce')}">
-                <a href="#"><i class="fa fa-shopping-cart"></i> <span class="nav-label">{{ 'COMMERCE' | translate }}</span><span class="fa arrow"></span></a>
-                <ul class="nav nav-second-level collapse" ng-class="{in: $state.includes('commerce')}">
-                    <li ui-sref-active="active"><a ui-sref="commerce.products_grid">Products grid</a></li>
-                    <li ui-sref-active="active"><a ui-sref="commerce.product_list">Products list</a></li>
-                    <li ui-sref-active="active"><a ui-sref="commerce.product">Product edit</a></li>
-                    <li ui-sref-active="active"><a ui-sref="commerce.product_details">Product detail</a></li>
-                    <li ui-sref-active="active"><a ui-sref="commerce.cart">Cart</a></li>
-                    <li ui-sref-active="active"><a ui-sref="commerce.orders">Orders</a></li>
-                    <li ui-sref-active="active"><a ui-sref="commerce.payments">Credit Card form</a></li>
-                </ul>
-            </li>
+            
             <li ng-class="{active: $state.includes('gallery')}">
                 <a href=""><i class="fa fa-picture-o"></i> <span class="nav-label">{{ 'GALLERY' | translate }}</span><span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse" ng-class="{in: $state.includes('gallery')}">
@@ -218,9 +254,12 @@
             <li ui-sref-active="active">
                 <a ui-sref="css_animations"><i class="fa fa-magic"></i> <span class="nav-label">{{ 'ANIMATIONS' | translate }}</span><span class="label label-info pull-right">62</span></a>
             </li>
+                
             <li class="landing_link">
                 <a ui-sref="landing"><i class="fa fa-star"></i> <span class="nav-label">{{ 'LANDING' | translate }}</span> <span class="label label-warning pull-right">NEW</span></a>
             </li>
+            -->
+            
         </ul>
 
     </div>

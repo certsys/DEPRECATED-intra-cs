@@ -301,11 +301,17 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
                 }
             }
         })
+        .state('outlook', {
+            url: "/outlook",
+            templateUrl: "views/outlook.html",
+            data: { pageTitle: 'Outlook view', specialClass: 'fixed-sidebar' }
+        })
         .state('mailbox', {
             abstract: true,
             url: "/mailbox",
             templateUrl: "views/common/content.html",
         })
+        
         .state('mailbox.inbox', {
             url: "/inbox",
             templateUrl: "views/mailbox.html",
@@ -675,6 +681,7 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
             templateUrl: "views/vote_list.html",
             data: { pageTitle: 'Vote list' }
         })
+        
         .state('pages', {
             abstract: true,
             url: "/pages",
@@ -1347,11 +1354,11 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
             templateUrl: "views/landing.html",
             data: { pageTitle: 'Landing page', specialClass: 'landing-page' }
         })
-        .state('outlook', {
+        /*.state('outlook', {
             url: "/outlook",
             templateUrl: "views/outlook.html",
             data: { pageTitle: 'Outlook view', specialClass: 'fixed-sidebar' }
-        })
+        })*/
         .state('off_canvas', {
             url: "/off_canvas",
             templateUrl: "views/off_canvas.html",
