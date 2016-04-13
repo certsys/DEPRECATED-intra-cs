@@ -20,19 +20,18 @@
                 <a ui-sref="perfil"><i class="fa fa-user"></i> <span class="nav-label">{{ 'PROFILE' | translate }}</span></a>
             </li>
             <li ui-sref-active="active">
-                <a ui-sref="pagina_principal"><i class="fa fa-envelope"></i><span class="nav-label"> {{ 'OUTLOOK' | translate}}</span></a>
+                <a ui-sref="outlook"><i class="fa fa-envelope"></i><span class="nav-label"> {{ 'OUTLOOK' | translate}}</span></a>
             </li>
 
-            <li ui-sref-active="active">
-                <a ui-sref="pagina_principal"><i class="fa fa-envelope"></i> <span class="nav-label">{{ 'MAILBOX' | translate }} </span><span class="label label-warning pull-right">16/24</span></a>
+            <li ng-class="{active: $state.includes('mailbox')}">
+                <a ui-sref="mailbox.inbox"><i class="fa fa-envelope"></i> <span class="nav-label">{{ 'MAILBOX' | translate }} </span><span class="label label-warning pull-right">16/24</span></a>
                 <ul class="nav nav-second-level collapse" ng-class="{in: $state.includes('mailbox')}">
-                    <li ui-sref-active="active"><a ui-sref="pagina_principal">{{ 'INBOX' | translate}}</a></li>
-                    <li ui-sref-active="active"><a ui-sref="pagina_principal">{{ 'MAILVW' | translate}}</a></li>
-                    <li ui-sref-active="active"><a ui-sref="pagina_principal">{{ 'MAILCOMPOSE' | translate}}</a></li>
-                    <li ui-sref-active="active"><a ui-sref="pagina_principal">{{ 'MAILTEMPLATE' | translate}}</a></li>
+                    <li ui-sref-active="active"><a ui-sref="mailbox.inbox">{{ 'INBOX' | translate}}</a></li>
+                    <li ui-sref-active="active"><a ui-sref="mailbox.email_view">{{ 'MAILVW' | translate}}</a></li>
+                    <li ui-sref-active="active"><a ui-sref="mailbox.email_compose">{{ 'MAILCOMPOSE' | translate}}</a></li>
+                    <li ui-sref-active="active"><a ui-sref="mailbox.email_template">{{ 'MAILTEMPLATE' | translate}}</a></li>
                 </ul>
             </li>
-
             <li ui-sref-active="active">
                 <a ui-sref="pagina_principal"><i class="fa fa-group"></i> <span class="nav-label">{{ 'CONTACTS' | translate }}</span></a>
             </li>

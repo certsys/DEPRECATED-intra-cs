@@ -60,6 +60,60 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
         }
     })
 
+    .state('outlook', {
+        url: "/outlook",
+        templateUrl: "page/outlook/outlook.html",
+        data: { pageTitle: 'Outlook view', specialClass: 'fixed-sidebar' }
+    })
+
+    .state('mailbox', {
+        abstract: true,
+        url: "/mailbox",
+        templateUrl: "views/common/content.html"
+    })
+    
+    .state('mailbox.inbox', {
+        url: "/inbox",
+        templateUrl: "page/mail/mailbox.html",
+        data: { pageTitle: 'Mail Inbox' },
+        resolve: {
+            loadPlugin: function ($ocLazyLoad) {
+                return $ocLazyLoad.load([
+                    {
+                        files: ['css/plugins/iCheck/custom.css','js/plugins/iCheck/icheck.min.js']
+                    }
+                ]);
+            }
+        }
+    })
+    .state('mailbox.email_view', {
+        url: "/email_view",
+        templateUrl: "page/mail/mail_detail.html",
+        data: { pageTitle: 'Mail detail' }
+    })
+    .state('mailbox.email_compose', {
+        url: "/email_compose",
+        templateUrl: "page/mail/mail_compose.html",
+        data: { pageTitle: 'Mail compose' },
+        resolve: {
+            loadPlugin: function ($ocLazyLoad) {
+                return $ocLazyLoad.load([
+                    {
+                        files: ['css/plugins/summernote/summernote.css','css/plugins/summernote/summernote-bs3.css','js/plugins/summernote/summernote.min.js']
+                    },
+                    {
+                        name: 'summernote',
+                        files: ['css/plugins/summernote/summernote.css','css/plugins/summernote/summernote-bs3.css','js/plugins/summernote/summernote.min.js','js/plugins/summernote/angular-summernote.min.js']
+                    }
+                ]);
+            }
+        }
+    })
+    .state('mailbox.email_template', {
+        url: "/email_template",
+        templateUrl: "page/mail/email_template.html",
+        data: { pageTitle: 'Mail compose' }
+    })
 }
 angular
     .module('inspinia')
