@@ -53,12 +53,12 @@
             </li>
             -->
             <li ui-sref-active="active">
-                <a ui-sref="widgets"><i class="fa fa-globe"></i> <span class="nav-label">{{ 'HOME'  }}</span></a>
+                <a ui-sref="index.home"><i class="fa fa-globe"></i> <span class="nav-label">{{ 'HOME' | translate  }}</span></a>
             </li>
             <li ui-sref-active="active">
-                <a ui-sref="app.profile_2"><i class="fa fa-user"></i> <span class="nav-label">{{ 'PROFILE'  }}</span></a>
+                <a ui-sref="index.profile"><i class="fa fa-user"></i> <span class="nav-label">{{ 'PROFILE'  }}</span></a>
             </li>
-            <li ng-class="{active: $state.includes('mailbox')}">
+            <!-- <li ng-class="{active: $state.includes('mailbox')}">
                 <a ui-sref="inbox"><i class="fa fa-envelope"></i> <span class="nav-label">{{ 'MAILBOX'  }} </span><span class="label label-warning pull-right">16/24</span></a>
                 <ul class="nav nav-second-level collapse" ng-class="{in: $state.includes('mailbox')}">
                     <li ui-sref-active="active"><a ui-sref="mailbox.inbox">Inbox</a></li>
@@ -66,16 +66,16 @@
                     <li ui-sref-active="active"><a ui-sref="mailbox.email_compose">Compose email</a></li>
                     <li ui-sref-active="active"><a ui-sref="mailbox.email_template">Email template</a></li>
                 </ul>
-            </li>
+            </li> -->
             <!--
             <li ui-sref-active="active">
                 <a ui-sref="metrics"><i class="fa fa-pie-chart"></i> <span class="nav-label">{{ 'METRICS'  }}</span> </a>
             </li>-->
-            
+<!--
             <li ui-sref-active="active">
                 <a ui-sref="app.contacts_2"><i class="fa fa-group"></i> <span class="nav-label">{{ 'CONTACTS'  }}</span></a>
-            </li>
-            
+            </li> -->
+<!--
             <li ui-sref-active="active">
                 <a ui-sref="app.project_detail"><i class="fa fa-briefcase"></i> <span class="nav-label">{{ 'PROJDETAIL'  }}</span></a>
             </li>
@@ -88,19 +88,19 @@
             <li ui-sref-active="active">
                 <a ui-sref="miscellaneous.forum_view"><i class="fa fa-copy"></i> <span class="nav-label">{{ 'FORUM'  }}</span></a>
             </li>
-            
+
             <li ui-sref-active="active">
                 <a ui-sref="app.vote_list"><i class="fa fa-check"></i> <span class="nav-label">{{ 'VOTELIST'  }}</span></a>
             </li>
-            
+
             <li ng-class="{active: $state.includes('forms')}">
                 <a href=""><i class="fa fa-book"></i> <span class="nav-label">{{ 'KB'  }}</span><span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse" ng-class="{in: $state.includes('forms')}">
                     <li ui-sref-active="active"><a ui-sref="forms.text_editor">Text Editor</a></li>
                     <li ui-sref-active="active"><a ui-sref="forms.file_upload">File Upload</a></li>
                 </ul>
-            </li>
-            
+            </li> -->
+
             <!--
             <li ng-class="{active: $state.includes('forms')}">
                 <a href=""><i class="fa fa-edit"></i> <span class="nav-label">{{ 'FORMS'  }}</span><span class="fa arrow"></span></a>
@@ -110,7 +110,7 @@
                     <li ui-sref-active="active"><a ui-sref="forms.wizard.step_one">Wizard</a></li>
                     <li ui-sref-active="active"><a ui-sref="forms.text_editor">Text Editor</a></li>
                     <li ui-sref-active="active"><a ui-sref="forms.file_upload">File Upload</a></li>
-                    
+
                     <li ui-sref-active="active"><a ui-sref="forms.markdown">Markdown</a></li>
                 </ul>
             </li>
@@ -210,7 +210,7 @@
                     <li ui-sref-active="active"><a ui-sref="tables.nggrid">NG Grid</a></li>
                 </ul>
             </li>
-            
+
             <li ng-class="{active: $state.includes('gallery')}">
                 <a href=""><i class="fa fa-picture-o"></i> <span class="nav-label">{{ 'GALLERY'  }}</span><span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse" ng-class="{in: $state.includes('gallery')}">
@@ -248,12 +248,12 @@
             <li ui-sref-active="active">
                 <a ui-sref="css_animations"><i class="fa fa-magic"></i> <span class="nav-label">{{ 'ANIMATIONS'  }}</span><span class="label label-info pull-right">62</span></a>
             </li>
-                
+
             <li class="landing_link">
                 <a ui-sref="landing"><i class="fa fa-star"></i> <span class="nav-label">{{ 'LANDING'  }}</span> <span class="label label-warning pull-right">NEW</span></a>
             </li>
             -->
-            
+
         </ul>
 
     </div>

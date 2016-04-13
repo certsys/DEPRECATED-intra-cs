@@ -240,7 +240,7 @@ function vectorMap() {
                     regions: [
                         {
                             values: scope.myMapData,
-                            scale: ["#1ab394", "#22d6b1"],
+                            scale: ["#3793c8", "#3dadd0"],
                             normalizeFunction: 'polynomial'
                         }
                     ]
