@@ -45,6 +45,21 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
           }
       })
 
+    .state('perfil', {
+        url: "/perfil",
+        templateUrl: "page/perfil/perfil.html",
+        data: { pageTitle: 'Perfil'},
+        resolve: {
+            loadPlugin: function ($ocLazyLoad) {
+                return $ocLazyLoad.load([
+                    {
+                        files: ['js/plugins/sparkline/jquery.sparkline.min.js']
+                    }
+                ]);
+            }
+        }
+    })
+
 }
 angular
     .module('inspinia')
