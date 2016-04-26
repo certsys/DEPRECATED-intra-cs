@@ -114,7 +114,53 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
         templateUrl: "page/mail/email_template.html",
         data: { pageTitle: 'Mail compose' }
     })
+
+    .state('contatos', {
+        url: "/contatos",
+        templateUrl: "page/contatos/contatos.html",
+        data: { pageTitle: 'Contatos' }
+    })
+
+     .state('calendario', {
+        url: "/calendario",
+        templateUrl: "page/calendario/calendario.html",
+        data: { pageTitle: 'Calendario' },
+        resolve: {
+                loadPlugin: function ($ocLazyLoad) {
+                    return $ocLazyLoad.load([
+                        {
+                            insertBefore: '#loadBefore',
+                            files: ['css/plugins/fullcalendar/fullcalendar.css','js/plugins/fullcalendar/fullcalendar.min.js','js/plugins/fullcalendar/gcal.js']
+                        },
+                        {
+                            name: 'ui.calendar',
+                            files: ['js/plugins/fullcalendar/calendar.js']
+                        }
+                    ]);
+                }
+            }
+    })
+
+    .state('projetos', {
+        url: "/projetos",
+        templateUrl: "page/projetos/project_detail.html",
+        data: { pageTitle: 'Projetos' }
+    })
+
+     .state('teams_board', {
+        url: "/teams_board",
+        templateUrl: "page/teams_board/teams_board.html",
+        data: { pageTitle: 'Team Board' }
+    })
+
+    .state('enquetes', {
+        url: "/enquetes",
+        templateUrl: "page/enquetes/vote_list.html",
+        data: { pageTitle: 'Enquetes' }
+    })
 }
+
+
 angular
     .module('inspinia')
     .config(config)
