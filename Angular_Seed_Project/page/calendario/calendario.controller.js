@@ -52,3 +52,5 @@ function CalendarCtrl($scope) {
     /* Event sources array */
     $scope.eventSources = [$scope.events];
 }
+
+angular.module('inspinia').controller('CalendarCtrl', CalendarCtrl);

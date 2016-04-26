@@ -158,6 +158,42 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
         templateUrl: "page/enquetes/vote_list.html",
         data: { pageTitle: 'Enquetes' }
     })
+    ////////////////
+    .state('forum', {
+        url: "/forum",
+        templateUrl: "page/forum/forum_view.html",
+        data: { pageTitle: 'Forum' }
+    })
+    
+    .state('forum.post', {
+        url: "/post",
+        templateUrl: "page/forum/forum_post_view.html",
+        data: { pageTitle: 'Enquetes' }
+    })
+    
+    .state('kb', {
+        url: "/kb",
+        templateUrl: "page/kb/kb_forum_view.html",
+        data: { pageTitle: 'Knowledge Base' }
+    })
+    
+    .state('kb.articles', {
+        url: "/articles",
+        templateUrl: "page/kb/form_editors.html",
+        data: { pageTitle: 'Enviar Artigo' }
+    })
+    
+    .state('kb.upload', {
+        url: "/upload",
+        templateUrl: "page/kb/file_upload.html",
+        data: { pageTitle: 'Enviar Arquivo' }
+    })
+    
+    .state('kb.files', {
+        url: "/files",
+        templateUrl: "page/kb/file_manager.html",
+        data: { pageTitle: 'Visualizar Arquivos' }
+    })
 }
 
 

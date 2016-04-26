@@ -33,8 +33,12 @@ function config($translateProvider) {
             TEAMBOARD: 'Team Board',
             CALENDAR: 'Calendário', 
             FORUM: 'Fórum', 
+            FORUMSEEALL: 'Ver Tudo',
+            NEWDISC: 'Nova Discussão',
             VOTELIST: 'Votações',
             KB: 'Knowledge Base',
+            KBSEEALL: 'Artigos',
+            FILES: 'Arquivos',
             FILEUPLD: 'Enviar um arquivo',
             TXTEDITOR: 'Escrever um artigo',
             INBOX: 'Caixa de Entrada',
@@ -42,6 +46,7 @@ function config($translateProvider) {
             MAILCOMPOSE: 'Escrever Email',
             MAILTEMPLATE: 'Template de Email',
             OUTLOOK: 'Outlook',
+            
             
 
             // Define some custom text
@@ -81,8 +86,12 @@ function config($translateProvider) {
             TEAMBOARD: 'Team Board',
             CALENDAR: 'Calendar', 
             FORUM: 'Forum', 
+            FORUMSEEALL: 'See All',
+            NEWDISC: 'New Discussion',
             VOTELIST: 'Vote List',
             KB: 'Knowledge Base',
+            KBSEEALL: 'Articles',
+            FILES: 'Files',
             FILEUPLD: 'Send a file',
             TXTEDITOR: 'Write an article',
             INBOX: 'Inbox',
@@ -90,6 +99,7 @@ function config($translateProvider) {
             MAILCOMPOSE: 'Compose email',
             MAILTEMPLATE: 'Email template',
             OUTLOOK: 'Outlook',
+            
             
 
             // Define some custom text
@@ -127,8 +137,12 @@ function config($translateProvider) {
             TEAMBOARD: 'Team Board',
             CALENDAR: 'Calendario', 
             FORUM: 'Forum', 
+            FORUMSEEALL: 'Mirar Todo',
+            NEWDISC: 'Nueva Discusión',
             VOTELIST: 'Votación',
             KB: 'Base de Conocimiento',
+            KBSEEALL: 'Articulos',
+            FILES: 'Archivos',
             FILEUPLD: 'Enviar un archivo', //??
             TXTEDITOR: 'Escrever um artigo', //??
             INBOX: 'Inbox',
@@ -136,6 +150,7 @@ function config($translateProvider) {
             MAILCOMPOSE: 'Compose email',
             MAILTEMPLATE: 'Email template',
             OUTLOOK: 'Outlook',
+            
         
         //REVISAR PELO AMOR DE DEUS
             
