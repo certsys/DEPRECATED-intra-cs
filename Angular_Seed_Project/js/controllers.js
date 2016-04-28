@@ -14,7 +14,17 @@ function MainCtrl() {
 
 };
 
+function translateCtrl($translate, $scope) {
+    $scope.changeLanguage = function (langKey) {
+        $translate.use(langKey);
+        $scope.language = langKey;
+    };
+};
 
 angular
     .module('inspinia')
     .controller('MainCtrl', MainCtrl);
+angular
+    .module('inspinia')
+    .controller('translateCtrl', translateCtrl);
+

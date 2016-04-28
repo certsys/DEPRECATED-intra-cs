@@ -159,26 +159,45 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
         data: { pageTitle: 'Enquetes' }
     })
     ////////////////
+    
     .state('forum', {
         url: "/forum",
+        abstract: true,
+        templateUrl: "views/common/content.html"
+    })
+    
+    .state('forum.view', {
+        url: "/view",
         templateUrl: "page/forum/forum_view.html",
         data: { pageTitle: 'Forum' }
+    })
+    
+    .state('forum.new_post', {
+        url: "/new_post",
+        templateUrl: "page/forum/form_editors.html",
+        data: { pageTitle: 'Novo Post' }
     })
     
     .state('forum.post', {
         url: "/post",
         templateUrl: "page/forum/forum_post_view.html",
-        data: { pageTitle: 'Enquetes' }
+        data: { pageTitle: 'Post' } //este aqui tem que ser acessado pelo clique do post no forum.view
     })
     
     .state('kb', {
         url: "/kb",
+        abstract: true,
+        templateUrl: "views/common/content.html"
+        //data: { pageTitle: 'Knowledge Base' }
+    })
+    .state('kb.view', {
+        url: "/view",
         templateUrl: "page/kb/kb_forum_view.html",
         data: { pageTitle: 'Knowledge Base' }
     })
     
     .state('kb.articles', {
-        url: "/articles",
+        url: "/new_article",
         templateUrl: "page/kb/form_editors.html",
         data: { pageTitle: 'Enviar Artigo' }
     })
@@ -194,6 +213,12 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
         templateUrl: "page/kb/file_manager.html",
         data: { pageTitle: 'Visualizar Arquivos' }
     })
+    
+    .state('kb.article', {
+        url: "/article",
+        templateUrl: "page/kb/article.html",
+        data: { pageTitle: 'Visualizar Artigo' }
+    }) //Este será usado quando houver um artigo a ser visto. abrirá nesta página
 }
 
 

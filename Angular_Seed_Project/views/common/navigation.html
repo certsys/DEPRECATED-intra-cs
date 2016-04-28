@@ -45,22 +45,21 @@
             <li ui-sref-active="active">
                 <a ui-sref="calendario"><i class="fa fa-calendar"></i> <span class="nav-label">{{ 'CALENDAR' | translate }}</span></a>
             </li>
-         
-            <li ui-sref-active="active">
+            <li ng-class="{active: $state.includes('forum')}">
                 <a href=""><i class="fa fa-copy"></i> <span class="nav-label">{{ 'FORUM' | translate }}</span><span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse" ng-class="{in: $state.includes('forum')}">
-                    <li ui-sref-active="active"><a ui-sref="forum">{{ 'FORUMSEEALL' | translate }}</a></li>
-                    <li ui-sref-active="active"><a ui-sref="forum.post">{{ 'NEWDISC' | translate }}</a></li>
+                    <li ui-sref-active="active"><a ui-sref="forum.view">{{ 'FORUMSEEALL' | translate }}</a></li>
+                    <li ui-sref-active="active"><a ui-sref="forum.new_post">{{ 'NEWDISC' | translate }}</a></li>
                 </ul>
             </li>
 
             <li ui-sref-active="active">
                 <a ui-sref="enquetes"><i class="fa fa-check"></i> <span class="nav-label">{{ 'VOTELIST' | translate }}</span></a>
             </li>
-            <li ui-sref-active="active">
+            <li ng-class="{active: $state.includes('kb')}">
                 <a href=""><i class="fa fa-book"></i> <span class="nav-label">{{ 'KB' | translate }}</span><span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse" ng-class="{in: $state.includes('kb')}">
-                    <li ui-sref-active="active"><a ui-sref="kb">{{ 'KBSEEALL' | translate }}</a></li>
+                    <li ui-sref-active="active"><a ui-sref="kb.view">{{ 'KBSEEALL' | translate }}</a></li>
                     <li ui-sref-active="active"><a ui-sref="kb.articles">{{ 'TXTEDITOR' | translate }}</a></li>
                     <li ui-sref-active="active"><a ui-sref="kb.files">{{ 'FILES' | translate}}</a></li>
                     <li ui-sref-active="active"><a ui-sref="kb.upload">{{ 'FILEUPLD' | translate}}</a></li>
