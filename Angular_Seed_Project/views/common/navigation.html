@@ -19,9 +19,11 @@
             <li ui-sref-active="active">
                 <a ui-sref="perfil"><i class="fa fa-user"></i> <span class="nav-label">{{ 'PROFILE' | translate }}</span></a>
             </li>
+            <!--
             <li ui-sref-active="active">
                 <a ui-sref="outlook"><i class="fa fa-envelope"></i><span class="nav-label"> {{ 'OUTLOOK' | translate}}</span></a>
             </li>
+            -->
 
             <li ng-class="{active: $state.includes('mailbox')}">
                 <a ui-sref="mailbox.inbox"><i class="fa fa-envelope"></i> <span class="nav-label">{{ 'MAILBOX' | translate }} </span><span class="label label-warning pull-right">16/24</span></a>
