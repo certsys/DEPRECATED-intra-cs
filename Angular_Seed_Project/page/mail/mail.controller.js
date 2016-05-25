@@ -25,6 +25,7 @@ function email($scope){
 };
 
 
+
 angular
     .module('inspinia')
     .controller('email', email);
