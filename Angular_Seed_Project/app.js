@@ -7,6 +7,8 @@ var bodyParser = require('body-parser');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
+var inbox = require('./routes/inbox');
+
 
 var app = express();
 
@@ -22,10 +24,11 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname)));
 
-app.use('/', routes);
+app.use('/', routes);//try
 app.use('/users', users);
+app.use('/mailbox/inbox', inbox);
 
-// catch 404 and forward to error handler
+// catch 404 and forward to error handler!
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
   err.status = 404;

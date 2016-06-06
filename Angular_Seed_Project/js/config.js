@@ -6,12 +6,17 @@
  * Initial there are written state for all view in theme.
  *
  */
-function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
+function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, $locationProvider) {
     $urlRouterProvider.otherwise("/pagina-principal");
 
     $ocLazyLoadProvider.config({
         // Set to true if you want to see what and when is dynamically loaded
         debug: false
+    });
+    
+    $locationProvider.html5Mode({
+      enabled: true//,
+    //  requireBase: false
     });
 
     $stateProvider
