@@ -14,10 +14,10 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, $locati
         debug: false
     });
     
-    $locationProvider.html5Mode({
-      enabled: true//,
-    //  requireBase: false
-    });
+//    $locationProvider.html5Mode({
+//      enabled: true//,
+//    //  requireBase: false
+//    });
 
     $stateProvider
     .state('pagina_principal', {
