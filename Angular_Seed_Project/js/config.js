@@ -7,7 +7,7 @@
  *
  */
 function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, $locationProvider) {
-    $urlRouterProvider.otherwise("/pagina-principal");
+    $urlRouterProvider.otherwise("/");
 
     $ocLazyLoadProvider.config({
         // Set to true if you want to see what and when is dynamically loaded
@@ -20,7 +20,13 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, $locati
 //    });
 
     $stateProvider
-    
+
+    .state('feed', {
+          url: "/",
+          templateUrl: "page/feed/feed.html",
+          data: { pageTitle: 'Feed de Notícias' }
+        })
+
     .state('perfil', {
         url: "/perfil",
         templateUrl: "page/perfil/perfil.html",
@@ -117,11 +123,11 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, $locati
             }
     })
 
-    .state('pagina_principal', {
-          url: "/pagina-principal",
-          templateUrl: "page/projetos/project_detail.html",
-          data: { pageTitle: 'Feed de Notícias' }
-        })
+    // .state('projetos', {
+    //       url: "/projetos",
+    //       templateUrl: "page/projetos/project_detail.html",
+    //       data: { pageTitle: 'Projetos' }
+    //     })
 
      .state('teams_board', {
         url: "/teams_board",

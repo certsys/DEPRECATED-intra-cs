@@ -30,24 +30,24 @@
         </ol>-->
     </div>
 </div>
-<div class="wrapper wrapper-content animated fadeInRight">
+<div class="wrapper wrapper-content animated fadeInRight" ng-controller="contacts">
     <div class="row">
         <div class="col-lg-3">
             <div class="contact-box center-version">
 
-                <a href="profile.html">
+                <a ui-sref="perfil" ng-repeat="contato in contatos">
 
-                    <img alt="image" class="img-circle" src="img/a2.jpg">
+                    <img alt="image" class="img-circle" src="{{contato.img}}">
 
 
-                    <h3 class="m-b-xs"><strong>John Smith</strong></h3>
+                    <h3 class="m-b-xs"><strong>{{contato.name}}</strong></h3>
 
-                    <div class="font-bold">Graphics designer</div>
+                    <div class="font-bold"><abbr title="Ferramenta Principal">{{contato.maintool}}</abbr></div>
                     <address class="m-t-md">
-                        <strong>Twitter, Inc.</strong><br>
-                        795 Folsom Ave, Suite 600<br>
-                        San Francisco, CA 94107<br>
-                        <abbr title="Phone">P:</abbr> (123) 456-7890
+                        <strong>Contatos</strong><br>
+                        <abbr title="Endereço de e-mail">{{contato.mail}}</abbr><br>
+                        <abbr title="Nome Skype">{{contato.skype}}</abbr><br>
+                        <abbr title="Telefone Coorporativo">{{contato.phone}}</abbr>
                     </address>
 
                 </a>
