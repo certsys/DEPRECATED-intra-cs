@@ -6,11 +6,20 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
 var routes = require('./routes/index');
-var users = require('./routes/users');
+var controldesk = require('./routes/controldesk');
 var inbox = require('./routes/inbox');
-
+var login = require('./routes/login');
 
 var app = express();
+
+//AD setup
+// var ActiveDirectory = require('activedirectory');
+// var config = { url: 'ldap://dc.certsys.com.br',
+//                baseDN: 'dc=Certsys,dc=local',
+//                username: 'username@certsys.com.br',
+//                password: 'password' }
+// var ad = new ActiveDirectory(config);
+
 
 // view engine setup
 app.set('views', path.join(__dirname));
@@ -25,8 +34,9 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname)));
 
 app.use('/', routes);//try
-app.use('/users', users);
+app.use('/controldesk', controldesk);
 app.use('/mailbox/inbox', inbox);
+app.use('/mailbox/login', login);
 
 // catch 404 and forward to error handler!
 app.use(function(req, res, next) {

@@ -1,7 +1,42 @@
-function callimap(){
-    var scope = angular.element(getElementById('mail-container')).scope();
-    scope.$apply(email());
+//este funcionava "bem"
+function email($scope, $http){
+    $http.get('/mailbox/inbox').success(function(response){
+        $scope.emails=response;
+
+    })
+   // $scope.emails=$http.get('/mailbox/inbox')//.then(function successCallback(response){
+//        $scope.emails=response.data;
+//    },function errorCallback(err){
+//        console.log(err);
+//    })
+   
 };
+
+// function email($scope, getEmail, $modal){
+//     $scope.init=function(){
+//         //$scope.emails=getEmail.maillist;
+//         $scope.getAll();
+//     }
+//     $scope.getAll = function(){
+//         getEmail.getMail()
+//         .then(function(res){
+//             $scope.emails=getEmail.maillist;
+//         }, function(err){
+//             console.log("Problems occured in the retrieval.");
+//         });
+//     }
+//     $scope.init();
+// }
+
+
+
+
+/////////////////////////////////////OLD////////////////////////////////////////
+
+//function callimap(){
+//    var scope = angular.element(getElementById('mail-container')).scope();
+//    scope.$apply(email());
+//};
 
 //function email($scope, $http){
 //    $http.get('/mailbox/inbox').then(function(response){
@@ -10,15 +45,28 @@ function callimap(){
 //        console.log(err);
 //    })
 //    
-//};
-function email($scope, $http){
-    $http.get('/mailbox/inbox').then(function successCallback(response){
-        $scope.emails=response.data;
-    },function errorCallback(err){
-        console.log(err);
-    })
+////};
+
+/////////////////////////////OLD/////////////////////////////////////////
+
+
+
+
+
+
+
+
+
+
+//function email($scope, $http){
+//    $http.jsonp('/mailbox/inbox').success(function(data){
+////        $scope.emails=data.found;
+//        console.log(data.found);
+//    },function errorCallback(err){
+//        console.log(err);
+//    })
     
-};
+//};
 
 //function email($scope){
 //    $scope.emails = [
@@ -45,8 +93,26 @@ function email($scope, $http){
 //    
 //};
 
+// function getEmail($http, $q){
+//     var emails=this;
+//     emails.maillist={};
+//     emails.getMail= function(){
+//         var defer = $q.defer();
+//         $http.get('/mailbox/inbox').success(function(res){
+//             emails.maillist=res;
+//             defer.resolve(res);    
+//         })
+//         .error(function(){
+//             defer.reject(err);
+//         })
+//         return defer.promise
+//     }
 
+//     return emails;
+// }
 
 angular
     .module('inspinia')
-    .controller('email', email);
+    //.service('getEmail', getEmail)
+   .controller('email',email//, ['getEmail', email]
+    );

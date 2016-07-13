@@ -224,6 +224,12 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, $locati
         templateUrl: "page/kb/article.html",
         data: { pageTitle: 'Visualizar Artigo' }
     }) //Este será usado quando houver um artigo a ser visto. abrirá nesta página
+
+    .state('login', {
+        url: "/login",
+        templateUrl: "page/login/login.html",
+        data: { pageTitle: 'Login' }
+    }) //Este será usado quando houver um artigo a ser visto. abrirá nesta página
 }
 
 
