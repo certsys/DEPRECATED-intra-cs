@@ -1,4 +1,14 @@
 <!-- Wrapper-->
+<div id="blueimp-gallery" class="blueimp-gallery">
+    <div class="slides"></div>
+    <h3 class="title"></h3>
+    <a class="prev">‹</a>
+    <a class="next">›</a>
+    <a class="close">×</a>
+    <a class="play-pause"></a>
+    <ol class="indicator"></ol>
+</div>
+
 <div id="wrapper">
 
     <!-- Navigation -->
@@ -12,104 +22,60 @@
         <div ng-include="'views/common/topnavbar.html'"></div>
 
         <!-- Main view  -->
-        
 
+<div ng-controller="feed">
 <div class="row wrapper border-bottom white-bg page-heading">
-    <div class="col-sm-4">
-        <h2>Feed de Notícias</h2>
-        <!--<ol class="breadcrumb">
-            <li>
-                <a href="index.html">Home</a>
-            </li>
-            <li class="active">
-                <strong>Project detail</strong>
-            </li>
-        </ol>-->
+    <div class="col-lg-10">
+        <form role="search" class="navbar-form-custom" method="post" action="">
+            <h2>{{title}}</h2>
+                <input type="text" placeholder="Refinar postagens" class="form-control" name="top-search" id="top-search" ng-model="search.titulo">
+        </form>
     </div>
 </div>
-<div class="row">
-<div class="col-lg-9">
-<div class="wrapper wrapper-content animated fadeInRight">
-<div class="ibox">
-<div class="ibox-content">
-<div class="row">
-    <div class="col-lg-12">
-        <div class="m-b-md">
-            <a href="" class="btn btn-white btn-xs pull-right">Edit project</a>
+<div class="wrapper wrapper-content animated fadeInRight" ng-repeat="post in feed | orderBy:'-data' | filter:search">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox product-detail">
+                <div class="ibox-content">
+                    <div class="row">
+                        <div class="imageBoxGallery col-md-5" imagebox-full>
+                            <a href="{{post.imagem}}" title="Imagem do POST" data-gallery=""><img src="{{post.imagem}}"></a>
+                        </div>
+                        <div class="col-md-7">
+                            <h2 class="font-bold m-b-xs">
+                                {{post.titulo}}
+                            </h2>
+                            <div class="m-t-md">
+                                <h3 class="product-main-price">{{post.assinatura}}</h3>
+                            </div>
+                            <hr>
 
-            <h2>Contract with Zender Company</h2>
-        </div>
-        <dl class="dl-horizontal">
-            <dt>Status:</dt>
-            <dd><span class="label label-primary">Active</span></dd>
-        </dl>
-    </div>
-</div>
-<div class="row">
-    <div class="col-lg-5">
-        <dl class="dl-horizontal">
-
-            <dt>Created by:</dt>
-            <dd>Alex Smith</dd>
-            <dt>Messages:</dt>
-            <dd> 162</dd>
-            <dt>Client:</dt>
-            <dd><a href="" class="text-navy"> Zender Company</a></dd>
-            <dt>Version:</dt>
-            <dd> v1.4.2</dd>
-        </dl>
-    </div>
-    <div class="col-lg-7" id="cluster_info">
-        <dl class="dl-horizontal">
-
-            <dt>Last Updated:</dt>
-            <dd>16.08.2014 12:15:57</dd>
-            <dt>Created:</dt>
-            <dd> 10.07.2014 23:36:57</dd>
-            <dt>Participants:</dt>
-            <dd class="project-people">
-                <a href=""><img alt="image" class="img-circle" src="img/a3.jpg"></a>
-                <a href=""><img alt="image" class="img-circle" src="img/a1.jpg"></a>
-                <a href=""><img alt="image" class="img-circle" src="img/a2.jpg"></a>
-                <a href=""><img alt="image" class="img-circle" src="img/a4.jpg"></a>
-                <a href=""><img alt="image" class="img-circle" src="img/a5.jpg"></a>
-            </dd>
-        </dl>
-    </div>
-</div>
-<div class="row">
-    <div class="col-lg-12">
-        <dl class="dl-horizontal">
-            <dt>Completed:</dt>
-            <dd>
-                <div class="progress progress-striped active m-b-sm">
-                    <div style="width: 60%;" class="progress-bar"></div>
+                            <div class="text-muted">
+                                {{post.texto}}
+                            </div>
+                            <hr>
+                            <!--<div>-->
+                                <!--<div class="btn-group">-->
+                                    <!--<button class="btn btn-primary btn-sm"><i class="fa fa-cart-plus"></i> Add to cart</button>-->
+                                    <!--<button class="btn btn-white btn-sm"><i class="fa fa-star"></i> Add to wishlist </button>-->
+                                    <!--<button class="btn btn-white btn-sm"><i class="fa fa-envelope"></i> Contact with author </button>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                        </div>
+                    </div>
                 </div>
-                <small>Project completed in <strong>60%</strong>. Remaining close the project, sign a contract and invoice.</small>
-            </dd>
-        </dl>
+                <div class="ibox-footer">
+                            <span class="pull-right">
+                                Data da postagem - <i class="fa fa-clock-o"></i> {{post.data | date:'dd/MM/yyyy HH:mm'}}
+                            </span>
+                    Newsfeed Certsys
+                </div>
+            </div>
+
+        </div>
+        </div>
+    </div>
+    <div ng-include="'views/common/footer.html'"></div>
+    </div>
     </div>
 </div>
-<div class="row m-t-sm">d
-<div class="col-lg-12">
-<div class="panel blank-panel ui-tab">
-
-
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-
-</div>
-
-<!-- Footer -->
-<div ng-include="'views/common/footer.html'"></div>
-
-    </div>
-    <!-- End page wrapper-->
-
-</div>
-<!-- End wrapper-->
