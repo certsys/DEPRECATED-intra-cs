@@ -24,7 +24,31 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, $locati
     .state('feed', {
           url: "/",
           templateUrl: "page/feed/feed.html",
-          data: { pageTitle: 'Feed de Notícias' }
+          data: { pageTitle: 'Feed de Notícias' },
+          resolve: {
+                loadPlugin: function ($ocLazyLoad) {
+                    return $ocLazyLoad.load([
+                        {
+                            files: ['js/plugins/blueimp/jquery.blueimp-gallery.min.js','css/plugins/blueimp/css/blueimp-gallery.min.css']
+                        }
+                    ]);
+                }
+            }
+        })
+
+        .state('insertnews', {
+            url: "/insertnews",
+            templateUrl: "page/feed/insertnews.html",
+            data: { pageTitle: 'Nova Postagem' },
+            resolve: {
+                loadPlugin: function ($ocLazyLoad) {
+                    return $ocLazyLoad.load([
+                        {
+                            files: ['css/plugins/iCheck/custom.css','js/plugins/iCheck/icheck.min.js']
+                        }
+                    ]);
+                }
+            }
         })
 
     .state('perfil', {
