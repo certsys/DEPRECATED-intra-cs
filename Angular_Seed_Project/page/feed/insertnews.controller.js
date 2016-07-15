@@ -1,21 +1,26 @@
-function insertnews($scope, $http){
-	$scope.submit= function(){
-		var data = $.param({
-			book: JSON.stringify({
-				titulo: $scope.titulo,
-				imagem: $scope.imagem,
-				texto: $scope.texto,
-				assinatura: $scope.assinatura
-			})
-		});
+function insertnews($scope, $http) {
+    $scope.submit = function () {
+        var data = {
+            titulo: $scope.titulo,
+            imagem: $scope.imagem,
+            texto: $scope.texto,
+            assinatura: $scope.assinatura
+        };
 
-		$http.post("/posts", data).success(function(data, status) {
-			console.log('Data posted successfully');
-		})
-	}
+        var output = angular.toJson(data);
+        $http({method: 'POST', url:'/posts', data: output})
+        	.then(function(response){
+        		//your code in case the post succeeds
+        		console.log(response);
+        	})
+        	.catch(function(err){
+        		//your code in case your post fails
+        		console.log(err);
+        	});
+    }
 };
 
 angular
     .module('inspinia')
-   .controller('insertnews',insertnews);
+    .controller('insertnews', insertnews);
 

@@ -2,16 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c7a0a699-939f-4bf9-97cd-a3d9f9d1425e" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/page/feed/feed.controller.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/page/feed/insertnews.controller.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/page/feed/insertnews.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.ejs" afterPath="$PROJECT_DIR$/index.ejs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/config.js" afterPath="$PROJECT_DIR$/js/config.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/img/contatos/henriquecavalcante.jpg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/models/contacts.js" afterPath="$PROJECT_DIR$/models/contacts.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/page/contatos/contatos.controller.js" afterPath="$PROJECT_DIR$/page/contatos/contatos.controller.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/page/contatos/contatos.html" afterPath="$PROJECT_DIR$/page/contatos/contatos.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/page/feed/feed.html" afterPath="$PROJECT_DIR$/page/feed/feed.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/common/topnavbar.html" afterPath="$PROJECT_DIR$/views/common/topnavbar.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/page/feed/feed.controller.js" afterPath="$PROJECT_DIR$/page/feed/feed.controller.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/page/feed/insertnews.controller.js" afterPath="$PROJECT_DIR$/page/feed/insertnews.controller.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/page/feed/insertnews.html" afterPath="$PROJECT_DIR$/page/feed/insertnews.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/routes/contacts.js" afterPath="$PROJECT_DIR$/routes/contacts.js" />
     </list>
     <ignored path="Angular_Seed_Project.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -31,72 +30,32 @@
     <favorites_list name="Angular_Seed_Project" />
   </component>
   <component name="FileEditorManager">
-
-    <leaf>
-      <file leaf-file-name="insertnews.controller.js" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/page/feed/insertnews.controller.js">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="contatos.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/page/contatos/contatos.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="7" column="45" selection-start-line="7" selection-start-column="45" selection-end-line="7" selection-end-column="45" />
-
+            <state relative-caret-position="164">
+              <caret line="41" column="98" selection-start-line="41" selection-start-column="98" selection-end-line="41" selection-end-column="98" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-
-      <file leaf-file-name="feed.controller.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/page/feed/feed.controller.js">
+      <file leaf-file-name="outlook.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/page/outlook/outlook.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="34">
-              <caret line="2" column="10" selection-start-line="2" selection-start-column="10" selection-end-line="2" selection-end-column="10" />
-
+            <state relative-caret-position="-12212">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-
-      <file leaf-file-name="mail.controller.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/page/mail/mail.controller.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="51">
-              <caret line="3" column="31" selection-start-line="3" selection-start-column="31" selection-end-line="3" selection-end-column="31" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-
       <file leaf-file-name="insertnews.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/page/feed/insertnews.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="213">
-              <caret line="44" column="63" selection-start-line="44" selection-start-column="63" selection-end-line="44" selection-end-column="63" />
-
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-
-      <file leaf-file-name="feed.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/page/feed/feed.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
-              <caret line="62" column="18" selection-start-line="62" selection-start-column="18" selection-end-line="62" selection-end-column="18" />
-
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="contatos.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/page/contatos/contatos.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="226">
-              <caret line="67" column="7" selection-start-line="67" selection-start-column="7" selection-end-line="67" selection-end-column="7" />
-
+            <state relative-caret-position="266">
+              <caret line="53" column="10" selection-start-line="53" selection-start-column="10" selection-end-line="53" selection-end-column="10" />
               <folding />
             </state>
           </provider>
@@ -106,22 +65,21 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
-
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-
         <option value="$PROJECT_DIR$/index.ejs" />
         <option value="$PROJECT_DIR$/views/common/topnavbar.html" />
-        <option value="$PROJECT_DIR$/page/contatos/contatos.controller.js" />
-        <option value="$PROJECT_DIR$/page/contatos/contatos.html" />
         <option value="$PROJECT_DIR$/js/config.js" />
         <option value="$PROJECT_DIR$/page/feed/feed.html" />
-        <option value="$PROJECT_DIR$/page/feed/insertnews.html" />
-        <option value="$PROJECT_DIR$/page/feed/insertnews.controller.js" />
         <option value="$PROJECT_DIR$/page/feed/feed.controller.js" />
-
+        <option value="$PROJECT_DIR$/page/feed/insertnews.controller.js" />
+        <option value="$PROJECT_DIR$/routes/contacts.js" />
+        <option value="$PROJECT_DIR$/models/contacts.js" />
+        <option value="$PROJECT_DIR$/page/contatos/contatos.controller.js" />
+        <option value="$PROJECT_DIR$/page/contatos/contatos.html" />
+        <option value="$PROJECT_DIR$/page/feed/insertnews.html" />
       </list>
     </option>
   </component>
@@ -139,9 +97,7 @@
     <option name="width" value="1382" />
     <option name="height" value="744" />
   </component>
-
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
-
     <OptionsSetting value="true" id="Add" />
     <OptionsSetting value="true" id="Remove" />
     <OptionsSetting value="true" id="Checkout" />
@@ -166,7 +122,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-
+      <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -195,8 +152,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-
-              <option name="myItemId" value="views" />
+              <option name="myItemId" value="img" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -210,79 +166,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="page" />
-
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Angular_Seed_Project" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Angular_Seed_Project" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="page" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-
-            <PATH_ELEMENT>
-              <option name="myItemId" value="perfil" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Angular_Seed_Project" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Angular_Seed_Project" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="page" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="mail" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Angular_Seed_Project" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Angular_Seed_Project" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-
-              <option name="myItemId" value="page" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="feed" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Angular_Seed_Project" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Angular_Seed_Project" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="page" />
+              <option name="myItemId" value="img" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -290,26 +174,8 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Angular_Seed_Project" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Angular_Seed_Project" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="js" />
-
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
-
-      <pane id="Scratches" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -317,6 +183,14 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="HbShouldOpenHtmlAsHb" value="" />
     <property name="js-jscs-nodeInterpreter" value="C:\Program Files\nodejs\node.exe" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\intranet-cs\Angular_Seed_Project\img\contatos" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\intranet-cs\Angular_Seed_Project\public\images" />
+    </key>
   </component>
   <component name="RunManager">
     <configuration default="true" type="DartCommandLineRunConfigurationType" factoryName="Dart Command Line Application">
@@ -344,6 +218,12 @@
       <method />
     </configuration>
     <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
+      <node-interpreter>project</node-interpreter>
+      <node-options />
+      <gulpfile />
+      <tasks />
+      <arguments />
+      <envs />
       <method />
     </configuration>
     <configuration default="true" type="js.build_tools.npm" factoryName="npm">
@@ -382,15 +262,15 @@
       <updated>1468434017825</updated>
       <workItem from="1468434023816" duration="598000" />
       <workItem from="1468503812655" duration="13202000" />
+      <workItem from="1468524824023" duration="6948000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-
-    <option name="totallyTimeSpent" value="13800000" />
+    <option name="totallyTimeSpent" value="20748000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="7" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <editor active="false" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23511904" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -400,7 +280,7 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22913256" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22585924" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -428,29 +308,7 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-
-    <entry file="file://$PROJECT_DIR$/page/feed/feed2.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="65" column="12" selection-start-line="65" selection-start-column="12" selection-end-line="65" selection-end-column="63" />
-
-          <folding />
-        </state>
-      </provider>
-    </entry>
-
-    <entry file="file://$PROJECT_DIR$/js/inspinia.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-798">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-
-          <folding />
-        </state>
-      </provider>
-    </entry>
-
-    <entry file="file://$PROJECT_DIR$/js/translation.js">
-
+    <entry file="file://$PROJECT_DIR$/page/feed/insertnews.controller.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -458,14 +316,65 @@
         </state>
       </provider>
     </entry>
-
+    <entry file="file://$PROJECT_DIR$/page/feed/feed.controller.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="10" selection-start-line="2" selection-start-column="10" selection-end-line="2" selection-end-column="10" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/page/mail/mail.controller.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="31" selection-start-line="3" selection-start-column="31" selection-end-line="3" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/page/feed/insertnews.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="748">
+          <caret line="44" column="63" selection-start-line="44" selection-start-column="63" selection-end-line="44" selection-end-column="63" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/page/feed/feed.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1054">
+          <caret line="62" column="18" selection-start-line="62" selection-start-column="18" selection-end-line="62" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/page/contatos/contatos.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1139">
+          <caret line="67" column="0" selection-start-line="67" selection-start-column="0" selection-end-line="67" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/page/feed/feed2.html" />
+    <entry file="file://$PROJECT_DIR$/js/inspinia.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-798">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/translation.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/js/directives.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="137">
           <caret line="149" column="0" selection-start-line="149" selection-start-column="0" selection-end-line="149" selection-end-column="0" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -473,35 +382,18 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="34">
           <caret line="2" column="2" selection-start-line="2" selection-start-column="2" selection-end-line="2" selection-end-column="2" />
-
-          <folding />
         </state>
       </provider>
     </entry>
-
     <entry file="file://$PROJECT_DIR$/js/controllers.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="188">
           <caret line="20" column="1" selection-start-line="20" selection-start-column="1" selection-end-line="20" selection-end-column="1" />
-          <folding>
-            <element signature="n#!!doc" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app.js">
-      <provider selected="true" editor-type-id="text-editor">
-
-        <state relative-caret-position="238">
-          <caret line="40" column="25" selection-start-line="40" selection-start-column="25" selection-end-line="40" selection-end-column="25" />
-
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/index.ejs">
       <provider selected="true" editor-type-id="text-editor">
-
         <state relative-caret-position="962">
           <caret line="84" column="47" selection-start-line="84" selection-start-column="47" selection-end-line="84" selection-end-column="47" />
           <folding />
@@ -512,7 +404,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="383">
           <caret line="47" column="19" selection-start-line="47" selection-start-column="19" selection-end-line="47" selection-end-column="19" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -520,7 +411,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
           <caret line="8" column="23" selection-start-line="4" selection-start-column="16" selection-end-line="8" selection-end-column="23" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -540,47 +430,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/page/contatos/contatos.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="226">
-          <caret line="67" column="7" selection-start-line="67" selection-start-column="7" selection-end-line="67" selection-end-column="7" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/page/feed/feed.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="62" column="18" selection-start-line="62" selection-start-column="18" selection-end-line="62" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/page/feed/insertnews.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="213">
-          <caret line="44" column="63" selection-start-line="44" selection-start-column="63" selection-end-line="44" selection-end-column="63" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-
-    <entry file="file://$PROJECT_DIR$/page/contatos/contatos.controller.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="12" column="13" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
-
-          <folding />
-        </state>
-      </provider>
-    </entry>
-
     <entry file="file://$PROJECT_DIR$/page/perfil/perfil.controller.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="357">
           <caret line="51" column="29" selection-start-line="51" selection-start-column="29" selection-end-line="51" selection-end-column="29" />
-
-          <folding />
         </state>
       </provider>
     </entry>
@@ -588,27 +441,115 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="51">
           <caret line="3" column="31" selection-start-line="3" selection-start-column="31" selection-end-line="3" selection-end-column="31" />
-
           <folding />
         </state>
       </provider>
     </entry>
-
-    <entry file="file://$PROJECT_DIR$/page/feed/feed.controller.js">
+    <entry file="file://$PROJECT_DIR$/app.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="10" selection-start-line="2" selection-start-column="10" selection-end-line="2" selection-end-column="10" />
-
+        <state relative-caret-position="153">
+          <caret line="40" column="25" selection-start-line="40" selection-start-column="25" selection-end-line="40" selection-end-column="25" />
           <folding />
         </state>
       </provider>
     </entry>
-
     <entry file="file://$PROJECT_DIR$/page/feed/insertnews.controller.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" column="45" selection-start-line="7" selection-start-column="45" selection-end-line="7" selection-end-column="45" />
-
+        <state relative-caret-position="323">
+          <caret line="19" column="5" selection-start-line="19" selection-start-column="5" selection-end-line="19" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/page/feed/feed.controller.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="29" selection-start-line="0" selection-start-column="29" selection-end-line="3" selection-end-column="46" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/page/feed/feed.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="970">
+          <caret line="78" column="10" selection-start-line="78" selection-start-column="10" selection-end-line="78" selection-end-column="10" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/models/contacts.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="17" selection-start-line="5" selection-start-column="17" selection-end-line="5" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/routes/contacts.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="26" column="7" selection-start-line="26" selection-start-column="7" selection-end-line="26" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/page/contatos/contatos.controller.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="31" selection-start-line="0" selection-start-column="31" selection-end-line="0" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$APPLICATION_HOME_DIR$/lib/webstorm.jar!/resources/html5-schema/html5/block.rnc">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="148">
+          <caret line="228" column="16" selection-start-line="228" selection-start-column="16" selection-end-line="228" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/routes/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/page/mail/mailbox.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/page/outlook/outlook.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-12212">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/page/feed/insertnews.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="266">
+          <caret line="53" column="10" selection-start-line="53" selection-start-column="10" selection-end-line="53" selection-end-column="10" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/img/contatos/henriquecavalcante.jpg">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/page/contatos/contatos.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="164">
+          <caret line="41" column="98" selection-start-line="41" selection-start-column="98" selection-end-line="41" selection-end-column="98" />
           <folding />
         </state>
       </provider>

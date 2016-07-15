@@ -1,11 +1,12 @@
 var mongoose = require('mongoose');
 
 var contactSchema = new mongoose.Schema({
-    titulo: String,
-    imagem: String,
-    texto: String,
-    assinatura: String,     // TODO: Referenciar para um id posteriormente (ObjectId)
-    data: {type: Date, default: Date.now}
+    nome: String,
+    ferramenta_principal: String,
+    mail: String,
+    telefone: String,
+    skype: String,
+    imagem: String
 });
 
 var Contact = mongoose.model('Contact', contactSchema);
