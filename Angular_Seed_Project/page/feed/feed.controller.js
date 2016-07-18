@@ -3,10 +3,10 @@ function feed($scope, $http){
 		$scope.feed = response.data;
 	}, console.log("Erro ao pegar os dados"));
 
-	$scope.title = "Newsfeed Certsys";
+	$scope.title = "Newsfeed Certsys"; 
+    
 };
 
 angular
     .module('inspinia')
    .controller('feed',feed);
-

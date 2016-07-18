@@ -36,7 +36,9 @@
                         <input class="col-sm-12" type="text" ng-model="titulo" name="Título">
                         <br>
                         Imagem<br>
-                        <input class="col-sm-12" type="text" ng-model="imagem" name="Imagem">
+                        <input class="col-sm-12" type="file" file-model="imagem" ng-model="imagem" name="Imagem" onchange="angular.element(this).scope().photoChanged(this.files)">
+                        <br>
+                        <img ng-src="{{ thumbnail.dataUrl }}" />
                         <br>
                         Corpo<br>
                         <input class="col-sm-12" type="text" ng-model="texto" name="Conteúdo">
@@ -44,7 +46,7 @@
                         Assinatura<br>
                         <input class="col-sm-12" type="text" ng-model="assinatura" name="Assinatura">
                         <br>
-                        <br><input class="col-sm-12 btn btn-primary" type="submit" value="Submit">
+                        <br><input class="col-sm-12 btn btn-primary" type="submit" value="Postar">
                     </form>
                     <br>
                     <br>

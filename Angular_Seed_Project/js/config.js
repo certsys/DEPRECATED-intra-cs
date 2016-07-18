@@ -6,7 +6,12 @@
  * Initial there are written state for all view in theme.
  *
  */
+function compileProvider($compileProvider) {   
+        $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|local|data):/); 
+}
+
 function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, $locationProvider) {
+    
     $urlRouterProvider.otherwise("/");
 
     $ocLazyLoadProvider.config({
@@ -237,6 +242,7 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, $locati
 angular
     .module('inspinia')
     .config(config)
+    .config(compileProvider)
     .run(function($rootScope, $state) {
         $rootScope.$state = $state;
     });
