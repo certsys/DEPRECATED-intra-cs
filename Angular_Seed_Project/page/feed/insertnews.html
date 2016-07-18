@@ -2,56 +2,50 @@
 <div id="blueimp-gallery" class="blueimp-gallery">
     <div class="slides"></div>
 </div>
-
 <div id="wrapper">
-
     <!-- Navigation -->
     <div ng-include="'views/common/navigation.html'"></div>
-
     <!-- Page wraper -->
     <!-- ng-class with current state name give you the ability to extended customization your view -->
     <div id="page-wrapper" class="gray-bg {{$state.current.name}}">
-
         <!-- Page wrapper -->
         <div ng-include="'views/common/topnavbar.html'"></div>
-
         <!-- Main view  -->
-
         <div ng-controller="insertnews">
             <div class="row wrapper border-bottom white-bg page-heading">
                 <div class="col-lg-10">
-                    <h2>{{title}}</h2>
-                </div>
+                    <h2>{{title}}</h2> </div>
             </div>
             <br>
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
                     <h5>All form elements
                         <small>With custom checbox and radion elements.</small>
-                    </h5>
-                </div>
+                    </h5> </div>
                 <div class="ibox-content">
-                    <form ng-submit="submit()" class="form-horizontal">
-                        Título<br>
+                    <form ng-submit="submit()" class="form-horizontal"> Título
+                        <br>
                         <input class="col-sm-12" type="text" ng-model="titulo" name="Título">
+                        <br> Imagem
                         <br>
-                        Imagem<br>
                         <input class="col-sm-12" type="text" ng-model="imagem" name="Imagem">
+                        <br> Corpo
                         <br>
-                        Corpo<br>
-                        <input class="col-sm-12" type="text" ng-model="texto" name="Conteúdo">
+                        <summernote class="col-sm-12"  type="text" ng-model="texto" name="Texto" height="300"></summernote>
+                        <br> Assinatura
                         <br>
-                        Assinatura<br>
                         <input class="col-sm-12" type="text" ng-model="assinatura" name="Assinatura">
                         <br>
-                        <br><input class="col-sm-12 btn btn-primary" type="submit" value="Submit">
-                    </form>
+                        <br>
+                        <input class="col-sm-12 btn btn-primary" type="submit" value="Submit"> </form>
                     <br>
                     <br>
-                    <br>
-                </div>
+                    <br> </div>
             </div>
         </div>
+        <br>
+        <br>
+        <br>
         <!-- Footer -->
         <div ng-include="'views/common/footer.html'"></div>
     </div>
