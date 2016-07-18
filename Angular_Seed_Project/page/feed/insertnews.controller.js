@@ -18,7 +18,7 @@ function insertnews($scope, $http, $timeout, $state) {
             }
         }
     };
-    $scope.submit = function () { << << << < HEAD
+    $scope.submit = function () { 
             var data = {
                 titulo: $scope.titulo
                 , imagem: $scope.thumbnail.dataUrl
