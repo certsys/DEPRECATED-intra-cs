@@ -570,6 +570,7 @@
 .note-editor abbr[data-original-title] {
   cursor: help;
   border-bottom: 1px dotted #999999;
+
 }
 .note-editor abbr.initialism {
   font-size: 90%;

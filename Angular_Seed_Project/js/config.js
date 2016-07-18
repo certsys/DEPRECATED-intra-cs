@@ -45,7 +45,6 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, $locati
                         }
                         , {
                             files: ['js/bower_components/summernote/dist/summernote.css'
-                            , 'js/bower_components/summernote/lang/summernote-pt-BR.js'
                             , 'js/bower_components/summernote/dist/summernote.js'
                             ]
                         }
