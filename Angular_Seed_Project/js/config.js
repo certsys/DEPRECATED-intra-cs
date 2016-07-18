@@ -6,7 +6,12 @@
  * Initial there are written state for all view in theme.
  *
  */
+function compileProvider($compileProvider) {   
+        $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|local|data):/); 
+}
+
 function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, $locationProvider) {
+    
     $urlRouterProvider.otherwise("/");
     $ocLazyLoadProvider.config({
         // Set to true if you want to see what and when is dynamically loaded
@@ -235,6 +240,12 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, $locati
             }
         }) //Este será usado quando houver um artigo a ser visto. abrirá nesta página
 }
-angular.module('inspinia').config(config).run(function ($rootScope, $state) {
-    $rootScope.$state = $state;
-});
+
+
+angular
+    .module('inspinia')
+    .config(config)
+    .config(compileProvider)
+    .run(function($rootScope, $state) {
+        $rootScope.$state = $state;
+    });

@@ -26,18 +26,21 @@
                     <form ng-submit="submit()" class="form-horizontal"> Título
                         <br>
                         <input class="col-sm-12" type="text" ng-model="titulo" name="Título">
-                        <br> Imagem
+                        <br> 
+                        Imagem<br>
+                        <input class="col-sm-12" type="file" file-model="imagem" ng-model="imagem" name="Imagem" onchange="angular.element(this).scope().photoChanged(this.files)">
                         <br>
-                        <input class="col-sm-12" type="text" ng-model="imagem" name="Imagem">
-                        <br> Corpo
+                        <img ng-src="{{ thumbnail.dataUrl }}" />
                         <br>
                         <summernote class="col-sm-12"  type="text" ng-model="texto" name="Texto" config="options"></summernote>
                         <br> Assinatura
                         <br>
                         <input class="col-sm-12" type="text" ng-model="assinatura" name="Assinatura">
                         <br>
-                        <br>
-                        <input class="col-sm-12 btn btn-primary" type="submit" value="Submit"> </form>
+
+                        <br><input class="col-sm-12 btn btn-primary" type="submit" value="Postar">
+                    </form>
+                    <br>
                     <br>
                     <br>
                     <br> </div>
