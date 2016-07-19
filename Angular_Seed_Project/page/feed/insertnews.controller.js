@@ -18,7 +18,7 @@ function insertnews($scope, $http, $timeout, $state) {
             }
         }
     };
-    $scope.submit = function () { 
+    $scope.submit = function () {
             var data = {
                 titulo: $scope.titulo
                 , imagem: $scope.thumbnail.dataUrl
@@ -26,7 +26,7 @@ function insertnews($scope, $http, $timeout, $state) {
                 , assinatura: $scope.assinatura
             };
             var output = angular.toJson(data);
-        console.log(output);
+            console.log(output);
             $http({
                 method: 'POST'
                 , url: '/posts'
@@ -41,6 +41,18 @@ function insertnews($scope, $http, $timeout, $state) {
             $state.go('feed');
         }
         // Opções da Caixa de Texto do Corpo do Arquivo
-    
+    $scope.options = {
+          text : ""
+        , height: 300
+        , toolbar: [
+              ['style', ['style', 'bold', 'italic', 'underline', 'clear']]
+              , ['color', ['color']]
+              , ['view', ['fullscreen', 'codeview']]
+              , ['table', ['table']]
+              , ['para', ['ul', 'ol', 'paragraph']]
+              , ['height', ['height']]
+            ]
+    };
 };
+
 angular.module('inspinia').controller('insertnews', insertnews);
