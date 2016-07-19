@@ -6,7 +6,9 @@ var contactSchema = new mongoose.Schema({
     mail: String,
     telefone: String,
     skype: String,
-    imagem: String
+    imagem: String,
+    cargo: String,
+    ferramentas: []
 });
 
 var Contact = mongoose.model('Contact', contactSchema);

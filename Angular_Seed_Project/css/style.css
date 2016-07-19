@@ -4389,6 +4389,7 @@ body.mini-navbar.fixed-sidebar .logo-element {
   display: block;
   background-color: #ffffff;
   padding: 20px;
+  height: 80%;
   text-align: center;
 }
 .contact-box.center-version > a img {

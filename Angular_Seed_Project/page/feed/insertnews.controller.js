@@ -26,6 +26,7 @@ function insertnews($scope, $http, $timeout, $state) {
                 , assinatura: $scope.assinatura
             };
             var output = angular.toJson(data);
+        console.log(output);
             $http({
                 method: 'POST'
                 , url: '/posts'
@@ -40,17 +41,6 @@ function insertnews($scope, $http, $timeout, $state) {
             $state.go('feed');
         }
         // Opções da Caixa de Texto do Corpo do Arquivo
-    $scope.options = {
-        placeholder: 'Digite aqui o texto principal do post...'
-        , height: 300
-        , toolbar: [
-              ['style', ['style', 'bold', 'italic', 'underline']]
-              , ['color', ['color']]
-              , ['font', ['superscript', 'subscript']]
-              , ['fontsize', ['fontsize']]
-              , ['table', ['table']]
-              , ['para', ['ul', 'ol', 'paragraph']]
-            ]
-    };
+    
 };
 angular.module('inspinia').controller('insertnews', insertnews);

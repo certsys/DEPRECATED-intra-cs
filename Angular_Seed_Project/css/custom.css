@@ -1,3 +1,28 @@
 .nav--img-logo {
-  width: 100%;
+    width: 100%;
+}
+
+.full-width {
+    width: 100%;
+    height: auto;
+}
+
+.fixed-height {
+    height: 350px !important;
+}
+
+.search {
+    position: relative;
+    width: 100%;
+}
+
+.search input {
+    text-indent: 30px;
+}
+
+.search .fa-search {
+    position: absolute;
+    left: 2%;
+    top: 25%;
+    font-size: 15px;
 }

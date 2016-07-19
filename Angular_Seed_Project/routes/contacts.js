@@ -18,7 +18,8 @@ router.post('/', function (req, res) {
         mail: req.body.mail,
         telefone: req.body.telefone,
         skype: req.body.skype,
-        imagem: req.body.imagem
+        imagem: req.body.imagem,
+        ferramentas: req.body.ferramentas,
     });
 
     newContact.save(function(err) {
