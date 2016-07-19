@@ -7,7 +7,8 @@
  *
  */
 function compileProvider($compileProvider) {   
-        $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|local|data):/); 
+        $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|local|data|mailto):/); 
+        
 }
 
 function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, $locationProvider) {
