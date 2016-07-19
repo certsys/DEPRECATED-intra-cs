@@ -25,17 +25,23 @@
                 <div class="ibox-content">
                     <form ng-submit="submit()" class="form-horizontal"> Título
                         <br>
-                        <input class="col-sm-12" type="text" ng-model="titulo" name="Título">
+                        <input required class="col-sm-12" type="text" ng-model="titulo" name="Título">
                         <br> 
                         Imagem<br>
-                        <input class="col-sm-12" type="file" file-model="imagem" ng-model="imagem" name="Imagem" onchange="angular.element(this).scope().photoChanged(this.files)">
+                        <input required class="col-sm-12" type="file" file-model="imagem" ng-model="imagem" name="Imagem" onchange="angular.element(this).scope().photoChanged(this.files)">
                         <br>
                         <img ng-src="{{ thumbnail.dataUrl }}" />
                         <br>
                         <summernote class="col-sm-12"  type="text" ng-model="texto" name="Texto"></summernote>
                         <br> Assinatura
                         <br>
-                        <input class="col-sm-12" type="text" ng-model="assinatura" name="Assinatura">
+                        <select required name="Assinatura" ng-model="assinatura" value="Assinatura" class="col-sm-12">
+                              <option value="">Assinatura</option>
+                              <option value="rhcert">Recursos Humanos - Certificações</option>
+                              <option value="rheven">Recursos Humanos - Eventos</option>
+                              <option value="rhpar">Recursos Humanos - Parcerias</option>
+                              <option value="finan">Financeiro</option>
+                        </select>
                         <br>
 
                         <br><input class="col-sm-12 btn btn-primary" type="submit" value="Postar">
