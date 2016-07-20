@@ -13,13 +13,16 @@ router.get('/', function(req, res){
 // Recebe um JSON e insere no banco de dados
 router.post('/', function (req, res) {
     var newContact = new Contact({
-        nome: req.body.nome,
-        ferramenta_principal: req.body.ferramenta_principal,
+        nome: req.body.name,
+        ferramenta_principal: req.body.maintool,
+        ferramentas: req.body.tools,        
         mail: req.body.mail,
-        telefone: req.body.telefone,
+        telefone: req.body.phone,
         skype: req.body.skype,
-        imagem: req.body.imagem
+        imagem: req.body.img
     });
+
+
 
     newContact.save(function(err) {
         if (err) throw err;

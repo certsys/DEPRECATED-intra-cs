@@ -10,13 +10,15 @@ function insertnews($scope, $http) {
         var output = angular.toJson(data);
         $http({method: 'POST', url:'/posts', data: output})
         	.then(function(response){
-        		//your code in case the post succeeds
-        		console.log(response);
-        	})
-        	.catch(function(err){
-        		//your code in case your post fails
-        		console.log(err);
-        	});
+                //your code in case the post succeeds
+                console.log(response);
+                alert('Post inserido com sucesso.');
+            })
+            .catch(function(err){
+                //your code in case your post fails
+                console.log(err);
+                alert('Ocorreu um erro. Post não adicionado. \nErro: '+err);
+            });
     }
 };
 

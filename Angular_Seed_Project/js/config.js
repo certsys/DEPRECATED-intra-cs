@@ -20,7 +20,6 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, $locati
 //    });
 
     $stateProvider
-
     .state('feed', {
           url: "/",
           templateUrl: "page/feed/feed.html",
@@ -51,9 +50,31 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, $locati
             }
         })
 
+    .state('contatos', {
+        url: "/contatos",
+        templateUrl: "page/contatos/contatos.html",
+        data: { pageTitle: 'Contatos' }
+    })
+
+    .state('insertcontato', {
+            url: "/insertcontact",
+            templateUrl: "page/contatos/insertcontact.html",
+            data: { pageTitle: 'Novo Contato' },
+            resolve: {
+                loadPlugin: function ($ocLazyLoad) {
+                    return $ocLazyLoad.load([
+                        {
+                            files: ['css/plugins/iCheck/custom.css','js/plugins/iCheck/icheck.min.js']
+                        }
+                    ]);
+                }
+            }
+        })
+
     .state('perfil', {
         url: "/perfil",
         templateUrl: "page/perfil/perfil.html",
+        controller: "perfil_ctrl",
         data: { pageTitle: 'Perfil'},
         resolve: {
             loadPlugin: function ($ocLazyLoad) {
@@ -121,11 +142,6 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, $locati
         data: { pageTitle: 'Mail compose' }
     })
 
-    .state('contatos', {
-        url: "/contatos",
-        templateUrl: "page/contatos/contatos.html",
-        data: { pageTitle: 'Contatos' }
-    })
 
      .state('calendario', {
         url: "/calendario",

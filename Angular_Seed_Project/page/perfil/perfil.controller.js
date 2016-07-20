@@ -1,4 +1,9 @@
-function dashboardFive() {
+function perfil_ctrl($scope, contactService) {
+
+
+    $scope.perfil=contactService.getContact();
+    console.log($scope.perfil);
+
 
     var data1 = [
         [0,4],[1,8],[2,5],[3,10],[4,4],[5,16],[6,5],[7,11],[8,6],[9,11],[10,20],[11,10],[12,13],[13,4],[14,7],[15,8],[16,12]
@@ -71,8 +76,11 @@ function dashboardFive() {
     this.sparkline2 = sparkline2Data;
     this.sparkline2Options = sparkline2Options;
 
+
+
+
 }
 
 angular
     .module('inspinia')
-    .controller('dashboardFive', dashboardFive);
+    .controller('perfil_ctrl', perfil_ctrl);

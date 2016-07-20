@@ -1,0 +1,69 @@
+<!-- Wrapper-->
+<div id="blueimp-gallery" class="blueimp-gallery">
+    <div class="slides"></div>
+</div>
+
+<div id="wrapper">
+
+    <!-- Navigation -->
+    <div ng-include="'views/common/navigation.html'"></div>
+
+    <!-- Page wraper -->
+    <!-- ng-class with current state name give you the ability to extended customization your view -->
+    <div id="page-wrapper" class="gray-bg {{$state.current.name}}">
+
+        <!-- Page wrapper -->
+        <div ng-include="'views/common/topnavbar.html'"></div>
+
+        <!-- Main view  -->
+
+        <div ng-controller="insertcontacts">
+            <div class="row wrapper border-bottom white-bg page-heading">
+                <div class="col-lg-10">
+                    <h2>{{title}}</h2>
+                </div>
+            </div>
+            <br>
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Insira novo contato<br>
+                        <small>Inserindo suas informações abaixo.</small>
+                    </h5>
+                </div>
+                <div class="ibox-content">
+                    <form ng-submit="submit()" class="form-horizontal">
+                        Nome<br>
+                        <input class="col-sm-12" type="text" ng-model="name" name="Nome">
+                        <br>
+                        Ferramenta Principal<br>
+                        <input class="col-sm-12" type="text" ng-model="maintool" name="FerramentaPrincipal">
+                        <br>
+                        Ferramentas<br>
+                        <input class="col-sm-12" type="text" ng-model="tools" name="Ferramentas">
+                        <br>
+                        Email<br>
+                        <input class="col-sm-12" type="text" ng-model="mail" name="Email">
+                        <br>
+                        Telefone<br>
+                        <input class="col-sm-12" type="text" ng-model="phone" name="Telefone">
+                        <br>
+                        Skype<br>
+                        <input class="col-sm-12" type="text" ng-model="skype" name="Skype">
+                        <br>
+                        Imagem<br>
+                        <input class="col-sm-12" type="text" ng-model="img" name="Imagem">
+                        <br>
+                        <br><input class="col-sm-12 btn btn-primary" type="submit" value="Submit">
+                    </form>
+                    <br>
+                    <br>
+                    <br>
+                </div>
+            </div>
+        </div>
+        <!-- Footer -->
+        <div ng-include="'views/common/footer.html'"></div>
+    </div>
+    <!-- End page wrapper-->
+</div>
+<!-- End wrapper-->
