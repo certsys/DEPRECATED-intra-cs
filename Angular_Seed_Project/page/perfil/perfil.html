@@ -47,7 +47,12 @@
                         <h2 class="no-margins">
                             {{perfil.nome}}
                         </h2>
-                        <h4>Ferramenta Principal: {{perfil.ferramenta_principal}}</h4>
+                        <h4>Ferramentas Principais:</h4>
+                        <ul>
+                            <li ng-repeat= "tool in perfil.tooltable.maintools" >
+                                {{tool}}
+                            </li>
+                        </ul>
                         <!--<small>
                             There are many variations of passages of Lorem Ipsum available, but the majority
                             have suffered alteration in some form Ipsum available.
@@ -56,7 +61,8 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-5">
+            
             <!--<table class="table small m-b-xs">
                 <tbody>
                 <tr>
@@ -97,7 +103,7 @@
     </div>
     <div class="row">
 
-        <div class="col-lg-3">
+        <div class="col-lg-5">
 
             <div class="ibox">
                 <div class="ibox-content">
@@ -175,9 +181,48 @@
 
                 
                 <div class="social-body">
-                    <p>
-                        {{perfil.tools}}
-                    </p>
+                    <h4>Conhecimento avançado em: </h4>
+                    <ul>
+                        <li ng-repeat= "tool in perfil.tooltable.tools_advanced" >
+                            {{tool}}
+                        </li>
+                    </ul>
+                    
+                </div>
+                
+
+            </div>
+        </div>
+        <div class="col-lg-5">
+
+            <div class="social-feed-box">
+
+                
+                <div class="social-body">
+                <h4>Conhecimento Intermediario em: </h4>
+                    <ul>
+                        <li ng-repeat= "tool in perfil.tooltable.tools_intermediate" >
+                            {{tool}}
+                        </li>
+                    </ul>
+                    
+                </div>
+                
+
+            </div>
+        </div>
+        <div class="col-lg-5">
+
+            <div class="social-feed-box">
+
+                
+                <div class="social-body">
+                    <h4>Conhecimento básico em: </h4>
+                    <ul>
+                        <li ng-repeat= "tool in perfil.tooltable.tools_basic" >
+                            {{tool}}
+                        </li>
+                    </ul>
                     
                 </div>
                 

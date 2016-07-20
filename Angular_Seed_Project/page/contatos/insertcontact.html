@@ -35,12 +35,31 @@
                         Nome<br>
                         <input class="col-sm-12" type="text" ng-model="name" name="Nome">
                         <br>
-                        Ferramenta Principal<br>
-                        <input class="col-sm-12" type="text" ng-model="maintool" name="FerramentaPrincipal">
+                        
+                        Ferramentas Principais<br>
+                        <input class="col-sm-2" ng-repeat="field in tooltable.maintools track by $index" type='text' ng-model='tooltable.maintools[$index]' placeholder='Ferramentas (Principais)' name="FerramentasPrincipais" style="margin-right:5px">
+                        <div>
+                          <button ng-click="addFormFieldMain()">Add</button>
+                        </div>
+                        Ferramentas (Avançado)<br>
+                        <input class="col-sm-2" ng-repeat="field in tooltable.tools_advanced track by $index" type='text' ng-model='tooltable.tools_advanced[$index]' placeholder='Ferramentas (Avançado)' name="FerramentasPrincipais" style="margin-right:5px">
+                        <div>
+                          <button ng-click="addFormFieldAdvanc()">Add</button>
+                        </div>
+                        Ferramentas (Interm)<br>
+                        <input class="col-sm-2" ng-repeat="field in tooltable.tools_intermediate track by $index" type='text' ng-model='tooltable.tools_intermediate[$index]' placeholder='Ferramentas (Interm)' name="FerramentasInterm" style="margin-right:5px">
+                        <div>
+                          <button ng-click="addFormFieldInterm()">Add</button>
+                        </div>
+                        Ferramentas (Básico)<br>
+                        <input class="col-sm-2" ng-repeat="field in tooltable.tools_basic track by $index" type='text' ng-model='tooltable.tools_basic[$index]' placeholder='Ferramentas (básico)' name="FerramentasPrincipais" style="margin-right:5px">
+                        <div>
+                          <button ng-click="addFormFieldBasic()">Add</button>
+                        </div>
+    
                         <br>
-                        Ferramentas<br>
-                        <input class="col-sm-12" type="text" ng-model="tools" name="Ferramentas">
-                        <br>
+                        <pre>{{ tooltable | json }}</pre>
+                        
                         Email<br>
                         <input class="col-sm-12" type="text" ng-model="mail" name="Email">
                         <br>
@@ -51,7 +70,10 @@
                         <input class="col-sm-12" type="text" ng-model="skype" name="Skype">
                         <br>
                         Imagem<br>
-                        <input class="col-sm-12" type="text" ng-model="img" name="Imagem">
+                        <input required class="col-sm-12" type="file" file-model="imagem" ng-model="imagem" name="imagem" >
+                        <br>
+                        <img ng-src="{{ thumbnail.dataUrl }}" />
+                        <br>
                         <br>
                         <br><input class="col-sm-12 btn btn-primary" type="submit" value="Submit">
                     </form>

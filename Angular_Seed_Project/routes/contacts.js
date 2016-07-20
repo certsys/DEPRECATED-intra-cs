@@ -14,12 +14,11 @@ router.get('/', function(req, res){
 router.post('/', function (req, res) {
     var newContact = new Contact({
         nome: req.body.name,
-        ferramenta_principal: req.body.maintool,
-        ferramentas: req.body.tools,        
+        tooltable: req.body.tooltable,        
         mail: req.body.mail,
         telefone: req.body.phone,
         skype: req.body.skype,
-        imagem: req.body.img
+        imagem: req.body.imagem
     });
 
 

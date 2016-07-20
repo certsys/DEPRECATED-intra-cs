@@ -44,13 +44,13 @@
 
                                 <h3 class="m-b-xs"><strong>{{contato.nome}}</strong></h3>
 
-                                <div class="font-bold"><abbr title="Ferramenta Principal">{{contato.ferramenta_principal}}</abbr>
+                                <div class="font-bold"><abbr title="Ferramenta Principal" ng-repeat="tool in tooltable.maintools">{{tool}}</abbr>
                                 </div>
                                 <address class="m-t-md">
                                     <strong>Contatos</strong><br>
-                                    <abbr title="Endereço de e-mail">{{contato.mail}}</abbr><br>
-                                    <abbr title="Nome Skype">{{contato.skype}}</abbr><br>
-                                    <abbr title="Telefone Coorporativo">{{contato.telefone}}</abbr>
+                                    <i class="fa fa-envelope"> </i><abbr title="Endereço de e-mail">{{contato.mail}}</abbr><br>
+                                    <i class="fa fa-skype"> </i><abbr title="Nome Skype">{{contato.skype}}</abbr><br>
+                                    <i class="fa fa-phone"> </i><abbr title="Telefone Coorporativo">{{contato.telefone}}</abbr>
                                 </address>
                             </a>
 

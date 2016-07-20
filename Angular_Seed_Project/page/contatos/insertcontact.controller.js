@@ -1,15 +1,36 @@
 function insertcontacts($scope, $http) {
     $scope.title='Novo Contato';
 
+    $scope.tooltable = { 
+            maintools : ['',],
+            tools_basic : ['',],
+            tools_intermediate : ['',],
+            tools_advanced : ['',] 
+        };
+
+    $scope.addFormFieldMain = function() {
+        $scope.tooltable.maintools.push('');
+    }
+    $scope.addFormFieldBasic = function() {
+        $scope.tooltable.tools_basic.push('');
+    }
+    $scope.addFormFieldInterm = function() {
+        $scope.tooltable.tools_intermediate.push('');
+    }
+    $scope.addFormFieldAdvanc = function() {
+        $scope.tooltable.tools_advanced.push('');
+    }
+
     $scope.submit = function () {
+        
+
         var data = {
             name: $scope.name,
-            maintool: $scope.maintool,
-            tools: $scope.tools, //ARRAY
+            tooltable: $scope.tooltable,
             mail: $scope.mail,
             phone: $scope.phone,
             skype: $scope.skype,
-            img: $scope.img
+            imagem: $scope.imagem
         };
 
         var output = JSON.stringify(data);
