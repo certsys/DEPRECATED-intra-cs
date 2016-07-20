@@ -2,6 +2,7 @@ var mongoose = require('mongoose');
 
 var contactSchema = new mongoose.Schema({
     nome: String,
+    sobre: String,
     tooltable: Object,
     mail: String,
     telefone: String,

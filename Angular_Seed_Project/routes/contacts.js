@@ -10,15 +10,17 @@ router.get('/', function(req, res){
     })
 });
 
+
 // Recebe um JSON e insere no banco de dados
 router.post('/', function (req, res) {
     var newContact = new Contact({
-        nome: req.body.name,
+        nome: req.body.nome,
+        sobre: req.body.sobre,
         tooltable: req.body.tooltable,        
         mail: req.body.mail,
         telefone: req.body.phone,
         skype: req.body.skype,
-        imagem: req.body.imagem
+        imagem: req.body.imagem 
     });
 
 

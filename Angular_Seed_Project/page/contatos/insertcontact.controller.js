@@ -21,16 +21,37 @@ function insertcontacts($scope, $http) {
         $scope.tooltable.tools_advanced.push('');
     }
 
+    $scope.thumbnail = [];
+    $scope.fileReaderSupported = window.FileReader != null;
+    $scope.photoChanged = function (files) {
+        if (files != null) {
+            var file = files[0];
+            if ($scope.fileReaderSupported && file.type.indexOf('image') > -1) {
+                $timeout(function () {
+                    var fileReader = new FileReader();
+                    fileReader.readAsDataURL(file); // convert the image to data url. 
+                    fileReader.onload = function (e) {
+                        $timeout(function () {
+                            $scope.thumbnail.dataUrl = e.target.result; // Retrieve the im  age. 
+                        });
+                    }
+                });
+            }
+        }
+    };
+
+
     $scope.submit = function () {
         
 
         var data = {
-            name: $scope.name,
+            nome: $scope.name,
+            sobre: $scope.sobre,
             tooltable: $scope.tooltable,
             mail: $scope.mail,
             phone: $scope.phone,
             skype: $scope.skype,
-            imagem: $scope.imagem
+            imagem: $scope.thumbnail.dataUrl
         };
 
         var output = JSON.stringify(data);

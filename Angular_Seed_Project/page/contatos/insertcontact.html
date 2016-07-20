@@ -35,6 +35,9 @@
                         Nome<br>
                         <input class="col-sm-12" type="text" ng-model="name" name="Nome">
                         <br>
+                        Sobre<br>
+                        <input class="col-sm-12" type="text" ng-model="sobre" name="Sobre">
+                        <br>
                         
                         Ferramentas Principais<br>
                         <input class="col-sm-2" ng-repeat="field in tooltable.maintools track by $index" type='text' ng-model='tooltable.maintools[$index]' placeholder='Ferramentas (Principais)' name="FerramentasPrincipais" style="margin-right:5px">
@@ -58,7 +61,30 @@
                         </div>
     
                         <br>
-                        <pre>{{ tooltable | json }}</pre>
+                        <pre>
+                            <table class="table" >
+                                <thead>
+                                    <tr>
+                                        <th colspan="4">Ferramenta | Conhecimento</th>
+                                    </tr>
+                                    <tr>
+                                        <th>Principal</th>
+                                        <th>Avançado</th>
+                                        <th>Intermediário</th>
+                                        <th>Básico</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th ng-repeat="tool in tooltable.maintools">{{tool}}</th>
+                                        <th ng-repeat="tool in tooltable.tools_advanced">{{tool}}</th>
+                                        <th ng-repeat="tool in tooltable.tools_intermediate">{{tool}}</th>
+                                        <th ng-repeat="tool in tooltable.tools_basic">{{tool}}</th>
+                                    </tr>
+                                </tbody>
+                                </table>
+
+                        </pre>
                         
                         Email<br>
                         <input class="col-sm-12" type="text" ng-model="mail" name="Email">
@@ -70,7 +96,7 @@
                         <input class="col-sm-12" type="text" ng-model="skype" name="Skype">
                         <br>
                         Imagem<br>
-                        <input required class="col-sm-12" type="file" file-model="imagem" ng-model="imagem" name="imagem" >
+                        <input required class="col-sm-12" type="file" file-model="imagem" ng-model="imagem" name="imagem" onchange="angular.element(this).scope().photoChanged(this.files)">
                         <br>
                         <img ng-src="{{ thumbnail.dataUrl }}" />
                         <br>

@@ -36,7 +36,7 @@
             </div>
             <div class="wrapper wrapper-content animated fadeInRight">
                 <div class="row">
-                    <div class="col-lg-3" ng-repeat="contato in contatos | filter:search">
+                    <div class="col-lg-4" ng-repeat="contato in contatos | filter:search">
                         <div class="contact-box center-version">
                             <a ui-sref="perfil" ng-click="sendContact(contato)">
                                 <img alt="image" class="img-circle" src="img/{{contato.imagem}}">
@@ -48,9 +48,9 @@
                                 </div>
                                 <address class="m-t-md">
                                     <strong>Contatos</strong><br>
-                                    <i class="fa fa-envelope"> </i><abbr title="Endereço de e-mail">{{contato.mail}}</abbr><br>
-                                    <i class="fa fa-skype"> </i><abbr title="Nome Skype">{{contato.skype}}</abbr><br>
-                                    <i class="fa fa-phone"> </i><abbr title="Telefone Coorporativo">{{contato.telefone}}</abbr>
+                                    <i class="fa fa-envelope" style="margin-right:10px"> </i><abbr title="Endereço de e-mail">{{contato.mail}}</abbr><br>
+                                    <i class="fa fa-skype" style="margin-right:10px"> </i><abbr title="Nome Skype">{{contato.skype}}</abbr><br>
+                                    <i class="fa fa-phone" style="margin-right:10px"> </i><abbr title="Telefone Coorporativo">{{contato.telefone}}</abbr>
                                 </address>
                             </a>
 
