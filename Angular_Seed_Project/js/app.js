@@ -9,7 +9,7 @@
         'pascalprecht.translate',       // Angular Translate
         'ui.bootstrap',                 // Ui Bootstrap
         'summernote',                   // Summernote Editor de Texto
-        'ngSanitize',
-        'infinite-scroll'
+        'ngSanitize',                   // Para display de código HTML
+        'infinite-scroll'               // Scroll Infinito
     ])
 })();
