@@ -32,21 +32,21 @@
             <div class="wrapper wrapper-content animated fadeInRight">
                 <div class="row">
 
-                    <div class="col-lg-3" ng-repeat="contato in contatos | filter:search | orderBy:'nome'">
-                        <div class="contact-box fixed-height center-version">
-                            <a ui-sref="perfil">
-                                <img alt="image" class="img-circle" src="../../img/contatos/{{contato.imagem}}">
-
+                    <div class="col-lg-4" ng-repeat="contato in contatos | filter:search | orderBy:'nome'">
+                        <div class="contact-box center-version">
+                            <a ui-sref="perfil" ng-click="sendContact(contato)">
+                                <img alt="image" class="img-circle" src="{{contato.imagem}}">
 
                                 <h4 class="m-b-xs"><strong>{{contato.nome}}</strong></h4>
 
-                                <div class="font-bold"><abbr title="Ferramenta Principal">{{contato.ferramenta_principal}}</abbr>
+                                <div class="font-bold"><abbr title="Ferramenta Principal" ng-repeat="tool in tooltable.maintools">{{tool}}</abbr>
                                 </div>
                                 <address class="m-t-md">
-                                    <strong>Dados Corporativos</strong><br>
-                                    <abbr title="Endereço de e-mail">{{contato.mail}}</abbr><br>
-                                    <abbr title="Nome Skype">{{contato.skype}}</abbr><br>
-                                    <abbr title="Telefone Coorporativo" data-mask="99999-9999">{{contato.telefone}}</abbr>
+
+                                    <strong>Contatos Coorporativos</strong><br>
+                                    <i class="fa fa-envelope" style="margin-right:10px"> </i><abbr title="Endereço de e-mail">{{contato.mail}}</abbr><br>
+                                    <i class="fa fa-skype" style="margin-right:10px"> </i><abbr title="Nome Skype">{{contato.skype}}</abbr><br>
+                                    <i class="fa fa-phone" style="margin-right:10px"> </i><abbr title="Telefone Coorporativo">{{contato.telefone}}</abbr>
                                 </address>
                             </a>
 

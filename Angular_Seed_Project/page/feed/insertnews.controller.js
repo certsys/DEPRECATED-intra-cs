@@ -53,6 +53,7 @@ function insertnews($scope, $http, $timeout, $state) {
               , ['height', ['height']]
             ]
     };
+
 };
 
 angular.module('inspinia').controller('insertnews', insertnews);
