@@ -92,6 +92,12 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, $locati
         data: { pageTitle: 'Contatos' }
     })
 
+    .state('manageposts', {
+        url: "/manageposts",
+        templateUrl: "page/feed/manageposts.html",
+        data: { pageTitle: 'Controlar Posts' }
+    })
+
     .state('insertcontato', {
             url: "/insertcontact",
             templateUrl: "page/contatos/insertcontact.html",

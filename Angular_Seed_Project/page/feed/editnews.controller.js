@@ -1,9 +1,11 @@
-function editnews($scope, postService, $state) {
+function editnews($http, $scope, postService, $state, $timeout) {
     $scope.title = "Newsfeed CS - Editar postagem";
 
-    $scope.perfil = postService.getPost();
-    console.log($scope.perfil);
+    $scope.postagem = postService.getPost();
+    console.log($scope.postagem);
 
+    $scope.thumbnail = [];
+    $scope.fileReaderSupported = window.FileReader != null;
     $scope.photoChanged = function (files) {
         if (files != null) {
             var file = files[0];
@@ -20,19 +22,30 @@ function editnews($scope, postService, $state) {
             }
         }
     };
-    $scope.submit = function () {
-        var data = {
-            titulo: $scope.titulo
-            , imagem: $scope.thumbnail.dataUrl
-            , texto: $scope.texto
-            , assinatura: $scope.assinatura
-        };
-        var output = angular.toJson(data);
-        console.log(output);
+    $scope.edit = function () {
+        if (angular.isDefined($scope.thumbnail)) {
+            console.log("IF 1");
+            var data = {
+                titulo: $scope.postagem.titulo
+                , imagem: $scope.thumbnail.dataUrl
+                , texto: $scope.postagem.texto
+                , assinatura: $scope.postagem.assinatura
+            };
+        }
+        else {
+            console.log("IF 2");
+            var data = {
+                titulo: $scope.postagem.titulo
+                , imagem: $scope.thumbnail.dataUrl
+                , texto: $scope.postagem.texto
+                , assinatura: $scope.postagem.assinatura
+            };
+        }
+        console.log($scope.thumbnail.dataUrl);
         $http({
-            method: 'POST'
-            , url: '/posts'
-            , data: output
+            method: 'PUT'
+            , url: '/posts/edit/' + $scope.postagem._id
+            , data: data
         }).then(function (response) {
             //your code in case the post succeeds
             console.log(response);

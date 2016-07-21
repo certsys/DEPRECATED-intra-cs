@@ -25,6 +25,30 @@ router.post('/', function (req, res) {
     });
 });
 
+router.delete('/remove/:id', function (req, res) {
+    Post.findByIdAndRemove(req.params.id, function(err, data) {
+        res.json(data);
+    });
+});
+
+router.put('/edit/:id', function(req, res, next) {
+    Post.findById(req.params.id, function(err, data) {
+        data.titulo = req.body.titulo;
+        if(req.body.imagem !== "") {
+            data.imagem = req.body.imagem;
+        }
+        data.texto = req.body.texto;
+        data.assinatura = req.body.assinatura;
+        data.data = Date.now();
+        data.save(function(err, data) {
+            if(err) {
+                return next(err);
+            }
+            res.status(201).json(data);
+        });
+    });
+});
+
 // Pega um Post específico
 router.get('/:post', function(req, res){
     res.json(req.post);

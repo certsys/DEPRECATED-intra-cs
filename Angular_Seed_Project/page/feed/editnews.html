@@ -23,21 +23,20 @@
                         <small>Altere o que desejar!</small>
                     </h5> </div>
                 <div class="ibox-content">
-                    <form ng-submit="submit()" class="form-horizontal"> <h2>Título</h2>
-                        
-                        <input required class="col-sm-12" type="text" ng-model="titulo" name="Título">
+                    <form ng-submit="edit()" class="form-horizontal"> <h2>Título</h2>
+                        <input required class="col-sm-12" type="text" ng-model="postagem.titulo" name="Título">
                         <br> 
                         <br> 
-                        <h2>Imagem</h2><br>
-                        <input required class="col-sm-12" type="file" file-model="imagem" ng-model="imagem" name="Imagem" onchange="angular.element(this).scope().photoChanged(this.files)">
+                        <h2>Alterar Imagem</h2><br>
+                        <input class="col-sm-12" type="file" file-model="imagem" ng-model="postagem.imagem" name="Imagem" onchange="angular.element(this).scope().photoChanged(this.files)">
                         <br>
                         <img ng-src="{{ thumbnail.dataUrl }}" />
                         <br>
                         <h2>Corpo</h2><br>
-                        <summernote class="col-sm-12"  type="text" ng-model="texto" name="Texto" config="options"></summernote>
+                        <summernote class="col-sm-12"  type="text" ng-model="postagem.texto" name="Texto" config="options"></summernote>
                         <br> <h2>Assinatura</h2>
                         <br>
-                        <select required name="Assinatura" ng-model="assinatura" value="Assinatura" class="col-sm-12">
+                        <select required name="Assinatura" ng-model="postagem.assinatura" value="Assinatura" class="col-sm-12">
                               <option value="">Assinatura</option>
                               <option value="Recursos Humanos - Certificações">Recursos Humanos - Certificações</option>
                               <option value="Recursos Humanos - Colaboradores">Recursos Humanos - Colaboradores</option>

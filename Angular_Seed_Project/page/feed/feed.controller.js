@@ -5,7 +5,6 @@ function feed($scope, $http) {
     $scope.title = "Newsfeed Certsys";
     $scope.limit = 1;
     $scope.loadMore = function () {
-        console.log($scope.limit);
         $scope.limit = $scope.limit + 1;
     };
 };
