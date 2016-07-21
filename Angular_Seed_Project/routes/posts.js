@@ -25,6 +25,12 @@ router.post('/', function (req, res) {
     });
 });
 
+router.delete('/remove/:id', function (req, res) {
+    Post.findByIdAndRemove(req.params.id, function(err, data) {
+        res.json(data);
+    });
+});
+
 // Pega um Post específico
 router.get('/:post', function(req, res){
     res.json(req.post);

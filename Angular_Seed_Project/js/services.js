@@ -2,7 +2,7 @@
   var contact;
 
   var sendContact = function(newObj) {
-      contact= newObj; 
+      contact = newObj; 
   };
 
   var getContact = function(){
@@ -11,9 +11,9 @@
   };
 
   return {
-    sendContact: sendContact,
-    getContact: getContact
-  };
+         sendContact: sendContact,
+         getContact: getContact
+     };
 
 };
 

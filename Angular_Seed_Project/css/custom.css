@@ -26,3 +26,16 @@
     top: 25%;
     font-size: 15px;
 }
+
+.all-right{
+    position:  relative;
+    float: right;
+}
+
+.fa-times-circle{
+    color: red;
+}
+
+.fa-times-circle:hover{
+    color: green;
+}
