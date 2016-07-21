@@ -17,7 +17,27 @@
 
 };
 
+ function postService() {
+     var post;
+
+     var sendPost = function(newObj) {
+         post= newObj;
+     };
+
+     var getPost = function(){
+         console.log(post)
+         return post;
+     };
+
+     return {
+         sendPost: sendPost,
+         getPost: getPost
+     };
+
+ };
+
 
 angular
     .module('inspinia')
     .service('contactService', contactService)
+    .service('postService', postService)

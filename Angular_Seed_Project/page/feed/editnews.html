@@ -1,0 +1,66 @@
+<!-- Wrapper-->
+<div id="blueimp-gallery" class="blueimp-gallery">
+    <div class="slides"></div>
+</div>
+<div id="wrapper">
+    <!-- Navigation -->
+    <div ng-include="'views/common/navigation.html'"></div>
+    <!-- Page wraper -->
+    <!-- ng-class with current state name give you the ability to extended customization your view -->
+    <div id="page-wrapper" class="gray-bg {{$state.current.name}}">
+        <!-- Page wrapper -->
+        <div ng-include="'views/common/topnavbar.html'"></div>
+        <!-- Main view  -->
+        <div ng-controller="editnews">
+            <div class="row wrapper border-bottom white-bg page-heading">
+                <div class="col-lg-10">
+                    <h2>{{title}}</h2> </div>
+            </div>
+            <br>
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Editar Postagem:
+                        <small>Altere o que desejar!</small>
+                    </h5> </div>
+                <div class="ibox-content">
+                    <form ng-submit="submit()" class="form-horizontal"> <h2>Título</h2>
+                        
+                        <input required class="col-sm-12" type="text" ng-model="titulo" name="Título">
+                        <br> 
+                        <br> 
+                        <h2>Imagem</h2><br>
+                        <input required class="col-sm-12" type="file" file-model="imagem" ng-model="imagem" name="Imagem" onchange="angular.element(this).scope().photoChanged(this.files)">
+                        <br>
+                        <img ng-src="{{ thumbnail.dataUrl }}" />
+                        <br>
+                        <h2>Corpo</h2><br>
+                        <summernote class="col-sm-12"  type="text" ng-model="texto" name="Texto" config="options"></summernote>
+                        <br> <h2>Assinatura</h2>
+                        <br>
+                        <select required name="Assinatura" ng-model="assinatura" value="Assinatura" class="col-sm-12">
+                              <option value="">Assinatura</option>
+                              <option value="Recursos Humanos - Certificações">Recursos Humanos - Certificações</option>
+                              <option value="Recursos Humanos - Colaboradores">Recursos Humanos - Colaboradores</option>
+                              <option value="Recursos Humanos - Eventos">Recursos Humanos - Eventos</option>
+                              <option value="Recursos Humanos - Parcerias">Recursos Humanos - Parcerias</option>
+                              <option value="Financeiro">Financeiro</option>
+                        </select>
+                        <br>                        
+                        <br>
+                        <br><input class="col-sm-12 btn btn-primary" type="submit" value="Postar">
+                    </form>
+                    <br>
+                    <br>
+                    <br>
+                    <br> </div>
+            </div>
+        </div>
+        <br>
+        <br>
+        <br>
+        <!-- Footer -->
+        <div ng-include="'views/common/footer.html'"></div>
+    </div>
+    <!-- End page wrapper-->
+</div>
+<!-- End wrapper-->

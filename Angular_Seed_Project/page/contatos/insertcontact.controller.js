@@ -61,6 +61,7 @@ function insertcontacts($scope, $http, $timeout, $state) {
         		//your code in case the post succeeds
         		//console.log(response);
                 alert('Contato inserido com sucesso.');
+                $state.go('contatos');
         	})
         	.catch(function(err){
         		//your code in case your post fails
