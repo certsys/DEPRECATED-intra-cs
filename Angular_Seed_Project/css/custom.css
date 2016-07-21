@@ -11,6 +11,10 @@
     height: 350px !important;
 }
 
+.highlight {
+    background: yellow;
+}
+
 .search {
     position: relative;
     width: 100%;
