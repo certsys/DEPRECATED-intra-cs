@@ -175,13 +175,13 @@
 
         </div>
 
-        <div class="col-lg-5">
+        <div class="col-lg-5" ng-if="perfil.tooltable.tools_advanced">
 
             <div class="social-feed-box">
 
                 
                 <div class="social-body">
-                    <h4>Conhecimento avançado em: </h4>
+                    <h4>Conhecimento Avançado em: </h4>
                     <ul>
                         <li ng-repeat= "tool in perfil.tooltable.tools_advanced" >
                             {{tool}}
@@ -193,7 +193,7 @@
 
             </div>
         </div>
-        <div class="col-lg-5">
+        <div class="col-lg-5" ng-if="perfil.tooltable.tools_intermediate">
 
             <div class="social-feed-box">
 
@@ -211,13 +211,13 @@
 
             </div>
         </div>
-        <div class="col-lg-5">
+        <div class="col-lg-5" ng-if="perfil.tooltable.tools_basic">
 
             <div class="social-feed-box">
 
                 
                 <div class="social-body">
-                    <h4>Conhecimento básico em: </h4>
+                    <h4>Conhecimento Básico em: </h4>
                     <ul>
                         <li ng-repeat= "tool in perfil.tooltable.tools_basic" >
                             {{tool}}
