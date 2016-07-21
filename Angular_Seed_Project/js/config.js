@@ -6,23 +6,23 @@
  * Initial there are written state for all view in theme.
  *
  */
-function compileProvider($compileProvider) {   
-        $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|local|data|mailto):/); 
-        
+function compileProvider($compileProvider) {
+    $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|local|data|mailto):/);
 }
 
 function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, $locationProvider) {
-    
     $urlRouterProvider.otherwise("/");
     $ocLazyLoadProvider.config({
         // Set to true if you want to see what and when is dynamically loaded
         debug: false
     });
+
     //    $locationProvider.html5Mode({
     //      enabled: true//,
     //    //  requireBase: false
     //    });
-    $stateProvider.state('feed', {
+    $stateProvider
+        .state('feed', {
             url: "/"
             , templateUrl: "page/feed/feed.html"
             , data: {
@@ -32,12 +32,15 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, $locati
                 loadPlugin: function ($ocLazyLoad) {
                     return $ocLazyLoad.load([
                         {
-                            files: ['js/plugins/blueimp/jquery.blueimp-gallery.min.js', 'css/plugins/blueimp/css/blueimp-gallery.min.css']
+                            files: ['js/plugins/blueimp/jquery.blueimp-gallery.min.js', 
+                            'css/plugins/blueimp/css/blueimp-gallery.min.css']
                         }
                     ]);
                 }
             }
-        }).state('insertnews', {
+        })
+
+        .state('insertnews', {
             url: "/insertnews"
             , templateUrl: "page/feed/insertnews.html"
             , data: {
@@ -57,17 +60,40 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, $locati
                     ]);
                 }
             }
-        }).state('perfil', {
-            url: "/perfil"
-            , templateUrl: "page/perfil/perfil.html"
-            , data: {
-                pageTitle: 'Perfil'
-            }
-            , resolve: {
+
+        })
+
+    .state('contatos', {
+        url: "/contatos",
+        templateUrl: "page/contatos/contatos.html",
+        data: { pageTitle: 'Contatos' }
+    })
+
+    .state('insertcontato', {
+            url: "/insertcontact",
+            templateUrl: "page/contatos/insertcontact.html",
+            data: { pageTitle: 'Novo Contato' },
+            resolve: {
                 loadPlugin: function ($ocLazyLoad) {
                     return $ocLazyLoad.load([
                         {
-                            files: ['js/plugins/sparkline/jquery.sparkline.min.js']
+                            files: ['css/plugins/iCheck/custom.css','js/plugins/iCheck/icheck.min.js']
+                        }
+                    ]);
+                }
+            }
+        })
+
+    .state('perfil', {
+        url: "/perfil",
+        templateUrl: "page/perfil/perfil.html",
+        controller: "perfil_ctrl",
+        data: { pageTitle: 'Perfil'},
+        resolve: {
+            loadPlugin: function ($ocLazyLoad) {
+                return $ocLazyLoad.load([
+                    {
+                        files: ['js/plugins/sparkline/jquery.sparkline.min.js']
                     }
                 ]);
                 }
@@ -123,25 +149,20 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, $locati
                 ]);
                 }
             }
-        }).state('mailbox.email_template', {
-            url: "/email_template"
-            , templateUrl: "page/mail/email_template.html"
-            , data: {
-                pageTitle: 'Mail compose'
-            }
-        }).state('contatos', {
-            url: "/contatos"
-            , templateUrl: "page/contatos/contatos.html"
-            , data: {
-                pageTitle: 'Contatos'
-            }
-        }).state('calendario', {
-            url: "/calendario"
-            , templateUrl: "page/calendario/calendario.html"
-            , data: {
-                pageTitle: 'Calendario'
-            }
-            , resolve: {
+        })
+
+        .state('mailbox.email_template', {
+            url: "/email_template",
+            templateUrl: "page/mail/email_template.html",
+            data: { pageTitle: 'Mail compose' }
+        })
+
+
+     .state('calendario', {
+        url: "/calendario",
+        templateUrl: "page/calendario/calendario.html",
+        data: { pageTitle: 'Calendario' },
+        resolve: {
                 loadPlugin: function ($ocLazyLoad) {
                     return $ocLazyLoad.load([
                         {
@@ -239,14 +260,15 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, $locati
             , data: {
                 pageTitle: 'Login'
             }
-        }) //Este será usado quando houver um artigo a ser visto. abrirá nesta página
+        }) //Tela de Login
+        .state('register', {
+            url: "/register"
+            , templateUrl: "page/register/register.html"
+            , data: {
+                pageTitle: 'Registrar-se'
+            }
+        }) //Tela de Registro
 }
-
-
-angular
-    .module('inspinia')
-    .config(config)
-    .config(compileProvider)
-    .run(function($rootScope, $state) {
-        $rootScope.$state = $state;
-    });
+angular.module('inspinia').config(config).config(compileProvider).run(function ($rootScope, $state) {
+    $rootScope.$state = $state;
+});

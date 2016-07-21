@@ -9,7 +9,8 @@
         'pascalprecht.translate',       // Angular Translate
         'ui.bootstrap',                 // Ui Bootstrap
         'summernote',                   // Summernote Editor de Texto
-        'ngSanitize'
+        'ngSanitize',                   // Para display de código HTML
+        'infinite-scroll'               // Scroll Infinito
     ])
     .filter('highlight', function($sce) {
     return function(text, phrase) {
