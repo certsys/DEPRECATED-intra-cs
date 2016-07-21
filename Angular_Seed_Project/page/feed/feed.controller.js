@@ -8,5 +8,6 @@ function feed($scope, $http) {
         console.log($scope.limit);
         $scope.limit = $scope.limit + 1;
     };
+
 };
 angular.module('inspinia').controller('feed', feed);
