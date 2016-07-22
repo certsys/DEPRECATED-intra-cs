@@ -32,7 +32,7 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, $locati
                 loadPlugin: function ($ocLazyLoad) {
                     return $ocLazyLoad.load([
                         {
-                            files: ['js/plugins/blueimp/jquery.blueimp-gallery.min.js', 
+                            files: ['js/plugins/blueimp/jquery.blueimp-gallery.min.js',
                             'css/plugins/blueimp/css/blueimp-gallery.min.css']
                         }
                     ]);
@@ -92,12 +92,21 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, $locati
         data: { pageTitle: 'Contatos' }
     })
 
-    .state('manageposts', {
-        url: "/manageposts",
-        templateUrl: "page/feed/manageposts.html",
-        data: { pageTitle: 'Controlar Posts' }
-    })
+        .state('manageposts', {
+            url: "/manageposts",
+            templateUrl: "page/feed/manageposts.html",
+            data: { pageTitle: 'Controlar Posts' }
+            , resolve: {
+                loadPlugin: function ($ocLazyLoad) {
+                    return $ocLazyLoad.load([
+                        {
+                            files: ['css/plugins/sweetalert/sweetalert.css', 'js/plugins/sweetalert/sweetalert.min.js']
+                        }
+                    ]);
+                }
+            }
 
+        })
     .state('insertcontato', {
             url: "/insertcontact",
             templateUrl: "page/contatos/insertcontact.html",
