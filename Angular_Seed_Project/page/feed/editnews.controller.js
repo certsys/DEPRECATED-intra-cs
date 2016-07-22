@@ -2,7 +2,6 @@ function editnews($http, $scope, postService, $state, $timeout) {
     $scope.title = "Newsfeed CS - Editar postagem";
 
     $scope.postagem = postService.getPost();
-    console.log($scope.postagem);
 
     $scope.thumbnail = [];
     $scope.fileReaderSupported = window.FileReader != null;

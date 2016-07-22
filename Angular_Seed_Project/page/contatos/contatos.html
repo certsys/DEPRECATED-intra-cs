@@ -32,7 +32,7 @@
             <div class="wrapper wrapper-content animated fadeInRight">
                 <div class="row">
 
-                    <div class="col-lg-4" ng-repeat="contato in contatos | filter:search | orderBy:'nome'">
+                    <div class="col-lg-4 animated fadeInRightBig" ng-repeat="contato in contatos | filter:search | orderBy:'nome'">
                         <div class="contact-box center-version">
                             <a ui-sref="perfil" ng-click="sendContact(contato)">
                                 <img alt="image" class="img-circle" src="{{contato.imagem}}">
