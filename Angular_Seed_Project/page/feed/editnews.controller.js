@@ -23,7 +23,7 @@ function editnews($http, $scope, postService, $state, $timeout) {
         }
     };
     $scope.edit = function () {
-        if (angular.isDefined($scope.thumbnail)) {
+        if (angular.isDefined($scope.thumbnail) && angular.isDefined($scope.thumbnail.dataUrl)) {
             console.log("IF 1");
             var data = {
                 titulo: $scope.postagem.titulo
@@ -36,7 +36,7 @@ function editnews($http, $scope, postService, $state, $timeout) {
             console.log("IF 2");
             var data = {
                 titulo: $scope.postagem.titulo
-                , imagem: $scope.thumbnail.dataUrl
+                , imagem: null
                 , texto: $scope.postagem.texto
                 , assinatura: $scope.postagem.assinatura
             };

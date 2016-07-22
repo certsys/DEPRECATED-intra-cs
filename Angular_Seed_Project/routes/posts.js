@@ -34,7 +34,7 @@ router.delete('/remove/:id', function (req, res) {
 router.put('/edit/:id', function(req, res, next) {
     Post.findById(req.params.id, function(err, data) {
         data.titulo = req.body.titulo;
-        if(req.body.imagem !== "") {
+        if(req.body.imagem !== null) {
             data.imagem = req.body.imagem;
         }
         data.texto = req.body.texto;
