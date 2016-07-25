@@ -1,4 +1,13 @@
 function feed($scope, $http) {
+    var today = new Date();
+
+    $scope.isToday = function (date) {
+    	console.log(today);
+    	console.log(date);
+    	if(date < today) return true;
+    	return false;
+    }
+
     $http.get('/posts').then(function (response) {
         $scope.feed = response.data;
     }, console.log("Erro ao pegar os dados"));

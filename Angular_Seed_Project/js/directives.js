@@ -148,6 +148,18 @@ function minimalizaSidebar($timeout) {
 }
 
 /**
+ * clockPicker - Directive for clock picker plugin
+ */
+function clockPicker() {
+    return {
+        restrict: 'A',
+        link: function(scope, element) {
+                element.clockpicker();
+        }
+    };
+};
+
+/**
  *
  * Pass all functions into module
  */
@@ -157,4 +169,5 @@ angular
     .directive('sideNavigation', sideNavigation)
     .directive('iboxTools', iboxTools)
     .directive('minimalizaSidebar', minimalizaSidebar)
-    .directive('iboxToolsFullScreen', iboxToolsFullScreen);
+    .directive('iboxToolsFullScreen', iboxToolsFullScreen)
+    .directive('clockPicker', clockPicker);

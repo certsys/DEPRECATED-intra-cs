@@ -1,7 +1,15 @@
 function insertnews($scope, $http, $timeout, $state) {
+    var programado = $scope.programado;
+    var hora = $scope.hora;
+    $scope.today = new Date();
     $scope.title = "Newsfeed CS - Nova postagem";
     $scope.thumbnail = [];
     $scope.fileReaderSupported = window.FileReader != null;
+    
+    $scope.showDate = function () {
+        console.log($scope.programado);
+    }
+
     $scope.photoChanged = function (files) {
         if (files != null) {
             var file = files[0];
@@ -11,7 +19,7 @@ function insertnews($scope, $http, $timeout, $state) {
                     fileReader.readAsDataURL(file); // convert the image to data url. 
                     fileReader.onload = function (e) {
                         $timeout(function () {
-                            $scope.thumbnail.dataUrl = e.target.result; // Retrieve the im  age. 
+                            $scope.thumbnail.dataUrl = e.target.result; // Retrieve the image. 
                         });
                     }
                 });
@@ -20,13 +28,30 @@ function insertnews($scope, $http, $timeout, $state) {
     };
     $scope.submit = function () {
             var editions = [];
-            var data = {
-                titulo: $scope.titulo
-                , imagem: $scope.thumbnail.dataUrl
-                , texto: $scope.texto
-                , assinatura: $scope.assinatura
-                , editions: editions
-            };
+            if ($scope.futuro == true) {
+                console.log("Tempo futuro");
+                console.log(programado);
+                console.log(hora);
+                var data = {
+                    titulo: $scope.titulo
+                    , imagem: $scope.thumbnail.dataUrl
+                    , texto: $scope.texto
+                    , assinatura: $scope.assinatura
+                    , editions: editions
+                    , data: programado
+                    , hora: hora
+                };
+            }
+            else {
+                console.log("Hoje!!!");
+                var data = {
+                    titulo: $scope.titulo
+                    , imagem: $scope.thumbnail.dataUrl
+                    , texto: $scope.texto
+                    , assinatura: $scope.assinatura
+                    , editions: editions
+                };   
+            }
             var output = angular.toJson(data);
             console.log(output);
             $http({
