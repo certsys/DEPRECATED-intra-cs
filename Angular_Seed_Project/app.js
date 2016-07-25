@@ -11,6 +11,7 @@ var routes = require('./routes/index');
 var controldesk = require('./routes/controldesk');
 var inbox = require('./routes/inbox');
 var login = require('./routes/login');
+var kb = require('./routes/kb');
 
 // Rotas relacionadas ao Mongo DB
 var posts = require('./routes/posts'); // Posts do Newsfeed
@@ -39,8 +40,8 @@ app.set('view engine', 'ejs');
 app.use(logger('dev'));
 
 // Aumentar o tamanho do arquivo que pode ser enviado pelas rotas
-app.use(bodyParser.json({limit: '5mb'}));
-app.use(bodyParser.urlencoded({limit: '5mb'}));
+app.use(bodyParser.json({limit: '500mb'}));
+app.use(bodyParser.urlencoded({limit: '500mb'}));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
@@ -51,6 +52,7 @@ app.use('/', routes);//try
 app.use('/controldesk', controldesk);
 app.use('/mailbox/inbox', inbox);
 app.use('/mailbox/login', login);
+app.use('/kb', kb);
 
 // Rotas para busca e inserção no Mongo DB
 app.use('/posts', posts);
