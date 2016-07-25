@@ -5,7 +5,8 @@ var postSchema = new mongoose.Schema({
     imagem: String,
     texto: String,
     assinatura: String,     // TODO: Referenciar para um id posteriormente (ObjectId)
-    data: {type: Date, default: Date.now}
+    data: {type: Date, default: Date.now},
+    editions: []
 });
 
 var Post = mongoose.model('Post', postSchema);

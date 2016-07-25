@@ -16,7 +16,8 @@ router.post('/', function (req, res) {
         titulo: req.body.titulo,
         imagem: req.body.imagem,
         texto: req.body.texto,
-        assinatura: req.body.assinatura
+        assinatura: req.body.assinatura,
+        editions: []
     });
 
     newPost.save(function(err) {
@@ -39,7 +40,7 @@ router.put('/edit/:id', function(req, res, next) {
         }
         data.texto = req.body.texto;
         data.assinatura = req.body.assinatura;
-        data.data = Date.now();
+        data.editions.push(Date.now());
         data.save(function(err, data) {
             if(err) {
                 return next(err);

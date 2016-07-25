@@ -40,6 +40,14 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, $locati
             }
         })
 
+        .state('institucional', {
+            url: "/institucional"
+            , templateUrl: "page/institucional/institucional.html"
+            , data: {
+                pageTitle: 'Institucional'
+            }
+        })
+
         .state('insertnews', {
             url: "/insertnews"
             , templateUrl: "page/feed/insertnews.html"

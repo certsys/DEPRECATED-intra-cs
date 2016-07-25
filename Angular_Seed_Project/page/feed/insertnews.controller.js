@@ -19,11 +19,13 @@ function insertnews($scope, $http, $timeout, $state) {
         }
     };
     $scope.submit = function () {
+            var editions = [];
             var data = {
                 titulo: $scope.titulo
                 , imagem: $scope.thumbnail.dataUrl
                 , texto: $scope.texto
                 , assinatura: $scope.assinatura
+                , editions: editions
             };
             var output = angular.toJson(data);
             console.log(output);

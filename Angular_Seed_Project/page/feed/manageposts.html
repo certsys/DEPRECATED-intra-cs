@@ -44,6 +44,15 @@
                                             </h2>
                                         </div>
                                     </div>
+                                    <br>
+                                    <div class="row" ng-if="isEmpty(post.editions)">
+                                        <div class="col-md-12">
+                                            <h4>Histórico de Edições:</h4>
+                                            <ul class="font-bold m-b-xs" ng-repeat="edit in post.editions track by $index">
+                                                <li>{{edit  |  date:'dd/MM/yyyy HH:mm:ss'}}</li>
+                                            </ul>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="ibox-footer"> <span class="pull-right">
                                 Data da postagem - <i class="fa fa-clock-o"></i> {{post.data | date:'dd/MM/yyyy HH:mm'}}

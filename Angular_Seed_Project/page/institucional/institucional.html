@@ -1,0 +1,59 @@
+<!-- Wrapper-->
+<div id="wrapper" class="top-navigation">
+
+    <!-- Navigation -->
+    <div ng-include="'views/common/navigation.html'"></div>
+
+    <!-- Page wraper -->
+    <!-- ng-class with current state name give you the ability to extended customization your view -->
+    <div id="page-wrapper" class="gray-bg {{$state.current.name}}" ng-controller="institucional">
+
+        <!-- Page wrapper -->
+        <div ng-include="'views/common/topnavbar.html'"></div>
+
+        <!-- Main view  -->
+        <div class="row wrapper border-bottom white-bg page-heading">
+            <div class="col-lg-10">
+                <h2>{{title}}</h2>
+            </div>
+            <div class="col-lg-2">
+
+            </div>
+        </div>
+        <div class="wrapper wrapper-content animated fadeInRight">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-content text-center p-md">
+
+                            <h2><span class="text-navy">{{name}}</span><br>
+                                {{intro}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div ng-repeat="info in institucional">
+                <div class="col-lg-6">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-content text-center p-md">
+
+                            <h4 class="m-b-xxs">{{info.titulo}}</h4>
+                            <small>{{info.subtitulo}}</small>
+                            <br>
+                            <div class="m-t-md">
+                                <p>{{info.conteudo}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div ng-include="'views/common/footer.html'"></div>
+
+    </div>
+    <!-- End page wrapper-->
+
+</div>
+<!-- End wrapper-->

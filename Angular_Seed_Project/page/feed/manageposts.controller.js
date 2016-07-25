@@ -37,7 +37,12 @@ function postManager($scope, $http, postService) {
     $scope.sendPost = function (currentPost) {
         console.log("Editar Post");
         postService.sendPost(currentPost);
-    }
+    };
+
+    $scope.isEmpty = function (array) { // Printa histórico de edições apenas se houver edições!!!
+        if (array.length > 0) return true;
+        return false;
+    };
 
 };
 angular.module('inspinia').controller('postManager', postManager);
