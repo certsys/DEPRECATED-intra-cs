@@ -10,7 +10,8 @@
         'ui.bootstrap',                 // Ui Bootstrap
         'summernote',                   // Summernote Editor de Texto
         'ngSanitize',                   // Para display de código HTML
-        'infinite-scroll'               // Scroll Infinito
+        'infinite-scroll',              // Scroll Infinito
+        'ngJsTree'                      // Árvore do KB
     ])
 })();
 
