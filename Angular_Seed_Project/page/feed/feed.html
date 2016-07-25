@@ -1,18 +1,16 @@
-<!-- Wrapper-->
 <div id="blueimp-gallery" class="blueimp-gallery">
     <div class="slides"></div>
     <h3 class="title"></h3> <a class="prev">‹</a> <a class="next">›</a> <a class="close">×</a>
     <a class="play-pause"></a>
     <ol class="indicator"></ol>
 </div>
-<div id="wrapper">
+
+<!-- Wrapper-->
+<div id="wrapper" class="top-navigation">
     <!-- Navigation -->
     <div ng-include="'views/common/navigation.html'"></div>
-    <!-- Page wraper -->
     <!-- ng-class with current state name give you the ability to extended customization your view -->
-    <div id="page-wrapper" class="gray-bg {{$state.current.name}}">
-        <!-- Page wrapper -->
-        <div ng-include="'views/common/topnavbar.html'"></div>
+    <div id="page-wrapper" class="gray-bg {{$state.current.name}}">  
         <!-- Main view  -->
         <div ng-controller="feed">
             <div class="row wrapper border-bottom white-bg page-heading">

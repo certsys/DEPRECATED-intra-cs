@@ -1,12 +1,11 @@
 <!-- Wrapper-->
-<div id="wrapper">
+<div id="wrapper" class="top-navigation">
     <!-- Navigation -->
     <div ng-include="'views/common/navigation.html'"></div>
     <!-- Page wraper -->
     <!-- ng-class with current state name give you the ability to extended customization your view -->
     <div id="page-wrapper" class="gray-bg {{$state.current.name}}">
         <!-- Page wrapper -->
-        <div ng-include="'views/common/topnavbar.html'"></div>
         <!-- Main view  -->
         <div ng-controller="contacts">
             <div class="row wrapper border-bottom white-bg page-heading">
@@ -14,7 +13,7 @@
                     <h2>{{title}}</h2>
                     
                     <div class="search"> <span class="fa fa-search"></span>
-                        <input type="text" placeholder="Buscar contatos..." class="form-control full-width" name="top-search" id="top-search" ng-model="search.$"> 
+                        <input type="text" placeholder="Buscar contatos..." class="form-control full-width" name="top-search" id="top-search" ng-model="search.$">
                     </div>
                     <!--<ol class="breadcrumb">
                         <li>
