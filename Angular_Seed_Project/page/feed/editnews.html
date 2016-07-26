@@ -29,7 +29,8 @@
                         <h2>Alterar Imagem</h2><br>
                         <input class="col-sm-12" type="file" accept="image/*" file-model="imagem" ng-model="postagem.imagem" name="Imagem" onchange="angular.element(this).scope().photoChanged(this.files)">
                         <br>
-                        <img ng-src="{{ thumbnail.dataUrl }}" />
+                        <div ng-show="noImage">Imagem anterior:<br> <img ng-src="{{ postagem.imagem }}" /></div>
+                        <div ng-show="noImage">Nova imagem:<br> <img ng-src="{{ thumbnail.dataUrl }}" /></div>
                         <br>
                         <h2>Corpo</h2><br>
                         <summernote class="col-sm-12"  type="text" ng-model="postagem.texto" name="Texto" config="options"></summernote>

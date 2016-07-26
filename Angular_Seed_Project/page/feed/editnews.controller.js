@@ -4,6 +4,12 @@ function editnews($http, $scope, postService, $state, $timeout) {
     $scope.postagem = postService.getPost();
 
     $scope.thumbnail = [];
+
+    $scope.noImage = function () {
+        if ($scope.thumbnail.length) return true;
+        return false;
+    }
+
     $scope.fileReaderSupported = window.FileReader != null;
     $scope.photoChanged = function (files) {
         if (files != null) {
