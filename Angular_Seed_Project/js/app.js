@@ -11,7 +11,8 @@
         'summernote',                   // Summernote Editor de Texto
         'ngSanitize',                   // Para display de código HTML
         'infinite-scroll',              // Scroll Infinito
-		'ui.switchery' 					// Switch iOS 7
+		'ui.switchery',					// Switch iOS 7
+        'ngJsTree'                      // Árvore do KB
     ])
 })();
 
