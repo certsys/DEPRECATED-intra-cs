@@ -46,19 +46,20 @@
                         </select>
                         <br>
                         <br>
-                        <br><h2>Postagem Futura? <input type="checkbox" class="js-switch" ui-switch="{color:'#3DADD0'}" ng-model="futuro" name="Futuro"></h2>
+                        <br><h2 class="hide">Postagem Futura? <input type="checkbox" class="js-switch" ui-switch="{color:'#3DADD0'}" ng-model="futuro" name="Futuro"></h2>
                         <br>
                         <br>
                         <div ng-if="futuro">
                             <div class="col-sm-10">
                                 <div class="input-group date">
                                     <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                                    <input type="text" class="form-control" data-ng-model="programado.checkOut" name="programado" date-time required min="{{ today | date: 'yyyy-MM-dd' }}" view="date" auto-close="true" min-view="date" format="DD/MM/YYYY">
+                                    <input type="text" date-time="" data-ng-model="dateHolder" format="DD/MM/YYYY HH:mm" view="date" min-view="hours" class="ng-pristine ng-valid ng-scope ng-touched">
+                                    <!--<input type="text" class="form-control" data-ng-model="programado.checkOut" name="programado" date-time required min="{{ today | date: 'yyyy-MM-dd' }}" view="date" auto-close="true" min-view="date" format="DD/MM/YYYY">-->
                                 </div>
-                                <div class="input-group" clock-picker data-autoclose="true">
-                                    <span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
-                                    <input type="text" class="form-control" data-ng-model="hora.checkOut" name="hora" value="00:00">
-                                </div>
+                                <!--<div class="input-group" clock-picker data-autoclose="true">-->
+                                    <!--<span class="input-group-addon"><i class="fa fa-clock-o"></i></span>-->
+                                    <!--<input type="text" class="form-control" data-ng-model="hora.checkOut" name="hora" value="00:00">-->
+                                <!--</div>-->
                             </div>
                             <br>
                             <br>

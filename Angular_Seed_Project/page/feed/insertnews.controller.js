@@ -1,14 +1,14 @@
 function insertnews($scope, $http, $timeout, $state) {
-    var programado = $scope.programado;
-    var hora = $scope.hora;
     $scope.today = new Date();
     $scope.title = "Newsfeed CS - Nova postagem";
     $scope.thumbnail = [];
-    $scope.fileReaderSupported = window.FileReader != null;
-    
-    $scope.showDate = function () {
-        console.log($scope.programado);
-    }
+    $scope.fileReaderSupported = window.FileReader != null
+    $scope.dateHolder = new Date();
+
+    // $scope.$watch('dateHolder', function(newValue, oldValue) {
+    //     console.log('dateHolder changed', oldValue, newValue);
+    // }, true);
+
 
     $scope.photoChanged = function (files) {
         if (files != null) {
@@ -30,16 +30,14 @@ function insertnews($scope, $http, $timeout, $state) {
             var editions = [];
             if ($scope.futuro == true) {
                 console.log("Tempo futuro");
-                console.log(programado);
-                console.log(hora);
+                console.log($scope.dateHolder);
                 var data = {
                     titulo: $scope.titulo
                     , imagem: $scope.thumbnail.dataUrl
                     , texto: $scope.texto
                     , assinatura: $scope.assinatura
                     , editions: editions
-                    , data: programado
-                    , hora: hora
+                    , data: $scope.dateHolder
                 };
             }
             else {
