@@ -40,11 +40,30 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, $locati
             }
         })
 
-        .state('institucional', {
-            url: "/institucional"
+	
+	.state('institucional', {
+              url: "/institucional"
             , templateUrl: "page/institucional/institucional.html"
             , data: {
                 pageTitle: 'Institucional'
+            }
+            , resolve: {
+                loadPlugin: function ($ocLazyLoad) {
+                    return $ocLazyLoad.load([
+                        {
+                            files: ['css/bootstrap-theme.css',
+									'css/bootstrap-theme.css.map',
+									'css/bootstrap-theme.min.css',
+									'js/pace.min.js',
+									'js/wow.min.js',
+									'js/classie.js',
+									'js/cbpAnimatedHeader.js'
+									
+									
+								    ]
+                        }
+                    ]);
+                }
             }
         })
 
