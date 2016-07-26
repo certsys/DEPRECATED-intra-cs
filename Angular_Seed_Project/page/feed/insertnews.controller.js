@@ -29,9 +29,9 @@ function insertnews($scope, $http, $timeout, $state) {
     };
     $scope.submit = function () {
             var editions = [];
-            if ($scope.futuro == true) {
-                var date = angular.element('#data-postagem').val();
-                $scope.changeDateToISO(date);
+            var date = angular.element('#data-postagem').val();
+            $scope.changeDateToISO(date);
+            if ($scope.futuro == true && ($scope.selectedDate > $scope.today)) {
                 var data = {
                     titulo: $scope.titulo
                     , imagem: $scope.thumbnail.dataUrl
