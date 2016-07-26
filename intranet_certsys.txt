@@ -1,0 +1,10 @@
+Complementos e mudanças
+
+
+- campo de pesquisa está limitado por postagens carregadas;
+- campo de resultados não encontrados;
+- ativo e inativo;
+- hidden(banco);
+- problema em inserir usuário (ferramenta/conhecimento);
+- pesquisa de contato por ferramenttas;
+- programar postagens.
