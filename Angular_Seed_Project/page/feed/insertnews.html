@@ -28,7 +28,7 @@
                         <br> 
                         <br> 
                         <h2>Imagem</h2><br>
-                        <input required class="col-sm-12" type="file" file-model="imagem" ng-model="imagem" name="Imagem" onchange="angular.element(this).scope().photoChanged(this.files)">
+                        <input required class="col-sm-12" type="file" accept="image/*" file-model="imagem" ng-model="imagem" name="Imagem" onchange="angular.element(this).scope().photoChanged(this.files)">
                         <br>
                         <img ng-src="{{ thumbnail.dataUrl }}" />
                         <br>

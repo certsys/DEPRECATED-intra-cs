@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var Contact = require('../models/contacts');
 
-// Pega todos os Posts
+// Pega todos os contatos
 router.get('/', function(req, res){
     Contact.find(function (err, contacts) {
         if (err) return console.error(err);
@@ -11,7 +11,7 @@ router.get('/', function(req, res){
 });
 
 
-// Recebe um JSON e insere no banco de dados
+// Recebe um JSON e insere no banco de dados, para cadastrar novo contato
 router.post('/', function (req, res) {
     var newContact = new Contact({
         nome: req.body.nome,
@@ -21,7 +21,6 @@ router.post('/', function (req, res) {
         telefone: req.body.phone,
         skype: req.body.skype,
         imagem: req.body.imagem 
-
     });
 
 

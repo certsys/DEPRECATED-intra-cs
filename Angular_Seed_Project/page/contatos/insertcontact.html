@@ -95,7 +95,7 @@
                         <input class="col-sm-12" type="text" ng-model="skype" name="Skype">
                         <br>
                         Imagem<br>
-                        <input required class="col-sm-12" type="file" file-model="imagem" ng-model="imagem" name="imagem" onchange="angular.element(this).scope().photoChanged(this.files)">
+                        <input required class="col-sm-12" type="file" accept="image/*" file-model="imagem" ng-model="imagem" name="imagem" onchange="angular.element(this).scope().photoChanged(this.files)">
                         <br>
                         <img ng-src="{{ thumbnail.dataUrl }}" />
                         <br>
