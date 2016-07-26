@@ -5,41 +5,54 @@ var ActiveDirectory = require('activedirectory');
 
 var config = {
     url: 'ldap://192.168.129.2:389',
-    baseDN: 'ou="Certsys",dc="certsys",dc="local"',
+    baseDN: 'OU=Certsys,DC=certsys,DC=local',
     username: 'svc_intranet@certsys.local',
-    password: 'Cert0104sys'
+    password: 'dAgAcupU6rA='
 }
 
 var ad = new ActiveDirectory(config);
 // var username = 'pedro.strabeli@certsys.com.br';
 var username = 'svc_intranet@certsys.local';
 // var password = 'password';
-var password = 'Cert0104sys';
+var password = 'dAgAcupU6rA=';
+var groupName = 'Certsys';
 
 
 /* GET users listing. */
 router.get('/', function (req, res, next) {
-    ad.userExists(username, function(err, exists) {
+    ad.getUsersForGroup(groupName, function(err, users) {
         if (err) {
-            res.json(JSON.stringify(err));
+            res.json('ERROR: ' +JSON.stringify(err));
             return;
         }
 
-        res.json({data : username   +' exists: '+ exists});
+        if (! users) res.json({data: 'Group: ' + groupName + ' not found.'});
+        else {
+            res.json(JSON.stringify(users));
+        }
     });
 
 });
 
 router.post('/', function (req, res) {
-    // ad.authenticate(req.body.username, req.body.password, function (err, auth) {
-    ad.authenticate(username, password, function (err, auth) {
+    ad.authenticate(req.body.username, req.body.password, function (err, auth) {
+    // ad.authenticate(username, password, function (err, auth) {
         if (err) {
             res.json(JSON.stringify(err));
             return;
         }
 
         if (auth) {
-            res.json({data: 'Entrou!'});
+            // res.json({data: 'Entrou!'});
+            ad.findUser(req.body.username, function(err, user) {
+                if (err) {
+                    res.json(JSON.stringify(err));
+                    return;
+                }
+
+                if (! user) res.json({data: 'User: ' + req.body.username + ' not found.'});
+                else res.json(JSON.stringify(user));
+            });
         }
         else {
             res.json({data: 'Falha de autenticação...'});
