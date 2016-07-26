@@ -12,7 +12,7 @@
         <div ng-include="'views/common/topnavbar.html'"></div>
 
         <!-- Main view  -->
-        <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="row wrapper border-bottom white-bg page-heading padding-0">
             <div class="col-lg-10">
                 <h2>{{title}}</h2>
             </div>
@@ -20,34 +20,47 @@
 
             </div>
         </div>
-        <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="wrapper wrapper-content animated fadeInRight padding-0">
             <div class="row">
-                <div class="col-lg-12">
-                    <div class="ibox float-e-margins">
-                        <div class="ibox-content text-center p-md">
-
-                            <h2><span class="text-navy">{{name}}</span><br>
-                                {{intro}}
-                        </div>
-                    </div>
+                <div class="col-lg-12 padding-0">
+                    <img class="fit-image" src="../../img/cloud_girl-1.png">
                 </div>
             </div>
-            <div ng-repeat="info in institucional">
-                <div class="col-lg-6">
+            <div class="row">
+                <div class="col-lg-12" style="margin-top: 50px; margin-bottom: 50px">
                     <div class="ibox float-e-margins">
-                        <div class="ibox-content text-center p-md">
-
-                            <h4 class="m-b-xxs">{{info.titulo}}</h4>
-                            <small>{{info.subtitulo}}</small>
-                            <br>
-                            <div class="m-t-md">
-                                <p>{{info.conteudo}}</p>
+                        <div class="ibox-content">
+                            <div class="text-center article-title">
+                                <h1>
+                                    <strong>{{name}}</strong>
+                                </h1>
                             </div>
+                            <p>{{intro_1}}</p>
+                            <p>{{intro_2}}</p>
+                            <p>{{intro_3}}</p>
+                            <p>Att.</p>
                         </div>
+
                     </div>
                 </div>
             </div>
         </div>
+        <!--<div ng-repeat="info in institucional">-->
+        <!--<div class="col-lg-6">-->
+        <!--<div class="ibox float-e-margins">-->
+        <!--<div class="ibox-content text-center p-md">-->
+
+        <!--<h4 class="m-b-xxs">{{info.titulo}}</h4>-->
+        <!--<small>{{info.subtitulo}}</small>-->
+        <!--<br>-->
+        <!--<div class="m-t-md">-->
+        <!--<p>{{info.conteudo}}</p>-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--</div>-->
+
 
         <!-- Footer -->
         <div ng-include="'views/common/footer.html'"></div>

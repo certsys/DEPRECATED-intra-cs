@@ -2,9 +2,11 @@ function institucional($scope) {
        
     $scope.title = "Institucional"; 
 
-    $scope.name = "Intranet Certsys";
+    $scope.name = "Bom dia Certsyanos!!!";
 
-    $scope.intro = "Escreva aqui seu texto introdutório";
+    $scope.intro_1 = "Todos que fazem parte dessa brigada a favor das boas práticas de TI. A Intranet Certsys tem uma missão apenas: unir todos que participam remotamente ou não do ambiente corporativo da empresa, ou seja, todos aqueles que tem o propósito de buscar ou agregar alguma coisa. A Intranet foi construída por desenvolvedores para desenvolvedores.";
+    $scope.intro_2 = "Supondo que todos nós somos aprendizes da entidade Tecnologia e do supremo buscador de informação Google, nossa virtude é nossa capacidade e técnica de buscar e lidar com todo o conjunto de informação e conhecimentos que rondam essa área, nada melhor que temos um local em comum para compartilhar nossas questões e conhecimento.";
+    $scope.intro_3 = "Simples assim: se quer ajuda ou ajudar aqui é um ambiente comum para achar pessoas, arquivos e outras coisas que desejar. Não tenha medo de pedir e nem de sugerir alguma coisa estamos aqui pra isso!";
 
     $scope.institucional = [
     	{

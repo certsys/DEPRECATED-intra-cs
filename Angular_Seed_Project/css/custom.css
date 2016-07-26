@@ -43,3 +43,12 @@
 .fa-times-circle:hover{
     color: green;
 }
+
+.padding-0{
+    padding: 0 !important;
+}
+
+.fit-image{
+    width: 100%;
+    height: auto;
+}
