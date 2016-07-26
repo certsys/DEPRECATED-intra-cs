@@ -48,10 +48,9 @@ function insertnews($scope, $http, $timeout, $state) {
                     , texto: $scope.texto
                     , assinatura: $scope.assinatura
                     , editions: editions
-                };   
+                };
             }
             var output = angular.toJson(data);
-            console.log(output);
             $http({
                 method: 'POST'
                 , url: '/posts'

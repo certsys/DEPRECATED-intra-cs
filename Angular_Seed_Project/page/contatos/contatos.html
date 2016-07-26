@@ -11,10 +11,10 @@
             <div class="row wrapper border-bottom white-bg page-heading">
                 <div class="col-lg-12">
                     <h2>{{title}}</h2>
-                    
-                    <div class="search"> <span class="fa fa-search"></span>
-                        <input type="text" placeholder="Buscar contatos..." class="form-control full-width" name="top-search" id="top-search" ng-model="search.$">
-                    </div>
+                    <form class="search" ng-submit="restrict()"> <span class="fa fa-search"></span>
+                        <input type="text" placeholder="Buscar contatos ou aperte ENTER para buscar por ferramenta..." class="form-control full-width" name="top-search" id="top-search" ng-model="search.nome">
+                        <!--"search.$"-->
+                    </form>
                     <!--<ol class="breadcrumb">
                         <li>
                             <a href="index.html">Home</a>
@@ -38,8 +38,15 @@
 
                                 <h4 class="m-b-xs"><strong>{{contato.nome}}</strong></h4>
 
-                                <div class="font-bold"><abbr title="Ferramenta Principal" ng-repeat="tool in tooltable.maintools">{{tool}}</abbr>
-                                </div>
+                                <strong><small>Avançado:</small></strong>
+                                <p><small title="Ferramenta Principal" ng-repeat="tool in contato.tooltable.tools_advanced">{{tool}}<br></small>
+                                </p>
+                                <strong><small>Intermediário:</small></strong>
+                                <p><small title="Ferramenta Principal" ng-repeat="tool in contato.tooltable.tools_intermediate">{{tool}}<br></small>
+                                </p>
+                                <strong><small>Básico:</small></strong>
+                                <p><small title="Ferramenta Principal" ng-repeat="tool in contato.tooltable.tools_basic">{{tool}}<br></small>
+                                </p>
                                 <address class="m-t-md">
 
                                     <strong>Contatos Coorporativos</strong><br>

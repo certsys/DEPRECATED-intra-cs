@@ -27,9 +27,19 @@ router.post('/', function (req, res) {
 });
 
 router.delete('/remove/:id', function (req, res) {
-    Post.findByIdAndRemove(req.params.id, function(err, data) {
-        res.json(data);
+    Post.findById(req.params.id, function(err, data) { //Soft delete
+        data.isDeleted = true;
+        data.editions.push(Date.now());
+        data.save(function(err, data) {
+            if(err) {
+                console.log(err);
+            }
+            res.json(data);
+        });
     });
+    // Post.findByIdAndRemove(req.params.id, function(err, data) {
+    //     res.json(data);
+    // });
 });
 
 router.put('/edit/:id', function(req, res, next) {
@@ -40,6 +50,7 @@ router.put('/edit/:id', function(req, res, next) {
         }
         data.texto = req.body.texto;
         data.assinatura = req.body.assinatura;
+        data.isDeleted = req.body.isDeleted;
         data.editions.push(Date.now());
         data.save(function(err, data) {
             if(err) {

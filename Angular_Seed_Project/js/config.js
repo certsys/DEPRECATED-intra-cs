@@ -111,6 +111,16 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, $locati
             url: "/contatos",
             templateUrl: "page/contatos/contatos.html",
             data: {pageTitle: 'Contatos'}
+            , resolve: {
+                loadPlugin: function ($ocLazyLoad) {
+                    return $ocLazyLoad.load([
+                        {
+                            files: ['css/plugins/switchery/switchery.css'
+                                , 'js/plugins/switchery/switchery.js']
+                        }
+                    ]);
+                }
+            }
         })
 
         .state('manageposts', {

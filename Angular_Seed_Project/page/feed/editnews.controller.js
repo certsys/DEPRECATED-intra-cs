@@ -29,6 +29,7 @@ function editnews($http, $scope, postService, $state, $timeout) {
                 , imagem: $scope.thumbnail.dataUrl
                 , texto: $scope.postagem.texto
                 , assinatura: $scope.postagem.assinatura
+                , isDeleted: false
             };
         }
         else {
@@ -38,6 +39,7 @@ function editnews($http, $scope, postService, $state, $timeout) {
                 , imagem: null
                 , texto: $scope.postagem.texto
                 , assinatura: $scope.postagem.assinatura
+                , isDeleted: false
             };
         }
         console.log($scope.thumbnail.dataUrl);

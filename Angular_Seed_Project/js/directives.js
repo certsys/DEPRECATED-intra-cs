@@ -159,6 +159,20 @@ function clockPicker() {
     };
 };
 
+function myEnter() {
+    return function (scope, element, attrs) {
+        element.bind("keydown keypress", function (event) {
+            if(event.which === 13) {
+                scope.$apply(function (){
+                    scope.$eval(attrs.myEnter);
+                });
+
+                event.preventDefault();
+            }
+        });
+    };
+};
+
 /**
  *
  * Pass all functions into module
@@ -170,4 +184,5 @@ angular
     .directive('iboxTools', iboxTools)
     .directive('minimalizaSidebar', minimalizaSidebar)
     .directive('iboxToolsFullScreen', iboxToolsFullScreen)
-    .directive('clockPicker', clockPicker);
+    .directive('clockPicker', clockPicker)
+    .directive('myEnter', myEnter);

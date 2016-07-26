@@ -26,7 +26,7 @@
                                             <h2 class="font-bold m-b-xs">
                                                 {{post.titulo}}
                                             </h2>
-                                            <a ng-click="removePost(post, $index)"><i class="fa fa-times-circle fa-3x all-right"></i></a>
+                                            <a ng-hide="post.isDeleted" ng-click="removePost(post, $index)"><i class="fa fa-times-circle fa-3x all-right"></i></a>
                                             <a ui-sref="editnews" ng-click="sendPost(post)"><i class="fa fa-edit fa-3x all-right" style="margin-right: 30px;"></i></a>
                                             <!--<div>-->
                                             <!--<div class="btn-group">-->
@@ -48,8 +48,8 @@
                                     <div class="row" ng-if="isEmpty(post.editions)">
                                         <div class="col-md-12">
                                             <h4>Histórico de Edições:</h4>
-                                            <ul class="font-bold m-b-xs" ng-repeat="edit in post.editions track by $index">
-                                                <li>{{edit  |  date:'dd/MM/yyyy HH:mm:ss'}}</li>
+                                            <ul class="font-bold m-b-xs" ng-repeat="edit in post.editions track by $index" ng-class="{'last': $last}">
+                                                <li> <div ng-if="post.isDeleted"><div ng-if="$last">Data de Exclusão: </div></div>{{edit  |  date:'dd/MM/yyyy HH:mm:ss'}}</li>
                                             </ul>
                                         </div>
                                     </div>
