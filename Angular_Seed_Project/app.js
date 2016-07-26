@@ -39,7 +39,7 @@ app.set('view engine', 'ejs');
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 
-// Aumentar o tamanho do arquivo que pode ser enviado pelas rotas
+// Tamanho do arquivo que pode ser enviado pelas rotas
 app.use(bodyParser.json({limit: '500mb'}));
 app.use(bodyParser.urlencoded({limit: '500mb'}));
 
@@ -51,7 +51,8 @@ app.use(express.static(path.join(__dirname)));
 app.use('/', routes);//try
 app.use('/controldesk', controldesk);
 app.use('/mailbox/inbox', inbox);
-app.use('/mailbox/login', login);
+// app.use('/mailbox/login', login);
+app.use('/login', login);
 app.use('/kb', kb);
 
 // Rotas para busca e inserção no Mongo DB

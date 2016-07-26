@@ -17,7 +17,8 @@ router.post('/', function (req, res) {
         imagem: req.body.imagem,
         texto: req.body.texto,
         assinatura: req.body.assinatura,
-        editions: []
+        editions: [],
+        data: req.body.data
     });
 
     newPost.save(function(err) {
