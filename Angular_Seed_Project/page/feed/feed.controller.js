@@ -4,8 +4,7 @@ function feed($scope, $http) {
     $scope.isToday = function (date) {
     	console.log(today);
     	console.log(date);
-    	if(date < today) return true;
-    	return false;
+    	return true;
     }
 
     $http.get('/posts').then(function (response) {
