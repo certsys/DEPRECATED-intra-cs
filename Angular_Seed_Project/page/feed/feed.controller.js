@@ -1,4 +1,4 @@
-function feed($scope, $http) {
+function feed($scope, $http, $state, userService) {
     var today = new Date();
 
     $scope.isToday = function (date) {
@@ -10,9 +10,19 @@ function feed($scope, $http) {
         return false;
     }
 
-    $http.get('/posts').then(function (response) {
+    $http({
+        url: '/posts',
+        method: "GET",
+        params: {token: userService.getToken()}
+    }).then(function (response) {
+        //your code in case the post succeeds
         $scope.feed = response.data;
-    }, console.log("Erro ao pegar os dados"));
+        console.log(response);
+    }).catch(function (err) {
+        $state.go('login');
+        console.log(err);
+    });
+    
     $scope.title = "Newsfeed Certsys";
     $scope.limit = 4; // TODO: Problema se a pessoa agendar 5 posts!!!
 

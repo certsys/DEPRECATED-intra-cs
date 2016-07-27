@@ -1,4 +1,4 @@
-function loginCrtl($scope, $http) {
+function loginCrtl($scope, $http, $state, userService) {
     $scope.title = "Login";
 
     $scope.login = function () {
@@ -15,11 +15,23 @@ function loginCrtl($scope, $http) {
             , data: output
         }).then(function (response) {
             //your code in case the post succeeds
-            console.log(response);
+            // console.log(response.data.token);
+            // console.log(response.data.user);
+            if (response.data.user) {
+                userService.sendUser(response.data.user);
+                userService.sendToken(response.data.token);
+                $state.go('feed');
+            } else {
+                $state.go('institucional');
+            }
         }).catch(function (err) {
             //your code in case your post fails
             console.log(err);
         });
+    };
+
+    $scope.logout = function () {
+        userService.sendToken('Logout');
     };
 
 

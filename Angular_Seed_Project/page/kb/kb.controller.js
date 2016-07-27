@@ -26,7 +26,7 @@ function kbCtrl($scope, $http) {
         }
     };
 
-    // TODO: Somente para teste, depois era bom esse json vir do Mongo
+    // TODO: Somente para teste, depois era bom esse json vir de outro lugar
     $scope.treeData = [
         { "id" : "certsys", "parent" : "#", "text" : "Certsys", "state": { "opened": true} },
         { "id" : "sccd", "parent" : "certsys", "text" : "IBM Control Desk", "state": { "opened": true} },

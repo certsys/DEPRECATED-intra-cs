@@ -12,6 +12,7 @@ var controldesk = require('./routes/controldesk');
 var inbox = require('./routes/inbox');
 var login = require('./routes/login');
 var kb = require('./routes/kb');
+var institucional = require('./routes/institucional');
 
 // Rotas relacionadas ao Mongo DB
 var posts = require('./routes/posts'); // Posts do Newsfeed
@@ -48,16 +49,16 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname)));
 
+
+app.use('/login', login);
 app.use('/', routes);//try
 app.use('/controldesk', controldesk);
 app.use('/mailbox/inbox', inbox);
 // app.use('/mailbox/login', login);
-app.use('/login', login);
 app.use('/kb', kb);
-
-// Rotas para busca e inserção no Mongo DB
 app.use('/posts', posts);
 app.use('/contacts', contacts);
+app.use('/institucional', institucional);
 
 
 // catch 404 and forward to error handler!
@@ -90,7 +91,5 @@ app.use(function (err, req, res, next) {
         error: {}
     });
 });
-
-
 
 module.exports = app;

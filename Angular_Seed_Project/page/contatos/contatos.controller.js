@@ -1,5 +1,5 @@
-function contacts($scope, $http, contactService) {
-
+function contacts($scope, $http, contactService, userService) {
+    
     $http.get('/contacts').then(function (response) {
         $scope.contatos = response.data;
     }).catch(function(response){console.log("Erro ao pegar os dados")});
