@@ -1,42 +1,46 @@
 <div class="row border-bottom white-bg">
     <nav class="navbar navbar-static-top" role="navigation">
         <div class="navbar-header" style="width:10%;">
-            <button aria-controls="navbar" aria-expanded="false" data-target="#navbar" data-toggle="collapse" class="navbar-toggle collapsed" type="button">
+            <button aria-controls="navbar" aria-expanded="false" data-target="#navbar" data-toggle="collapse"
+                    class="navbar-toggle collapsed" type="button">
                 <i class="fa fa-reorder"></i>
             </button>
             <a ui-sref="feed" class="navbar-brand"><img src="util/certsys_logo_branco.png" style="width:100%;"></a>
         </div>
-        <div class="navbar-collapse collapse" id="navbar">
-            <ul class="nav navbar-nav">
-                <li ui-sref-active="active">
-                    <a ui-sref="feed"><i class="fa fa-globe"></i> {{ 'HOME' | translate }}</a>
-                </li>
-                <li ui-sref-active="active">
-                    <a ui-sref="institucional"><i class="fa fa-institution"></i> {{ 'INSTITUTIONAL' | translate }}</a>
-                </li>
-                <li ui-sref-active="active">
-                    <a ui-sref="kb"><i class="fa fa-folder-open"></i> {{ 'KNOWLEDGEBASE' | translate }}</a>
-                </li>
-                <li ui-sref-active="active">
-                    <a ui-sref="contatos"><i class="fa fa-group"></i> {{ 'CONTACTS' | translate }}</a>
-                </li>
-                <!-- <li class="dropdown" dropdown>
-                    <a class="dropdown-toggle" href dropdown-toggle> Menu item <span class="caret"></span></a>
-                    <ul role="menu" class="dropdown-menu">
-                        <li><a href="#">Menu item</a></li>
-                        <li><a href="#">Menu item</a></li>
-                        <li><a href="#">Menu item</a></li>
-                        <li><a href="#">Menu item</a></li>
-                    </ul>
-                </li>  Exemplo caso queiramos dropdown -->
-            </ul>
-            <ul class="nav navbar-top-links navbar-right">
-                <li>
-                    <a ui-sref="login" ng-click="logout()">
-                        <i class="fa fa-sign-out"></i> Sair
-                    </a>
-                </li>
-            </ul>
+        <div ng-controller="navigationCrtl">
+            <div class="navbar-collapse collapse" id="navbar">
+                <ul class="nav navbar-nav">
+                    <li ui-sref-active="active">
+                        <a ui-sref="feed"><i class="fa fa-globe"></i> {{ 'HOME' | translate }}</a>
+                    </li>
+                    <li ui-sref-active="active">
+                        <a ui-sref="institucional"><i class="fa fa-institution"></i> {{ 'INSTITUTIONAL' | translate
+                            }}</a>
+                    </li>
+                    <li ui-sref-active="active">
+                        <a ui-sref="kb"><i class="fa fa-folder-open"></i> {{ 'KNOWLEDGEBASE' | translate }}</a>
+                    </li>
+                    <li ui-sref-active="active">
+                        <a ui-sref="contatos"><i class="fa fa-group"></i> {{ 'CONTACTS' | translate }}</a>
+                    </li>
+                    <!-- <li class="dropdown" dropdown>
+                        <a class="dropdown-toggle" href dropdown-toggle> Menu item <span class="caret"></span></a>
+                        <ul role="menu" class="dropdown-menu">
+                            <li><a href="#">Menu item</a></li>
+                            <li><a href="#">Menu item</a></li>
+                            <li><a href="#">Menu item</a></li>
+                            <li><a href="#">Menu item</a></li>
+                        </ul>
+                    </li>  Exemplo caso queiramos dropdown -->
+                </ul>
+                <ul class="nav navbar-top-links navbar-right">
+                    <li>
+                        <a ng-click="logout()">
+                            <i class="fa fa-sign-out"></i> Sair
+                        </a>
+                    </li>
+                </ul>
+            </div>
         </div>
     </nav>
 </div>

@@ -31,6 +31,7 @@ function loginCrtl($scope, $http, $state, userService) {
     };
 
     $scope.logout = function () {
+        console.log("Entrei na função logout!!!")
         userService.sendToken('Logout');
     };
 

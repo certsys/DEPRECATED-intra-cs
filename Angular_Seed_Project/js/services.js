@@ -1,4 +1,4 @@
- function contactService($window) {
+ function contactService() {
 
   var sendContact = function(newObj) {
       sessionStorage.contact = angular.toJson(newObj); 
@@ -16,8 +16,6 @@
 };
 
  function postService() {
-     var post;
-
      var sendPost = function(newObj) {
          sessionStorage.post= angular.toJson(newObj);
      };
@@ -35,23 +33,20 @@
 
 
  function userService() {
-     var user;
-     var token;
-
      var sendUser = function (newObj) {
-         user = newObj;
+         sessionStorage.user = angular.toJson(newObj);
      }
 
      var getUser = function(){
-         return user;
+         return angular.fromJson(sessionStorage.user);
      }
 
      var sendToken = function (newObj) {
-         token = newObj;
+         sessionStorage.token = angular.toJson(newObj);
      }
 
      var getToken = function(){
-         return token;
+         return angular.fromJson(sessionStorage.token);
      }
 
      return {
