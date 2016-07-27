@@ -1,8 +1,18 @@
 function contacts($scope, $http, contactService, userService) {
-    
-    $http.get('/contacts').then(function (response) {
+
+    $http({
+        url: '/contacts',
+        method: "GET",
+        params: {token: userService.getToken()}
+    }).then(function (response) {
+        //your code in case the post succeeds
         $scope.contatos = response.data;
-    }).catch(function(response){console.log("Erro ao pegar os dados")});
+        console.log(response);
+    }).catch(function (err) {
+        $state.go('login');
+        console.log(err);
+    });
+
 
     $scope.restrict = function() {
         var inputed = angular.element('#top-search').val().toLowerCase();
