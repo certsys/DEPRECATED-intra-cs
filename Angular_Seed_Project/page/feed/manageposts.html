@@ -16,7 +16,7 @@
                 </div>
             </div>
             <div infinite-scroll="loadMore()" infinite-scroll-distance="1">
-                <div class="wrapper wrapper-content animated fadeInRight" ng-repeat="post in feed | orderBy:'-data' | filter:search">
+                <div class="wrapper wrapper-content animated fadeInRight" ng-repeat="post in filteredFeed = (feed | orderBy:'-data' | filter:search)">
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="ibox product-detail">
@@ -61,6 +61,7 @@
                         </div>
                     </div>
                 </div>
+                <div ng-if="filteredFeed.length === 0"><br><h2 class="text-center">Ops :( Nada foi encontrado!</h2></div>
             </div>
             <div ng-include="'views/common/footer.html'"></div>
         </div>
