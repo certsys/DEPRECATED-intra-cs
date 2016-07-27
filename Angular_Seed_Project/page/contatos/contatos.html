@@ -11,9 +11,15 @@
             <div class="row wrapper border-bottom white-bg page-heading">
                 <div class="col-lg-12">
                     <h2>{{title}}</h2>
-                    <form class="search" ng-submit="restrict()"> <span class="fa fa-search"></span>
-                        <input type="text" placeholder="Buscar contatos ou aperte ENTER para buscar por ferramenta..." class="form-control full-width" name="top-search" id="top-search" ng-model="search.nome">
-                        <!--"search.$"-->
+                    <form class="searchname">
+                        <input type="text" placeholder="Buscar contatos..." class="form-control full-width" name="top-search" id="top-search" ng-model="search.nome">
+                    </form>
+                    <br>
+                    <form class="search" ng-submit="restrict()">
+                        <select class="form-control" name="Ferramenta" ng-model="ferramenta" value="Ferramenta" class="col-sm-12">
+                            <option value="">Selecionar Ferramenta</option>
+                            <option ng-repeat="tool in tools" value="{{tool.name}}">{{tool.name}}</option>
+                        </select>
                     </form>
                     <!--<ol class="breadcrumb">
                         <li>
@@ -31,29 +37,36 @@
             <div class="wrapper wrapper-content animated fadeInRight">
                 <div class="row">
 
-                    <div class="col-lg-4 animated fadeInRightBig" ng-repeat="contato in filteredContatos = (contatos | filter:search | orderBy:'nome')">
+                    <div class="col-lg-4 animated fadeInRightBig" ng-repeat="contato in filteredContatos = (contatos | filter:search | filter:restrict(contato) | orderBy:'nome')">
                         <div class="contact-box fixed-height center-version">
                             <a ui-sref="perfil" ng-click="sendContact(contato)">
                                 <img alt="image" class="img-circle" src="{{contato.imagem}}">
 
                                 <h4 class="m-b-xs"><strong>{{contato.nome}}</strong></h4>
 
-                                <strong><small>Avançado:</small></strong>
-                                <p><small title="Ferramenta Principal" ng-repeat="tool in contato.tooltable.tools_advanced">{{tool}}<br></small>
-                                </p>
-                                <strong><small>Intermediário:</small></strong>
-                                <p><small title="Ferramenta Principal" ng-repeat="tool in contato.tooltable.tools_intermediate">{{tool}}<br></small>
-                                </p>
-                                <strong><small>Básico:</small></strong>
-                                <p><small title="Ferramenta Principal" ng-repeat="tool in contato.tooltable.tools_basic">{{tool}}<br></small>
-                                </p>
-                                <address class="m-t-md">
-
+                                <div class="row">
+                                    <div ng-if="contato.tooltable.tools_advanced.length > 0">
+                                        <strong><small>Avançado:</small></strong>
+                                        <p><small title="Ferramenta Principal" ng-repeat="tool in contato.tooltable.tools_advanced">{{tool}}<br></small>
+                                        </p>
+                                    </div>
+                                    <div ng-if="contato.tooltable.tools_intermediate.length > 0">
+                                        <strong><small>Intermediário:</small></strong>
+                                        <p><small title="Ferramenta Principal" ng-repeat="tool in contato.tooltable.tools_intermediate">{{tool}}<br></small>
+                                        </p>
+                                    </div>
+                                    <div ng-if="contato.tooltable.tools_basic.length > 0">
+                                        <strong><small>Básico:</small></strong>
+                                        <p><small title="Ferramenta Principal" ng-repeat="tool in contato.tooltable.tools_basic">{{tool}}<br></small>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="row m-t-md">
                                     <strong>Contatos Coorporativos</strong><br>
                                     <i class="fa fa-envelope" style="margin-right:10px"> </i><abbr title="Endereço de e-mail">{{contato.mail}}</abbr><br>
                                     <i class="fa fa-skype" style="margin-right:10px"> </i><abbr title="Nome Skype">{{contato.skype}}</abbr><br>
                                     <i class="fa fa-phone" style="margin-right:10px"> </i><abbr title="Telefone Coorporativo">{{contato.telefone}}</abbr>
-                                </address>
+                                </div>
                             </a>
 
                             <div class="contact-box-footer">

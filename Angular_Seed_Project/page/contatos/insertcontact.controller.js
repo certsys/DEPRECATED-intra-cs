@@ -72,20 +72,20 @@ function insertcontacts($scope, $http, $timeout, $state, userService) {
 
         for(var i = 0; i < $scope.tools_basic.length; i++) {
             angular.forEach($scope.tools_basic[i], function(value, key) {
-                if (key != "$$hashKey") basic_array.push(value);
+                if (key != "$$hashKey" && key != "worktool") basic_array.push(value);
             }, log);
         }
 
         for(var i = 0; i < $scope.tools_intermediate.length; i++) {
             angular.forEach($scope.tools_intermediate[i], function(value, key) {
-                if (key != "$$hashKey") inter_array.push(value);
+                if (key != "$$hashKey" && key != "worktool") inter_array.push(value);
             }, log);
         }
 
         for(var i = 0; i < $scope.tools_advanced.length; i++) {
             console.log($scope.tools_advanced[i]);
             angular.forEach($scope.tools_advanced[i], function(value, key) {
-                if (key != "$$hashKey") advanced_array.push(value);
+                if (key != "$$hashKey" && key != "worktool") advanced_array.push(value);
             }, log);
         }
 
