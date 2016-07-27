@@ -371,6 +371,15 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, $locati
             , data: {
                 pageTitle: 'Login'
             }
+            , resolve: {
+                loadPlugin: function ($ocLazyLoad) {
+                    return $ocLazyLoad.load([
+                        {
+                            files: ['css/plugins/sweetalert/sweetalert.css', 'js/plugins/sweetalert/sweetalert.min.js']
+                        }
+                    ]);
+                }
+            }
         }) //Tela de Login
         .state('register', {
             url: "/register"

@@ -1,8 +1,18 @@
 function loginCrtl($scope, $http, $state, userService) {
     $scope.title = "Login";
 
+    $scope.incorrectData = function () {
+        swal({
+            title: "OPS!",
+            text: "Usuário e/ou senha inválida!",
+            type: "error",
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "Ok",
+            closeOnConfirm: false
+        });
+    };
+        // $state.go('feed');
     $scope.login = function () {
-
         var data = {
             username: $scope.username + '@certsys.local',
             password: $scope.password
@@ -22,7 +32,7 @@ function loginCrtl($scope, $http, $state, userService) {
                 userService.sendToken(response.data.token);
                 $state.go('feed');
             } else {
-                $state.go('institucional');
+                $scope.incorrectData();
             }
         }).catch(function (err) {
             //your code in case your post fails

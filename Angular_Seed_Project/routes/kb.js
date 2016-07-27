@@ -48,6 +48,7 @@ router.get('/', function (req, res) {
 });
 
 router.post('/', function (req, res) {
+    console.log(req.body.id);
     var file = 'kb/' + req.body.id;
     res.download(file);
     // res.json(file);

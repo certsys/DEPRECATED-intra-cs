@@ -1,4 +1,16 @@
-function insertnews($scope, $http, $timeout, $state) {
+function insertnews($scope, $http, $timeout, $state, userService) {
+    $http({
+        url: '/institucional',
+        method: "GET",
+        params: {token: userService.getToken()}
+    }).then(function (response) {
+        //your code in case the post succeeds
+        console.log(response);
+    }).catch(function (err) {
+        $state.go('login');
+        console.log(err);
+    });
+
     $scope.today = new Date();
     $scope.title = "Newsfeed CS - Nova postagem";
     $scope.thumbnail = [];
@@ -9,7 +21,6 @@ function insertnews($scope, $http, $timeout, $state) {
     // $scope.$watch('dateHolder', function(newValue, oldValue) {
     //     console.log('dateHolder changed', oldValue, newValue);
     // }, true);
-
 
     $scope.photoChanged = function (files) {
         if (files != null) {
