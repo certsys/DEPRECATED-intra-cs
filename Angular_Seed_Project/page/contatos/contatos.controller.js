@@ -1,4 +1,4 @@
-function contacts($scope, $http, contactService, userService) {
+function contacts($scope, $http, contactService, userService, $state) {
 
     $http({
         url: '/contacts',

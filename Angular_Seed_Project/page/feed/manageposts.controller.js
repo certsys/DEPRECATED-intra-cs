@@ -1,4 +1,16 @@
-function postManager($scope, $http, postService) {
+function postManager($scope, $http, postService, $state, userService) {
+    $http({
+        url: '/institucional',
+        method: "GET",
+        params: {token: userService.getToken()}
+    }).then(function (response) {
+        //your code in case the post succeeds
+        console.log(response);
+    }).catch(function (err) {
+        $state.go('login');
+        console.log(err);
+    });
+
     $http.get('/posts').then(function (response) {
         $scope.feed = response.data;
     }, console.log("Erro ao pegar os dados"));

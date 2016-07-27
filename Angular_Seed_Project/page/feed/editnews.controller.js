@@ -1,4 +1,16 @@
-function editnews($http, $scope, postService, $state, $timeout) {
+function editnews($http, $scope, postService, $state, $timeout, userService) {
+    $http({
+        url: '/institucional',
+        method: "GET",
+        params: {token: userService.getToken()}
+    }).then(function (response) {
+        //your code in case the post succeeds
+        console.log(response);
+    }).catch(function (err) {
+        $state.go('login');
+        console.log(err);
+    });
+
     $scope.title = "Newsfeed CS - Editar postagem";
 
     $scope.postagem = postService.getPost();
