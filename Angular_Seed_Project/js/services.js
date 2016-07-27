@@ -1,13 +1,11 @@
- function contactService() {
-  var contact;
+ function contactService($window) {
 
   var sendContact = function(newObj) {
-      contact = newObj; 
+      sessionStorage.contact = angular.toJson(newObj); 
   };
 
   var getContact = function(){
-      console.log(contact)
-      return contact;
+      return angular.fromJson(sessionStorage.contact);
   };
 
   return {
@@ -21,12 +19,11 @@
      var post;
 
      var sendPost = function(newObj) {
-         post= newObj;
+         sessionStorage.post= angular.toJson(newObj);
      };
 
      var getPost = function(){
-         console.log(post)
-         return post;
+         return angular.fromJson(sessionStorage.post);
      };
 
      return {
