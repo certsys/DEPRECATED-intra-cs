@@ -163,7 +163,7 @@
                             <script type="text/ng-template" id="tag-template">
                                 <div class="tag-template">
                                     <div class="right-panel">
-                                        <span>{{$getDisplayText().replace('-', ' ').toUpperCase()}}</span>
+                                        <span>{{data.name}}</span>
                                         <a class="remove-button" ng-click="$removeTag()">&#10006;</a>
                                     </div>
                                 </div>
@@ -171,7 +171,7 @@
                             <script type="text/ng-template" id="autocomplete-template">
                                 <div class="autocomplete-template">
                                     <div class="right-panel">
-                                        <span ng-bind-html="$highlight($getDisplayText().replace('-', ' ').toUpperCase())"></span>
+                                        <span ng-bind-html="data.name"></span>
                                         <!--<span>({{data.worktool}})</span>-->
                                     </div>
                                 </div>
