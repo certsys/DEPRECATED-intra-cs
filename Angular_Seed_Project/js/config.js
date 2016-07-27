@@ -166,6 +166,10 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, $locati
                     return $ocLazyLoad.load([
                         {
                             files: ['css/plugins/iCheck/custom.css', 'js/plugins/iCheck/icheck.min.js']
+                        },
+                        {
+                            name: 'ngTagsInput',
+                            files: ['js/plugins/ng-tags-input/ng-tags-input.min.js', 'css/plugins/ng-tags-input/ng-tags-input.min.css', 'css/plugins/ng-tags-input/ng-tags-input.bootstrap.min.css']
                         }
                     ]);
                 }

@@ -31,7 +31,7 @@
             <div class="wrapper wrapper-content animated fadeInRight">
                 <div class="row">
 
-                    <div class="col-lg-4 animated fadeInRightBig" ng-repeat="contato in contatos | filter:search | orderBy:'nome'">
+                    <div class="col-lg-4 animated fadeInRightBig" ng-repeat="contato in filteredContatos = (contatos | filter:search | orderBy:'nome')">
                         <div class="contact-box fixed-height center-version">
                             <a ui-sref="perfil" ng-click="sendContact(contato)">
                                 <img alt="image" class="img-circle" src="{{contato.imagem}}">
@@ -62,6 +62,7 @@
                             </div>
                         </div>
                     </div>
+                    <div ng-if="filteredContatos.length === 0"><br><h2 class="text-center">Ops :( Nada foi encontrado!</h2></div>
                 </div>
             </div>
         </div>
