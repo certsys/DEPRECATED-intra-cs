@@ -10,13 +10,10 @@ function editnews($http, $scope, postService, $state, $timeout, userService) {
         $state.go('login');
         console.log(err);
     });
-
-
     // Só administradores do sistema podem entrar nessa view
-    if(!userService.isAdmin())
+    if (!userService.isAdmin())
         $state.go('feed');
 
-    
     $scope.title = "Newsfeed CS - Editar postagem";
 
     $scope.postagem = postService.getPost();
@@ -83,7 +80,7 @@ function editnews($http, $scope, postService, $state, $timeout, userService) {
     }
 
     $scope.options = {
-        text : ""
+        text: ""
         , height: 300
         , toolbar: [
             ['style', ['style', 'bold', 'italic', 'underline', 'clear']]

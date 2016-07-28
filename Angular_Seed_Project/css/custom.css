@@ -2,6 +2,14 @@
     width: 100%;
 }
 
+
+.navbar-brand>img {
+	height: 100% !important;
+}
+
+
+
+
 .full-width {
     width: 100%;
     height: auto;
@@ -56,7 +64,19 @@
 
 
 
+.background-login {
+	width: 100%;
+	height: auto;
+	margin: 0;
+	padding: 20px;
 
+	background: url('../img/bg2.gif') no-repeat center center fixed;
+	 -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+	
+}
 
 
 
@@ -87,6 +107,8 @@
   -o-background-size: cover;
   background-size: cover;
 }
+
+
 /* CUSTOMIZE THE CAROUSEL
 -------------------------------------------------- */
 /* Carousel base class */
@@ -149,7 +171,7 @@
 }
 .carousel-caption-right {
   position: absolute;
-  top: 100px;
+  top: 90px;
   left: auto;
   bottom: auto;
   right: 0;
@@ -160,7 +182,6 @@
   position: absolute;
   top: 100px;
   bottom: auto;
-  right: auto;
   text-align: center;
 	
 }
@@ -195,7 +216,7 @@
 
 
 .carousel-indicators {
-  padding-right: 60px;
+  /*padding-right: 60px;*/
 }
 
 .carousel-caption h1 {
@@ -295,4 +316,51 @@
     display: block;
     font-size: 14px;
     font-style: italic;
+}
+
+
+
+
+
+
+
+/* UI Sortable */
+
+.ui-sortable .ibox-title {
+  cursor: move;
+}
+
+.resizable-panels .ibox .ibox-content-login {
+  height: calc(100% - 49px);
+}
+
+.ibox-content-login h1,
+.ibox-content-login h2,
+.ibox-content-login h3,
+.ibox-content-login h4,
+.ibox-content-login h5,
+.ibox-title h1,
+.ibox-title h2,
+.ibox-title h3,
+.ibox-title h4,
+.ibox-title h5 {
+  margin-top: 5px;
+}
+.ibox-content-login.text-box {
+  padding-bottom: 0;
+  padding-top: 15px;
+}
+
+.ibox.collapsed .ibox-content-login {
+  display: none;
+}
+
+.ibox-content-login {
+  background-color: rgba(0,0,0,0.77);
+  color: inherit;
+  padding: 15px 20px 20px 20px;
+  /*border-color: #e7eaec;*/
+  border-image: none;
+  /*border-style: solid solid none; */
+  /*border-width: 1px 0; */
 }

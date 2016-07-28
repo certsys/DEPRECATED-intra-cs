@@ -38,9 +38,15 @@
                 <div class="row">
 
                     <div class="col-lg-4 animated fadeInRightBig" bindonce ng-repeat="contato in filteredContatos = (contatos | filter:search | orderBy:'nome')">
+
                         <div class="contact-box fixed-height center-version">
+							
+						
+							
                             <a ui-sref="perfil" ng-click="sendContact(contato)">
+
                                 <img alt="image" class="img-circle" bo-src="contato.imagem">
+
 
                                 <h4 class="m-b-xs"><strong bo-text="contato.nome" /></h4>
 

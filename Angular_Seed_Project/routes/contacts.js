@@ -3,7 +3,6 @@ var router = express.Router();
 var Contact = require('../models/contacts');
 var jwt = require('jsonwebtoken');
 
-
 router.use(function (req, res, next) {
 
     // check header or url parameters or post parameters for token

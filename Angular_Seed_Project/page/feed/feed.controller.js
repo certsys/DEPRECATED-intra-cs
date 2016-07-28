@@ -11,7 +11,6 @@ function feed($scope, $http, $state, userService) {
         $state.go('login');
         console.log(err);
     });
-    
 
     var today = new Date();
 

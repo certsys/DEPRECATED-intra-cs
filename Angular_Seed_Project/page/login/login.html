@@ -1,25 +1,78 @@
-<div class="middle-box text-center loginscreen  animated fadeInDown">
-    <div ng-controller="loginCrtl">
-        <div>
-            <h1 class="logo-name">CS</h1> </div>
-        <h3>Bem-vindo à Intranet da Certsys</h3>
-        <p>Aqui você poderá ver todas as novidade da empresa, além de buscar todos os contatos. </p>
-        <p>Faça Login e veja a Intranet funcionando. </p>
-        <form class="m-t" ng-submit="login()">
-            <div class="form-group">
-                <input type="plain/text" ng-model="username" class="form-control" placeholder="nome.sobrenome" required=""> </div>
-            <div class="form-group">
-                <input type="password" ng-model="password" class="form-control" placeholder="Senha" required=""> </div>
-            <button type="submit" class="btn btn-primary block full-width m-b">Login</button>
-            <div class="hide">
-                <a ui-sref="forgot_password"><small>Esqueceu a senha?</small></a>
-                <p class="text-muted text-center"><small>Ainda não tem uma conta?</small></p>
-                <a class="btn btn-sm btn-outline btn-block btn-primary" ui-sref="register">Crie uma conta</a> </form>
-                <br>
+<div class="background-login">
+
+<div class="loginColumns animated fadeInDown jumbotron">
+    <div class="row" ng-controller="loginCrtl">
+		<div style="color:#fff" class="col-md-6 text-right">
+			<h1 class="font-bold">Bem-vindo à Intranet</h1>
+
+            <p>
+                Veja aqui todas as novidade da empresa, além de buscar todos os contatos.
+            </p>
+
+            <p>
+                Faça Login e veja a Intranet funcionando.
+            </p>
+			
+			<div class="col-md-12">
+				   <img style="text-align:right;" src="/util/certsys_logo_branco.png"  class="img-responsive logo">
+				</div>
+
+            
+        </div>
+        <div class="col-md-6">
+            <div class="ibox-content-login">
+				<div class="col-md-12">
+				   <img src="../../img/cs_white.png"  class="img-responsive logo">
+				</div>
+							<form class="m-t" role="form" ng-submit="login()">
+								<div class="form-group">
+									<input type="plain/text" ng-model="username" class="form-control" placeholder="nome.sobrenome" required="">
+								</div>
+								<div class="form-group">
+									<input type="password" ng-model="password" class="form-control" placeholder="Senha" required=""> 
+								</div>
+								<button type="submit" class="btn btn-primary block full-width m-b">Login</button>
+
+								<a ui-sref="forgot_password">
+									<small style="font-size:14px;">Esqueceu a senha?</small>
+								</a>
+
+								<!--<p class="text-muted text-center">
+									<small>Ainda não tem uma conta??</small>
+								</p>-->
+
+						<div style="color:#fff" class="hide">
+							<a ui-sref="forgot_password"><small>Esqueceu a senha?</small></a>
+							<p><small>Ainda não tem uma conta?</small></p>
+							<a class="btn btn-sm btn-white btn-block" ui-sref="register">Crie uma conta</a> 
+							<br>
+						</div>
+
+
+
+							</form>
+                <p class="m-t text-center">
+                    <small>Intranet Certsys &copy; 2016</small>
+                </p>
             </div>
-        <hr/>
-        <div class="row">
-            <div ng-include="'views/common/footer.html'"></div>
+        </div>
+    </div>
+   <hr style="color:#000;" /> 
+    <div style="color:#fff;" class="row">
+        <div class="col-md-6">
+            Copyright Certsys 
+        </div>
+        <div class="col-md-6 text-right">
+            <small>© 2016</small>
         </div>
     </div>
 </div>
+</div>
+
+
+
+
+
+
+
+

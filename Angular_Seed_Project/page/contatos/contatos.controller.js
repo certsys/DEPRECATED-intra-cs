@@ -1,9 +1,10 @@
 function contacts($scope, $http, contactService, userService, $state) {
+
     var log = [];
     $scope.tools = [];
     
     $scope.ferramenta = "";
-    
+
     $http({
         url: '/contacts',
         method: "GET",

@@ -13,7 +13,6 @@ function insertcontacts($scope, $http, $timeout, $state, userService) {
     // Só administradores do sistema podem entrar nessa view
     if(!userService.isAdmin())
         $state.go('feed');
-
     $scope.title='Novo Contato';
 
     $scope.maintools = [];

@@ -1,5 +1,6 @@
 function navigationCrtl($scope, $state, userService, contactService, $http) {
 
+
     $scope.logout = function () {
         console.log("Entrei na função logout!!!")
         userService.sendToken('Logout');
