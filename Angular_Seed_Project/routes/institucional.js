@@ -8,8 +8,6 @@ router.use(function(req, res, next) {
     // check header or url parameters or post parameters for token
     var token = req.body.token || req.param('token') || req.headers['x-access-token'];
 
-    console.log(req.headers['x-access-token']);
-
     // decode token
     if (token) {
 
