@@ -34,6 +34,10 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, $locati
                         {
                             files: ['js/plugins/blueimp/jquery.blueimp-gallery.min.js',
                                 'css/plugins/blueimp/css/blueimp-gallery.min.css']
+                        },
+                        {
+                            name: 'pasvaz.bindonce',
+                            files: ['js/plugins/bindonce/bindonce.min.js']
                         }
                     ]);
                 }
@@ -134,8 +138,8 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, $locati
                 loadPlugin: function ($ocLazyLoad) {
                     return $ocLazyLoad.load([
                         {
-                            files: ['css/plugins/switchery/switchery.css'
-                                , 'js/plugins/switchery/switchery.js']
+                            name: 'pasvaz.bindonce',
+                            files: ['js/plugins/bindonce/bindonce.min.js']
                         }
                     ]);
                 }
@@ -151,6 +155,10 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, $locati
                     return $ocLazyLoad.load([
                         {
                             files: ['css/plugins/sweetalert/sweetalert.css', 'js/plugins/sweetalert/sweetalert.min.js']
+                        },
+                        {
+                            name: 'pasvaz.bindonce',
+                            files: ['js/plugins/bindonce/bindonce.min.js']
                         }
                     ]);
                 }
