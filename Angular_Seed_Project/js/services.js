@@ -33,27 +33,48 @@
 
 
  function userService() {
+
+     var ADMINS = [
+         'augusto.kiramoto',
+         'bianca.novo',
+         'eduardo.hyodo',
+         'henrique.cavalcante',
+         'ivan.zoppetti',
+         'lucas.felgueiras',
+         'pedro.strabeli',
+         'stiverson.palma',
+         'vanessa.assis'
+     ];
+
      var sendUser = function (newObj) {
          sessionStorage.user = angular.toJson(newObj);
-     }
+     };
 
      var getUser = function(){
          return angular.fromJson(sessionStorage.user);
-     }
+     };
 
      var sendToken = function (newObj) {
          sessionStorage.token = angular.toJson(newObj);
-     }
+     };
 
      var getToken = function(){
          return angular.fromJson(sessionStorage.token);
-     }
+     };
+
+     var isAdmin = function() {
+         for(var i = 0; i < ADMINS.length; i++){
+             if (getUser().mail == ADMINS[i]) return true;
+         }
+         return false;
+     };
 
      return {
          sendUser: sendUser,
          getUser: getUser,
          sendToken: sendToken,
-         getToken: getToken
+         getToken: getToken,
+         isAdmin: isAdmin
      };
  }
 

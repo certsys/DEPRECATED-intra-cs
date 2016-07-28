@@ -11,6 +11,12 @@ function postManager($scope, $http, postService, $state, userService) {
         $state.go('login');
         console.log(err);
     });
+
+    // Só administradores do sistema podem entrar nessa view
+    if(!userService.isAdmin())
+        $state.go('feed');
+
+
     $scope.title = "Controle dos Posts";
 
     $scope.removePost = function (currentPost) {
