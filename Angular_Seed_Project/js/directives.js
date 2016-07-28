@@ -24,6 +24,26 @@ function pageTitle($rootScope, $timeout) {
     }
 }
 
+
+
+
+function mytooltip($timeout) {
+    return {
+        restrict: 'A',
+        link: function(scope, element, attrs){
+            $(element).hover(function(){
+                // on mouseenter
+                $(element).tooltip('show');
+            }, function(){
+                // on mouseleave
+                $(element).tooltip('hide');
+            });
+        }
+    };
+});
+
+
+
 /**
  * sideNavigation - Directive for run metsiMenu on sidebar navigation
  */
@@ -185,4 +205,5 @@ angular
     .directive('minimalizaSidebar', minimalizaSidebar)
     .directive('iboxToolsFullScreen', iboxToolsFullScreen)
     .directive('clockPicker', clockPicker)
-    .directive('myEnter', myEnter);
+    .directive('myEnter', myEnter)
+    .directive('tooltip', mytooltip);  

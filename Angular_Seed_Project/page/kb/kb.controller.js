@@ -1,4 +1,17 @@
-function kbCtrl($scope, $http) {
+function kbCtrl($scope, $http, $state, userService) {
+
+    $http({
+        url: '/kb',
+        method: "GET",
+        params: {token: userService.getToken()}
+    }).then(function (response) {
+        //your code in case the post succeeds
+        console.log(response);
+    }).catch(function (err) {
+        $state.go('login');
+        console.log(err);
+    });
+
     $scope.title = "Base de Conhecimento";
 
     $scope.treeConfig = {
@@ -31,7 +44,7 @@ function kbCtrl($scope, $http) {
         { "id" : "certsys", "parent" : "#", "text" : "Certsys", "state": { "opened": true} },
         { "id" : "sccd", "parent" : "certsys", "text" : "IBM Control Desk", "state": { "opened": true} },
         { "id" : "sccd_documentacao", "parent" : "sccd", "text" : "Documentação" },
-        { "id" : "sccd_cursos_overview.pdf", "parent" : "sccd_documentacao", "text" : "Overview", "type": "js" },
+        { "id" : "sccd_documentacao_overview.pdf", "parent" : "sccd_documentacao", "text" : "Overview", "type": "js" },
         { "id" : "sccd_cursos", "parent" : "sccd", "text" : "Cursos" },
         { "id" : "sccd_duvidas", "parent" : "sccd", "text" : "Dúvidas" },
         { "id" : "websphere", "parent" : "certsys", "text" : "IBM WebSphere", "state": { "opened": true} },
@@ -60,6 +73,7 @@ function kbCtrl($scope, $http) {
             method: 'POST'
             , url: '/kb'
             , data: selectedNode
+            , params: {token: userService.getToken()}
             , responseType: 'arraybuffer'
         }).then(function (response) {
             //your code in case the post succeeds

@@ -30,13 +30,19 @@
             </div>
             <div class="wrapper wrapper-content animated fadeInRight">
                 <div class="row">
-
+						
+					
                     <div class="col-lg-4 animated fadeInRightBig" ng-repeat="contato in filteredContatos = (contatos | filter:search | orderBy:'nome')">
                         <div class="contact-box fixed-height center-version">
+							
+						
+							
                             <a ui-sref="perfil" ng-click="sendContact(contato)">
                                 <img alt="image" class="img-circle" src="{{contato.imagem}}">
 
                                 <h4 class="m-b-xs"><strong>{{contato.nome}}</strong></h4>
+								
+											
 
                                 <strong><small>Avançado:</small></strong>
                                 <p><small title="Ferramenta Principal" ng-repeat="tool in contato.tooltable.tools_advanced">{{tool}}<br></small>

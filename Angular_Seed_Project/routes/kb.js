@@ -5,6 +5,7 @@ var jwt    = require('jsonwebtoken');
 
 
 
+
 router.use(function(req, res, next) {
 
     // check header or url parameters or post parameters for token
@@ -18,11 +19,13 @@ router.use(function(req, res, next) {
         // verifies secret and checks exp
         jwt.verify(token, 'Cert0104sys', function(err, decoded) {
             if (err) {
-                return res.json({ success: false, message: 'Failed to authenticate token.' });
+                return res.status(403).send({
+                    success: false,
+                    message: 'Falha de autenticação do Token'
+                });
             } else {
                 // if everything is good, save to request for use in other routes
                 req.decoded = decoded;
-                console.log("PARADA DECODIFICADA: " + req.decoded);
                 next();
             }
         });
@@ -45,6 +48,7 @@ router.get('/', function (req, res) {
 });
 
 router.post('/', function (req, res) {
+    console.log(req.body.id);
     var file = 'kb/' + req.body.id;
     res.download(file);
     // res.json(file);
