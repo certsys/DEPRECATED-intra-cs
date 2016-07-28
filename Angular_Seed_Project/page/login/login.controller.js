@@ -1,6 +1,19 @@
 function loginCrtl($scope, $http, $state, userService) {
     $scope.title = "Login";
 
+    $http({
+        url: '/posts',
+        method: "GET",
+        params: {token: userService.getToken()}
+    }).then(function (response) {
+        //your code in case the post succeeds
+        console.log(response);
+        $state.go('feed');
+    }).catch(function (err) {
+        console.log(err);
+    });
+
+
     $scope.incorrectData = function () {
         swal({
             title: "OPS!",

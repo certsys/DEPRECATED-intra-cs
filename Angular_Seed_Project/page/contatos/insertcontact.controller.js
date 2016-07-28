@@ -1,16 +1,18 @@
 function insertcontacts($scope, $http, $timeout, $state, userService) {
     $http({
-        url: '/institucional',
+        url: '/contacts',
         method: "GET",
         params: {token: userService.getToken()}
     }).then(function (response) {
         //your code in case the post succeeds
-        $scope.contatos = response.data;
-        console.log(response);
     }).catch(function (err) {
         $state.go('login');
         console.log(err);
     });
+
+    // Só administradores do sistema podem entrar nessa view
+    if(!userService.isAdmin())
+        $state.go('feed');
 
     $scope.title='Novo Contato';
 
@@ -69,13 +71,13 @@ function insertcontacts($scope, $http, $timeout, $state, userService) {
         var inter_array = [];
         var advanced_array = [];
         var log = [];
-
+        console.log("Entrei");
         for(var i = 0; i < $scope.tools_basic.length; i++) {
             angular.forEach($scope.tools_basic[i], function(value, key) {
                 if (key != "$$hashKey" && key != "worktool") basic_array.push(value);
             }, log);
         }
-
+        console.log("Sai");
         for(var i = 0; i < $scope.tools_intermediate.length; i++) {
             angular.forEach($scope.tools_intermediate[i], function(value, key) {
                 if (key != "$$hashKey" && key != "worktool") inter_array.push(value);

@@ -11,6 +11,12 @@ function insertnews($scope, $http, $timeout, $state, userService) {
         console.log(err);
     });
 
+
+    // Só administradores do sistema podem entrar nessa view
+    if(!userService.isAdmin())
+        $state.go('feed');
+
+    
     $scope.today = new Date();
     $scope.title = "Newsfeed CS - Nova postagem";
     $scope.thumbnail = [];
