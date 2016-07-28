@@ -25,29 +25,32 @@ function contacts($scope, $http, contactService, userService, $state) {
         }, log);
     });
 
-    // $scope.restrict = function() {
-    //     var inputed = angular.element('#top-search').val().toLowerCase();
-    //     $http({
-    //         url: '/contacts',
-    //         method: "GET",
-    //         params: {token: userService.getToken(), inputed: inputed}
-    //     }).then(function (response) {
-    //         //your code in case the post succeeds
-    //         $scope.contatos = response.data;
-    //         console.log(response);
-    //     }).catch(function (err) {
-    //         $state.go('login');
-    //         console.log(err);
-    //     });
-    // };
-
-    $scope.restrict = function(contato) {
-        if(angular.isUndefined(contato)) return true;
-        else if (contato.tooltable.tools_basic.indexOf($scope.ferramenta) === -1 &&
-            contato.tooltable.tools_intermediate.indexOf($scope.ferramenta) === -1 &&
-            contato.tooltable.tools_advanced.indexOf($scope.ferramenta) === -1) return false;
-        else return true;
+    $scope.restrict = function() {
+        var inputed = angular.element('#top-search').val().toLowerCase();
+        console.log("Termo buscado em Lowercase: " + inputed);
+        $http({
+            url: '/contacts',
+            method: "GET",
+            params: {token: userService.getToken(), inputed: inputed}
+        }).then(function (response) {
+            //your code in case the post succeeds
+            $scope.contatos = response.data;
+            console.log(response);
+        }).catch(function (err) {
+            $state.go('login');
+            console.log(err);
+        });
+        $scope.search.nome = "";
     };
+
+    // $scope.restrict = function(contato) {
+    //     console.log(contato);
+    //     if(angular.isUndefined(contato)) return false;
+    //     else if (contato.tooltable.tools_basic.indexOf($scope.ferramenta) === -1 &&
+    //         contato.tooltable.tools_intermediate.indexOf($scope.ferramenta) === -1 &&
+    //         contato.tooltable.tools_advanced.indexOf($scope.ferramenta) === -1) return false;
+    //     else return true;
+    // };
 
     $scope.sendContact = function(currObj){
             contactService.sendContact(currObj);

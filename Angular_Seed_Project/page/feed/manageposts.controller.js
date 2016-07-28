@@ -11,9 +11,18 @@ function postManager($scope, $http, postService, $state, userService) {
         console.log(err);
     });
 
-    $http.get('/posts').then(function (response) {
+    $http({
+        url: '/posts',
+        method: "GET",
+        params: {token: userService.getToken()}
+    }).then(function (response) {
+        //your code in case the post succeeds
         $scope.feed = response.data;
-    }, console.log("Erro ao pegar os dados"));
+        console.log(response);
+    }).catch(function (err) {
+        $state.go('login');
+        console.log(err);
+    });
     $scope.title = "Controle dos Posts";
 
     $scope.removePost = function (currentPost) {
