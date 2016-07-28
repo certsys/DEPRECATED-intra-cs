@@ -1,6 +1,6 @@
 function insertcontacts($scope, $http, $timeout, $state, userService) {
     $http({
-        url: '/institucional',
+        url: '/contacts',
         method: "GET",
         params: {token: userService.getToken()}
     }).then(function (response) {

@@ -1,6 +1,17 @@
 function loginCrtl($scope, $http, $state, userService) {
     $scope.title = "Login";
 
+    $http({
+        url: '/posts',
+        method: "GET",
+        params: {token: userService.getToken()}
+    }).then(function (response) {
+        console.log(response);
+        $state.go('feed');
+    }).catch(function (err) {
+        console.log(err);
+    });
+
     $scope.incorrectData = function () {
         swal({
             title: "OPS!",
@@ -41,7 +52,7 @@ function loginCrtl($scope, $http, $state, userService) {
     };
 
     $scope.logout = function () {
-        console.log("Entrei na função logout!!!")
+        console.log("Entrei na função logout!!!");
         userService.sendToken('Logout');
     };
 
