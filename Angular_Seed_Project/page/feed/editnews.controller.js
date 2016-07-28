@@ -65,6 +65,7 @@ function editnews($http, $scope, postService, $state, $timeout, userService) {
             method: 'PUT'
             , url: '/posts/edit/' + $scope.postagem._id
             , data: data
+            , params: {token: userService.getToken()}
         }).then(function (response) {
             //your code in case the post succeeds
             console.log(response);

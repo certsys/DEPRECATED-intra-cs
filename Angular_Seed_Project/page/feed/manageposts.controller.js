@@ -1,17 +1,5 @@
 function postManager($scope, $http, postService, $state, userService) {
     $http({
-        url: '/institucional',
-        method: "GET",
-        params: {token: userService.getToken()}
-    }).then(function (response) {
-        //your code in case the post succeeds
-        console.log(response);
-    }).catch(function (err) {
-        $state.go('login');
-        console.log(err);
-    });
-
-    $http({
         url: '/posts',
         method: "GET",
         params: {token: userService.getToken()}
@@ -38,6 +26,7 @@ function postManager($scope, $http, postService, $state, userService) {
             $http({
                 method: 'DELETE'
                 , url: '/posts/remove/' + currentPost._id
+                , params: {token: userService.getToken()}
             }).then(function (response) {
                 //your code in case the post succeeds
 

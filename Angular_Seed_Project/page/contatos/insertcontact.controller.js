@@ -108,18 +108,18 @@ function insertcontacts($scope, $http, $timeout, $state, userService) {
 
         var output = JSON.stringify(data);
         console.log(output);
-        // $http({method: 'POST', url:'/contacts', data: output})
-        // 	.then(function(response){
-        // 		//your code in case the post succeeds
-        // 		//console.log(response);
-        //         alert('Contato inserido com sucesso.');
-        //         $state.go('contatos');
-        // 	})
-        // 	.catch(function(err){
-        // 		//your code in case your post fails
-        // 		//console.log(err);
-        //         alert('Ocorreu um erro. Contato não adicionado. \nErro: '+JSON.stringify(err));
-        // 	});
+        $http({method: 'POST', url:'/contacts', data: output, params: {token: userService.getToken()}})
+        	.then(function(response){
+        		//your code in case the post succeeds
+        		//console.log(response);
+                alert('Contato inserido com sucesso.');
+                $state.go('contatos');
+        	})
+        	.catch(function(err){
+        		//your code in case your post fails
+        		//console.log(err);
+                alert('Ocorreu um erro. Contato não adicionado. \nErro: '+JSON.stringify(err));
+        	});
     }
     
 };

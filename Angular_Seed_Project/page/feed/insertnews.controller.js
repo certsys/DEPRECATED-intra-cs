@@ -67,6 +67,7 @@ function insertnews($scope, $http, $timeout, $state, userService) {
                 method: 'POST'
                 , url: '/posts'
                 , data: output
+                , params: {token: userService.getToken()}
             }).then(function (response) {
                 //your code in case the post succeeds
                 console.log(response);

@@ -16,7 +16,7 @@
                 </div>
             </div>
             <div infinite-scroll="loadMore()" infinite-scroll-distance="1">
-                <div class="wrapper wrapper-content animated fadeInRight" ng-repeat="post in filteredFeed = (feed | orderBy:'-data' | filter:search)">
+                <div class="wrapper wrapper-content animated fadeInRight" bindonce ng-repeat="post in filteredFeed = (feed | orderBy:'-data' | filter:search)">
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="ibox product-detail">
@@ -26,7 +26,7 @@
                                             <h2 class="font-bold m-b-xs">
                                                 {{post.titulo}}
                                             </h2>
-                                            <a ng-hide="post.isDeleted" ng-click="removePost(post, $index)"><i class="fa fa-times-circle fa-3x all-right"></i></a>
+                                            <a bo-hide="post.isDeleted" bo-click="removePost(post, $index)"><i class="fa fa-times-circle fa-3x all-right"></i></a>
                                             <a ui-sref="editnews" ng-click="sendPost(post)"><i class="fa fa-edit fa-3x all-right" style="margin-right: 30px;"></i></a>
                                             <!--<div>-->
                                             <!--<div class="btn-group">-->
@@ -45,11 +45,11 @@
                                         </div>
                                     </div>
                                     <br>
-                                    <div class="row" ng-if="isEmpty(post.editions)">
+                                    <div class="row" bo-if="isEmpty(post.editions)">
                                         <div class="col-md-12">
                                             <h4>Histórico de Edições:</h4>
-                                            <ul class="font-bold m-b-xs" ng-repeat="edit in post.editions track by $index" ng-class="{'last': $last}">
-                                                <li> <div ng-if="post.isDeleted"><div ng-if="$last">Data de Exclusão: </div></div>{{edit  |  date:'dd/MM/yyyy HH:mm:ss'}}</li>
+                                            <ul class="font-bold m-b-xs" bindonce ng-repeat="edit in post.editions track by $index" bo-class="{'last': $last}">
+                                                <li> <div bo-if="post.isDeleted"><div bo-if="$last">Data de Exclusão: </div></div>{{edit  |  date:'dd/MM/yyyy HH:mm:ss'}}</li>
                                             </ul>
                                         </div>
                                     </div>
