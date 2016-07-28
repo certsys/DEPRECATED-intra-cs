@@ -62,4 +62,41 @@
             <div ng-include="'views/common/footer.html'"></div>
         </div>
     </div>
+
+    <!-- MODAL -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <div align="center"><h1 class="modal-title" id="myModalLabel">C3R75Y5 M1LGR4U!</h1></div>
+                </div>
+                <div class="modal-body">
+                    <div align="center"><h3>BEM-VINDO!!!</h3></div>
+                    <div align="center"><img src="util/eduardo.hyodo.png"></p></div>
+                </div>
+                <div class="modal-footer">
+                    <div align="center"><h4>Texto bem legal aqui!</h4></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        if ( window.addEventListener ) {
+            // cima cima baixo baixo esquerda direita esquerda direita B A
+            var state = 0, konami = [38,38,40,40,37,39,37,39,66,65];
+            window.addEventListener("keydown", function(e) {
+                if ( e.keyCode == konami[state] ) state++;
+                else state = 0;
+                if ( state == 10 ) {
+                    console.log("work");
+                    $(function(){
+                        $("#myModal").modal('show');
+                    });
+                }
+
+            }, true);
+        }
+    </script>
 </div>

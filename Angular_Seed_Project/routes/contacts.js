@@ -39,6 +39,17 @@ router.use(function (req, res, next) {
 
 });
 
+// Pega usuário pelo email
+router.get('/perfil', function (req, res) {
+
+    var mail = req.param("mail");
+    var query = Contact.where({mail: new RegExp(mail, 'ig')});
+    query.find(function (err, contacts) {
+        if (err) return console.error(err);
+        res.json(contacts);
+    })
+
+});
 
 // Pega todos os contatos
 router.get('/', function (req, res) {

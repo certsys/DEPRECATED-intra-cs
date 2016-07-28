@@ -46,12 +46,12 @@
                         <h2 class="no-margins">
                             {{perfil.nome}}
                         </h2>
-                        <h4>Ferramentas Principais:</h4>
-                        <ul>
-                            <li ng-repeat= "tool in perfil.tooltable.maintools" >
-                                {{tool}}
-                            </li>
-                        </ul>
+                        <!--<h4>Ferramentas Principais:</h4>-->
+                        <!--<ul>-->
+                            <!--<li ng-repeat= "tool in perfil.tooltable.maintools" >-->
+                                <!--{{tool}}-->
+                            <!--</li>-->
+                        <!--</ul>-->
                         <!--<small>
                             There are many variations of passages of Lorem Ipsum available, but the majority
                             have suffered alteration in some form Ipsum available.
@@ -112,6 +112,12 @@
                         {{perfil.sobre}}
                     </p>
 
+                    <h3>Dados de contato:</h3>
+                    <div>
+                           <i class="fa fa-envelope" style="margin-right:10px"> </i>{{perfil.mail}}<br>
+                           <i class="fa fa-skype" style="margin-right:10px"> </i>{{perfil.skype}}<br>
+                           <i class="fa fa-phone" style="margin-right:10px"> </i>{{perfil.telefone}}
+                    </div>
                 </div>
             </div>
 
@@ -137,44 +143,44 @@
                 </div>
             </div>-->
 
-            <div class="ibox">
-                <div class="ibox-content">
-                    <h3>Personal friends</h3>
-                    <ul class="list-unstyled file-list">
-                        <li><a href=""><i class="fa fa-file"></i> Project_document.docx</a></li>
-                        <li><a href=""><i class="fa fa-file-picture-o"></i> Logo_zender_company.jpg</a></li>
-                        <li><a href=""><i class="fa fa-stack-exchange"></i> Email_from_Alex.mln</a></li>
-                        <li><a href=""><i class="fa fa-file"></i> Contract_20_11_2014.docx</a></li>
-                        <li><a href=""><i class="fa fa-file-powerpoint-o"></i> Presentation.pptx</a></li>
-                        <li><a href=""><i class="fa fa-file"></i> 10_08_2015.docx</a></li>
-                    </ul>
-                </div>
-            </div>
+            <!--<div class="ibox">-->
+                <!--<div class="ibox-content">-->
+                    <!--<h3>Personal friends</h3>-->
+                    <!--<ul class="list-unstyled file-list">-->
+                        <!--<li><a href=""><i class="fa fa-file"></i> Project_document.docx</a></li>-->
+                        <!--<li><a href=""><i class="fa fa-file-picture-o"></i> Logo_zender_company.jpg</a></li>-->
+                        <!--<li><a href=""><i class="fa fa-stack-exchange"></i> Email_from_Alex.mln</a></li>-->
+                        <!--<li><a href=""><i class="fa fa-file"></i> Contract_20_11_2014.docx</a></li>-->
+                        <!--<li><a href=""><i class="fa fa-file-powerpoint-o"></i> Presentation.pptx</a></li>-->
+                        <!--<li><a href=""><i class="fa fa-file"></i> 10_08_2015.docx</a></li>-->
+                    <!--</ul>-->
+                <!--</div>-->
+            <!--</div>-->
 
-            <div class="ibox">
-                <div class="ibox-content">
-                    <h3>Private message</h3>
+            <!--<div class="ibox">-->
+                <!--<div class="ibox-content">-->
+                    <!--<h3>Private message</h3>-->
 
-                    <p class="small">
-                        Send private message to Alex Smith
-                    </p>
+                    <!--<p class="small">-->
+                        <!--Send private message to Alex Smith-->
+                    <!--</p>-->
 
-                    <div class="form-group">
-                        <label>Subject</label>
-                        <input type="email" class="form-control" placeholder="Message subject">
-                    </div>
-                    <div class="form-group">
-                        <label>Message</label>
-                        <textarea class="form-control" placeholder="Your message" rows="3"></textarea>
-                    </div>
-                    <button class="btn btn-primary btn-block">Send</button>
+                    <!--<div class="form-group">-->
+                        <!--<label>Subject</label>-->
+                        <!--<input type="email" class="form-control" placeholder="Message subject">-->
+                    <!--</div>-->
+                    <!--<div class="form-group">-->
+                        <!--<label>Message</label>-->
+                        <!--<textarea class="form-control" placeholder="Your message" rows="3"></textarea>-->
+                    <!--</div>-->
+                    <!--<button class="btn btn-primary btn-block">Send</button>-->
 
-                </div>
-            </div>
+                <!--</div>-->
+            <!--</div>-->
 
         </div>
 
-        <div class="col-lg-5" ng-if="perfil.tooltable.tools_advanced">
+        <div class="col-lg-5" ng-if="perfil.tooltable.tools_advanced.length !== 0">
 
             <div class="social-feed-box">
 
@@ -192,7 +198,7 @@
 
             </div>
         </div>
-        <div class="col-lg-5" ng-if="perfil.tooltable.tools_intermediate">
+        <div class="col-lg-5" ng-if="perfil.tooltable.tools_intermediate.length !== 0">
 
             <div class="social-feed-box">
 
@@ -210,7 +216,7 @@
 
             </div>
         </div>
-        <div class="col-lg-5" ng-if="perfil.tooltable.tools_basic">
+        <div class="col-lg-5" ng-if="perfil.tooltable.tools_basic.length !== 0">
 
             <div class="social-feed-box">
 

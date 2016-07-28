@@ -11,16 +11,16 @@
             <div class="row wrapper border-bottom white-bg page-heading">
                 <div class="col-lg-12">
                     <h2>{{title}}</h2>
-                    <form class="search" ng-submit="restrict()"><span class="fa fa-search"></span>
-                        <input type="text" placeholder=" Buscar contatos digitando o nome ou pressione ENTER para buscar por ferramenta..." class="form-control full-width" name="top-search" id="top-search" ng-model="search.nome">
+                    <form class="search"><span class="fa fa-search"></span>
+                        <input type="text" placeholder=" Buscar contatos pelo nome..." class="form-control full-width" name="top-search" id="top-search" ng-model="search.nome">
                     </form>
                     <br>
-                    <!--<form class="search" ng-submit="restrict()">-->
-                        <!--<select class="form-control" name="Ferramenta" ng-model="ferramenta" value="Ferramenta" class="col-sm-12">-->
-                            <!--<option value="">Selecionar Ferramenta</option>-->
-                            <!--<option ng-repeat="tool in tools" value="{{tool.name}}">{{tool.name}}</option>-->
-                        <!--</select>-->
-                    <!--</form>-->
+                    <form class="search" ng-submit="restrict()">
+                        <select class="form-control" name="Ferramenta" ng-model="ferramenta" value="Ferramenta" class="col-sm-12">
+                            <option value="">Selecionar Ferramenta</option>
+                            <option ng-repeat="tool in tools" value="{{tool.name}}">{{tool.name}}</option>
+                        </select>
+                    </form>
                     <!--<ol class="breadcrumb">
                         <li>
                             <a href="index.html">Home</a>
@@ -44,23 +44,23 @@
 
                                 <h4 class="m-b-xs"><strong bo-text="contato.nome" /></h4>
 
-                                <div class="row">
-                                    <div bo-if="contato.tooltable.tools_advanced.length > 0">
-                                        <strong><small>Avançado:</small></strong>
-                                        <p><small title="Ferramenta Principal" bindonce ng-repeat="tool in contato.tooltable.tools_advanced">{{tool}}<br></small>
-                                        </p>
-                                    </div>
-                                    <div bo-if="contato.tooltable.tools_intermediate.length > 0">
-                                        <strong><small>Intermediário:</small></strong>
-                                        <p><small title="Ferramenta Principal" bindonce ng-repeat="tool in contato.tooltable.tools_intermediate">{{tool}}<br></small>
-                                        </p>
-                                    </div>
-                                    <div bo-if="contato.tooltable.tools_basic.length > 0">
-                                        <strong><small>Básico:</small></strong>
-                                        <p><small title="Ferramenta Principal" bindonce ng-repeat="tool in contato.tooltable.tools_basic">{{tool}}<br></small>
-                                        </p>
-                                    </div>
-                                </div>
+                                <!--<div class="row">-->
+                                    <!--<div bo-if="contato.tooltable.tools_advanced.length > 0">-->
+                                        <!--<strong><small>Avançado:</small></strong>-->
+                                        <!--<p><small title="Ferramenta Principal" bindonce ng-repeat="tool in contato.tooltable.tools_advanced">{{tool}}<br></small>-->
+                                        <!--</p>-->
+                                    <!--</div>-->
+                                    <!--<div bo-if="contato.tooltable.tools_intermediate.length > 0">-->
+                                        <!--<strong><small>Intermediário:</small></strong>-->
+                                        <!--<p><small title="Ferramenta Principal" bindonce ng-repeat="tool in contato.tooltable.tools_intermediate">{{tool}}<br></small>-->
+                                        <!--</p>-->
+                                    <!--</div>-->
+                                    <!--<div bo-if="contato.tooltable.tools_basic.length > 0">-->
+                                        <!--<strong><small>Básico:</small></strong>-->
+                                        <!--<p><small title="Ferramenta Principal" bindonce ng-repeat="tool in contato.tooltable.tools_basic">{{tool}}<br></small>-->
+                                        <!--</p>-->
+                                    <!--</div>-->
+                                <!--</div>-->
                                 <div class="row m-t-md">
                                     <strong>Contatos Coorporativos</strong><br>
                                     <i class="fa fa-envelope" style="margin-right:10px"> </i><small bo-text="contato.mail" /><br>

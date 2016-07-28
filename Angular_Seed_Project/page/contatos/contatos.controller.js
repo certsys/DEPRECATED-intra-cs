@@ -2,7 +2,7 @@ function contacts($scope, $http, contactService, userService, $state) {
     var log = [];
     $scope.tools = [];
     
-    $scope.ferramenta = null;
+    $scope.ferramenta = "";
     
     $http({
         url: '/contacts',
@@ -25,12 +25,11 @@ function contacts($scope, $http, contactService, userService, $state) {
         }, log);
     });
 
-    $scope.restrict = function() {
-        var inputed = angular.element('#top-search').val().toLowerCase();
+    $scope.$watch('ferramenta', function(newValue, oldValue) {
         $http({
             url: '/contacts',
             method: "GET",
-            params: {token: userService.getToken(), inputed: inputed}
+            params: {token: userService.getToken(), inputed: newValue}
         }).then(function (response) {
             //your code in case the post succeeds
             $scope.contatos = response.data;
@@ -39,8 +38,7 @@ function contacts($scope, $http, contactService, userService, $state) {
             $state.go('login');
             console.log(err);
         });
-        $scope.search.nome = "";
-    };
+    });
 
     // $scope.restrict = function(contato) {
     //     console.log(contato);
