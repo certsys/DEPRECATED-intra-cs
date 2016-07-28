@@ -1,24 +1,19 @@
 var express = require('express');
 var router = express.Router();
 var Contact = require('../models/contacts');
-var jwt    = require('jsonwebtoken');
+var jwt = require('jsonwebtoken');
 
 
-
-
-
-router.use(function(req, res, next) {
+router.use(function (req, res, next) {
 
     // check header or url parameters or post parameters for token
     var token = req.body.token || req.param('token') || req.headers['x-access-token'];
-
-    console.log(req.headers['x-access-token']);
 
     // decode token
     if (token) {
 
         // verifies secret and checks exp
-        jwt.verify(token, 'Cert0104sys', function(err, decoded) {
+        jwt.verify(token, 'Cert0104sys', function (err, decoded) {
             if (err) {
                 return res.status(403).send({
                     success: false,
@@ -46,11 +41,23 @@ router.use(function(req, res, next) {
 
 
 // Pega todos os contatos
-router.get('/', function(req, res){
-    Contact.find(function (err, contacts) {
-        if (err) return console.error(err);
-        res.json(contacts);
-    })
+router.get('/', function (req, res) {
+
+    var search = req.param("inputed");
+    console.log(search);
+    if (search) {
+        var query = Contact.where({$or: [{'tooltable.tools_basic': new RegExp(search, 'i')}, {'tooltable.tools_intermediate': new RegExp(search, 'i')}, {'tooltable.tools_advanced': new RegExp(search, 'i')}]})
+        query.find(function (err, contacts) {
+            if (err) return console.error(err);
+            res.json(contacts);
+        })
+    }
+    else {
+        Contact.find(function (err, contacts) {
+            if (err) return console.error(err);
+            res.json(contacts);
+        })
+    }
 });
 
 
@@ -59,16 +66,15 @@ router.post('/', function (req, res) {
     var newContact = new Contact({
         nome: req.body.nome,
         sobre: req.body.sobre,
-        tooltable: req.body.tooltable,        
+        tooltable: req.body.tooltable,
         mail: req.body.mail,
         telefone: req.body.phone,
         skype: req.body.skype,
-        imagem: req.body.imagem 
+        imagem: req.body.imagem
     });
 
 
-
-    newContact.save(function(err) {
+    newContact.save(function (err) {
         if (err) throw err;
         res.json({data: 'Contato salvo com successo!'});
     });

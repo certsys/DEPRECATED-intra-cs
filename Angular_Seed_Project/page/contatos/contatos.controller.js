@@ -27,7 +27,6 @@ function contacts($scope, $http, contactService, userService, $state) {
 
     $scope.restrict = function() {
         var inputed = angular.element('#top-search').val().toLowerCase();
-        console.log("Termo buscado em Lowercase: " + inputed);
         $http({
             url: '/contacts',
             method: "GET",
