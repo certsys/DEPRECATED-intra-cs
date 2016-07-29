@@ -7,6 +7,10 @@ function navigationCrtl($scope, $state, userService, contactService, $http) {
         $state.go('login');
     };
 
+    $scope.isAdmin = function () {
+        return userService.isAdmin();
+    };
+
     $scope.perfil = function () {
         $http({
             url: '/contacts/perfil',
