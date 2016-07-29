@@ -40,7 +40,7 @@ function mytooltip($timeout) {
             });
         }
     };
-});
+};
 
 
 

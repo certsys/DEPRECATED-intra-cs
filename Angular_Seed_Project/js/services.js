@@ -83,4 +83,4 @@ angular
     .module('inspinia')
     .service('contactService', contactService)
     .service('postService', postService)
-    .service('userService', userService)
+    .service('userService', userService);

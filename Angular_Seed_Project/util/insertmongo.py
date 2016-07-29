@@ -57,7 +57,7 @@ for row in csv_f:
         else: data['telefone'] = "Desconhecido"
         data['skype'] = "Desconhecido"
         if row[3] != "":
-            filename = row[3] + ".png"
+            filename = row[3] + ".png" 
             with open(filename, "rb") as image_file:
                 imagedata = base64.b64encode(image_file.read())
                 data['imagem'] = "data:image/png;base64," + imagedata.decode('UTF-8')
