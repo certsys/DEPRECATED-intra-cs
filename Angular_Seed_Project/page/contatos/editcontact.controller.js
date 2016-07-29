@@ -1,4 +1,6 @@
-function editcontact($scope, $http, $timeout, $state, userService, contactService) {
+function editcontact($scope, $http, $state, userService, contactService) {
+
+    // Somente permite editar o próprio contato
     $http({
         url: '/contacts/perfil',
         method: "GET",
@@ -6,9 +8,9 @@ function editcontact($scope, $http, $timeout, $state, userService, contactServic
     }).then(function (response) {
         //your code in case the post succeeds
         // console.log(response.data.lenght > 0);
-        console.log(response.data.length);
+        contactService.sendContact(response.data[0]);
+        $scope.carregaDados();
         if(response.data.length > 0) {
-            contactService.sendContact(response.data[0]);
         }else{
             alert("Infelizmente o seu usuário ainda não tem dados no sistema :(")
         }
@@ -16,55 +18,59 @@ function editcontact($scope, $http, $timeout, $state, userService, contactServic
         $state.go('login');
         console.log(err);
     });
+
     $scope.title = 'Editar Perfil';
 
-    $scope.edit_perfil = contactService.getContact();
 
-    $scope.maintools = [];
-    $scope.tools_basic = [];
-    $scope.tools_intermediate = [];
-    $scope.tools_advanced = [];
+    $scope.carregaDados = function () {
+        $scope.edit_perfil = contactService.getContact();
+        $scope.maintools = [];
+        $scope.tools_basic = [];
+        $scope.tools_intermediate = [];
+        $scope.tools_advanced = [];
 
-    if (angular.isDefined($scope.edit_perfil.tooltable)) {
-        for (var i = 0; i < $scope.edit_perfil.tooltable.tools_advanced.length; i++) {
-            var tool = $scope.edit_perfil.tooltable.tools_advanced[i];
-            // Criar tag padrão do sistema de TAGs com base no nome
-            var tag = tool.replace(/®/g, "").replace(/™/g, "").replace(/ /g, "-").replace(/ /g, "-").toLowerCase();
-            if (tag[tag.length - 1] === '-') tag[tag.length - 1] = "";
+        if (angular.isDefined($scope.edit_perfil.tooltable)) {
+            for (var i = 0; i < $scope.edit_perfil.tooltable.tools_advanced.length; i++) {
+                var tool = $scope.edit_perfil.tooltable.tools_advanced[i];
+                // Criar tag padrão do sistema de TAGs com base no nome
+                var tag = tool.replace(/®/g, "").replace(/™/g, "").replace(/ /g, "-").replace(/ /g, "-").toLowerCase();
+                if (tag[tag.length - 1] === '-') tag[tag.length - 1] = "";
 
-            var objeto_tag = {
-                worktool: tag, name: tool
+                var objeto_tag = {
+                    worktool: tag, name: tool
+                }
+
+                $scope.tools_advanced.push(objeto_tag);
             }
 
-            $scope.tools_advanced.push(objeto_tag);
-        }
+            for (var i = 0; i < $scope.edit_perfil.tooltable.tools_intermediate.length; i++) {
+                var tool = $scope.edit_perfil.tooltable.tools_intermediate[i];
+                // Criar tag padrão do sistema de TAGs com base no nome
+                var tag = tool.replace(/®/g, "").replace(/™/g, "").replace(/ /g, "-").replace(/ /g, "-").toLowerCase();
+                if (tag[tag.length - 1] === '-') tag[tag.length - 1] = "";
 
-        for (var i = 0; i < $scope.edit_perfil.tooltable.tools_intermediate.length; i++) {
-            var tool = $scope.edit_perfil.tooltable.tools_intermediate[i];
-            // Criar tag padrão do sistema de TAGs com base no nome
-            var tag = tool.replace(/®/g, "").replace(/™/g, "").replace(/ /g, "-").replace(/ /g, "-").toLowerCase();
-            if (tag[tag.length - 1] === '-') tag[tag.length - 1] = "";
+                var objeto_tag = {
+                    worktool: tag, name: tool
+                }
 
-            var objeto_tag = {
-                worktool: tag, name: tool
+                $scope.tools_intermediate.push(objeto_tag);
             }
 
-            $scope.tools_intermediate.push(objeto_tag);
-        }
+            for (var i = 0; i < $scope.edit_perfil.tooltable.tools_basic.length; i++) {
+                var tool = $scope.edit_perfil.tooltable.tools_basic[i];
+                // Criar tag padrão do sistema de TAGs com base no nome
+                var tag = tool.replace(/®/g, "").replace(/™/g, "").replace(/ /g, "-").replace(/ /g, "-").toLowerCase();
+                if (tag[tag.length - 1] === '-') tag[tag.length - 1] = "";
 
-        for (var i = 0; i < $scope.edit_perfil.tooltable.tools_basic.length; i++) {
-            var tool = $scope.edit_perfil.tooltable.tools_basic[i];
-            // Criar tag padrão do sistema de TAGs com base no nome
-            var tag = tool.replace(/®/g, "").replace(/™/g, "").replace(/ /g, "-").replace(/ /g, "-").toLowerCase();
-            if (tag[tag.length - 1] === '-') tag[tag.length - 1] = "";
+                var objeto_tag = {
+                    worktool: tag, name: tool
+                }
 
-            var objeto_tag = {
-                worktool: tag, name: tool
+                $scope.tools_basic.push(objeto_tag);
             }
-
-            $scope.tools_basic.push(objeto_tag);
         }
-    }
+
+    };
 
 
     $scope.loadTools = function ($query) {
@@ -147,7 +153,7 @@ function editcontact($scope, $http, $timeout, $state, userService, contactServic
         var data = {
             sobre: $scope.edit_perfil.sobre,
             tooltable: tooltable,
-            phone: $scope.edit_perfil.phone,
+            telefone: $scope.edit_perfil.telefone,
             skype: $scope.edit_perfil.skype
         };
 
@@ -161,9 +167,9 @@ function editcontact($scope, $http, $timeout, $state, userService, contactServic
             , params: {token: userService.getToken(), mail: userService.getUser().mail}
         }).then(function (response) {
             //your code in case the post succeeds
-            contactService.sendContact(response);
+            console.log(response.data);
+            contactService.sendContact(response.data);
             $state.go('perfil');
-            console.log(response);
         }).catch(function (err) {
             //your code in case your post fails
             console.log(err);

@@ -1,9 +1,7 @@
-function perfil_ctrl($scope, contactService) {
+function perfil_ctrl($scope, contactService, $state) {
 
 
     $scope.perfil=contactService.getContact();
-    console.log($scope.perfil);
-
 }
 
 angular

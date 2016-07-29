@@ -98,7 +98,7 @@ router.put('/edit', function (req, res, next) {
     query.findOne(function (err, data) {
         data.sobre = req.body.sobre;
         data.tooltable = req.body.tooltable;
-        data.telefone = req.body.phone;
+        data.telefone = req.body.telefone;
         data.skype = req.body.skype;
 
         data.save(function (err, data) {

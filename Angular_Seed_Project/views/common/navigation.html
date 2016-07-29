@@ -43,9 +43,19 @@
                     </li>
                 </ul>
 
+                <!--<ul class="nav navbar-top-links navbar-right">-->
+                <!--<li ui-sref-active="active">-->
+                <!--<a ng-click="perfil()">Olá, {{nome}}!</a>-->
+                <!--</li>-->
+                <!--</ul>-->
+
                 <ul class="nav navbar-top-links navbar-right">
-                    <li ui-sref-active="active">
-                        <a ng-click="perfil()">Olá, {{nome}}!</a>
+                    <li ui-sref-active="active" class="dropdown" dropdown>
+                        <a class="dropdown-toggle" href dropdown-toggle>Olá, {{nome}}!<span class="caret"></span></a>
+                        <ul role="menu" class="dropdown-menu">
+                            <li><a ng-click="perfil()">Ver Perfil</a></li>
+                            <li><a ui-sref="editcontact">Editar Perfil</a></li>
+                        </ul>
                     </li>
                 </ul>
             </div>
