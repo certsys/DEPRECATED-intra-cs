@@ -26,7 +26,7 @@
                                             <h2 class="font-bold m-b-xs">
                                                 {{post.titulo}}
                                             </h2>
-                                            <a bo-hide="post.isDeleted" bo-click="removePost(post, $index)"><i class="fa fa-times-circle fa-3x all-right"></i></a>
+                                            <a bo-hide="post.isDeleted" ng-click="removePost(post, $index)"><i class="fa fa-times-circle fa-3x all-right"></i></a>
                                             <a ui-sref="editnews" ng-click="sendPost(post)"><i class="fa fa-edit fa-3x all-right" style="margin-right: 30px;"></i></a>
                                             <!--<div>-->
                                             <!--<div class="btn-group">-->
