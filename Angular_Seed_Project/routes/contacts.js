@@ -43,9 +43,9 @@ router.get('/perfil', function (req, res) {
 
     var mail = req.param("mail");
     var query = Contact.where({mail: new RegExp(mail, 'ig')});
-    query.find(function (err, contacts) {
+    query.find(function (err, data) {
         if (err) return console.error(err);
-        res.json(contacts);
+        res.json(data);
     })
 
 });
@@ -87,6 +87,27 @@ router.post('/', function (req, res) {
     newContact.save(function (err) {
         if (err) throw err;
         res.json({data: 'Contato salvo com successo!'});
+    });
+});
+
+router.put('/edit', function (req, res, next) {
+
+    var mail = req.param("mail");
+    var query = Contact.where({mail: new RegExp(mail, 'ig')});
+
+    query.findOne(function (err, data) {
+        data.sobre = req.body.sobre;
+        data.tooltable = req.body.tooltable;
+        data.telefone = req.body.phone;
+        data.skype = req.body.skype;
+
+        data.save(function (err, data) {
+            if (err) {
+                return next(err);
+            }
+            res.status(201).json(data);
+        });
+
     });
 });
 

@@ -1,0 +1,197 @@
+<!-- Wrapper-->
+<div id="blueimp-gallery" class="blueimp-gallery">
+    <div class="slides"></div>
+</div>
+
+<div id="wrapper" class="top-navigation">
+
+    <!-- Navigation -->
+    <div ng-include="'views/common/navigation.html'"></div>
+
+    <!-- Page wraper -->
+    <!-- ng-class with current state name give you the ability to extended customization your view -->
+    <div id="page-wrapper" class="gray-bg {{$state.current.name}}">
+
+        <!-- Page wrapper -->
+
+        <!-- Main view  -->
+
+        <div ng-controller="editcontact">
+            <div class="row wrapper border-bottom white-bg page-heading">
+                <div class="col-lg-10">
+                    <h2>{{title}}</h2>
+                </div>
+            </div>
+            <br>
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Edite seu perfil
+                        <small> - Inserindo suas informações abaixo.</small>
+                    </h5>
+                </div>
+                <div class="ibox-content">
+                    <div ng-submit="edit()" class="form-horizontal">
+                        <form class="form-group">
+                            <div class="col-sm-12">
+                                Nome<br>
+                                <input ng-disabled="true" required class="form-control" type="text" ng-model="edit_perfil.nome"
+                                       name="Nome">
+                                <br>
+                            </div>
+                            <div class="col-sm-12">
+                                Sobre<br>
+                                <input required class="form-control" type="text" ng-model="edit_perfil.sobre"
+                                       name="Sobre">
+                                <br>
+                            </div>
+                            <!--Ferramentas Principais<br>-->
+                            <!--<input class="col-sm-2" ng-repeat="field in tooltable.maintools track by $index" type='text' ng-model='tooltable.maintools[$index]' placeholder='Ferramentas (Principais)' name="FerramentasPrincipais" style="margin-right:5px">-->
+                            <!--<div>-->
+                            <!--<button ng-click="addFormFieldMain()">Add</button>-->
+                            <!--</div>-->
+                            <br>
+                            <div class="col-lg-12">Ferramentas (Avançado)<br>
+                                <tags-input template="tag-template" display-property="worktool" type='text'
+                                            ng-model='tools_advanced' placeholder='Ferramentas (Avançado)'
+                                            name="FerramentasPrincipais" style="margin-right:5px">
+                                    <auto-complete source="loadTools($query)"
+                                                   min-length="0"
+                                                   load-on-focus="true"
+                                                   load-on-empty="true"
+                                                   max-results-to-show="32"
+                                                   template="autocomplete-template"></auto-complete>
+                                </tags-input>
+                                <!--<div>-->
+                                <!--<button ng-click="addFormFieldAdvanc()">+</button>-->
+                                <!--</div>-->
+                                <br>Ferramentas (Intermediário)<br>
+                                <tags-input template="tag-template" display-property="worktool" type='text'
+                                            ng-model='tools_intermediate'
+                                            placeholder='Ferramentas (Intermediário)' name="FerramentasInterm"
+                                            style="margin-right:5px">
+                                    <auto-complete source="loadTools($query)"
+                                                   min-length="0"
+                                                   load-on-focus="true"
+                                                   load-on-empty="true"
+                                                   max-results-to-show="32"
+                                                   template="autocomplete-template"></auto-complete>
+                                </tags-input>
+                                <!--<div>-->
+                                <!--<button ng-click="addFormFieldInterm()">+</button>-->
+                                <!--</div>-->
+                                <br>Ferramentas (Básico)<br>
+                                <tags-input template="tag-template" display-property="worktool" type='text'
+                                            ng-model='tools_basic' placeholder='Ferramentas (Básico)'
+                                            name="FerramentasPrincipais" style="margin-right:5px">
+                                    <auto-complete source="loadTools($query)"
+                                                   min-length="0"
+                                                   load-on-focus="true"
+                                                   load-on-empty="true"
+                                                   max-results-to-show="32"
+                                                   template="autocomplete-template"></auto-complete>
+                                </tags-input>
+                                <!--<div>-->
+                                <!--<button ng-click="addFormFieldBasic()">+</button>-->
+                                <!--</div>-->
+                                <br>
+                            </div>
+                            <!--<pre>-->
+                            <!--<table class="table" >-->
+                            <!--<thead>-->
+                            <!--<tr>-->
+                            <!--<th colspan="4">Ferramenta | Conhecimento</th>-->
+                            <!--</tr>-->
+                            <!--<tr>-->
+                            <!--<th>Principal</th>-->
+                            <!--<th>Avançado</th>-->
+                            <!--<th>Intermediário</th>-->
+                            <!--<th>Básico</th>-->
+                            <!--</tr>-->
+                            <!--</thead>-->
+                            <!--<tbody>-->
+                            <!--<tr>-->
+                            <!--<th ng-repeat="tool in tooltable.maintools">{{tool}}</th>-->
+                            <!--<th ng-repeat="tool in tooltable.tools_advanced">{{tool}}</th>-->
+                            <!--<th ng-repeat="tool in tooltable.tools_intermediate">{{tool}}</th>-->
+                            <!--<th ng-repeat="tool in tooltable.tools_basic">{{tool}}</th>-->
+                            <!--</tr>-->
+                            <!--</tbody>-->
+                            <!--</table>-->
+
+                            <!--</pre>-->
+
+                            <!--<div class="col-lg-12">-->
+                            <!--<div class="col-lg-4">-->
+                            <!--Ferramentas Avançadas:-->
+                            <!--<ul>-->
+                            <!--<li ng-repeat="tool in tools_advanced">{{tool}}</li>-->
+                            <!--</ul>-->
+                            <!--</div>-->
+                            <!--<div class="col-lg-4">-->
+                            <!--Ferramentas Intermediárias:-->
+                            <!--<ul>-->
+                            <!--<li ng-repeat="tool in tools_intermediate">{{tool}}</li>-->
+                            <!--</ul>-->
+                            <!--</div>-->
+                            <!--<div class="col-lg-4">-->
+                            <!--Ferramentas Básicas:-->
+                            <!--<ul>-->
+                            <!--<li ng-repeat="tool in tools_basic">{{tool}}</li>-->
+                            <!--</ul>-->
+                            <!--</div>-->
+                            <!--</div>-->
+                            <div class="col-sm-12">
+                                <br>E-mail<br>
+                                <input ng-disabled="true" required class="form-control" type="text" ng-model="edit_perfil.mail"
+                                       name="E-mail">
+                                <br>
+                            </div>
+                            <div class="col-sm-12">
+                                Telefone<br>
+                                <input class="form-control" type="text" ng-model="edit_perfil.telefone" name="Telefone">
+                                <br>
+                            </div>
+                            <div class="col-sm-12">
+                                Skype<br>
+                                <input class="form-control" type="text" ng-model="edit_perfil.skype" name="Skype">
+                                <br>
+                            </div>
+                            <!--<div class="col-sm-12">-->
+                            <!--Imagem<br>-->
+                            <!--<input required class="form-control" type="file" accept="image/*" file-model="imagem" ng-model="imagem" name="imagem" onchange="angular.element(this).scope().photoChanged(this.files)">-->
+                            <!--<br>-->
+                            <!--<img ng-src="{{ thumbnail.dataUrl }}" />-->
+                            <!--</div>-->
+                            <div class="col-sm-12">
+                                <input class="col-sm-12 btn btn-primary" type="submit" value="Editar">
+                            </div>
+                        <br>
+                        <br>
+                        <br>
+                        </form>
+                        <script type="text/ng-template" id="tag-template">
+                            <div class="tag-template">
+                                <div class="right-panel">
+                                    <span>{{data.name}}</span>
+                                    <a class="remove-button" ng-click="$removeTag()">&#10006;</a>
+                                </div>
+                            </div>
+                        </script>
+                        <script type="text/ng-template" id="autocomplete-template">
+                            <div class="autocomplete-template">
+                                <div class="right-panel">
+                                    <span ng-bind-html="data.name"></span>
+                                    <!--<span>({{data.worktool}})</span>-->
+                                </div>
+                            </div>
+                        </script>
+                    </div>
+                </div>
+            </div>
+            <!-- Footer -->
+            <div ng-include="'views/common/footer.html'"></div>
+        </div>
+        <!-- End page wrapper-->
+    </div>
+    <!-- End wrapper-->
+</div>
