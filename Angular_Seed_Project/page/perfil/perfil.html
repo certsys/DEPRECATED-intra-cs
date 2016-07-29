@@ -179,59 +179,60 @@
             <!--</div>-->
 
         </div>
+        <div ng-if="perfil.tooltable">
+            <div class="col-lg-5" ng-if="perfil.tooltable.tools_advanced.length !== 0">
 
-        <div class="col-lg-5" ng-if="perfil.tooltable.tools_advanced.length !== 0">
+                <div class="social-feed-box">
 
-            <div class="social-feed-box">
 
-                
-                <div class="social-body">
-                    <h4>Conhecimento Avançado em: </h4>
-                    <ul>
-                        <li ng-repeat= "tool in perfil.tooltable.tools_advanced" >
-                            {{tool}}
-                        </li>
-                    </ul>
-                    
+                    <div class="social-body">
+                        <h4>Conhecimento Avançado em: </h4>
+                        <ul>
+                            <li ng-repeat= "tool in perfil.tooltable.tools_advanced" >
+                                {{tool}}
+                            </li>
+                        </ul>
+
+                    </div>
+
+
                 </div>
-                
-
             </div>
-        </div>
-        <div class="col-lg-5" ng-if="perfil.tooltable.tools_intermediate.length !== 0">
+            <div class="col-lg-5" ng-if="perfil.tooltable.tools_intermediate.length !== 0">
 
-            <div class="social-feed-box">
+                <div class="social-feed-box">
 
-                
-                <div class="social-body">
-                <h4>Conhecimento Intermediario em: </h4>
-                    <ul>
-                        <li ng-repeat= "tool in perfil.tooltable.tools_intermediate" >
-                            {{tool}}
-                        </li>
-                    </ul>
-                    
+
+                    <div class="social-body">
+                    <h4>Conhecimento Intermediario em: </h4>
+                        <ul>
+                            <li ng-repeat= "tool in perfil.tooltable.tools_intermediate" >
+                                {{tool}}
+                            </li>
+                        </ul>
+
+                    </div>
+
+
                 </div>
-                
-
             </div>
-        </div>
-        <div class="col-lg-5" ng-if="perfil.tooltable.tools_basic.length !== 0">
+            <div class="col-lg-5" ng-if="perfil.tooltable.tools_basic.length !== 0">
 
-            <div class="social-feed-box">
+                <div class="social-feed-box">
 
-                
-                <div class="social-body">
-                    <h4>Conhecimento Básico em: </h4>
-                    <ul>
-                        <li ng-repeat= "tool in perfil.tooltable.tools_basic" >
-                            {{tool}}
-                        </li>
-                    </ul>
-                    
+
+                    <div class="social-body">
+                        <h4>Conhecimento Básico em: </h4>
+                        <ul>
+                            <li ng-repeat= "tool in perfil.tooltable.tools_basic" >
+                                {{tool}}
+                            </li>
+                        </ul>
+
+                    </div>
+
+
                 </div>
-                
-
             </div>
         </div>
 
