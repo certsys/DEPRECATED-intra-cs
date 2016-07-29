@@ -15,7 +15,7 @@ function institucional($scope, $http, userService, $state) {
     $scope.title = "Institucional";
 
     $scope.name = "Bom dia Certsyanos!!!";
-    $scope.subtitulo = "A todos que fazem parte dessa brigada a favor das boas práticas de TI."
+    $scope.subtitulo = "A todos que fazem parte dessa brigada a favor das boas práticas de TI.";
 
     $scope.intro_0 = "A Intranet foi construída por desenvolvedores para desenvolvedores.";
 
@@ -23,7 +23,7 @@ function institucional($scope, $http, userService, $state) {
     $scope.intro_2 = "Supondo que todos nós somos aprendizes da entidade Tecnologia e do supremo buscador de informação Google, nossa virtude é nossa capacidade e técnica de buscar e lidar com todo o conjunto de informação e conhecimentos que rondam essa área, nada melhor que temos um local em comum para compartilhar nossas questões e conhecimento.";
     $scope.intro_3 = "Simples assim: se quer ajuda ou ajudar aqui é um ambiente comum para achar pessoas, arquivos e outras coisas que desejar. Não tenha medo de pedir e nem de sugerir alguma coisa estamos aqui pra isso!";
 
-    $scope.assinatura = "MKT & DevBitches"
+    $scope.assinatura = "Equipe Certsys";
 
     $scope.institucional = [
         {
