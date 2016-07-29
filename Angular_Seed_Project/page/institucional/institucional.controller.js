@@ -15,7 +15,7 @@ function institucional($scope, $http, userService, $state) {
     $scope.title = "Institucional";
 
     $scope.name = "Bom dia Certsyanos!!!";
-    $scope.subtitulo = "A todos que fazem parte dessa brigada a favor das boas práticas de TI."
+    $scope.subtitulo = "A todos que fazem parte dessa brigada a favor das boas práticas de TI.";
 
     $scope.intro_0 = "A Intranet foi construída por desenvolvedores para desenvolvedores.";
 
