@@ -101,6 +101,9 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, $locati
                             'js/plugins/clockpicker/clockpicker.js']
 
                         }
+                        , {
+                            files: ['css/plugins/sweetalert/sweetalert.css', 'js/plugins/sweetalert/sweetalert.min.js']
+                        },
                     ]);
                 }
             }

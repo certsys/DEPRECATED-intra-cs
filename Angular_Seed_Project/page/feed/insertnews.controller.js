@@ -43,18 +43,31 @@ function insertnews($scope, $http, $timeout, $state, userService) {
     };
     $scope.submit = function () {
             var editions = [];
-            if ($scope.futuro == true && ($scope.selectedDate > $scope.today)) {
+            if ($scope.futuro == true) {
                 console.log("Data futura!!");
                 var date = angular.element('#data-postagem').val();
                 $scope.changeDateToISO(date);
-                var data = {
-                    titulo: $scope.titulo
-                    , imagem: $scope.thumbnail.dataUrl
-                    , texto: $scope.texto
-                    , assinatura: $scope.assinatura
-                    , editions: editions
-                    , data: $scope.selectedDate
-                };
+                if ($scope.selectedDate >= $scope.today) {
+                    var data = {
+                        titulo: $scope.titulo
+                        , imagem: $scope.thumbnail.dataUrl
+                        , texto: $scope.texto
+                        , assinatura: $scope.assinatura
+                        , editions: editions
+                        , data: $scope.selectedDate
+                    };
+                }
+                else {
+                    swal({
+                        title: "OPS!",
+                        text: "Data anterior a atual, corrija a data de postagem!",
+                        type: "error",
+                        confirmButtonColor: "#DD6B55",
+                        confirmButtonText: "Ok",
+                        closeOnConfirm: false
+                    });
+                    return;
+                }
             }
             else {
                 console.log("Data não futura!!");
