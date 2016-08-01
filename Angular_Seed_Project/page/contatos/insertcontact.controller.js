@@ -100,6 +100,7 @@ function insertcontacts($scope, $http, $timeout, $state, userService) {
         var data = {
             nome: $scope.name,
             sobre: $scope.sobre,
+            grupo: $scope.grupo,
             tooltable: tooltable,
             mail: $scope.mail,
             phone: $scope.phone,

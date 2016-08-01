@@ -76,6 +76,7 @@ router.post('/', function (req, res) {
     var newContact = new Contact({
         nome: req.body.nome,
         sobre: req.body.sobre,
+        grupo: req.body.grupo,
         tooltable: req.body.tooltable,
         mail: req.body.mail,
         telefone: req.body.phone,
