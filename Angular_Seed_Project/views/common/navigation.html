@@ -12,17 +12,33 @@
         <div ng-controller="navigationCrtl">
             <div class="navbar-collapse collapse" id="navbar">
                 <ul class="nav navbar-nav">
-                    <li ui-sref-active="active">
+                    <li ng-if="isAdmin()" ui-sref-active="active" class="dropdown" dropdown>
+                        <a class="dropdown-toggle" href dropdown-toggle><i class="fa fa-globe"></i>{{ 'HOME' | translate }}</a>
+                        <ul role="menu" class="dropdown-menu">
+                            <li><a ui-sref="feed">Ir Para NeewsFeed</a></li>
+                            <li><a ui-sref="insertnews">Inserir Novo Post</a></li>
+                            <li><a ui-sref="manageposts">Gerenciar Posts</a></li>
+                        </ul>
+                    </li>
+                    <li ng-if="!isAdmin()" ui-sref-active="active">
                         <a ui-sref="feed"><i class="fa fa-globe"></i> {{ 'HOME' | translate }}</a>
                     </li>
                     <li ui-sref-active="active">
-                        <a ui-sref="institucional"><i class="fa fa-institution"></i> {{ 'INSTITUTIONAL' | translate
-                            }}</a>
+                        <a ui-sref="institucional"><i class="fa fa-institution"></i> {{ 'INSTITUTIONAL' | translate}}</a>
                     </li>
                     <li ui-sref-active="active">
                         <a ui-sref="kb"><i class="fa fa-folder-open"></i> {{ 'KNOWLEDGEBASE' | translate }}</a>
                     </li>
-                    <li ui-sref-active="active">
+
+                    <li ng-if="isAdmin()" ui-sref-active="active" class="dropdown" dropdown>
+                        <a class="dropdown-toggle" href dropdown-toggle><i class="fa fa-group"></i> {{ 'CONTACTS' | translate }}</a>
+                        <ul role="menu" class="dropdown-menu">
+                            <li><a ui-sref="contatos">Todos os Contatos</a></li>
+                            <li><a ui-sref="insertcontato">Inserir Novo Contato</a></li>
+                        </ul>
+                    </li>
+
+                    <li ng-if="!isAdmin()" ui-sref-active="active">
                         <a ui-sref="contatos"><i class="fa fa-group"></i> {{ 'CONTACTS' | translate }}</a>
                     </li>
                     <!-- <li class="dropdown" dropdown>
@@ -43,9 +59,19 @@
                     </li>
                 </ul>
 
+                <!--<ul class="nav navbar-top-links navbar-right">-->
+                <!--<li ui-sref-active="active">-->
+                <!--<a ng-click="perfil()">Olá, {{nome}}!</a>-->
+                <!--</li>-->
+                <!--</ul>-->
+
                 <ul class="nav navbar-top-links navbar-right">
-                    <li ui-sref-active="active">
-                        <a ng-click="perfil()">Olá, {{nome}}!</a>
+                    <li ui-sref-active="active" class="dropdown" dropdown>
+                        <a class="dropdown-toggle" href dropdown-toggle>Olá, {{nome}}!<span class="caret"></span></a>
+                        <ul role="menu" class="dropdown-menu">
+                            <li><a ng-click="perfil()">Ver Perfil</a></li>
+                            <li><a ui-sref="editcontact">Editar Perfil</a></li>
+                        </ul>
                     </li>
                 </ul>
             </div>

@@ -7,6 +7,10 @@ function navigationCrtl($scope, $state, userService, contactService, $http) {
         $state.go('login');
     };
 
+    $scope.isAdmin = function () {
+        return userService.isAdmin();
+    };
+
     $scope.perfil = function () {
         $http({
             url: '/contacts/perfil',
@@ -14,11 +18,12 @@ function navigationCrtl($scope, $state, userService, contactService, $http) {
             params: {token: userService.getToken(), mail: userService.getUser().mail}
         }).then(function (response) {
             //your code in case the post succeeds
-            // console.log(response.data.lenght > 0);
-            console.log(response.data.length);
             if(response.data.length > 0) {
                 contactService.sendContact(response.data[0]);
-                $state.go('perfil')
+                if($state.current.name === 'perfil') {
+                    $state.go($state.$current, null, { reload: true });
+                }
+                $state.go('perfil');
             }else{
                 alert("Infelizmente o seu usuário ainda não tem dados no sistema :(")
             }

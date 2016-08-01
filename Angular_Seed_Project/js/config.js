@@ -44,9 +44,9 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, $locati
             }
         })
 
-	
-	.state('institucional', {
-              url: "/institucional"
+
+        .state('institucional', {
+            url: "/institucional"
             , templateUrl: "page/institucional/institucional.html"
             , data: {
                 pageTitle: 'Institucional'
@@ -56,15 +56,15 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, $locati
                     return $ocLazyLoad.load([
                         {
                             files: ['css/bootstrap-theme.css',
-									'css/bootstrap-theme.css.map',
-									'css/bootstrap-theme.min.css',
-									'js/pace.min.js',
-									'js/wow.min.js',
-									'js/classie.js',
-									'js/cbpAnimatedHeader.js'
-									
-									
-								    ]
+                                'css/bootstrap-theme.css.map',
+                                'css/bootstrap-theme.min.css',
+                                'js/pace.min.js',
+                                'js/wow.min.js',
+                                'js/classie.js',
+                                'js/cbpAnimatedHeader.js'
+
+
+                            ]
                         }
                     ]);
                 }
@@ -85,20 +85,20 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, $locati
                         }
                         , {
                             files: ['js/bower_components/summernote/dist/summernote.css'
-                            , 'js/bower_components/summernote/dist/summernote.js']
+                                , 'js/bower_components/summernote/dist/summernote.js']
                         }
                         , {
                             files: ['css/plugins/switchery/switchery.css'
-                            , 'js/plugins/switchery/switchery.js']
+                                , 'js/plugins/switchery/switchery.js']
                         }
                         , {
                             name: 'datePicker',
                             files: ['js/plugins/moment/moment.min.js', 'css/plugins/datapicker/angular-datapicker.css',
-                            'js/plugins/datapicker/angular-datepicker.js', 'js/plugins/datapicker/pt-br.js']
+                                'js/plugins/datapicker/angular-datepicker.js', 'js/plugins/datapicker/pt-br.js']
                         }
                         , {
                             files: ['css/plugins/clockpicker/clockpicker.css',
-                            'js/plugins/clockpicker/clockpicker.js']
+                                'js/plugins/clockpicker/clockpicker.js']
 
                         }
                         , {
@@ -131,6 +131,27 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, $locati
                 }
             }
 
+        })
+
+        .state('editcontact', {
+            url: "/editcontact"
+            , templateUrl: "page/contatos/editcontact.html"
+            , data: {
+                pageTitle: 'Editar Perfil'
+            }
+            , resolve: {
+                loadPlugin: function ($ocLazyLoad) {
+                    return $ocLazyLoad.load([
+                        {
+                            files: ['css/plugins/iCheck/custom.css', 'js/plugins/iCheck/icheck.min.js']
+                        },
+                        {
+                            name: 'ngTagsInput',
+                            files: ['js/plugins/ng-tags-input/ng-tags-input.min.js', 'css/plugins/ng-tags-input/ng-tags-input.min.css', 'css/plugins/ng-tags-input/ng-tags-input.bootstrap.min.css']
+                        }
+                    ]);
+                }
+            }
         })
 
         .state('contatos', {

@@ -10,6 +10,7 @@ function editnews($http, $scope, postService, $state, $timeout, userService) {
         $state.go('login');
         console.log(err);
     });
+    
     // Só administradores do sistema podem entrar nessa view
     if (!userService.isAdmin())
         $state.go('feed');

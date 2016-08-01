@@ -365,8 +365,13 @@
   /*border-width: 1px 0; */
 }
 
-
-.remove-tag-button {
+.remove-tag-button{
     position: relative;
     float: right;
+}
+
+.dropdown:hover .dropdown-menu {
+    display: block;
+    margin-top: 0; // remove the gap so it doesn't close
+
 }

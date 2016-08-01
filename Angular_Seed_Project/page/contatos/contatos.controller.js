@@ -2,7 +2,7 @@ function contacts($scope, $http, contactService, userService, $state) {
 
     var log = [];
     $scope.tools = [];
-    
+
     $scope.ferramenta = "";
 
     $http({
@@ -19,26 +19,29 @@ function contacts($scope, $http, contactService, userService, $state) {
     });
 
 
-    $http.get('tools.json', { cache: true}).then(function(response) {
+    $http.get('tools.json', {cache: true}).then(function (response) {
         var toolsJson = response.data;
-        angular.forEach(toolsJson, function(value, key) {
+        angular.forEach(toolsJson, function (value, key) {
             if (key != "$$hashKey" && key != "worktool") $scope.tools.push(value);
         }, log);
     });
 
-    $scope.$watch('ferramenta', function(newValue, oldValue) {
-        $http({
-            url: '/contacts',
-            method: "GET",
-            params: {token: userService.getToken(), inputed: newValue}
-        }).then(function (response) {
-            //your code in case the post succeeds
-            $scope.contatos = response.data;
-            console.log(response);
-        }).catch(function (err) {
-            $state.go('login');
-            console.log(err);
-        });
+    $scope.$watch('ferramenta', function (newValue, oldValue) {
+        // Evita carregar se vierem os mesmos dados
+        if (newValue !== oldValue) {
+            $http({
+                url: '/contacts',
+                method: "GET",
+                params: {token: userService.getToken(), inputed: newValue}
+            }).then(function (response) {
+                //your code in case the post succeeds
+                $scope.contatos = response.data;
+                console.log(response);
+            }).catch(function (err) {
+                $state.go('login');
+                console.log(err);
+            });
+        }
     });
 
     // $scope.restrict = function(contato) {
@@ -50,9 +53,9 @@ function contacts($scope, $http, contactService, userService, $state) {
     //     else return true;
     // };
 
-    $scope.sendContact = function(currObj){
-            contactService.sendContact(currObj);
-        };
+    $scope.sendContact = function (currObj) {
+        contactService.sendContact(currObj);
+    };
 
     // $scope.haveTool = function(person){
     //     console.log(person.nome);
@@ -83,10 +86,9 @@ function contacts($scope, $http, contactService, userService, $state) {
     // }
 
 
-    $scope.title = "Contatos"; 
+    $scope.title = "Contatos";
 };
 
-    
 
 angular
     .module('inspinia')
