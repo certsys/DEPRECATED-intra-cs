@@ -64,18 +64,20 @@ router.put('/', function (req, res, next) {
                             if (user.sAMAccountName === "marco.villa.adm") {
                             }
                             else if (data.length > 0) {
-                                var is_same = (data.grupo.length == final.length) && data.grupo.every(function(element, index) {
-                                        return element === final[index];
-                                    });
-                                if (!is_same) {
-                                    data.grupo = final;
-                                    data.save(function(err, data) {
-                                        if(err) {
-                                            return next(err);
-                                        }
-                                        res.status(201).json(data);
-                                    });
-                                }
+                                data.forEach(function(individuo) {
+                                    var is_same = (individuo.grupo.length == final.length) && individuo.grupo.every(function(element, index) {
+                                            return element === final[index];
+                                        });
+                                    if (!is_same) {
+                                        individuo.grupo = final;
+                                        individuo.save(function(err, data) {
+                                            if(err) {
+                                                return next(err);
+                                            }
+                                            res.status(201).json(data);
+                                        });
+                                    }
+                                });
                             }
                             else {
                                 var newContact = new Contact({
