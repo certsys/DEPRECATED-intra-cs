@@ -113,7 +113,9 @@
                     </p>
 
                     <h3>Corporativo</h3>
-                    <p class="small">Área de atuação: {{perfil.grupo}}</p>
+                    <ul>
+                        <li ng-repeat="group in perfil.grupo">{{group}}</li>
+                    </ul>
                     <br>
                     <h3>Dados de contato:</h3>
                     <div>
