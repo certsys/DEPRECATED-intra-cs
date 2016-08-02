@@ -15,7 +15,7 @@ var ad = new ActiveDirectory(config);
 var username = 'svc_intranet@certsys.local';
 // var password = 'password';
 var password = 'dAgAcupU6rA=';
-var groupName = 'Certsys';
+var groupName = '';
 
 
 /* GET users listing. */
@@ -33,6 +33,7 @@ router.put('/', function (req, res, next) {
             users.forEach(function(user) {
                 var sAMAccountName = user.sAMAccountName;
                 var user_groups = "";
+                var final = [];
 
                 var ad = new ActiveDirectory(config);
                 ad.getGroupMembershipForUser(sAMAccountName, function(err, groups) {
@@ -43,42 +44,61 @@ router.put('/', function (req, res, next) {
 
                     if (! groups) console.log('User: ' + sAMAccountName + ' not found.');
                     else {
-                        user_groups = groups;
-                    }
-                });
+                        groups.forEach(function(group) {
+                            var group_cn = group.cn.split(",");
+                            var group_dn = group.dn.split(",");
 
-                var vector_groups = user_groups.split(",");
-                var final = [];
+                            group_cn.forEach(function(element) {
+                                element = (element.split("="))[1];
+                                if (element != null && final.indexOf(element) == -1) final.push(element);
+                            });
 
-                vector_groups.forEach(function(group) {
-                    group = (group.split("="))[1];
-                    final.push(group);
-                });
+                            group_dn.forEach(function(element) {
+                                element = (element.split("="))[1];
+                                if (element != null && final.indexOf(element) == -1) final.push(element);
+                            });
 
-                Contact.find({nome : user.cn}, function (err, data) {
-                    if (data.length > 0) {
-                        console.log("Dado já existente no sistema");
-                    }
-                    else {
-                        console.log("Dado não existente no sistema");
-                        var groups = [];
+                        })
 
-                        var newContact = new Contact({
-                            nome: user.cn,
-                            sobre: "Conte sua vida aqui!",
-                            grupo: final,
-                            tooltable: {},
-                            mail: user.sAMAccountName + "@certsys.com.br",
-                            telefone: "Digite seu telefone",
-                            skype: "Digite seu skype",
-                            imagem: ""
+                        Contact.find({nome : user.cn}, function (err, data) {
+                            if (user.sAMAccountName === "marco.villa.adm") {
+                            }
+                            else if (data.length > 0) {
+                                var is_same = (data.grupo.length == final.length) && data.grupo.every(function(element, index) {
+                                        return element === final[index];
+                                    });
+                                if (!is_same) {
+                                    data.grupo = final;
+                                    data.save(function(err, data) {
+                                        if(err) {
+                                            return next(err);
+                                        }
+                                        res.status(201).json(data);
+                                    });
+                                }
+                            }
+                            else {
+                                var newContact = new Contact({
+                                    nome: user.cn,
+                                    sobre: "Conte sua vida aqui!",
+                                    grupo: final,
+                                    tooltable: {},
+                                    mail: user.sAMAccountName + "@certsys.com.br",
+                                    telefone: "Digite seu telefone",
+                                    skype: "Digite seu skype",
+                                    imagem: ""
+                                });
+
+                                newContact.save(function (err) {
+                                    if (err) return err;
+                                });
+                            }
                         });
 
-                        newContact.save(function (err) {
-                            if (err) return err;
-                        });
+
                     }
                 });
+
             });
         }
     });
