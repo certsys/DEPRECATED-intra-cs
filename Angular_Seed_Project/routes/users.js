@@ -32,8 +32,8 @@ router.put('/', function (req, res, next) {
             res.json(users);
             users.forEach(function(user) {
                 var sAMAccountName = user.sAMAccountName;
-                var user_groups = "";
                 var final = [];
+                var extra_groups = user.dn.split(",");
 
                 var ad = new ActiveDirectory(config);
                 ad.getGroupMembershipForUser(sAMAccountName, function(err, groups) {
@@ -44,6 +44,11 @@ router.put('/', function (req, res, next) {
 
                     if (! groups) console.log('User: ' + sAMAccountName + ' not found.');
                     else {
+                        extra_groups.forEach(function(extra) {
+                            extra = (extra.split("="))[1];
+                            if (extra != null && final.indexOf(extra) == -1) final.push(extra);
+                        });
+
                         groups.forEach(function(group) {
                             var group_cn = group.cn.split(",");
                             var group_dn = group.dn.split(",");
@@ -74,7 +79,7 @@ router.put('/', function (req, res, next) {
                                             if(err) {
                                                 return next(err);
                                             }
-                                            res.status(201).json(data);
+                                            // res.status(201).json(data);
                                         });
                                     }
                                 });
