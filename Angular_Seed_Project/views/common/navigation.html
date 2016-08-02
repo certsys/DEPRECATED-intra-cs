@@ -12,10 +12,9 @@
         <div ng-controller="navigationCrtl">
             <div class="navbar-collapse collapse" id="navbar">
                 <ul class="nav navbar-nav">
-                    <li ng-if="isAdmin()" ui-sref-active="active" class="dropdown" dropdown>
-                        <a class="dropdown-toggle" href dropdown-toggle><i class="fa fa-globe"></i>{{ 'HOME' | translate }}</a>
+                    <li ng-if="isAdmin()" ui-sref-active="active" class="dropdown">
+                        <a  ui-sref="feed" dropdown-toggle><i class="fa fa-globe"></i>{{ 'HOME' | translate }}</a>
                         <ul role="menu" class="dropdown-menu">
-                            <li><a ui-sref="feed">Ir Para NeewsFeed</a></li>
                             <li><a ui-sref="insertnews">Inserir Novo Post</a></li>
                             <li><a ui-sref="manageposts">Gerenciar Posts</a></li>
                         </ul>
@@ -30,10 +29,9 @@
                         <a ui-sref="kb"><i class="fa fa-folder-open"></i> {{ 'KNOWLEDGEBASE' | translate }}</a>
                     </li>
 
-                    <li ng-if="isAdmin()" ui-sref-active="active" class="dropdown" dropdown>
-                        <a class="dropdown-toggle" href dropdown-toggle><i class="fa fa-group"></i> {{ 'CONTACTS' | translate }}</a>
+                    <li ng-if="isAdmin()" ui-sref-active="active" class="dropdown">
+                        <a  ui-sref="contatos" dropdown-toggle><i class="fa fa-group"></i> {{ 'CONTACTS' | translate }}</a>
                         <ul role="menu" class="dropdown-menu">
-                            <li><a ui-sref="contatos">Todos os Contatos</a></li>
                             <li><a ui-sref="insertcontato">Inserir Novo Contato</a></li>
                         </ul>
                     </li>
