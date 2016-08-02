@@ -64,7 +64,7 @@
 
      var isAdmin = function() {
          for(var i = 0; i < ADMINS.length; i++){
-             if (getUser().mail == ADMINS[i]) return true;
+             if (getUser().sAMAccountName == ADMINS[i]) return true;
          }
          return false;
      };
