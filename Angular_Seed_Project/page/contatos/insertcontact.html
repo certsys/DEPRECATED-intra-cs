@@ -153,6 +153,14 @@
                                     <img ng-src="{{ thumbnail.dataUrl }}" />
                                 </div>
                                 <div class="col-sm-12">
+                                    <select required name="Grupo" ng-model="grupo" value="Grupo">
+                                        <option value="">Grupo</option>
+                                        <option value="Vendas">Vendas</option>
+                                        <option value="Administrativo">Administrativo</option>
+                                        <option value="Desenvolvimento">Desenvolvimento</option>
+                                    </select>
+                                </div>
+                                <div class="col-sm-12">
                                     <input class="col-sm-12 btn btn-primary" type="submit" value="Cadastrar">
                                 </div>
                             </form>

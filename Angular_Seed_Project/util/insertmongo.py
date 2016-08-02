@@ -1,3 +1,9 @@
+def is_empty(any_structure):
+    if any_structure:
+        return False
+    else:
+        return True
+
 import pymongo
 import csv
 import json
@@ -51,6 +57,12 @@ for row in csv_f:
             tooltable['tools_intermediate'] = inter_tools[people.index(name_stub)]
             tooltable['tools_advanced'] = advanced_tools[people.index(name_stub)]
         data['tooltable'] = tooltable
+        if row[0] == "Augusto Takahiro Kiramoto" or row[0] == "Stiverson Stopa Assis Palma":
+            data['grupo'] = "Administrativo"
+        elif is_empty(tooltable):
+            data['grupo'] = "Vendas"
+        else:
+            data['grupo'] = "Desenvolvimento"
         if row[1] != "": data['mail'] = row[1]
         else: data['mail'] = "Desconhecido"
         if row[2] != "": data['telefone'] = row[2]

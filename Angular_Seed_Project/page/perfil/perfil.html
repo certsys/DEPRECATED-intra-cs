@@ -15,7 +15,7 @@
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-10">
         <h2>Perfil</h2>
-        <!--<ol class="breadcrumb">
+        <!--<ol clas!-"breadcrumb">
             <li>
                 <a href="index.html">Home</a>
             </li>
@@ -112,6 +112,11 @@
                         {{perfil.sobre}}
                     </p>
 
+                    <h3>Corporativo</h3>
+                    <ul>
+                        <li ng-repeat="group in perfil.grupo">{{group}}</li>
+                    </ul>
+                    <br>
                     <h3>Dados de contato:</h3>
                     <div>
                            <i class="fa fa-envelope" style="margin-right:10px"> </i>{{perfil.mail}}<br>
