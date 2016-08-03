@@ -101,6 +101,7 @@ router.put('/edit', function (req, res, next) {
         data.tooltable = req.body.tooltable;
         data.telefone = req.body.telefone;
         data.skype = req.body.skype;
+        data.imagem = req.body.imagem;
 
         data.save(function (err, data) {
             if (err) {

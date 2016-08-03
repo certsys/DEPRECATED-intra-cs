@@ -1,8 +1,4 @@
 <!-- Wrapper-->
-<div id="blueimp-gallery" class="blueimp-gallery">
-    <div class="slides"></div>
-</div>
-
 <div id="wrapper" class="top-navigation">
 
     <!-- Navigation -->
@@ -34,7 +30,8 @@
                         <form class="form-group">
                             <div class="col-sm-12">
                                 Nome<br>
-                                <input ng-disabled="true" required class="form-control" type="text" ng-model="edit_perfil.nome"
+                                <input ng-disabled="true" required class="form-control" type="text"
+                                       ng-model="edit_perfil.nome"
                                        name="Nome">
                                 <br>
                             </div>
@@ -142,7 +139,8 @@
                             <!--</div>-->
                             <div class="col-sm-12">
                                 <br>E-mail<br>
-                                <input ng-disabled="true" required class="form-control" type="text" ng-model="edit_perfil.mail"
+                                <input ng-disabled="true" required class="form-control" type="text"
+                                       ng-model="edit_perfil.mail"
                                        name="E-mail">
                                 <br>
                             </div>
@@ -156,6 +154,24 @@
                                 <input class="form-control" type="text" ng-model="edit_perfil.skype" name="Skype">
                                 <br>
                             </div>
+                            <div class="col-lg-12">
+                                Imagem
+                                <br>
+                                <br>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="m-b-md"><input type="file" accept="image/*"  id="fileInput"/></div>
+                                        <div class="cropArea">
+                                            <img-crop area-type="square" image="myImage"
+                                                      result-image="myCroppedImage"></img-crop>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <h4>Imagem final</h4>
+                                        <div class="m-b-md"><img ng-src="{{myCroppedImage}}"/></div>
+                                    </div>
+                                </div>
+                            </div>
                             <!--<div class="col-sm-12">-->
                             <!--Imagem<br>-->
                             <!--<input required class="form-control" type="file" accept="image/*" file-model="imagem" ng-model="imagem" name="imagem" onchange="angular.element(this).scope().photoChanged(this.files)">-->
@@ -163,11 +179,17 @@
                             <!--<img ng-src="{{ thumbnail.dataUrl }}" />-->
                             <!--</div>-->
                             <div class="col-sm-12">
-                                <input class="col-sm-12 btn btn-primary" type="submit" value="Editar">
+                                <p>
+                                    <button class="col-sm-12 btn btn-primary" type="submit" value="Salvar">
+                                        <i class="fa fa-check">
+                                        </i>
+                                        &nbsp;Salvar
+                                    </button>
+                                </p>
                             </div>
-                        <br>
-                        <br>
-                        <br>
+                            <br>
+                            <br>
+                            <br>
                         </form>
                         <script type="text/ng-template" id="tag-template">
                             <div class="tag-template">
@@ -191,7 +213,7 @@
             <!-- Footer -->
             <div ng-include="'views/common/footer.html'"></div>
         </div>
-        <!-- End page wrapper-->
+        <!--End page wrapper-->
     </div>
     <!-- End wrapper-->
 </div>
