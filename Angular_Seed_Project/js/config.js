@@ -192,27 +192,27 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, $locati
             }
 
         })
-        .state('insertcontato', {
-            url: "/insertcontact",
-            templateUrl: "page/contatos/insertcontact.html",
-            data: {pageTitle: 'Novo Contato'},
-            resolve: {
-                loadPlugin: function ($ocLazyLoad) {
-                    return $ocLazyLoad.load([
-                        {
-                            files: ['css/plugins/iCheck/custom.css', 'js/plugins/iCheck/icheck.min.js']
-                        },
-                        {
-                            name: 'ngTagsInput',
-                            files: ['js/plugins/ng-tags-input/ng-tags-input.min.js', 'css/plugins/ng-tags-input/ng-tags-input.min.css', 'css/plugins/ng-tags-input/ng-tags-input.bootstrap.min.css']
-                        },
-                        {
-                            files: ['js/plugins/jasny/jasny-bootstrap.min.js', 'css/plugins/jasny/jasny-bootstrap.min.css']
-                        }
-                    ]);
-                }
-            }
-        })
+        // .state('insertcontato', {
+        //     url: "/insertcontact",
+        //     templateUrl: "page/contatos/insertcontact.html",
+        //     data: {pageTitle: 'Novo Contato'},
+        //     resolve: {
+        //         loadPlugin: function ($ocLazyLoad) {
+        //             return $ocLazyLoad.load([
+        //                 {
+        //                     files: ['css/plugins/iCheck/custom.css', 'js/plugins/iCheck/icheck.min.js']
+        //                 },
+        //                 {
+        //                     name: 'ngTagsInput',
+        //                     files: ['js/plugins/ng-tags-input/ng-tags-input.min.js', 'css/plugins/ng-tags-input/ng-tags-input.min.css', 'css/plugins/ng-tags-input/ng-tags-input.bootstrap.min.css']
+        //                 },
+        //                 {
+        //                     files: ['js/plugins/jasny/jasny-bootstrap.min.js', 'css/plugins/jasny/jasny-bootstrap.min.css']
+        //                 }
+        //             ]);
+        //         }
+        //     }
+        // })
 
         .state('kb', {
             url: "/kb",
