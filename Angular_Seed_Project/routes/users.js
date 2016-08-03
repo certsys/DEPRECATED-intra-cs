@@ -77,6 +77,7 @@ router.put('/', function (req, res, next) {
                                     mail: user.sAMAccountName + "@certsys.com.br",
                                     telefone: "",
                                     skype: "",
+                                    linkedin: "",
                                     imagem: ""
                                 });
 

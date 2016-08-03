@@ -138,13 +138,11 @@ function editcontact($scope, $http, $state, userService, contactService) {
         var inter_array = [];
         var advanced_array = [];
         var log = [];
-        console.log($scope.myCroppedImage);
         for (var i = 0; i < $scope.tools_basic.length; i++) {
             angular.forEach($scope.tools_basic[i], function (value, key) {
                 if (key != "$$hashKey" && key != "worktool") basic_array.push(value);
             }, log);
         }
-        console.log("Sai");
         for (var i = 0; i < $scope.tools_intermediate.length; i++) {
             angular.forEach($scope.tools_intermediate[i], function (value, key) {
                 if (key != "$$hashKey" && key != "worktool") inter_array.push(value);
@@ -152,7 +150,6 @@ function editcontact($scope, $http, $state, userService, contactService) {
         }
 
         for (var i = 0; i < $scope.tools_advanced.length; i++) {
-            console.log($scope.tools_advanced[i]);
             angular.forEach($scope.tools_advanced[i], function (value, key) {
                 if (key != "$$hashKey" && key != "worktool") advanced_array.push(value);
             }, log);
@@ -170,6 +167,7 @@ function editcontact($scope, $http, $state, userService, contactService) {
             tooltable: tooltable,
             telefone: $scope.edit_perfil.telefone,
             skype: $scope.edit_perfil.skype,
+            linkedin: $scope.edit_perfil.linkedin,
             imagem: $scope.myCroppedImage
         };
 

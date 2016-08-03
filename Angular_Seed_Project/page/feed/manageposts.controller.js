@@ -51,7 +51,6 @@ function postManager($scope, $http, postService, $state, userService) {
     }
 
     $scope.sendPost = function (currentPost) {
-        console.log("Editar Post");
         postService.sendPost(currentPost);
     };
 

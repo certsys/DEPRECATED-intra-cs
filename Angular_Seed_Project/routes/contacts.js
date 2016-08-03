@@ -54,7 +54,6 @@ router.get('/perfil', function (req, res) {
 router.get('/', function (req, res) {
 
     var search = req.param("inputed");
-    console.log(search);
     if (search) {
         var query = Contact.where({$or: [{'tooltable.tools_basic': new RegExp(search, 'i')}, {'tooltable.tools_intermediate': new RegExp(search, 'i')}, {'tooltable.tools_advanced': new RegExp(search, 'i')}]})
         query.find(function (err, contacts) {
@@ -81,6 +80,7 @@ router.post('/', function (req, res) {
         mail: req.body.mail,
         telefone: req.body.phone,
         skype: req.body.skype,
+        linkedin: req.body.linkedin,
         imagem: req.body.imagem
     });
 
@@ -101,6 +101,7 @@ router.put('/edit', function (req, res, next) {
         data.tooltable = req.body.tooltable;
         data.telefone = req.body.telefone;
         data.skype = req.body.skype;
+        data.linkedin = req.body.linkedin;
         data.imagem = req.body.imagem;
 
         data.save(function (err, data) {

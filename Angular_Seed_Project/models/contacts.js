@@ -8,6 +8,7 @@ var contactSchema = new mongoose.Schema({
     mail: String,
     telefone: String,
     skype: String,
+    linkedin: String,
     imagem: String,
     cargo: String
 });

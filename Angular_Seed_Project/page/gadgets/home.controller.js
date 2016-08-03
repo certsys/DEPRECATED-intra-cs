@@ -1,6 +1,5 @@
 function widgetFlotChart() {
 
-	console.log('widgetflotchart loaded');
     /**
      * Flot chart data and options
      */

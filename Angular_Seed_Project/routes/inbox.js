@@ -22,10 +22,6 @@ router.get('/', function(req, res, next) {
     imap.connect();
     //req.end();
     
-    console.log('denovo novo');
-    console.log('denovo novo');
-    console.log('denovo novo');
-    console.log('denovo novo');
     console.log(maillist);
     //json.stringify(maillist); 
     //res.json(maillist);

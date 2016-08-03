@@ -45,7 +45,6 @@ function editnews($http, $scope, postService, $state, $timeout, userService) {
     };
     $scope.edit = function () {
         if (angular.isDefined($scope.thumbnail) && angular.isDefined($scope.thumbnail.dataUrl)) {
-            console.log("IF 1");
             var data = {
                 titulo: $scope.postagem.titulo
                 , imagem: $scope.thumbnail.dataUrl
@@ -55,7 +54,6 @@ function editnews($http, $scope, postService, $state, $timeout, userService) {
             };
         }
         else {
-            console.log("IF 2");
             var data = {
                 titulo: $scope.postagem.titulo
                 , imagem: null
@@ -64,7 +62,6 @@ function editnews($http, $scope, postService, $state, $timeout, userService) {
                 , isDeleted: false
             };
         }
-        console.log($scope.thumbnail.dataUrl);
         $http({
             method: 'PUT'
             , url: '/posts/edit/' + $scope.postagem._id

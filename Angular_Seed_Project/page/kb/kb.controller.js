@@ -89,11 +89,9 @@ function kbCtrl($scope, $http, $state, userService) {
             console.log();
         }).catch(function (err) {
             //your code in case your post fails
-            console.log("Deu ruim!");
             console.log(err);
         });
     };
-
 }
 
 angular.module('inspinia').controller('kbCtrl', kbCtrl);

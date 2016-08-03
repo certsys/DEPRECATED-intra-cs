@@ -44,7 +44,6 @@ function insertnews($scope, $http, $timeout, $state, userService) {
     $scope.submit = function () {
             var editions = [];
             if ($scope.futuro == true) {
-                console.log("Data futura!!");
                 var date = angular.element('#data-postagem').val();
                 $scope.changeDateToISO(date);
                 if ($scope.selectedDate >= $scope.today) {
@@ -70,7 +69,6 @@ function insertnews($scope, $http, $timeout, $state, userService) {
                 }
             }
             else {
-                console.log("Data não futura!!");
                 var data = {
                     titulo: $scope.titulo
                     , imagem: $scope.thumbnail.dataUrl
