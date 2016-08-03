@@ -138,7 +138,7 @@
                                 </div>
                                 <div class="col-sm-12">
                                     Telefone<br>
-                                    <input class="form-control" type="text" ng-model="phone" name="Telefone">
+                                    <input class="form-control" type="text" data-mask="(99) 99999-9999" ng-model="phone" name="Telefone">
                                     <br>
                                 </div>
                                 <div class="col-sm-12">
@@ -151,14 +151,6 @@
                                     <input required class="form-control" type="file" accept="image/*" file-model="imagem" ng-model="imagem" name="imagem" onchange="angular.element(this).scope().photoChanged(this.files)">
                                     <br>
                                     <img ng-src="{{ thumbnail.dataUrl }}" />
-                                </div>
-                                <div class="col-sm-12">
-                                    <select required name="Grupo" ng-model="grupo" value="Grupo">
-                                        <option value="">Grupo</option>
-                                        <option value="Vendas">Vendas</option>
-                                        <option value="Administrativo">Administrativo</option>
-                                        <option value="Desenvolvimento">Desenvolvimento</option>
-                                    </select>
                                 </div>
                                 <div class="col-sm-12">
                                     <input class="col-sm-12 btn btn-primary" type="submit" value="Cadastrar">

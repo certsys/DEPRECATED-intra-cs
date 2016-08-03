@@ -148,6 +148,9 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, $locati
                         {
                             name: 'ngTagsInput',
                             files: ['js/plugins/ng-tags-input/ng-tags-input.min.js', 'css/plugins/ng-tags-input/ng-tags-input.min.css', 'css/plugins/ng-tags-input/ng-tags-input.bootstrap.min.css']
+                        },
+                        {
+                            files: ['js/plugins/jasny/jasny-bootstrap.min.js', 'css/plugins/jasny/jasny-bootstrap.min.css']
                         }
                     ]);
                 }
@@ -202,6 +205,9 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, $locati
                         {
                             name: 'ngTagsInput',
                             files: ['js/plugins/ng-tags-input/ng-tags-input.min.js', 'css/plugins/ng-tags-input/ng-tags-input.min.css', 'css/plugins/ng-tags-input/ng-tags-input.bootstrap.min.css']
+                        },
+                        {
+                            files: ['js/plugins/jasny/jasny-bootstrap.min.js', 'css/plugins/jasny/jasny-bootstrap.min.css']
                         }
                     ]);
                 }
