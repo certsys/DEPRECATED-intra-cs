@@ -18,8 +18,8 @@ var password = 'dAgAcupU6rA=';
 var groupName = '';
 
 
-/* GET users listing. */
-router.get('/', function (req, res, next) {
+/* PUT users listing. */
+router.put('/', function (req, res, next) {
     ad.getUsersForGroup(groupName, function (err, users) {
         if (err) {
             res.json('ERROR: ' + JSON.stringify(err));
@@ -64,32 +64,11 @@ router.get('/', function (req, res, next) {
                             });
 
                         });
-
-                        Contact.find({nome : user.cn}, function (err, data) {
-                            if (user.sAMAccountName === "marco.villa.adm") {
+                        Contact.findOne({nome : user.cn}, function (err, data) {
+                            if (err) return err;
+                            else if (user.sAMAccountName === "marco.villa.adm") {
                             }
-                            else if (data.length > 0) {
-                                data.forEach(function(individuo) {
-                                    if (final.indexOf("Ex-Funcionarios") > -1) {
-                                        individuo.remove(function(err, data) {
-                                            if (err) return next(err);
-                                        });
-                                    }
-                                    else {
-                                        var is_same = (individuo.grupo.length == final.length) && individuo.grupo.every(function (element, index) {
-                                                return element === final[index];
-                                            });
-                                        if (!is_same) {
-                                            individuo.grupo = final;
-                                            individuo.save(function (err, data) {
-                                                if (err) return next(err);
-                                                // res.status(201).json(data);
-                                            });
-                                        }
-                                    }
-                                });
-                            }
-                            else if (final.indexOf("Ex-Funcionarios") > -1) {
+                            else if (final.indexOf("Ex-Funcionarios") < 0 && data == null) {
                                 var newContact = new Contact({
                                     nome: user.cn,
                                     sobre: "",
@@ -104,6 +83,25 @@ router.get('/', function (req, res, next) {
                                 newContact.save(function (err) {
                                     if (err) return err;
                                 });
+                            }
+                            else if (data != null) {
+                                if (final.indexOf("Ex-Funcionarios") > -1) {
+                                    data.remove(function(err, data) {
+                                        if (err) return next(err);
+                                    });
+                                }
+                                else {
+                                    var is_same = (data.grupo.length == final.length) && data.grupo.every(function (element, index) {
+                                            return element === final[index];
+                                        });
+                                    if (!is_same) {
+                                        data.grupo = final;
+                                        data.save(function (err, data) {
+                                            if (err) return next(err);
+                                            // res.status(201).json(data);
+                                        });
+                                    }
+                                }
                             }
                         });
                     }
