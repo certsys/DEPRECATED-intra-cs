@@ -43,6 +43,7 @@ function loginCrtl($scope, $http, $state, userService) {
                 userService.sendToken(response.data.token);
                 $state.go('feed');
             } else {
+                console.log(response.data);
                 $scope.incorrectData();
             }
         }).catch(function (err) {

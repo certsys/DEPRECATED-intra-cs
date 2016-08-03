@@ -7,9 +7,6 @@
 	height: 100% !important;
 }
 
-
-
-
 .full-width {
     width: 100%;
     height: auto;
@@ -319,7 +316,12 @@
 }
 
 
-
+.cropArea {
+    background: transparent;
+    overflow: hidden;
+    width:100%;
+    height:100%;
+}
 
 
 

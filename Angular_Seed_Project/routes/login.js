@@ -13,9 +13,7 @@ var config = {
 }
 
 var ad = new ActiveDirectory(config);
-// var username = 'pedro.strabeli@certsys.com.br';
 var username = 'henrique.cavalcante';
-// var password = 'password';
 var password = 'dAgAcupU6rA=';
 var groupName = 'Certsys';
 var sAMAccountName = 'henrique.cavalcante';

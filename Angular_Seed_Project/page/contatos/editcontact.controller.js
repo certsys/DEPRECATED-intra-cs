@@ -21,6 +21,20 @@ function editcontact($scope, $http, $state, userService, contactService) {
 
     $scope.title = 'Editar Perfil';
 
+    $scope.myImage='';
+    $scope.myCroppedImage='';
+
+    var handleFileSelect=function(evt) {
+        var file=evt.currentTarget.files[0];
+        var reader = new FileReader();
+        reader.onload = function (evt) {
+            $scope.$apply(function($scope){
+                $scope.myImage=evt.target.result;
+            });
+        };
+        reader.readAsDataURL(file);
+    };
+    angular.element(document.querySelector('#fileInput')).on('change',handleFileSelect);
 
     $scope.carregaDados = function () {
         $scope.edit_perfil = contactService.getContact();
@@ -124,6 +138,7 @@ function editcontact($scope, $http, $state, userService, contactService) {
         var inter_array = [];
         var advanced_array = [];
         var log = [];
+        console.log($scope.myCroppedImage);
         for (var i = 0; i < $scope.tools_basic.length; i++) {
             angular.forEach($scope.tools_basic[i], function (value, key) {
                 if (key != "$$hashKey" && key != "worktool") basic_array.push(value);
@@ -154,7 +169,8 @@ function editcontact($scope, $http, $state, userService, contactService) {
             sobre: $scope.edit_perfil.sobre,
             tooltable: tooltable,
             telefone: $scope.edit_perfil.telefone,
-            skype: $scope.edit_perfil.skype
+            skype: $scope.edit_perfil.skype,
+            imagem: $scope.myCroppedImage
         };
 
         var output = JSON.stringify(data);
