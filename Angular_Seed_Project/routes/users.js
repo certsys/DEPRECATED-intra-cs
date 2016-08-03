@@ -19,7 +19,7 @@ var groupName = '';
 
 
 /* GET users listing. */
-router.put('/', function (req, res, next) {
+router.get('/', function (req, res, next) {
     ad.getUsersForGroup(groupName, function (err, users) {
         if (err) {
             res.json('ERROR: ' + JSON.stringify(err));
@@ -42,7 +42,7 @@ router.put('/', function (req, res, next) {
                         return;
                     }
 
-                    if (! groups) console.log('User: ' + sAMAccountName + ' not found.');
+                    if (!groups) console.log('User: ' + sAMAccountName + ' not found.');
                     else {
                         extra_groups.forEach(function(extra) {
                             extra = (extra.split("="))[1];
@@ -63,36 +63,41 @@ router.put('/', function (req, res, next) {
                                 if (element != null && final.indexOf(element) == -1) final.push(element);
                             });
 
-                        })
+                        });
 
                         Contact.find({nome : user.cn}, function (err, data) {
                             if (user.sAMAccountName === "marco.villa.adm") {
                             }
                             else if (data.length > 0) {
                                 data.forEach(function(individuo) {
-                                    var is_same = (individuo.grupo.length == final.length) && individuo.grupo.every(function(element, index) {
-                                            return element === final[index];
+                                    if (final.indexOf("Ex-Funcionarios") > -1) {
+                                        individuo.remove(function(err, data) {
+                                            if (err) return next(err);
                                         });
-                                    if (!is_same) {
-                                        individuo.grupo = final;
-                                        individuo.save(function(err, data) {
-                                            if(err) {
-                                                return next(err);
-                                            }
-                                            // res.status(201).json(data);
-                                        });
+                                    }
+                                    else {
+                                        var is_same = (individuo.grupo.length == final.length) && individuo.grupo.every(function (element, index) {
+                                                return element === final[index];
+                                            });
+                                        if (!is_same) {
+                                            individuo.grupo = final;
+                                            individuo.save(function (err, data) {
+                                                if (err) return next(err);
+                                                // res.status(201).json(data);
+                                            });
+                                        }
                                     }
                                 });
                             }
-                            else {
+                            else if (final.indexOf("Ex-Funcionarios") > -1) {
                                 var newContact = new Contact({
                                     nome: user.cn,
-                                    sobre: "Conte sua vida aqui!",
+                                    sobre: "",
                                     grupo: final,
                                     tooltable: {},
                                     mail: user.sAMAccountName + "@certsys.com.br",
-                                    telefone: "Digite seu telefone",
-                                    skype: "Digite seu skype",
+                                    telefone: "",
+                                    skype: "",
                                     imagem: ""
                                 });
 
@@ -101,15 +106,11 @@ router.put('/', function (req, res, next) {
                                 });
                             }
                         });
-
-
                     }
                 });
-
             });
         }
     });
-
 });
 
 module.exports = router;
