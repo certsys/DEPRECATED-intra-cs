@@ -15,7 +15,7 @@ var ad = new ActiveDirectory(config);
 var username = 'svc_intranet@certsys.local';
 // var password = 'password';
 var password = 'dAgAcupU6rA=';
-var groupName = '';
+var groupName = 'Certsys';
 
 
 /* PUT users listing. */
