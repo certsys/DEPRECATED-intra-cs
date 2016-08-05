@@ -1,4 +1,5 @@
 var express = require('express');
+var async = require('async');
 var router = express.Router();
 var Contact = require('../models/contacts');
 var ActiveDirectory = require('activedirectory');
@@ -16,7 +17,176 @@ var username = 'svc_intranet@certsys.local';
 // var password = 'password';
 var password = 'dAgAcupU6rA=';
 var groupName = 'Certsys';
+var GROUPS = [
+    'Administrativo',
+    'Comercial',
+    'Diretores',
+    'Financeiro',
+    'Juridico',
+    'PreVendas',
+    'Técnico'
+];
 
+
+// router.get('/permission', function (req, res, next) {
+//     var sAMAccountName = req.param("token");
+//     console.log(sAMAccountName);
+//     ad.isUserMemberOf(sAMAccountName, GROUPS[0], function(err, isMember) {
+//         if (err) {
+//             console.log('ERROR: ' + JSON.stringify(err));
+//             return;
+//         }
+//         res.json(JSON.stringify(isMember));
+//     });
+// });
+
+router.get('/admins', function (req, res, next) {
+    var admins = [];
+    ad.getUsersForGroup(groupName, function (err, users) {
+        if (err) {
+            res.json('ERROR: ' + JSON.stringify(err));
+            return;
+        }
+
+        if (!users) res.json({data: 'Group: ' + groupName + ' not found.'});
+        else {
+            async.each(users, function(user, callback) {
+                ad.isUserMemberOf(user.sAMAccountName, GROUPS[0], function (err, isMember) {
+                    if (err) {
+                        console.log('ERROR: ' + JSON.stringify(err));
+                        callback(err);
+                    }
+                    if (isMember) {
+                        admins.push(user.sAMAccountName);
+                    }
+                    callback(null);
+                });
+            }, function(err) {
+                if (err) return console.log(err);
+                res.json(admins);
+            });
+        }
+    });
+});
+
+router.get('/comercial', function (req, res, next) {
+    var admins = [];
+    ad.getUsersForGroup(groupName, function (err, users) {
+        if (err) {
+            res.json('ERROR: ' + JSON.stringify(err));
+            return;
+        }
+
+        if (!users) res.json({data: 'Group: ' + groupName + ' not found.'});
+        else {
+            async.each(users, function(user, callback) {
+                ad.isUserMemberOf(user.sAMAccountName, GROUPS[1], function (err, isMember) {
+                    if (err) {
+                        console.log('ERROR: ' + JSON.stringify(err));
+                        callback(err);
+                    }
+                    if (isMember) {
+                        admins.push(user.sAMAccountName);
+                    }
+                    callback(null);
+                });
+            }, function(err) {
+                   if (err) return console.log(err);
+                   res.json(admins);
+            });
+        }
+    });
+});
+
+router.get('/directors', function (req, res, next) {
+    var admins = [];
+    var calls = [];
+    ad.getUsersForGroup(groupName, function (err, users) {
+        if (err) {
+            res.json('ERROR: ' + JSON.stringify(err));
+            return;
+        }
+
+        if (!users) res.json({data: 'Group: ' + groupName + ' not found.'});
+        else {
+            async.each(users, function(user, callback) {
+                ad.isUserMemberOf(user.sAMAccountName, GROUPS[2], function (err, isMember) {
+                    if (err) {
+                        console.log('ERROR: ' + JSON.stringify(err));
+                        return callback(err);
+                    }
+                    if (isMember) {
+                        admins.push(user.sAMAccountName);
+                    }
+                    return callback(null, user.sAMAccountName);
+                });
+            }, function(err) {
+                if (err) return console.log(err);
+                res.json(admins);
+            });
+        }
+    });
+});
+
+router.get('/prevendas', function (req, res, next) {
+    var admins = [];
+    var calls = [];
+    ad.getUsersForGroup(groupName, function (err, users) {
+        if (err) {
+            res.json('ERROR: ' + JSON.stringify(err));
+            return;
+        }
+
+        if (!users) res.json({data: 'Group: ' + groupName + ' not found.'});
+        else {
+            async.each(users, function(user, callback) {
+                ad.isUserMemberOf(user.sAMAccountName, GROUPS[5], function (err, isMember) {
+                    if (err) {
+                        console.log('ERROR: ' + JSON.stringify(err));
+                        callback(err);
+                    }
+                    if (isMember) {
+                        admins.push(user.sAMAccountName);
+                    }
+                    callback(null);
+                });
+            }, function(err) {
+                if (err) return console.log(err);
+                res.json(admins);
+            });
+        }
+    });
+});
+
+router.get('/tecnico', function (req, res, next) {
+    var admins = [];
+    var calls = [];
+    ad.getUsersForGroup(groupName, function (err, users) {
+        if (err) {
+            res.json('ERROR: ' + JSON.stringify(err));
+            return;
+        }
+
+        if (!users) res.json({data: 'Group: ' + groupName + ' not found.'});
+        else {
+            async.each(users, function(user, callback) {
+                ad.isUserMemberOf(user.sAMAccountName, GROUPS[6], function (err, isMember) {
+                    if (err) {
+                        console.log('ERROR: ' + JSON.stringify(err));
+                        callback(err);
+                    }
+                    if (isMember) {
+                        admins.push(user.sAMAccountName);
+                    }
+                    callback(null);
+                });
+            }, function(err) {
+                if (err) return console.log(err);
+                res.json(admins);
+            });
+        }
+    });
+});
 
 /* PUT users listing. */
 router.put('/', function (req, res, next) {

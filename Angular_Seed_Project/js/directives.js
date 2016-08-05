@@ -177,7 +177,7 @@ function clockPicker() {
                 element.clockpicker();
         }
     };
-};
+}
 
 function myEnter() {
     return function (scope, element, attrs) {
@@ -191,7 +191,22 @@ function myEnter() {
             }
         });
     };
-};
+}
+
+function elemReady ( $parse ) {
+    return {
+        restrict: 'A',
+        link: function ($scope, elem, attrs) {
+            elem.ready(function () {
+                $scope.$apply(function () {
+                    var func = $parse(attrs.elemReady);
+                    func($scope);
+                })
+            })
+        }
+    };
+}
+
 
 /**
  *
@@ -206,4 +221,5 @@ angular
     .directive('iboxToolsFullScreen', iboxToolsFullScreen)
     .directive('clockPicker', clockPicker)
     .directive('myEnter', myEnter)
-    .directive('tooltip', mytooltip);  
+    .directive('tooltip', mytooltip)
+    .directive('elemReady', elemReady);

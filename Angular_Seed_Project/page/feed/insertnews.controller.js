@@ -1,4 +1,4 @@
-function insertnews($scope, $http, $timeout, $state, userService) {
+function insertnews($scope, $http, $timeout, $state, userService, peopleGroups) {
     $http({
         url: '/institucional',
         method: "GET",
@@ -10,9 +10,38 @@ function insertnews($scope, $http, $timeout, $state, userService) {
         $state.go('login');
         console.log(err);
     });
-    // Só administradores do sistema podem entrar nessa view
-    if(!userService.isAdmin())
+
+    $scope.permissions = {
+        debug: false,
+        admin: false,
+        comercial: false,
+        diretores: false,
+        prevendas: false,
+        tecnico: false
+    };
+
+    if(userService.devGroup()) $scope.permissions.debug = true;
+
+    peopleGroups.ADMINS()
+        .then(function(data) {
+            if(angular.isDefined(data) && userService.insideGroup(data)) $scope.permissions.admin = true;
+        }, function(error){
+            console.log('error', error);
+        });
+
+    peopleGroups.DIRETORES()
+        .then(function(data) {
+            if(angular.isDefined(data) && userService.insideGroup(data)) $scope.permissions.diretores = true;
+        }, function(error){
+            console.log('error', error);
+        });
+
+    if(!($scope.permissions.debug || $scope.permissions.admin || $scope.permissions.diretores))
         $state.go('feed');
+
+    // Só administradores do sistema podem entrar nessa view
+    // if(!userService.isAdmin())
+    //     $state.go('feed');
 
     $scope.today = new Date();
     $scope.title = "Newsfeed CS - Nova postagem";
@@ -44,6 +73,7 @@ function insertnews($scope, $http, $timeout, $state, userService) {
     $scope.submit = function () {
             var editions = [];
             if ($scope.futuro == true) {
+                console.log("Data futura!!");
                 var date = angular.element('#data-postagem').val();
                 $scope.changeDateToISO(date);
                 if ($scope.selectedDate >= $scope.today) {
@@ -69,6 +99,7 @@ function insertnews($scope, $http, $timeout, $state, userService) {
                 }
             }
             else {
+                console.log("Data não futura!!");
                 var data = {
                     titulo: $scope.titulo
                     , imagem: $scope.thumbnail.dataUrl

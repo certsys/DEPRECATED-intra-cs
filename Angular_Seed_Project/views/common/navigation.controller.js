@@ -1,4 +1,4 @@
-function navigationCrtl($scope, $state, userService, contactService, $http) {
+function navigationCrtl($scope, $state, userService, contactService, peopleGroups, $http) {
 
 
     $scope.logout = function () {
@@ -7,9 +7,30 @@ function navigationCrtl($scope, $state, userService, contactService, $http) {
         $state.go('login');
     };
 
-    $scope.isAdmin = function () {
-        return userService.isAdmin();
+    $scope.permissions = {
+        debug: false,
+        admin: false,
+        comercial: false,
+        diretores: false,
+        prevendas: false,
+        tecnico: false
     };
+
+    if(userService.devGroup()) $scope.permissions.debug = true;
+    
+    peopleGroups.ADMINS()
+        .then(function(data) {
+            if(angular.isDefined(data) && userService.insideGroup(data)) $scope.permissions.admin = true;
+        }, function(error){
+            console.log('error', error);
+        });
+
+    peopleGroups.DIRETORES()
+        .then(function(data) {
+            if(angular.isDefined(data) && userService.insideGroup(data)) $scope.permissions.diretores = true;
+        }, function(error){
+            console.log('error', error);
+        });
 
     $scope.perfil = function () {
         $http({
