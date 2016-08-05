@@ -36,7 +36,7 @@ function navigationCrtl($scope, $state, userService, contactService, peopleGroup
         $http({
             url: '/contacts/perfil',
             method: "GET",
-            params: {token: userService.getToken(), mail: userService.getUser().mail}
+            params: {token: userService.getToken(), mail: userService.getUser().sAMAccountName}
         }).then(function (response) {
             //your code in case the post succeeds
             if(response.data.length > 0) {

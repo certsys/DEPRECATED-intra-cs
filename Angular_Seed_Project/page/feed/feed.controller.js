@@ -1,4 +1,4 @@
-function feed($scope, $http, $state, userService) {
+function feed($scope, $http, $state, $sce, userService) {
     $http({
         url: '/posts',
         method: "GET",
@@ -6,7 +6,9 @@ function feed($scope, $http, $state, userService) {
     }).then(function (response) {
         //your code in case the post succeeds
         $scope.feed = response.data;
-        console.log(response);
+        $scope.feed.forEach(function(postagem) {
+            postagem.texto = $sce.trustAsHtml(postagem.texto);
+        });
     }).catch(function (err) {
         $state.go('login');
         console.log(err);

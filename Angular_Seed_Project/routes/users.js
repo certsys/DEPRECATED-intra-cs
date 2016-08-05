@@ -239,12 +239,15 @@ router.put('/', function (req, res, next) {
                             else if (user.sAMAccountName === "marco.villa.adm") {
                             }
                             else if (final.indexOf("Ex-Funcionarios") < 0 && data == null) {
+                                if (user.mail != undefined && user.mail.indexOf("@") < 0)
+                                    email = user.mail + "@certsys.com.br";
+                                else email = user.mail;
                                 var newContact = new Contact({
                                     nome: user.cn,
                                     sobre: "",
                                     grupo: final,
                                     tooltable: {},
-                                    mail: user.sAMAccountName + "@certsys.com.br",
+                                    mail: user.mail,
                                     telefone: "",
                                     skype: "",
                                     linkedin: "",
@@ -262,6 +265,23 @@ router.put('/', function (req, res, next) {
                                     });
                                 }
                                 else {
+                                    if (user.mail != undefined && user.mail.indexOf("@") < 0)
+                                        email = user.mail + "@certsys.com.br";
+                                    else email = user.mail;
+                                    if (data.mail == undefined) {
+                                        data.mail = user.sAMAccountName + "@certsys.com.br"
+                                        data.save(function (err, data) {
+                                            if (err) return next(err);
+                                            // res.status(201).json(data);
+                                        });
+                                    }
+                                    else if (user.mail != undefined && data.mail !== email) {
+                                        data.mail = email;
+                                        data.save(function (err, data) {
+                                            if (err) return next(err);
+                                            // res.status(201).json(data);
+                                        });
+                                    }
                                     var is_same = (data.grupo.length == final.length) && data.grupo.every(function (element, index) {
                                             return element === final[index];
                                         });
