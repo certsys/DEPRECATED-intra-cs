@@ -5,7 +5,6 @@ function insertnews($scope, $http, $timeout, $state, userService, peopleGroups) 
         params: {token: userService.getToken()}
     }).then(function (response) {
         //your code in case the post succeeds
-        console.log(response);
     }).catch(function (err) {
         $state.go('login');
         console.log(err);
@@ -25,7 +24,6 @@ function insertnews($scope, $http, $timeout, $state, userService, peopleGroups) 
     peopleGroups.GROUPS()
         .then(function(data) {
             if(angular.isDefined(data)) {
-                console.log(data);
                 if (userService.insideGroup(data[0].users)) $scope.permissions.admin = true;
                 if (userService.insideGroup(data[4].users)) $scope.permissions.comercial = true;
                 if (userService.insideGroup(data[2].users)) $scope.permissions.diretores = true;
@@ -77,15 +75,32 @@ function insertnews($scope, $http, $timeout, $state, userService, peopleGroups) 
                 var date = angular.element('#data-postagem').val();
                 $scope.changeDateToISO(date);
                 if ($scope.selectedDate >= $scope.today) {
-                    var data = {
-                        titulo: $scope.titulo
-                        , imagem: $scope.thumbnail.dataUrl
-                        , texto: $scope.texto
-                        , assinatura: $scope.assinatura
-                        , editions: editions
-                        , data: $scope.selectedDate
-                        , sendBy: userService.getUser().displayName
-                    };
+                    if ($scope.mala == true) {
+                        var usermail = angular.element('#usermail').val();
+                        var password = angular.element('#password').val();
+                        var data = {
+                            titulo: $scope.titulo
+                            , imagem: $scope.thumbnail.dataUrl
+                            , texto: $scope.texto
+                            , assinatura: $scope.assinatura
+                            , editions: editions
+                            , data: $scope.selectedDate
+                            , sendBy: userService.getUser().displayName
+                            , usermail: usermail
+                            , password: password
+                        };
+                    }
+                    else {
+                        var data = {
+                            titulo: $scope.titulo
+                            , imagem: $scope.thumbnail.dataUrl
+                            , texto: $scope.texto
+                            , assinatura: $scope.assinatura
+                            , editions: editions
+                            , data: $scope.selectedDate
+                            , sendBy: userService.getUser().displayName
+                        };
+                    }
                 }
                 else {
                     swal({
@@ -101,14 +116,30 @@ function insertnews($scope, $http, $timeout, $state, userService, peopleGroups) 
             }
             else {
                 console.log("Data não futura!!");
-                var data = {
-                    titulo: $scope.titulo
-                    , imagem: $scope.thumbnail.dataUrl
-                    , texto: $scope.texto
-                    , assinatura: $scope.assinatura
-                    , editions: editions
-                    , sendBy: userService.getUser().displayName
-                };
+                if ($scope.mala == true) {
+                    var usermail = angular.element('#usermail').val();
+                    var password = angular.element('#password').val();
+                    var data = {
+                        titulo: $scope.titulo
+                        , imagem: $scope.thumbnail.dataUrl
+                        , texto: $scope.texto
+                        , assinatura: $scope.assinatura
+                        , editions: editions
+                        , sendBy: userService.getUser().displayName
+                        , usermail: usermail
+                        , password: password
+                    };
+                }
+                else {
+                    var data = {
+                        titulo: $scope.titulo
+                        , imagem: $scope.thumbnail.dataUrl
+                        , texto: $scope.texto
+                        , assinatura: $scope.assinatura
+                        , editions: editions
+                        , sendBy: userService.getUser().displayName
+                    };
+                }
             }
             var output = angular.toJson(data);
             // console.log(output);

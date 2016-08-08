@@ -6,7 +6,6 @@ function postManager($scope, $http, postService, $state, userService, peopleGrou
     }).then(function (response) {
         //your code in case the post succeeds
         $scope.feed = response.data;
-        console.log(response);
     }).catch(function (err) {
         $state.go('login');
         console.log(err);
@@ -26,7 +25,6 @@ function postManager($scope, $http, postService, $state, userService, peopleGrou
     peopleGroups.GROUPS()
         .then(function(data) {
             if(angular.isDefined(data)) {
-                console.log(data);
                 if (userService.insideGroup(data[0].users)) $scope.permissions.admin = true;
                 if (userService.insideGroup(data[4].users)) $scope.permissions.comercial = true;
                 if (userService.insideGroup(data[2].users)) $scope.permissions.diretores = true;

@@ -61,7 +61,6 @@ router.get('/all', function (req, res) {
 
 // Recebe um JSON, insere no banco de dados e envia email com os dados
 router.post('/', function (req, res) {
-
     var newPost = new Post({
         titulo: req.body.titulo,
         imagem: req.body.imagem,
@@ -71,59 +70,60 @@ router.post('/', function (req, res) {
         data: req.body.data
     });
 
-    newPost.save(function(err) {
+    newPost.save(function (err) {
         if (err) throw err;
-        res.json({data: 'Post salvo com successo!'});
     });
 
+    if(req.body.usermail && req.body.password) {
+        // ENVIO DE E-MAIL
+        var options = {
+            host: 'webmail.exchange.locaweb.com.br',
+            port: 587, // Porta SMTP no Exchange
+            auth: {
+                user: req.body.usermail, // Colocar e-mail do RH aqui;
+                pass: req.body.password // Senha do e-mail aqui;
+            }
+        };
 
-    // ENVIO DE E-MAIL
-    var options = {
-        host: 'webmail.exchange.locaweb.com.br',
-        port: 587, // Porta SMTP no Exchange
-        auth: {
-            user: 'henrique.cavalcante@certsys.com.br',
-            pass: ''
+        var transporter = nodemailer.createTransport(smtpTransport(options));
+
+        // Após configurar o transporte chegou a hora de criar um e-mail
+        // para enviarmos, para isso basta criar um objeto com algumas configurações
+
+        var email = {
+            from: req.body.usermail, // Quem enviou este e-mail
+            to: 'lucas_arthur_f@hotmail.com', // Quem receberá (todos@certsys.com.br)
+            subject: req.body.titulo,  // Um assunto
+            html: '<img src="cid:imagemDoPost"/><br><br>' + req.body.texto + '<br>' + req.body.assinatura, // O conteúdo do e-mail
+            attachments: [{
+                filename: 'image.png',
+                path: req.body.imagem,
+                cid: 'imagemDoPost'
+            }]
+        };
+
+
+        if (req.body.data) {
+            var date = new Date(req.body.data);
+            var agendamento = schedule.scheduleJob(date, function () {
+                transporter.sendMail(email, function (err, info) {
+                    if (err)
+                        res.json(err);
+
+                    res.json(info);
+                });
+            });
         }
-    };
-
-    var transporter = nodemailer.createTransport(smtpTransport(options));
-
-    // Após configurar o transporte chegou a hora de criar um e-mail
-    // para enviarmos, para isso basta criar um objeto com algumas configurações
-
-    var email = {
-        from: 'henrique.cavalcante@certsys.com.br', // Quem enviou este e-mail
-        to: 'henrique_hashimoto@hotmail.com', // Quem receberá
-        subject: req.body.titulo,  // Um assunto
-        html: '<img src="cid:imagemDoPost"/><br><br>' + req.body.texto + '<br>' + req.body.assinatura, // O conteúdo do e-mail
-        attachments: [{
-            filename: 'image.png',
-            path: req.body.imagem,
-            cid: 'imagemDoPost'
-        }]
-    };
-
-
-    if(req.body.data) {
-        var date = new Date(req.body.data);
-        var agendamento = schedule.scheduleJob(date, function(){
+        else {
             transporter.sendMail(email, function (err, info) {
                 if (err)
                     res.json(err);
 
                 res.json(info);
             });
-        });
+        }
     }
-    else {
-        transporter.sendMail(email, function (err, info) {
-            if (err)
-                res.json(err);
-
-            res.json(info);
-        });
-    }
+    else res.json(null);
 });
 
 

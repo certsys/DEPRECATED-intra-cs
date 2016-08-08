@@ -12,7 +12,6 @@ function contacts($scope, $http, contactService, userService, $state) {
     }).then(function (response) {
         //your code in case the post succeeds
         $scope.contatos = response.data;
-        console.log(response);
     }).catch(function (err) {
         $state.go('login');
         console.log(err);

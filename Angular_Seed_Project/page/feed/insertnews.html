@@ -69,6 +69,22 @@
                             <br>
                             <br>
                         </div>
+                        <br><h2>Enviar por e-mail para toda a CS? <input type="checkbox" class="js-switch" ui-switch="{color:'#3DADD0'}" ng-model="mala" name="Mail"></h2>
+                        <br>
+                        <br>
+                        <div ng-if="mala">
+                            <div class="form-horizontal">
+                                Digite seu e-mail:
+                                <input id="usermail" required class="col-sm-12" type="text" ng-model="usermail" name="E-mail">
+                                <br>
+                                Digite sua senha:
+                                <input id="password" required class="col-sm-12" type="password" ng-model="password" name="Senha">
+                            </div>
+                            <!--<div><span>Selected date: {{dateHolder | date}}</span></div>-->
+                            <br>
+                            <br>
+                            <br>
+                        </div>
                         <input class="col-sm-12 btn btn-primary" type="submit" value="Postar">
                     </form>
                     <br>
