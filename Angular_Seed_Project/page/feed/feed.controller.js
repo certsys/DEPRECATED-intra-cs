@@ -26,7 +26,7 @@ function feed($scope, $http, $state, $sce, userService) {
     }
 
     $scope.title = "Newsfeed Certsys";
-    $scope.limit = 4; // TODO: Problema se a pessoa agendar 5 posts!!!
+    $scope.limit = 2;
 
     $scope.loadMore = function () {
         $scope.limit = $scope.limit + 1;

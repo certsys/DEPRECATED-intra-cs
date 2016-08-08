@@ -1,6 +1,6 @@
 function postManager($scope, $http, postService, $state, userService, peopleGroups) {
     $http({
-        url: '/posts',
+        url: '/posts/all',
         method: "GET",
         params: {token: userService.getToken()}
     }).then(function (response) {
