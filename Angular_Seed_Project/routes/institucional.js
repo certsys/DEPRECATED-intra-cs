@@ -40,6 +40,7 @@ router.use(function(req, res, next) {
 
 router.get('/', function (req, res) {
     // Só pra bloquear rota no Front-End
+    res.json(null);
 });
 
 

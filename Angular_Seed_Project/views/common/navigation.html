@@ -22,8 +22,15 @@
                     <li ng-if="!isAdmin()" ui-sref-active="active">
                         <a ui-sref="feed"><i class="fa fa-globe"></i> {{ 'HOME' | translate }}</a>
                     </li>
-                    <li ui-sref-active="active">
-                        <a ui-sref="institucional"><i class="fa fa-institution"></i> {{ 'INSTITUTIONAL' | translate}}</a>
+                    <!--<li ui-sref-active="active">-->
+                        <!--<a ui-sref="institucional"><i class="fa fa-institution"></i> {{ 'INSTITUTIONAL' | translate}}</a>-->
+                    <!--</li>-->
+                    <li ui-sref-active="active" class="dropdown">
+                        <a  ui-sref="institucional" dropdown-toggle><i class="fa fa-university"></i> {{ 'INSTITUTIONAL' | translate}}</a>
+                        <ul role="menu" class="dropdown-menu">
+                            <li><a target="_blank" href="http://www.certsys.com.br/certsys-institucional/">Políticas</a></li>
+                            <li><a target="_blank" href="https://webmail.exchange.locaweb.com.br/">Webmail</a></li>
+                        </ul>
                     </li>
                     <li ui-sref-active="active">
                         <a ui-sref="kb"><i class="fa fa-folder-open"></i> {{ 'KNOWLEDGEBASE' | translate }}</a>
@@ -69,6 +76,7 @@
                         <ul role="menu" class="dropdown-menu">
                             <li><a ng-click="perfil()">Ver Perfil</a></li>
                             <li><a ui-sref="editcontact">Editar Perfil</a></li>
+                            <li><a target="_blank" href="http://192.168.129.98/maximo/">Control Desk</a></li>
                         </ul>
                     </li>
                 </ul>

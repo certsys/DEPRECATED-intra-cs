@@ -54,6 +54,7 @@ function insertnews($scope, $http, $timeout, $state, userService) {
                         , assinatura: $scope.assinatura
                         , editions: editions
                         , data: $scope.selectedDate
+                        , sendBy: userService.getUser().displayName
                     };
                 }
                 else {
@@ -75,6 +76,7 @@ function insertnews($scope, $http, $timeout, $state, userService) {
                     , texto: $scope.texto
                     , assinatura: $scope.assinatura
                     , editions: editions
+                    , sendBy: userService.getUser().displayName
                 };
             }
             var output = angular.toJson(data);

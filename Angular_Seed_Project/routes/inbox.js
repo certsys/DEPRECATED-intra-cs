@@ -5,7 +5,7 @@ var Imap = require('imap'),
     inspect = require('util').inspect;
 
 var imap = new Imap({
-  user: 'pedro.strabeli@certsys.com.br',
+  user: 'henrique.cavalcante@certsys.com.br',
   password: '',
   host: 'webmail.exchange.locaweb.com.br', //this is locaweb's exchange host. formerly was using imap.gmail.com',
   port: 993,

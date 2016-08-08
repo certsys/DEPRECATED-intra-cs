@@ -2,6 +2,9 @@ var express = require('express');
 var router = express.Router();
 var Post = require('../models/posts');
 var jwt    = require('jsonwebtoken');
+var nodemailer = require('nodemailer');
+var schedule = require('node-schedule');
+var smtpTransport = require('nodemailer-smtp-transport');
 
 
 
@@ -39,32 +42,26 @@ router.use(function(req, res, next) {
 
     }
 
+
+});
+// Pega todos os Posts que não foram deletados
+router.get('/', function(req, res){
+    Post.find({ 'isDeleted': false }, function (err, posts) {
+        if (err) return console.error(err);
+        res.json(posts);
+    })
 });
 
 // Pega todos os Posts
-router.get('/', function(req, res){
+router.get('/all', function(req, res){
     Post.find(function (err, posts) {
         if (err) return console.error(err);
         res.json(posts);
     })
 });
 
-// Recebe um JSON e insere no banco de dados
-router.post('/', function (req, res) {
-    var newPost = new Post({
-        titulo: req.body.titulo,
-        imagem: req.body.imagem,
-        texto: req.body.texto,
-        assinatura: req.body.assinatura,
-        editions: [],
-        data: req.body.data
-    });
+// Recebe um JSON, insere no banco de dados e envia email com os dados
 
-    newPost.save(function(err) {
-        if (err) throw err;
-        res.json({data: 'Post salvo com successo!'});
-    });
-});
 
 router.delete('/remove/:id', function (req, res) {
     Post.findById(req.params.id, function(err, data) { //Soft delete
@@ -105,6 +102,90 @@ router.put('/edit/:id', function(req, res, next) {
 router.get('/:post', function(req, res){
     res.json(req.post);
 });
+
+router.post('/', function (req, res) {
+
+    var newPost = new Post({
+        titulo: req.body.titulo,
+        imagem: req.body.imagem,
+        texto: req.body.texto,
+        assinatura: req.body.assinatura,
+        editions: [],
+        data: req.body.data
+    });
+
+    newPost.save(function(err) {
+        if (err) throw err;
+        res.json({data: 'Post salvo com successo!'});
+    });
+
+
+
+    // ENVIO DE E-MAIL
+    var options = {
+        host: 'webmail.exchange.locaweb.com.br',
+        port: 465, // Porta SMTP over SSL no Exchange
+        tls: {
+            secureProtocol: "TLSv1_method"
+        },
+        secure: true,
+        auth: {
+            user: 'henrique.cavalcante@certsys.com.br',
+            pass: ''
+        }
+    };
+
+    var transporter = nodemailer.createTransport(smtpTransport(options));
+    
+    transporter.verify(function(error, success) {
+        if (error) {
+            console.log(error);
+        } else {
+            console.log('Server is ready to take our messages');
+        }
+    });
+
+    // Após configurar o transporte chegou a hora de criar um e-mail
+    // para enviarmos, para isso basta criar um objeto com algumas configurações
+        
+        var email = {
+        from: 'henrique.cavalcante@certsys.com.br', // Quem enviou este e-mail
+        to: 'lucas.felgueiras@certsys.com.br', // Quem receberá
+        subject: req.body.titulo,  // Um assunto bacana :-)
+        html: '<img src="cid:imagemDoPost"/><br><br>' + req.body.texto + '<br>' + req.body.assinatura, // O conteúdo do e-mail
+        attachments: [{
+            filename: 'image.png',
+            path: req.body.imagem,
+            cid: 'imagemDoPost' //same cid value as in the html img src
+        }]
+    };
+    
+    // Pronto, tudo em mãos, basta informar para o transporte
+    // que desejamos enviar este e-mail
+    
+    
+    if(req.body.data) {
+        var date = new Date(req.body.data);
+        var agendamento = schedule.scheduleJob(date, function(){
+            transporte.sendMail(email, function (err, info) {
+                if (err)
+                    throw err; // Oops, algo de errado aconteceu.
+    
+                console.log('Email enviado! Leia as informações adicionais: ', info);
+            });
+        });
+    }
+    else {
+        transporte.sendMail(email, function (err, info) {
+            if (err)
+                throw err; // Oops, algo de errado aconteceu.
+    
+            console.log('Email enviado! Leia as informações adicionais: ', info);
+        });
+    }
+    var email
+});
+
 
 module.exports = router;
 
