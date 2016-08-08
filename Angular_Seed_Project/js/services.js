@@ -83,61 +83,19 @@
 }
 
 function peopleGroups($http, $q) {
+    var GROUPS = function () {
+        return $http({
+            url: '/groups',
+            method: "GET"
+        }).then(function (response) {
+            return (response.data);
+        }, function(response) {
+            return $q.reject(response.data);
+        });
+    };
+
     return {
-        ADMINS: function () {
-            return $http({
-                url: '/users/admins',
-                method: "GET"
-            }).then(function (response) {
-                return (response.data);
-            }, function(response) {
-                return $q.reject(response.data);
-            });
-        },
-
-        COMERCIAL: function () {
-            return $http({
-                url: '/users/comercial',
-                method: "GET"
-            }).then(function (response) {
-                return (response.data);
-            }, function(response) {
-                return $q.reject(response.data);
-            });
-        },
-
-        DIRETORES: function () {
-            return $http({
-                url: '/users/directors',
-                method: "GET"
-            }).then(function (response) {
-                return (response.data);
-            }, function(response) {
-                return $q.reject(response.data);
-            });
-        },
-
-        PREVENDAS: function () {
-            return $http({
-                url: '/users/prevendas',
-                method: "GET"
-            }).then(function (response) {
-                return (response.data);
-            }, function(response) {
-                return $q.reject(response.data);
-            });
-        },
-
-        TECNICO: function () {
-            return $http({
-                url: '/users/tecnico',
-                method: "GET"
-            }).then(function (response) {
-                return (response.data);
-            }, function(response) {
-                return $q.reject(response.data);
-            });
-        }
+        GROUPS: GROUPS
     };
 }
 

@@ -23,16 +23,16 @@ function postManager($scope, $http, postService, $state, userService, peopleGrou
 
     if(userService.devGroup()) $scope.permissions.debug = true;
 
-    peopleGroups.ADMINS()
+    peopleGroups.GROUPS()
         .then(function(data) {
-            if(angular.isDefined(data) && userService.insideGroup(data)) $scope.permissions.admin = true;
-        }, function(error){
-            console.log('error', error);
-        });
-
-    peopleGroups.DIRETORES()
-        .then(function(data) {
-            if(angular.isDefined(data) && userService.insideGroup(data)) $scope.permissions.diretores = true;
+            if(angular.isDefined(data)) {
+                console.log(data);
+                if (userService.insideGroup(data[0].users)) $scope.permissions.admin = true;
+                if (userService.insideGroup(data[4].users)) $scope.permissions.comercial = true;
+                if (userService.insideGroup(data[2].users)) $scope.permissions.diretores = true;
+                if (userService.insideGroup(data[3].users)) $scope.permissions.prevendas = true;
+                if (userService.insideGroup(data[1].users)) $scope.permissions.tecnico = true;
+            }
         }, function(error){
             console.log('error', error);
         });
