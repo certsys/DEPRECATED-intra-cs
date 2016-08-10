@@ -75,32 +75,32 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, $locati
 	
     	
 	
-	.state('politicas', {
-            url: "/institucional/politicas"
-            , templateUrl: "page/institucional/politicas/politicas.html"
-            , data: {
-                pageTitle: 'Políticas'
-            }
-            , resolve: {
-                loadPlugin: function ($ocLazyLoad) {
-                    return $ocLazyLoad.load([
-                        {
-                            files: ['js/pace.min.js',
-                                'js/wow.min.js',
-                                'js/classie.js',
-                                'js/cbpAnimatedHeader.js',
-								'css/animate.css',
-								'js/plugins/slimscroll/jquery.slimscroll.min.js'
-								
-									
-
-
-                            ]
-                        }
-                    ]);
-                }
-            }
-        })
+    // .state('politicas', {
+    //         url: "/institucional/politicas"
+    //         , templateUrl: "page/institucional/politicas/politicas.html"
+    //         , data: {
+    //             pageTitle: 'Políticas'
+    //         }
+    //         , resolve: {
+    //             loadPlugin: function ($ocLazyLoad) {
+    //                 return $ocLazyLoad.load([
+    //                     {
+    //                         files: ['js/pace.min.js',
+    //                             'js/wow.min.js',
+    //                             'js/classie.js',
+    //                             'js/cbpAnimatedHeader.js',
+    //                             'css/animate.css',
+    //                             'js/plugins/slimscroll/jquery.slimscroll.min.js'
+    //
+    //
+    //
+    //
+    //                         ]
+    //                     }
+    //                 ]);
+    //             }
+    //         }
+    //     })
 	
 	
 	
