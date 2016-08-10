@@ -6,7 +6,27 @@ var nodemailer = require('nodemailer');
 var schedule = require('node-schedule');
 var smtpTransport = require('nodemailer-smtp-transport');
 
+var mails = [];
+var posting = [];
 
+var search = function (post) {
+    var i = 0;
+    while (i < posting.length) {
+        if(posting[i].imagem === post.imagem)
+           return i;
+        else i++;
+    }
+    return -1;
+};
+
+router.get('/clean', function() {
+    posting.forEach(function(post) {
+       if(post.data < Date.now()) {
+           posting.splice(posting.indexOf(post), 1);
+       }
+    });
+    res.json(null);
+});
 
 router.use(function (req, res, next) {
 
@@ -113,6 +133,8 @@ router.post('/', function (req, res) {
                     res.json(info);
                 });
             });
+            posting.push(newPost);
+            mails.push(agendamento);
         }
         else {
             transporter.sendMail(email, function (err, info) {
@@ -137,6 +159,11 @@ router.delete('/remove/:id', function (req, res) {
             }
             res.json(data);
         });
+        var indice = search(data);
+        if (indice > -1) {    
+            mails[indice].cancel();
+            mails[indice] = undefined;
+        }
     });
     // Post.findByIdAndRemove(req.params.id, function(err, data) {
     //     res.json(data);
@@ -159,6 +186,57 @@ router.put('/edit/:id', function (req, res, next) {
             }
             res.status(201).json(data);
         });
+        var editPost = new Post({
+            titulo: data.titulo,
+            imagem: data.imagem,
+            texto: data.texto,
+            assinatura: data.assinatura,
+            editions: data.editions,
+            data: data.data
+        });
+        var indice = search(data);
+        if(indice > -1) {
+            if(req.body.usermail && req.body.password) {
+                // ENVIO DE E-MAIL
+                var options = {
+                    host: 'webmail.exchange.locaweb.com.br',
+                    port: 587, // Porta SMTP no Exchange
+                    auth: {
+                        user: req.body.usermail, // Colocar e-mail do RH aqui;
+                        pass: req.body.password // Senha do e-mail aqui;
+                    }
+                };
+
+                var transporter = nodemailer.createTransport(smtpTransport(options));
+
+                // Após configurar o transporte chegou a hora de criar um e-mail
+                // para enviarmos, para isso basta criar um objeto com algumas configurações
+
+                var email = {
+                    from: req.body.usermail, // Quem enviou este e-mail
+                    to: 'lucas_arthur_f@hotmail.com', // Quem receberá (todos@certsys.com.br)
+                    subject: editPost.titulo,  // Um assunto
+                    html: '<img src="cid:imagemDoPost"/><br><br>' + editPost.texto + '<br>' + editPost.assinatura, // O conteúdo do e-mail
+                    attachments: [{
+                        filename: 'image.png',
+                        path: data.imagem,
+                        cid: 'imagemDoPost'
+                    }]
+                };
+                var date = new Date(editPost.data);
+                var agendamento = schedule.scheduleJob(date, function () {
+                    transporter.sendMail(email, function (err, info) {
+                        if (err)
+                            return console.error(err);
+                    });
+                });
+                posting[indice] = editPost;
+                if(mails[indice] != undefined) {
+                    mails[indice].cancel();
+                }
+                mails[indice] = agendamento;
+            }
+        }
     });
 });
 

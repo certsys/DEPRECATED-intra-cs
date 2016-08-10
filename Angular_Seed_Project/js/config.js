@@ -161,6 +161,10 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, $locati
                                 , 'js/bower_components/summernote/dist/summernote.js'
                             ]
                         }
+                        , {
+                            files: ['css/plugins/switchery/switchery.css'
+                                , 'js/plugins/switchery/switchery.js']
+                        }
                     ]);
                 }
             }

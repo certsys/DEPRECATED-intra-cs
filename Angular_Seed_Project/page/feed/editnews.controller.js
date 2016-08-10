@@ -72,22 +72,52 @@ function editnews($http, $scope, postService, $state, $timeout, userService, peo
     };
     $scope.edit = function () {
         if (angular.isDefined($scope.thumbnail) && angular.isDefined($scope.thumbnail.dataUrl)) {
-            var data = {
-                titulo: $scope.postagem.titulo
-                , imagem: $scope.thumbnail.dataUrl
-                , texto: $scope.postagem.texto
-                , assinatura: $scope.postagem.assinatura
-                , isDeleted: false
-            };
+            if ($scope.mala == true) {
+                var usermail = angular.element('#usermail').val();
+                var password = angular.element('#password').val();
+                var data = {
+                    titulo: $scope.postagem.titulo
+                    , imagem: $scope.thumbnail.dataUrl
+                    , texto: $scope.postagem.texto
+                    , assinatura: $scope.postagem.assinatura
+                    , isDeleted: false
+                    , usermail: usermail
+                    , password: password
+                };
+            }
+            else {
+                var data = {
+                    titulo: $scope.postagem.titulo
+                    , imagem: $scope.thumbnail.dataUrl
+                    , texto: $scope.postagem.texto
+                    , assinatura: $scope.postagem.assinatura
+                    , isDeleted: false
+                };
+            }
         }
         else {
-            var data = {
-                titulo: $scope.postagem.titulo
-                , imagem: null
-                , texto: $scope.postagem.texto
-                , assinatura: $scope.postagem.assinatura
-                , isDeleted: false
-            };
+            if ($scope.mala == true) {
+                var usermail = angular.element('#usermail').val();
+                var password = angular.element('#password').val();
+                var data = {
+                    titulo: $scope.postagem.titulo
+                    , imagem: null
+                    , texto: $scope.postagem.texto
+                    , assinatura: $scope.postagem.assinatura
+                    , isDeleted: false
+                    , usermail: usermail
+                    , password: password
+                };
+            }
+            else {
+                var data = {
+                    titulo: $scope.postagem.titulo
+                    , imagem: null
+                    , texto: $scope.postagem.texto
+                    , assinatura: $scope.postagem.assinatura
+                    , isDeleted: false
+                };
+            }
         }
         $http({
             method: 'PUT'

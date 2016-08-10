@@ -44,14 +44,29 @@
                               <option value="Recursos Humanos - Parcerias">Recursos Humanos - Parcerias</option>
                               <option value="Financeiro">Financeiro</option>
                         </select>
-                        <br>                        
                         <br>
+                        <br>
+                        <br><br><h2>Enviar por e-mail para toda a CS? <input type="checkbox" class="js-switch" ui-switch="{color:'#3DADD0'}" ng-model="mala" name="Mail"></h2>
+                        <br>
+                        <br>
+                        <div ng-if="mala">
+                            <div class="form-horizontal">
+                                Digite seu e-mail:
+                                <input id="usermail" required class="col-sm-12" type="text" ng-model="usermail" name="E-mail">
+                                <br>
+                                Digite sua senha:
+                                <input id="password" required class="col-sm-12" type="password" ng-model="password" name="Senha">
+                            </div>
+                            <!--<div><span>Selected date: {{dateHolder | date}}</span></div>-->
+                            <br>
+                            <br>
+                            <br>
+                        </div>
                         <br><input class="col-sm-12 btn btn-primary" type="submit" value="Postar">
+                        <br>
+                        <br>
                     </form>
-                    <br>
-                    <br>
-                    <br>
-                    <br> </div>
+                </div>
             </div>
         </div>
         <br>
