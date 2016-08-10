@@ -128,7 +128,7 @@ router.post('/', function (req, res) {
             var agendamento = schedule.scheduleJob(date, function () {
                 transporter.sendMail(email, function (err, info) {
                     if (err)
-                        res.json(err);
+                        console.error(err);
 
                     res.json(info);
                 });
@@ -139,7 +139,7 @@ router.post('/', function (req, res) {
         else {
             transporter.sendMail(email, function (err, info) {
                 if (err)
-                    res.json(err);
+                    console.error(err);
 
                 res.json(info);
             });

@@ -43,6 +43,7 @@ router.use(function(req, res, next) {
 
 router.get('/', function (req, res) {
     // res.download('util/fotos.csv');
+    res.json(null);
 });
 
 router.post('/', function (req, res) {
