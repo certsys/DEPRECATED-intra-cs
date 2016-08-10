@@ -162,7 +162,6 @@ router.delete('/remove/:id', function (req, res) {
         var indice = search(data);
         if (indice > -1) {    
             mails[indice].cancel();
-            mails[indice] = undefined;
         }
     });
     // Post.findByIdAndRemove(req.params.id, function(err, data) {
@@ -231,9 +230,7 @@ router.put('/edit/:id', function (req, res, next) {
                     });
                 });
                 posting[indice] = editPost;
-                if(mails[indice] != undefined) {
-                    mails[indice].cancel();
-                }
+                mails[indice].cancel();
                 mails[indice] = agendamento;
             }
         }
