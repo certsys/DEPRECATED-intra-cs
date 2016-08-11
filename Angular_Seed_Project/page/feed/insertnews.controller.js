@@ -152,9 +152,8 @@ function insertnews($scope, $http, $timeout, $state, userService, peopleGroups) 
         }).then(function (response) {
             //your code in case the post succeeds
             console.log(response);
-            status = response.data.status;
-            mail = response.data.mail;
-            if (angular.isDefined(mail)) {
+            var status = response.data.status;
+            if (angular.isDefined(response.data.mail)) {
                 if (!status) {
                     swal({
                         title: "OPS!",
@@ -209,6 +208,8 @@ function insertnews($scope, $http, $timeout, $state, userService, peopleGroups) 
         var ano = date.slice(6, 10);
         var hora = date.slice(11, 13);
         var horaBrasil = (parseInt(hora) + 3).toString();
+        if (parseInt(hora) + 3 < 10)
+            horaBrasil = "0" + horaBrasil;
         var minuto = date.slice(14, 16);
         // Exemplo de Date ISO: 2016-07-26T12:03:30Z
         var iso_date = ano + "-" + mes + "-" + dia + "T" + horaBrasil + ":" + minuto + ":00Z";
