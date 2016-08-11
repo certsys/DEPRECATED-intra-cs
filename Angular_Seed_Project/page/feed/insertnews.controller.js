@@ -152,7 +152,7 @@ function insertnews($scope, $http, $timeout, $state, userService, peopleGroups) 
         }).then(function (response) {
             //your code in case the post succeeds
             console.log(response);
-            var status = response.data.status;
+            status = response.data.status;
             if (angular.isDefined(response.data.mail)) {
                 if (!status) {
                     swal({

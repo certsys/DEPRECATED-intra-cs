@@ -5,7 +5,7 @@ function editnews($http, $scope, postService, $state, $timeout, userService, peo
         params: {token: userService.getToken()}
     }).then(function (response) {
         //your code in case the post succeeds
-        console.log(response);
+        // console.log(response);
     }).catch(function (err) {
         $state.go('login');
         console.log(err);
@@ -20,22 +20,22 @@ function editnews($http, $scope, postService, $state, $timeout, userService, peo
         tecnico: false
     };
 
-    if(userService.devGroup()) $scope.permissions.debug = true;
+    if (userService.devGroup()) $scope.permissions.debug = true;
 
     peopleGroups.GROUPS()
-        .then(function(data) {
-            if(angular.isDefined(data)) {
+        .then(function (data) {
+            if (angular.isDefined(data)) {
                 if (userService.insideGroup(data[0].users)) $scope.permissions.admin = true;
                 if (userService.insideGroup(data[4].users)) $scope.permissions.comercial = true;
                 if (userService.insideGroup(data[2].users)) $scope.permissions.diretores = true;
                 if (userService.insideGroup(data[3].users)) $scope.permissions.prevendas = true;
                 if (userService.insideGroup(data[1].users)) $scope.permissions.tecnico = true;
             }
-        }, function(error){
+        }, function (error) {
             console.log('error', error);
         });
 
-    if(!($scope.permissions.debug || $scope.permissions.admin || $scope.permissions.diretores))
+    if (!($scope.permissions.debug || $scope.permissions.admin || $scope.permissions.diretores))
         $state.go('feed');
 
     // Só administradores do sistema podem entrar nessa view
@@ -119,20 +119,47 @@ function editnews($http, $scope, postService, $state, $timeout, userService, peo
                 };
             }
         }
+
+        var status;
         $http({
             method: 'PUT'
             , url: '/posts/edit/' + $scope.postagem._id
             , data: data
             , params: {token: userService.getToken()}
         }).then(function (response) {
-            //your code in case the post succeeds
-            console.log(response);
+            status = response.data.status;
+            if (angular.isDefined(response.data.mail)) {
+                if (!status) {
+                    swal({
+                        title: "OPS!",
+                        text: "Usuário e/ou Senha Inválidos!",
+                        type: "error",
+                        confirmButtonColor: "#DD6B55",
+                        confirmButtonText: "Ok",
+                        closeOnConfirm: false
+                    });
+                } else {
+                    swal({
+                        title: "Sucesso!",
+                        text: "Seu post foi editado com sucesso!",
+                        type: "success"
+                    });
+                    $state.go('manageposts');
+                }
+            }
+            else {
+                swal({
+                    title: "Sucesso!",
+                    text: "Seu post foi editado com sucesso!",
+                    type: "success"
+                });
+                $state.go('manageposts');
+            }
         }).catch(function (err) {
             //your code in case your post fails
             console.log(err);
         });
-        $state.go('manageposts');
-    }
+    };
 
     $scope.options = {
         text: ""
