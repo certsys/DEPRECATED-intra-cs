@@ -19,22 +19,22 @@ function insertnews($scope, $http, $timeout, $state, userService, peopleGroups) 
         tecnico: false
     };
 
-    if(userService.devGroup()) $scope.permissions.debug = true;
+    if (userService.devGroup()) $scope.permissions.debug = true;
 
     peopleGroups.GROUPS()
-        .then(function(data) {
-            if(angular.isDefined(data)) {
+        .then(function (data) {
+            if (angular.isDefined(data)) {
                 if (userService.insideGroup(data[0].users)) $scope.permissions.admin = true;
                 if (userService.insideGroup(data[4].users)) $scope.permissions.comercial = true;
                 if (userService.insideGroup(data[2].users)) $scope.permissions.diretores = true;
                 if (userService.insideGroup(data[3].users)) $scope.permissions.prevendas = true;
                 if (userService.insideGroup(data[1].users)) $scope.permissions.tecnico = true;
             }
-        }, function(error){
+        }, function (error) {
             console.log('error', error);
         });
 
-    if(!($scope.permissions.debug || $scope.permissions.admin || $scope.permissions.diretores))
+    if (!($scope.permissions.debug || $scope.permissions.admin || $scope.permissions.diretores))
         $state.go('feed');
 
     // Só administradores do sistema podem entrar nessa view
@@ -69,53 +69,12 @@ function insertnews($scope, $http, $timeout, $state, userService, peopleGroups) 
         }
     };
     $scope.submit = function () {
-            var editions = [];
-            if ($scope.futuro == true) {
-                console.log("Data futura!!");
-                var date = angular.element('#data-postagem').val();
-                $scope.changeDateToISO(date);
-                if ($scope.selectedDate >= $scope.today) {
-                    if ($scope.mala == true) {
-                        var usermail = angular.element('#usermail').val();
-                        var password = angular.element('#password').val();
-                        var data = {
-                            titulo: $scope.titulo
-                            , imagem: $scope.thumbnail.dataUrl
-                            , texto: $scope.texto
-                            , assinatura: $scope.assinatura
-                            , editions: editions
-                            , data: $scope.selectedDate
-                            , sendBy: userService.getUser().displayName
-                            , usermail: usermail
-                            , password: password
-                        };
-                    }
-                    else {
-                        var data = {
-                            titulo: $scope.titulo
-                            , imagem: $scope.thumbnail.dataUrl
-                            , texto: $scope.texto
-                            , assinatura: $scope.assinatura
-                            , editions: editions
-                            , data: $scope.selectedDate
-                            , sendBy: userService.getUser().displayName
-                        };
-                    }
-                }
-                else {
-                    swal({
-                        title: "OPS!",
-                        text: "Data anterior a atual, corrija a data de postagem!",
-                        type: "error",
-                        confirmButtonColor: "#DD6B55",
-                        confirmButtonText: "Ok",
-                        closeOnConfirm: false
-                    });
-                    return;
-                }
-            }
-            else {
-                console.log("Data não futura!!");
+        var editions = [];
+        if ($scope.futuro == true) {
+            console.log("Data futura!!");
+            var date = angular.element('#data-postagem').val();
+            $scope.changeDateToISO(date);
+            if ($scope.selectedDate >= $scope.today) {
                 if ($scope.mala == true) {
                     var usermail = angular.element('#usermail').val();
                     var password = angular.element('#password').val();
@@ -125,6 +84,7 @@ function insertnews($scope, $http, $timeout, $state, userService, peopleGroups) 
                         , texto: $scope.texto
                         , assinatura: $scope.assinatura
                         , editions: editions
+                        , data: $scope.selectedDate
                         , sendBy: userService.getUser().displayName
                         , usermail: usermail
                         , password: password
@@ -137,38 +97,109 @@ function insertnews($scope, $http, $timeout, $state, userService, peopleGroups) 
                         , texto: $scope.texto
                         , assinatura: $scope.assinatura
                         , editions: editions
+                        , data: $scope.selectedDate
                         , sendBy: userService.getUser().displayName
                     };
                 }
             }
-            var output = angular.toJson(data);
-            // console.log(output);
-            $http({
-                method: 'POST'
-                , url: '/posts'
-                , data: output
-                , params: {token: userService.getToken()}
-            }).then(function (response) {
-                //your code in case the post succeeds
-                console.log(response);
-            }).catch(function (err) {
-                //your code in case your post fails
-                console.log(err);
-            });
-            $state.go('feed');
+            else {
+                swal({
+                    title: "OPS!",
+                    text: "Data anterior a atual, corrija a data de postagem!",
+                    type: "error",
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "Ok",
+                    closeOnConfirm: false
+                });
+                return;
+            }
         }
-        // Opções da Caixa de Texto do Corpo do Arquivo
+        else {
+            console.log("Data não futura!!");
+            if ($scope.mala == true) {
+                var usermail = angular.element('#usermail').val();
+                var password = angular.element('#password').val();
+                var data = {
+                    titulo: $scope.titulo
+                    , imagem: $scope.thumbnail.dataUrl
+                    , texto: $scope.texto
+                    , assinatura: $scope.assinatura
+                    , editions: editions
+                    , sendBy: userService.getUser().displayName
+                    , usermail: usermail
+                    , password: password
+                };
+            }
+            else {
+                var data = {
+                    titulo: $scope.titulo
+                    , imagem: $scope.thumbnail.dataUrl
+                    , texto: $scope.texto
+                    , assinatura: $scope.assinatura
+                    , editions: editions
+                    , sendBy: userService.getUser().displayName
+                };
+            }
+        }
+        var output = angular.toJson(data);
+        //
+        var status;
+        $http({
+            method: 'POST'
+            , url: '/posts'
+            , data: output
+            , params: {token: userService.getToken()}
+        }).then(function (response) {
+            //your code in case the post succeeds
+            console.log(response);
+            status = response.data.status;
+            mail = response.data.mail;
+            if (angular.isDefined(mail)) {
+                if (!status) {
+                    swal({
+                        title: "OPS!",
+                        text: "Usuário e/ou Senha Inválidos!",
+                        type: "error",
+                        confirmButtonColor: "#DD6B55",
+                        confirmButtonText: "Ok",
+                        closeOnConfirm: false
+                    });
+                } else {
+                    swal({
+                        title: "Sucesso!",
+                        text: "Seu post foi inserido com sucesso!",
+                        type: "success"
+                    });
+                    $state.go('manageposts');
+                }
+            }
+            else {
+                swal({
+                    title: "Sucesso!",
+                    text: "Seu post foi inserido com sucesso!",
+                    type: "success"
+                });
+                $state.go('manageposts');
+            }
+        }).catch(function (err) {
+            //your code in case your post fails
+            console.log(err);
+        });
+
+
+    };
+    // Opções da Caixa de Texto do Corpo do Arquivo
     $scope.options = {
-          text : ""
+        text: ""
         , height: 300
         , toolbar: [
-              ['style', ['style', 'bold', 'italic', 'underline', 'clear']]
-              , ['color', ['color']]
-              , ['view', ['fullscreen', 'codeview']]
-              , ['table', ['table']]
-              , ['para', ['ul', 'ol', 'paragraph']]
-              , ['height', ['height']]
-            ]
+            ['style', ['style', 'bold', 'italic', 'underline', 'clear']]
+            , ['color', ['color']]
+            , ['view', ['fullscreen', 'codeview']]
+            , ['table', ['table']]
+            , ['para', ['ul', 'ol', 'paragraph']]
+            , ['height', ['height']]
+        ]
     };
 
     // Pega uma String do tipo dd/mm/aaaa hh:mm e transforma em ISODate
