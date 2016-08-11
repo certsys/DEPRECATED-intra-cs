@@ -48,7 +48,7 @@ function postManager($scope, $http, postService, $state, userService, peopleGrou
     $scope.removePost = function (currentPost) {
         swal({
             title: "Você tem certeza?",
-            text: "Você não poderá recuperar esse post!",
+            text: "Você ainda poderá recuperar esse post!",
             type: "warning",
             showCancelButton: true,
             confirmButtonColor: "#DD6B55",
