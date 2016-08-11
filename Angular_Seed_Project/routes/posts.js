@@ -12,18 +12,18 @@ var posting = [];
 var search = function (post) {
     var i = 0;
     while (i < posting.length) {
-        if(posting[i].imagem === post.imagem)
-           return i;
+        if (posting[i].imagem === post.imagem)
+            return i;
         else i++;
     }
     return -1;
 };
 
-router.get('/clean', function() {
-    posting.forEach(function(post) {
-       if(post.data < Date.now()) {
-           posting.splice(posting.indexOf(post), 1);
-       }
+router.get('/clean', function () {
+    posting.forEach(function (post) {
+        if (post.data < Date.now()) {
+            posting.splice(posting.indexOf(post), 1);
+        }
     });
     res.json(null);
 });
@@ -81,20 +81,8 @@ router.get('/all', function (req, res) {
 
 // Recebe um JSON, insere no banco de dados e envia email com os dados
 router.post('/', function (req, res) {
-    var newPost = new Post({
-        titulo: req.body.titulo,
-        imagem: req.body.imagem,
-        texto: req.body.texto,
-        assinatura: req.body.assinatura,
-        editions: [],
-        data: req.body.data
-    });
 
-    newPost.save(function (err) {
-        if (err) throw err;
-    });
-
-    if(req.body.usermail && req.body.password) {
+    if (req.body.usermail && req.body.password) {
         // ENVIO DE E-MAIL
         var options = {
             host: 'webmail.exchange.locaweb.com.br',
@@ -107,45 +95,97 @@ router.post('/', function (req, res) {
 
         var transporter = nodemailer.createTransport(smtpTransport(options));
 
-        // Após configurar o transporte chegou a hora de criar um e-mail
-        // para enviarmos, para isso basta criar um objeto com algumas configurações
+        // verify connection configuration
+        transporter.verify(function (error, success) {
+            if (error) {
+                res.json(
+                    {
+                        status: false,
+                        mail: true
+                    });
+            } else {
 
-        var email = {
-            from: req.body.usermail, // Quem enviou este e-mail
-            to: 'lucas_arthur_f@hotmail.com', // Quem receberá (todos@certsys.com.br)
-            subject: req.body.titulo,  // Um assunto
-            html: '<img src="cid:imagemDoPost"/><br><br>' + req.body.texto + '<br>' + req.body.assinatura, // O conteúdo do e-mail
-            attachments: [{
-                filename: 'image.png',
-                path: req.body.imagem,
-                cid: 'imagemDoPost'
-            }]
-        };
-
-
-        if (req.body.data) {
-            var date = new Date(req.body.data);
-            var agendamento = schedule.scheduleJob(date, function () {
-                transporter.sendMail(email, function (err, info) {
-                    if (err)
-                        console.error(err);
-
-                    res.json(info);
+                var newPost = new Post({
+                    titulo: req.body.titulo,
+                    imagem: req.body.imagem,
+                    texto: req.body.texto,
+                    assinatura: req.body.assinatura,
+                    editions: [],
+                    data: req.body.data
                 });
-            });
-            posting.push(newPost);
-            mails.push(agendamento);
-        }
-        else {
-            transporter.sendMail(email, function (err, info) {
-                if (err)
-                    console.error(err);
 
-                res.json(info);
-            });
-        }
+                newPost.save(function (err) {
+                    if (err) throw err;
+                });
+
+                // Após configurar o transporte chegou a hora de criar um e-mail
+                // para enviarmos, para isso basta criar um objeto com algumas configurações
+
+                var email = {
+                    from: req.body.usermail, // Quem enviou este e-mail
+                    to: 'henrique_hashimoto@hotmail.com', // Quem receberá (todos@certsys.com.br)
+                    subject: req.body.titulo,  // Um assunto
+                    html: '<img src="cid:imagemDoPost"/><br><br>' + req.body.texto + '<br>' + req.body.assinatura, // O conteúdo do e-mail
+                    attachments: [{
+                        filename: 'image.png',
+                        path: req.body.imagem,
+                        cid: 'imagemDoPost'
+                    }]
+                };
+
+
+                if (req.body.data) {
+                    var date = new Date(req.body.data);
+                    var agendamento = schedule.scheduleJob(date, function () {
+                        transporter.sendMail(email, function (err, info) {
+                            if (err)
+                                console.error(err);
+
+                            res.json(
+                                {
+                                    status: true,
+                                    mail: true,
+                                    info: info
+                                });
+                        });
+                    });
+                    posting.push(newPost);
+                    mails.push(agendamento);
+                }
+                else {
+                    transporter.sendMail(email, function (err, info) {
+                        if (err)
+                            console.error(err);
+                        res.json(
+                            {
+                                status: true,
+                                mail: true,
+                                info: info
+                            });
+                    });
+                }
+            }
+        });
+
     }
-    else res.json(null);
+    else {
+        
+        var newPost = new Post({
+            titulo: req.body.titulo,
+            imagem: req.body.imagem,
+            texto: req.body.texto,
+            assinatura: req.body.assinatura,
+            editions: [],
+            data: req.body.data
+        });
+
+        newPost.save(function (err) {
+            if (err) throw err;
+        });
+        res.json({
+            status: true
+        });
+    }
 });
 
 
@@ -160,7 +200,7 @@ router.delete('/remove/:id', function (req, res) {
             res.json(data);
         });
         var indice = search(data);
-        if (indice > -1) {    
+        if (indice > -1) {
             mails[indice].cancel();
         }
     });
@@ -194,8 +234,8 @@ router.put('/edit/:id', function (req, res, next) {
             data: data.data
         });
         var indice = search(data);
-        if(indice > -1) {
-            if(req.body.usermail && req.body.password) {
+        if (indice > -1) {
+            if (req.body.usermail && req.body.password) {
                 // ENVIO DE E-MAIL
                 var options = {
                     host: 'webmail.exchange.locaweb.com.br',
