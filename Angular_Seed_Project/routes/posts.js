@@ -141,16 +141,15 @@ router.post('/', function (req, res) {
                             if (err)
                                 console.error(err);
 
-                            res.json(
-                                {
-                                    status: true,
-                                    mail: true,
-                                    info: info
-                                });
                         });
                     });
                     posting.push(newPost);
                     mails.push(agendamento);
+                    res.json(
+                        {
+                            status: true,
+                            mail: true
+                        });
                 }
                 else {
                     transporter.sendMail(email, function (err, info) {
@@ -159,8 +158,7 @@ router.post('/', function (req, res) {
                         res.json(
                             {
                                 status: true,
-                                mail: true,
-                                info: info
+                                mail: true
                             });
                     });
                 }
@@ -169,7 +167,7 @@ router.post('/', function (req, res) {
 
     }
     else {
-        
+
         var newPost = new Post({
             titulo: req.body.titulo,
             imagem: req.body.imagem,
@@ -223,7 +221,6 @@ router.put('/edit/:id', function (req, res, next) {
             if (err) {
                 return next(err);
             }
-            res.status(201).json(data);
         });
         var editPost = new Post({
             titulo: data.titulo,
@@ -248,31 +245,52 @@ router.put('/edit/:id', function (req, res, next) {
 
                 var transporter = nodemailer.createTransport(smtpTransport(options));
 
-                // Após configurar o transporte chegou a hora de criar um e-mail
-                // para enviarmos, para isso basta criar um objeto com algumas configurações
+                transporter.verify(function (error, success) {
+                    console.log(error);
+                    console.log(success);
+                    if (error) {
+                        res.json(
+                            {
+                                status: false,
+                                mail: true
+                            });
+                    } else {
 
-                var email = {
-                    from: req.body.usermail, // Quem enviou este e-mail
-                    to: 'lucas_arthur_f@hotmail.com', // Quem receberá (todos@certsys.com.br)
-                    subject: editPost.titulo,  // Um assunto
-                    html: '<img src="cid:imagemDoPost"/><br><br>' + editPost.texto + '<br>' + editPost.assinatura, // O conteúdo do e-mail
-                    attachments: [{
-                        filename: 'image.png',
-                        path: data.imagem,
-                        cid: 'imagemDoPost'
-                    }]
-                };
-                var date = new Date(editPost.data);
-                var agendamento = schedule.scheduleJob(date, function () {
-                    transporter.sendMail(email, function (err, info) {
-                        if (err)
-                            return console.error(err);
-                    });
+                        // Após configurar o transporte chegou a hora de criar um e-mail
+                        // para enviarmos, para isso basta criar um objeto com algumas configurações
+
+                        var email = {
+                            from: req.body.usermail, // Quem enviou este e-mail
+                            to: 'henrique_hashimoto@hotmail.com', // Quem receberá (todos@certsys.com.br)
+                            subject: editPost.titulo,  // Um assunto
+                            html: '<img src="cid:imagemDoPost"/><br><br>' + editPost.texto + '<br>' + editPost.assinatura, // O conteúdo do e-mail
+                            attachments: [{
+                                filename: 'image.png',
+                                path: data.imagem,
+                                cid: 'imagemDoPost'
+                            }]
+                        };
+                        var date = new Date(editPost.data);
+                        var agendamento = schedule.scheduleJob(date, function () {
+                            transporter.sendMail(email, function (err, info) {
+                                if (err)
+                                    console.error(err);
+                            });
+                        });
+                        posting[indice] = editPost;
+                        mails[indice].cancel();
+                        mails[indice] = agendamento;
+
+                        res.json({
+                            status: true,
+                            mail: true
+                        });
+                    }
                 });
-                posting[indice] = editPost;
-                mails[indice].cancel();
-                mails[indice] = agendamento;
-            }
+            } else
+                res.json({
+                    status: true
+                });
         }
     });
 });

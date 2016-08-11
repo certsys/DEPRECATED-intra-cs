@@ -153,8 +153,7 @@ function insertnews($scope, $http, $timeout, $state, userService, peopleGroups) 
             //your code in case the post succeeds
             console.log(response);
             status = response.data.status;
-            mail = response.data.mail;
-            if (angular.isDefined(mail)) {
+            if (angular.isDefined(response.data.mail)) {
                 if (!status) {
                     swal({
                         title: "OPS!",
