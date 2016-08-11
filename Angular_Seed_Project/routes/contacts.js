@@ -78,7 +78,7 @@ router.put('/', function (req, res, next) {
                                     mail: user.mail,
                                     telefone: "",
                                     skype: "",
-                                    linkedin: "",
+                                    linkedin: "https://www.linkedin.com/in/",
                                     imagem: ""
                                 });
 
@@ -115,6 +115,13 @@ router.put('/', function (req, res, next) {
                                         });
                                     if (!is_same) {
                                         data.grupo = final;
+                                        data.save(function (err, data) {
+                                            if (err) return next(err);
+                                            // res.status(201).json(data);
+                                        });
+                                    }
+                                    if (data.linkedin === "") {
+                                        data.linkedin = "https://www.linkedin.com/in/";
                                         data.save(function (err, data) {
                                             if (err) return next(err);
                                             // res.status(201).json(data);

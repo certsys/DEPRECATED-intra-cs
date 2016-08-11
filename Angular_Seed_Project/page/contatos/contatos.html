@@ -79,6 +79,8 @@
                             <div class="contact-box-footer">
                                 <div class="m-t-xs btn-group"> <a ng-href="mailto:{{contato.mail}}" class="btn btn-xs btn-white"><i
                                             class="fa fa-envelope"></i> E-mail</a> </div>
+                                <div ng-if="contato.linkedin !== 'https://www.linkedin.com/in/'" class="m-t-xs btn-group"> <a target="_blank" ng-href="{{contato.linkedin}}" class="btn btn-xs btn-white"><i
+                                        class="fa fa-linkedin-square"></i> LinkedIn</a> </div>
                             </div>
                         </div>
                     </div>
