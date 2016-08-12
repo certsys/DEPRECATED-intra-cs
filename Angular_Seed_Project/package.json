@@ -6,6 +6,7 @@
     "start": "node ./bin/www"
   },
   "dependencies": {
+    "async": "^2.0.1",
     "body-parser": "~1.13.2",
     "cookie-parser": "^1.4.3",
     "debug": "~2.2.0",
@@ -14,6 +15,9 @@
     "jsonwebtoken": "^7.1.6",
     "mongoose": "^4.5.4",
     "morgan": "^1.7.0",
+    "node-schedule": "^1.1.1",
+    "nodemailer": "^2.5.0",
+    "nodemailer-smtp-transport": "^2.6.0",
     "serve-favicon": "~2.3.0"
   }
 }

@@ -1,37 +1,62 @@
 var express = require('express');
 var router = express.Router();
 var ActiveDirectory = require('activedirectory');
-var jwt    = require('jsonwebtoken');
+var jwt = require('jsonwebtoken');
+var Contact = require('../models/contacts');
 
 
 var config = {
     url: 'ldap://192.168.129.2:389',
-    baseDN: 'OU=Certsys,DC=certsys,DC=local',
+    baseDN: 'DC=certsys,DC=local',
     username: 'svc_intranet@certsys.local',
     password: 'dAgAcupU6rA='
 }
 
 var ad = new ActiveDirectory(config);
-// var username = 'pedro.strabeli@certsys.com.br';
-var username = 'svc_intranet@certsys.local';
-// var password = 'password';
+var username = 'henrique.cavalcante';
 var password = 'dAgAcupU6rA=';
 var groupName = 'Certsys';
+var sAMAccountName = 'henrique.cavalcante';
 
 
 /* GET users listing. */
 router.get('/', function (req, res, next) {
-    ad.getUsersForGroup(groupName, function (err, users) {
-        if (err) {
-            res.json('ERROR: ' + JSON.stringify(err));
-            return;
-        }
 
-        if (!users) res.json({data: 'Group: ' + groupName + ' not found.'});
-        else {
-            res.json(JSON.stringify(users));
-        }
+    var contacts = Contact.find(function (err, contacts) {
+        if (err) return console.error(err);
+        ad.getUsersForGroup('Certsys', function (err, users) {
+            if (err) {
+                res.json('ERROR: ' + JSON.stringify(err));
+                return;
+            }
+
+            if (!users) res.json({data: 'Group: ' + groupName + ' not found.'});
+            else {
+                var usuarios = JSON.parse(JSON.stringify(users));
+                var nomes = [];
+                for (var i = 0; i < usuarios.length; i++) {
+                    ad.isUserMemberOf(usuarios[i].sAMAccountName, 'Ex-Funcionarios', function (err, isMember) {
+                        if (err) {
+                            console.log('ERROR: ' + JSON.stringify(err));
+                            return;
+                        }
+
+                        if (isMember)
+                            nomes.push(usuarios[i].sAMAccountName);
+                    });
+                }
+
+                res.json(JSON.stringify(nomes));
+
+            }
+        });
     });
+
+
+});
+
+router.get('/ex', function (req, res, next) {
+    
 
 });
 

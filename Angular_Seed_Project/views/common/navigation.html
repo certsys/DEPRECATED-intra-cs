@@ -12,16 +12,37 @@
         <div ng-controller="navigationCrtl">
             <div class="navbar-collapse collapse" id="navbar">
                 <ul class="nav navbar-nav">
-                    <li ui-sref-active="active">
+                    <li ng-if="permissions.debug || permissions.diretores || permissions.admin" ui-sref-active="active" class="dropdown">
+                        <a  ui-sref="feed" dropdown-toggle><i class="fa fa-globe"></i>{{ 'HOME' | translate }}</a>
+                        <ul role="menu" class="dropdown-menu">
+                            <li><a ui-sref="insertnews">Inserir Novo Post</a></li>
+                            <li><a ui-sref="manageposts">Gerenciar Posts</a></li>
+                        </ul>
+                    </li>
+                    <li ng-if="!permissions.debug && !permissions.diretores && !permissions.admin" ui-sref-active="active">
                         <a ui-sref="feed"><i class="fa fa-globe"></i> {{ 'HOME' | translate }}</a>
                     </li>
-                    <li ui-sref-active="active">
-                        <a ui-sref="institucional"><i class="fa fa-institution"></i> {{ 'INSTITUTIONAL' | translate
-                            }}</a>
+                    <!--<li ui-sref-active="active">-->
+                        <!--<a ui-sref="institucional"><i class="fa fa-institution"></i> {{ 'INSTITUTIONAL' | translate}}</a>-->
+                    <!--</li>-->
+                    <li ui-sref-active="active" class="dropdown">
+                        <a  ui-sref="institucional" dropdown-toggle><i class="fa fa-university"></i> {{ 'INSTITUTIONAL' | translate}}</a>
+                        <ul role="menu" class="dropdown-menu">
+                            <!--<li><a ui-sref="politicas">Políticas</a></li>-->
+                            <li><a target="_blank" href="https://webmail.exchange.locaweb.com.br/">Webmail</a></li>
+                        </ul>
                     </li>
                     <li ui-sref-active="active">
                         <a ui-sref="kb"><i class="fa fa-folder-open"></i> {{ 'KNOWLEDGEBASE' | translate }}</a>
                     </li>
+
+                    <!--<li ng-if="isAdmin()" ui-sref-active="active" class="dropdown">-->
+                        <!--<a  ui-sref="contatos" dropdown-toggle><i class="fa fa-group"></i> {{ 'CONTACTS' | translate }}</a>-->
+                            <!--<ul role="menu" class="dropdown-menu">-->
+                            <!--<li><a ui-sref="insertcontato">Inserir Novo Contato</a></li>-->
+                        <!--</ul>-->
+                    <!--</li>-->
+
                     <li ui-sref-active="active">
                         <a ui-sref="contatos"><i class="fa fa-group"></i> {{ 'CONTACTS' | translate }}</a>
                     </li>
@@ -43,9 +64,21 @@
                     </li>
                 </ul>
 
+                <!--<ul class="nav navbar-top-links navbar-right">-->
+                <!--<li ui-sref-active="active">-->
+                <!--<a ng-click="perfil()">Olá, {{nome}}!</a>-->
+                <!--</li>-->
+                <!--</ul>-->
+
                 <ul class="nav navbar-top-links navbar-right">
-                    <li ui-sref-active="active">
-                        <a ng-click="perfil()">Olá, {{nome}}!</a>
+                    <li ui-sref-active="active" class="dropdown" dropdown>
+                        <a class="dropdown-toggle" href dropdown-toggle>Olá, {{nome}}!<span class="caret"></span></a>
+                        <ul role="menu" class="dropdown-menu">
+                            <li><a ng-click="perfil()"><i class="fa fa-user"></i> Ver Perfil</a></li>
+                            <li><a ui-sref="editcontact"><i class="fa fa-user-plus"></i> Editar Perfil</a></li>
+                            <li><a target="_blank" href="http://sccd.certsys.com.br/maximo/webclient/login/login.jsp?appservauth=true"><i class="fa fa-clock-o"></i> Apontamento de Horas</a></li>
+                            <li><a target="_blank" href="https://webmail.exchange.locaweb.com.br/"><i class="fa fa-envelope"></i> Webmail</a></li>
+                        </ul>
                     </li>
                 </ul>
             </div>

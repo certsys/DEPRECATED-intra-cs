@@ -1,3 +1,9 @@
+def is_empty(any_structure):
+    if any_structure:
+        return False
+    else:
+        return True
+
 import pymongo
 import csv
 import json
@@ -10,7 +16,7 @@ db = client['intra-cs']
 
 collection = db.contacts
 
-f = open('skills.csv', newline='')
+f = open('skills.csv', encoding='mac-roman', newline='')
 csv_f = csv.reader(f, dialect='excel', delimiter=';')
 
 people = []
@@ -28,41 +34,39 @@ for row in csv_f:
                 basic_tools.append([])
                 inter_tools.append([])
                 advanced_tools.append([])
-            if index == 1: basic_tools[people.index(row[index])].append(worktool)
-            elif index == 2: inter_tools[people.index(row[index])].append(worktool)
-            elif index == 3: advanced_tools[people.index(row[index])].append(worktool)
+            if index == 1: basic_tools[people.index(row[index])].append(worktool.replace("Æ†","® ").replace("Æ","®").replace("ô","™").replace("†e", "e").replace("†", " "))
+            elif index == 2: inter_tools[people.index(row[index])].append(worktool.replace("Æ†","® ").replace("Æ","®").replace("ô","™").replace("†e", "e").replace("†", " "))
+            elif index == 3: advanced_tools[people.index(row[index])].append(worktool.replace("Æ†","® ").replace("Æ","®").replace("ô","™").replace("†e", "e").replace("†", " "))
             else: print("Deu ruim em algo!")
         index = index + 1
 
-### ================================================================================== ###
-
-f = open('fotos.csv', newline='')
+f = open('fotos.csv', encoding='mac-roman', newline='')
 csv_f = csv.reader(f, dialect='excel', delimiter=';')
 
 for row in csv_f:
-    if row[0] != "":
-        data = {}
-        data['nome'] = row[0]
-        data['sobre'] = "Conte sua vida aqui!"
+    if row[3] != "":
         tooltable = {}
-        name_stub = " " + row[0] ### Na planilha de habilidades, todos os nomes começam com espaço
+        name_stub = row[3]
         if name_stub in people:
+            tooltable = {}
             tooltable['tools_basic'] = basic_tools[people.index(name_stub)]
             tooltable['tools_intermediate'] = inter_tools[people.index(name_stub)]
             tooltable['tools_advanced'] = advanced_tools[people.index(name_stub)]
-        data['tooltable'] = tooltable
-        if row[1] != "": data['mail'] = row[1]
-        else: data['mail'] = "Desconhecido"
-        if row[2] != "": data['telefone'] = row[2]
-        else: data['telefone'] = "Desconhecido"
-        data['skype'] = "Desconhecido"
+        else: tooltable = {}
         if row[3] != "":
             filename = row[3] + ".png" 
             with open(filename, "rb") as image_file:
                 imagedata = base64.b64encode(image_file.read())
-                data['imagem'] = "data:image/png;base64," + imagedata.decode('UTF-8')
-        else: data['imagem'] = "Desconhecido"
-##      json_data = json.dumps(data)
-        collection.insert_one(data)
-
-print("Inserção no banco completa!")
+                finalimage = "data:image/png;base64," + imagedata.decode('UTF-8')
+        else: finalimage = ""
+        temp_mail = name_stub + "@certsys.com.br"
+        collection.update_one(
+            {"mail": temp_mail},
+            {
+                "$set": {
+                    "tooltable": tooltable,
+                    "imagem": finalimage
+                }
+            }
+        )
+print("Atualização no banco completa!")

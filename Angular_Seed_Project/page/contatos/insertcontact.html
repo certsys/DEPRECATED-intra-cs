@@ -138,7 +138,7 @@
                                 </div>
                                 <div class="col-sm-12">
                                     Telefone<br>
-                                    <input class="form-control" type="text" ng-model="phone" name="Telefone">
+                                    <input class="form-control" type="text" data-mask="(99) 99999-9999" ng-model="phone" name="Telefone">
                                     <br>
                                 </div>
                                 <div class="col-sm-12">
@@ -164,7 +164,7 @@
                                 <div class="tag-template">
                                     <div class="right-panel">
                                         <span>{{data.name}}</span>
-                                        <a class="remove-button" ng-click="$removeTag()">&#10006;</a>
+                                        <a class="remove-button remove-tag-button" ng-click="$removeTag()">&#10006;</a>
                                     </div>
                                 </div>
                             </script>

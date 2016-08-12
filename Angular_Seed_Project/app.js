@@ -17,6 +17,8 @@ var institucional = require('./routes/institucional');
 // Rotas relacionadas ao Mongo DB
 var posts = require('./routes/posts'); // Posts do Newsfeed
 var contacts = require('./routes/contacts'); // Contatos dos Funcionários
+var users = require('./routes/users'); // Usuários do AD
+var groups = require('./routes/groups'); // Grupos do AD
 
 //conecta com o Mongo
 mongoose.connect('mongodb://localhost/intra-cs');
@@ -58,6 +60,8 @@ app.use('/mailbox/inbox', inbox);
 app.use('/kb', kb);
 app.use('/posts', posts);
 app.use('/contacts', contacts);
+app.use('/users', users);
+app.use('/groups', groups);
 app.use('/institucional', institucional);
 
 

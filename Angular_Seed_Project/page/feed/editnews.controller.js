@@ -1,18 +1,46 @@
-function editnews($http, $scope, postService, $state, $timeout, userService) {
+function editnews($http, $scope, postService, $state, $timeout, userService, peopleGroups) {
     $http({
         url: '/institucional',
         method: "GET",
         params: {token: userService.getToken()}
     }).then(function (response) {
         //your code in case the post succeeds
-        console.log(response);
+        // console.log(response);
     }).catch(function (err) {
         $state.go('login');
         console.log(err);
     });
-    // Só administradores do sistema podem entrar nessa view
-    if (!userService.isAdmin())
+
+    $scope.permissions = {
+        debug: false,
+        admin: false,
+        comercial: false,
+        diretores: false,
+        prevendas: false,
+        tecnico: false
+    };
+
+    if (userService.devGroup()) $scope.permissions.debug = true;
+
+    peopleGroups.GROUPS()
+        .then(function (data) {
+            if (angular.isDefined(data)) {
+                if (userService.insideGroup(data[0].users)) $scope.permissions.admin = true;
+                if (userService.insideGroup(data[4].users)) $scope.permissions.comercial = true;
+                if (userService.insideGroup(data[2].users)) $scope.permissions.diretores = true;
+                if (userService.insideGroup(data[3].users)) $scope.permissions.prevendas = true;
+                if (userService.insideGroup(data[1].users)) $scope.permissions.tecnico = true;
+            }
+        }, function (error) {
+            console.log('error', error);
+        });
+
+    if (!($scope.permissions.debug || $scope.permissions.admin || $scope.permissions.diretores))
         $state.go('feed');
+
+    // Só administradores do sistema podem entrar nessa view
+    // if (!userService.isAdmin())
+    //     $state.go('feed');
 
     $scope.title = "Newsfeed CS - Editar postagem";
 
@@ -44,40 +72,98 @@ function editnews($http, $scope, postService, $state, $timeout, userService) {
     };
     $scope.edit = function () {
         if (angular.isDefined($scope.thumbnail) && angular.isDefined($scope.thumbnail.dataUrl)) {
-            console.log("IF 1");
-            var data = {
-                titulo: $scope.postagem.titulo
-                , imagem: $scope.thumbnail.dataUrl
-                , texto: $scope.postagem.texto
-                , assinatura: $scope.postagem.assinatura
-                , isDeleted: false
-            };
+            if ($scope.mala == true) {
+                var usermail = angular.element('#usermail').val();
+                var password = angular.element('#password').val();
+                var data = {
+                    titulo: $scope.postagem.titulo
+                    , imagem: $scope.thumbnail.dataUrl
+                    , texto: $scope.postagem.texto
+                    , assinatura: $scope.postagem.assinatura
+                    , sendBy: userService.getUser().displayName
+                    , isDeleted: false
+                    , usermail: usermail
+                    , password: password
+                };
+            }
+            else {
+                var data = {
+                    titulo: $scope.postagem.titulo
+                    , imagem: $scope.thumbnail.dataUrl
+                    , texto: $scope.postagem.texto
+                    , sendBy: userService.getUser().displayName
+                    , assinatura: $scope.postagem.assinatura
+                    , isDeleted: false
+                };
+            }
         }
         else {
-            console.log("IF 2");
-            var data = {
-                titulo: $scope.postagem.titulo
-                , imagem: null
-                , texto: $scope.postagem.texto
-                , assinatura: $scope.postagem.assinatura
-                , isDeleted: false
-            };
+            if ($scope.mala == true) {
+                var usermail = angular.element('#usermail').val();
+                var password = angular.element('#password').val();
+                var data = {
+                    titulo: $scope.postagem.titulo
+                    , imagem: null
+                    , texto: $scope.postagem.texto
+                    , sendBy: userService.getUser().displayName
+                    , assinatura: $scope.postagem.assinatura
+                    , isDeleted: false
+                    , usermail: usermail
+                    , password: password
+                };
+            }
+            else {
+                var data = {
+                    titulo: $scope.postagem.titulo
+                    , imagem: null
+                    , texto: $scope.postagem.texto
+                    , sendBy: userService.getUser().displayName
+                    , assinatura: $scope.postagem.assinatura
+                    , isDeleted: false
+                };
+            }
         }
-        console.log($scope.thumbnail.dataUrl);
+
+        var status;
         $http({
             method: 'PUT'
             , url: '/posts/edit/' + $scope.postagem._id
             , data: data
             , params: {token: userService.getToken()}
         }).then(function (response) {
-            //your code in case the post succeeds
-            console.log(response);
+            status = response.data.status;
+            if (angular.isDefined(response.data.mail)) {
+                if (!status) {
+                    swal({
+                        title: "OPS!",
+                        text: "Usuário e/ou Senha Inválidos!",
+                        type: "error",
+                        confirmButtonColor: "#DD6B55",
+                        confirmButtonText: "Ok",
+                        closeOnConfirm: false
+                    });
+                } else {
+                    swal({
+                        title: "Sucesso!",
+                        text: "Seu post foi editado com sucesso!",
+                        type: "success"
+                    });
+                    $state.go('manageposts');
+                }
+            }
+            else {
+                swal({
+                    title: "Sucesso!",
+                    text: "Seu post foi editado com sucesso!",
+                    type: "success"
+                });
+                $state.go('manageposts');
+            }
         }).catch(function (err) {
             //your code in case your post fails
             console.log(err);
         });
-        $state.go('manageposts');
-    }
+    };
 
     $scope.options = {
         text: ""

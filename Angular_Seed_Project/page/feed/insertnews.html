@@ -39,7 +39,9 @@
                         <select required name="Assinatura" ng-model="assinatura" value="Assinatura" class="col-sm-12">
                               <option value="">Assinatura</option>
                               <option value="Recursos Humanos - Certificações">Recursos Humanos - Certificações</option>
+                              <option value="Recursos Humanos - Treinamentos">Recursos Humanos - Treinamentos</option>
                               <option value="Recursos Humanos - Colaboradores">Recursos Humanos - Colaboradores</option>
+                              <option value="Recursos Humanos - Aniversário">Recursos Humanos - Aniversário</option>
                               <option value="Recursos Humanos - Eventos">Recursos Humanos - Eventos</option>
                               <option value="Recursos Humanos - Parcerias">Recursos Humanos - Parcerias</option>
                               <option value="Financeiro">Financeiro</option>
@@ -65,6 +67,22 @@
                             <br>
                             <br>
                             <br>
+                            <br>
+                            <br>
+                            <br>
+                        </div>
+                        <br><h2>Enviar por e-mail para toda a CS? <input type="checkbox" class="js-switch" ui-switch="{color:'#3DADD0'}" ng-model="mala" name="Mail"></h2>
+                        <br>
+                        <br>
+                        <div ng-if="mala">
+                            <div class="form-horizontal">
+                                Digite seu e-mail:
+                                <input id="usermail" required class="col-sm-12" type="text" ng-model="usermail" name="E-mail">
+                                <br>
+                                Digite sua senha:
+                                <input id="password" required class="col-sm-12" type="password" ng-model="password" name="Senha">
+                            </div>
+                            <!--<div><span>Selected date: {{dateHolder | date}}</span></div>-->
                             <br>
                             <br>
                             <br>
