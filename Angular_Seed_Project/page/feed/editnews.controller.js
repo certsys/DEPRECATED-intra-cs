@@ -80,6 +80,7 @@ function editnews($http, $scope, postService, $state, $timeout, userService, peo
                     , imagem: $scope.thumbnail.dataUrl
                     , texto: $scope.postagem.texto
                     , assinatura: $scope.postagem.assinatura
+                    , sendBy: userService.getUser().displayName
                     , isDeleted: false
                     , usermail: usermail
                     , password: password
@@ -90,6 +91,7 @@ function editnews($http, $scope, postService, $state, $timeout, userService, peo
                     titulo: $scope.postagem.titulo
                     , imagem: $scope.thumbnail.dataUrl
                     , texto: $scope.postagem.texto
+                    , sendBy: userService.getUser().displayName
                     , assinatura: $scope.postagem.assinatura
                     , isDeleted: false
                 };
@@ -103,6 +105,7 @@ function editnews($http, $scope, postService, $state, $timeout, userService, peo
                     titulo: $scope.postagem.titulo
                     , imagem: null
                     , texto: $scope.postagem.texto
+                    , sendBy: userService.getUser().displayName
                     , assinatura: $scope.postagem.assinatura
                     , isDeleted: false
                     , usermail: usermail
@@ -114,6 +117,7 @@ function editnews($http, $scope, postService, $state, $timeout, userService, peo
                     titulo: $scope.postagem.titulo
                     , imagem: null
                     , texto: $scope.postagem.texto
+                    , sendBy: userService.getUser().displayName
                     , assinatura: $scope.postagem.assinatura
                     , isDeleted: false
                 };

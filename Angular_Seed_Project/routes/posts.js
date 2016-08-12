@@ -63,9 +63,11 @@ router.use(function (req, res, next) {
 
 
 });
-// Pega todos os Posts que não foram deletados
+
+// Pega todos os Posts que não foram deletados e que possuem data anterior à atual
 router.get('/', function (req, res) {
-    Post.find({'isDeleted': false}, function (err, posts) {
+    var data_atual = new Date();
+    Post.find({'isDeleted': false, 'data': {$lte: data_atual}}, function (err, posts) {
         if (err) return console.error(err);
         res.json(posts);
     })
@@ -83,6 +85,7 @@ router.get('/all', function (req, res) {
 router.post('/', function (req, res) {
 
     if (req.body.usermail && req.body.password) {
+
         // ENVIO DE E-MAIL
         var options = {
             host: 'webmail.exchange.locaweb.com.br',
@@ -120,12 +123,15 @@ router.post('/', function (req, res) {
 
                 // Após configurar o transporte chegou a hora de criar um e-mail
                 // para enviarmos, para isso basta criar um objeto com algumas configurações
-
+                var assinatura = req.body.assinatura;
+                if (assinatura.indexOf('-') > -1)
+                    assinatura = req.body.assinatura.substr(0, assinatura.indexOf('-'));
+                var assinaturaEmail = '<div><p style="font-family: Helvetica, Arial, sans-serif; font-size: 12px; line-height: 14px; color: rgb(33, 33, 33); margin-bottom: 10px;"><span style="font-weight: bold; color: rgb(134, 134, 134); display: inline;">' + req.body.sendBy + '</span><span style="display: inline;"> | </span> <span style="color: rgb(134, 134, 134); display: inline;">' + assinatura + '</span><span style="display: inline;"><br></span><a href="mailto:' + req.body.usermail + '" style="color: rgb(14, 76, 170); text-decoration: none; display: inline;">' + req.body.usermail + '</a><span style="display: inline;"><p style="font-family: Helvetica, Arial, sans-serif; font-size: 12px; line-height: 14px; margin-bottom: 10px;"><span style="font-weight: bold; color: rgb(134, 134, 134); display: inline;">Certsys Tecnologia da Informação Ltda</span><span style="display: inline;"><br></span><span style="color: rgb(134, 134, 134); display: inline;"> + 55 11 5084-2984</span><span style="display: inline;"><br></span> <span style="color: rgb(134, 134, 134); display: inline;">Rua Estela 515 Conjunto F - 22</span><span></span><span style="display: inline;"><br></span><a href="http://www.certsys.com.br" style="color: rgb(14, 76, 170); text-decoration: none; display: inline;">www.certsys.com.br</a>  </p><p style="font-family: Helvetica, Arial, sans-serif; font-size: 12px; line-height: 14px; color: rgb(33, 33, 33); margin-bottom: 10px;"><span style="color: rgb(134, 134, 134); display: inline;"><a alt="Facebook" style="text-decoration: none; display: inline;" href="https://www.facebook.com/certsys" target="_blank"> Facebook </a></span><span style="display: inline;">|</span><span style="color: rgb(134, 134, 134); display: inline;"><a alt="Facebook" style="text-decoration: none; display: inline;" href="https://www.linkedin.com/company/certsys-tecnologia-da-informa-o" target="_blank"> LinkedIn </a></span></div>';
                 var email = {
                     from: req.body.usermail, // Quem enviou este e-mail
                     to: 'henrique_hashimoto@hotmail.com', // Quem receberá (todos@certsys.com.br)
                     subject: req.body.titulo,  // Um assunto
-                    html: '<img src="cid:imagemDoPost"/><br><br>' + req.body.texto + '<br>' + req.body.assinatura, // O conteúdo do e-mail
+                    html: '<img src="cid:imagemDoPost"/><br><br>' + req.body.texto + '<br>' + assinaturaEmail, // O conteúdo do e-mail
                     attachments: [{
                         filename: 'image.png',
                         path: req.body.imagem,
@@ -259,17 +265,22 @@ router.put('/edit/:id', function (req, res, next) {
                         // Após configurar o transporte chegou a hora de criar um e-mail
                         // para enviarmos, para isso basta criar um objeto com algumas configurações
 
+                        var assinatura = req.body.assinatura;
+                        if (assinatura.indexOf('-') > -1)
+                            assinatura = req.body.assinatura.substr(0, assinatura.indexOf('-'));
+                        var assinaturaEmail = '<div><p style="font-family: Helvetica, Arial, sans-serif; font-size: 12px; line-height: 14px; color: rgb(33, 33, 33); margin-bottom: 10px;"><span style="font-weight: bold; color: rgb(134, 134, 134); display: inline;">' + req.body.sendBy + '</span><span style="display: inline;"> | </span> <span style="color: rgb(134, 134, 134); display: inline;">' + assinatura + '</span><span style="display: inline;"><br></span><a href="mailto:' + req.body.usermail + '" style="color: rgb(14, 76, 170); text-decoration: none; display: inline;">' + req.body.usermail + '</a><span style="display: inline;"><p style="font-family: Helvetica, Arial, sans-serif; font-size: 12px; line-height: 14px; margin-bottom: 10px;"><span style="font-weight: bold; color: rgb(134, 134, 134); display: inline;">Certsys Tecnologia da Informação Ltda</span><span style="display: inline;"><br></span><span style="color: rgb(134, 134, 134); display: inline;"> + 55 11 5084-2984</span><span style="display: inline;"><br></span> <span style="color: rgb(134, 134, 134); display: inline;">Rua Estela 515 Conjunto F - 22</span><span></span><span style="display: inline;"><br></span><a href="http://www.certsys.com.br" style="color: rgb(14, 76, 170); text-decoration: none; display: inline;">www.certsys.com.br</a>  </p><p style="font-family: Helvetica, Arial, sans-serif; font-size: 12px; line-height: 14px; color: rgb(33, 33, 33); margin-bottom: 10px;"><span style="color: rgb(134, 134, 134); display: inline;"><a alt="Facebook" style="text-decoration: none; display: inline;" href="https://www.facebook.com/certsys" target="_blank"> Facebook </a></span><span style="display: inline;">|</span><span style="color: rgb(134, 134, 134); display: inline;"><a alt="Facebook" style="text-decoration: none; display: inline;" href="https://www.linkedin.com/company/certsys-tecnologia-da-informa-o" target="_blank"> LinkedIn </a></span></div>';
                         var email = {
                             from: req.body.usermail, // Quem enviou este e-mail
                             to: 'henrique_hashimoto@hotmail.com', // Quem receberá (todos@certsys.com.br)
-                            subject: editPost.titulo,  // Um assunto
-                            html: '<img src="cid:imagemDoPost"/><br><br>' + editPost.texto + '<br>' + editPost.assinatura, // O conteúdo do e-mail
+                            subject: req.body.titulo,  // Um assunto
+                            html: '<img src="cid:imagemDoPost"/><br><br>' + req.body.texto + '<br>' + assinaturaEmail, // O conteúdo do e-mail
                             attachments: [{
                                 filename: 'image.png',
-                                path: data.imagem,
+                                path: req.body.imagem,
                                 cid: 'imagemDoPost'
                             }]
                         };
+                        
                         var date = new Date(editPost.data);
                         var agendamento = schedule.scheduleJob(date, function () {
                             transporter.sendMail(email, function (err, info) {
