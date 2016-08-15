@@ -194,10 +194,10 @@ function insertnews($scope, $http, $timeout, $state, userService, peopleGroups) 
         , toolbar: [
             ['style', ['style', 'bold', 'italic', 'underline', 'clear']]
             , ['color', ['color']]
-            , ['view', ['fullscreen', 'codeview']]
-            , ['table', ['table']]
             , ['para', ['ul', 'ol', 'paragraph']]
-            , ['height', ['height']]
+            , ['table', ['table']]
+            , ['insert', ['link', 'hr']]
+            , ['view', ['fullscreen', 'codeview']]
         ]
     };
 

@@ -113,5 +113,23 @@ ejs version
 <!-- Please wait -->
 <script type="text/javascript" src="js/plugins/please-wait/please-wait.js"></script>
 
+<script>
+    if ( window.addEventListener ) {
+        // cima cima baixo baixo esquerda direita esquerda direita B A
+        var state = 0, konami = [38,38,40,40,37,39,37,39,66,65];
+        window.addEventListener("keydown", function(e) {
+            if ( e.keyCode == konami[state] ) state++;
+            else state = 0;
+            if ( state == 10 ) {
+                console.log("work");
+                $(function(){
+                    $("#myModal").modal('show');
+                });
+            }
+
+        }, true);
+    }
+</script>
+
 </body>
 </html>

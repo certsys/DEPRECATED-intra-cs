@@ -280,7 +280,7 @@ router.put('/edit/:id', function (req, res, next) {
                                 cid: 'imagemDoPost'
                             }]
                         };
-                        
+
                         var date = new Date(editPost.data);
                         var agendamento = schedule.scheduleJob(date, function () {
                             transporter.sendMail(email, function (err, info) {
@@ -303,6 +303,7 @@ router.put('/edit/:id', function (req, res, next) {
                     status: true
                 });
         }
+        res.json({data: "Deu ruim"});
     });
 });
 

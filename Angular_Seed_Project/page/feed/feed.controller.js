@@ -24,7 +24,7 @@ function feed($scope, $http, $state, $sce, userService) {
             return true;
         return false;
     }
-
+    
     $scope.title = "Newsfeed Certsys";
     $scope.limit = 2;
 
