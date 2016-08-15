@@ -267,6 +267,21 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, $locati
             }
         })
 
+        .state('insertkb', {
+            url: "/insertkb",
+            templateUrl: "page/kb/kb_subscribe.html",
+            data: {pageTitle: 'Cadastrar novo item'},
+            resolve: {
+                loadPlugin: function ($ocLazyLoad) {
+                    return $ocLazyLoad.load([
+                        {
+                            files: ['css/plugins/iCheck/custom.css', 'js/plugins/iCheck/icheck.min.js']
+                        }
+                    ]);
+                }
+            }
+        })
+
         .state('perfil', {
             url: "/perfil",
             templateUrl: "page/perfil/perfil.html",
