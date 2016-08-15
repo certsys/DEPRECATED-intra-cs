@@ -12,7 +12,7 @@ function kbCtrl($scope, $http, $state, userService) {
         console.log(err);
     });
 
-    $scope.title = "Base de Conhecimento - VERSÃO BETA!!!";
+    $scope.title = "Base de Conhecimento - Versão Alpha";
 
     $scope.treeConfig = {
         'plugins' : [ 'types', 'dnd' ],

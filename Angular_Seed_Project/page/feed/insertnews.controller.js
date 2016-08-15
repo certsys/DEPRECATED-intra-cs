@@ -30,12 +30,11 @@ function insertnews($scope, $http, $timeout, $state, userService, peopleGroups) 
                 if (userService.insideGroup(data[3].users)) $scope.permissions.prevendas = true;
                 if (userService.insideGroup(data[1].users)) $scope.permissions.tecnico = true;
             }
+            if (!($scope.permissions.debug || $scope.permissions.admin || $scope.permissions.diretores))
+                $state.go('feed');
         }, function (error) {
             console.log('error', error);
         });
-
-    if (!($scope.permissions.debug || $scope.permissions.admin || $scope.permissions.diretores))
-        $state.go('feed');
 
     // Só administradores do sistema podem entrar nessa view
     // if(!userService.isAdmin())
