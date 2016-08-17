@@ -99,9 +99,31 @@ function peopleGroups($http, $q) {
     };
 }
 
+ String.prototype.startWith = function (str) {
+     return this.indexOf(str) == 0;
+ };
+
+ 'use strict';
+ function linkFilter() {
+     return function (link) {
+         var result;
+         var startingUrl = "http://";
+         var httpsStartingUrl = "https://";
+         if(link.startWith(startingUrl)||link.startWith(httpsStartingUrl)){
+             result = link;
+         }
+         else {
+             result = startingUrl + link;
+         }
+         return result;
+     }
+ }
+
+
 angular
     .module('inspinia')
     .service('contactService', contactService)
     .service('postService', postService)
     .service('userService', userService)
-    .service('peopleGroups', peopleGroups);
+    .service('peopleGroups', peopleGroups)
+    .filter('linkFilter', linkFilter);
