@@ -79,7 +79,7 @@ router.post('/', function (req, res) {
                 if (!user) res.json({data: 'User: ' + req.body.username + ' not found.'});
                 else {
                     var token = jwt.sign(user, 'Cert0104sys', {
-                        expiresIn: 3600 // Tempo em segundos ( 1 hora )
+                        expiresIn: 14400 // Tempo em segundos ( 1 hora )
                     });
 
                     res.json({

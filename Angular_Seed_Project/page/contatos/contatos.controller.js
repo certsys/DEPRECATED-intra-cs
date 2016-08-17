@@ -86,7 +86,7 @@ function contacts($scope, $http, contactService, userService, $state) {
 
 
     $scope.title = "Contatos";
-};
+}
 
 
 angular
