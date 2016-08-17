@@ -10,9 +10,9 @@ function editcontact($scope, $http, $state, userService, contactService) {
         // console.log(response.data.lenght > 0);
         contactService.sendContact(response.data[0]);
         $scope.carregaDados();
-        if(response.data.length > 0) {
-        }else{
-            alert("Infelizmente o seu usuário ainda não tem dados no sistema :(")
+        if(response.data != null && response.data.length > 0) {
+        } else {
+            alert("Infelizmente o seu usuário ainda não tem dados no sistema :(");
         }
     }).catch(function (err) {
         $state.go('login');

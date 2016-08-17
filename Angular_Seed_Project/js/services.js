@@ -1,11 +1,11 @@
- function contactService() {
+ function contactService($sessionStorage) {
 
   var sendContact = function(newObj) {
-      sessionStorage.contact = angular.toJson(newObj); 
+      $sessionStorage.contact = angular.toJson(newObj);
   };
 
   var getContact = function(){
-      return angular.fromJson(sessionStorage.contact);
+      return angular.fromJson($sessionStorage.contact);
   };
 
   return {
@@ -15,13 +15,13 @@
 
 };
 
- function postService() {
+ function postService($sessionStorage) {
      var sendPost = function(newObj) {
-         sessionStorage.post= angular.toJson(newObj);
+         $sessionStorage.post= angular.toJson(newObj);
      };
 
      var getPost = function(){
-         return angular.fromJson(sessionStorage.post);
+         return angular.fromJson($sessionStorage.post);
      };
 
      return {
@@ -32,7 +32,7 @@
  };
 
 
- function userService() {
+ function userService($sessionStorage) {
 
      var DEV = [
          'eduardo.hyodo',
@@ -43,19 +43,19 @@
      ];
 
      var sendUser = function (newObj) {
-         sessionStorage.user = angular.toJson(newObj);
+         $sessionStorage.user = angular.toJson(newObj);
      };
 
      var getUser = function(){
-         return angular.fromJson(sessionStorage.user);
+         return angular.fromJson($sessionStorage.user);
      };
 
      var sendToken = function(newObj) {
-         sessionStorage.token = angular.toJson(newObj);
+         $sessionStorage.token = angular.toJson(newObj);
      };
 
      var getToken = function(){
-         return angular.fromJson(sessionStorage.token);
+         return angular.fromJson($sessionStorage.token);
      };
 
      var insideGroup = function(array) {
