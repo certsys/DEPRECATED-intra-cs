@@ -1,10 +1,24 @@
 function editcontact($scope, $http, $state, userService, contactService) {
 
+    $http({
+        url: '/institucional',
+        method: "GET",
+        params: {token: userService.getToken()}
+    }).then(function (response) {
+        //your code in case the post succeeds
+        console.log(response);
+    }).catch(function (err) {
+        $state.go('login');
+        console.log(err);
+    });
+
     // Somente permite editar o próprio contato
+    var mail = "";
     $http({
         url: '/contacts/perfil',
         method: "GET",
-        params: {token: userService.getToken(), mail: userService.getUser().sAMAccountName}
+        params: {token: userService.getToken(), mail: mail}
+        // params: {token: userService.getToken(), mail: userService.getUser().sAMAccountName}
     }).then(function (response) {
         //your code in case the post succeeds
         // console.log(response.data.lenght > 0);
