@@ -23,7 +23,7 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, $locati
     //    });
     $stateProvider
         .state('feed', {
-            url: "/"
+            url: "/feed"
             , templateUrl: "page/feed/feed.html"
             , data: {
                 pageTitle: 'Feed de Notícias'
@@ -459,7 +459,7 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, $locati
         }
     }) //Este será usado quando houver um artigo a ser visto. abrirá nesta página
         .state('login', {
-            url: "/login"
+            url: "/"
             , templateUrl: "page/login/login.html"
             , data: {
                 pageTitle: 'Login'
