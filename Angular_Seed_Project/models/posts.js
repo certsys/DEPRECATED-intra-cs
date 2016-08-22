@@ -4,9 +4,11 @@ var postSchema = new mongoose.Schema({
     titulo: String,
     imagem: String,
     texto: String,
-    assinatura: String,     // TODO: Referenciar para um id posteriormente (ObjectId)
+    assinatura: String,
     data: {type: Date, default: Date.now},
     editions: [],
+    mail: Object,
+    mail_transport: Object,
     isDeleted: {type: Boolean, default: false}
 });
 
