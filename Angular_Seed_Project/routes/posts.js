@@ -11,15 +11,15 @@ var crypto = require('crypto'),
     password = 'Cert0104sys';
 
 function encrypt(text) {
-    var cipher = crypto.createCipher(algorithm, password)
-    var crypted = cipher.update(text, 'utf8', 'hex')
+    var cipher = crypto.createCipher(algorithm, password);
+    var crypted = cipher.update(text, 'utf8', 'hex');
     crypted += cipher.final('hex');
     return crypted;
 }
 
 function decrypt(text) {
-    var decipher = crypto.createDecipher(algorithm, password)
-    var dec = decipher.update(text, 'hex', 'utf8')
+    var decipher = crypto.createDecipher(algorithm, password);
+    var dec = decipher.update(text, 'hex', 'utf8');
     dec += decipher.final('utf8');
     return dec;
 }
@@ -72,7 +72,7 @@ router.get('/reschedule', function (req, res) {
                     else {
                         if (post.data >= data_atual && post.mail) {
                             // console.log("Post Futuro");
-
+                            console.log(post.titulo);
                             var email = post.mail;
 
                             var date = new Date(post.data);
@@ -307,28 +307,6 @@ router.delete('/remove/:id', function (req, res) {
 router.put('/edit/:id', function (req, res, next) {
     Post.findById(req.params.id, function (err, data) {
         var indice = search(data);
-        data.titulo = req.body.titulo;
-        if (req.body.imagem !== null) {
-            data.imagem = req.body.imagem;
-        }
-        data.texto = req.body.texto;
-        data.assinatura = req.body.assinatura;
-        data.isDeleted = req.body.isDeleted;
-        data.editions.push(Date.now());
-        data.save(function (err, data) {
-            if (err) {
-                return next(err);
-            }
-        });
-        var editPost = new Post({
-            titulo: data.titulo,
-            imagem: data.imagem,
-            texto: data.texto,
-            assinatura: data.assinatura,
-            editions: data.editions,
-            data: data.data
-        });
-
         if (indice > -1) {
             if (req.body.usermail && req.body.password) {
 
@@ -374,6 +352,42 @@ router.put('/edit/:id', function (req, res, next) {
                                 cid: 'imagemDoPost'
                             }]
                         };
+
+                        options = {
+                            host: 'webmail.exchange.locaweb.com.br',
+                            port: 587, // Porta SMTP no Exchange
+                            auth: {
+                                user: req.body.usermail, // Colocar e-mail do RH aqui;
+                                pass: encrypt(req.body.password) // Senha do e-mail aqui;
+                            }
+                        };
+
+                        data.titulo = req.body.titulo;
+                        if (req.body.imagem !== null) {
+                            data.imagem = req.body.imagem;
+                        }
+                        data.texto = req.body.texto;
+                        data.mail = email;
+                        data.mail_transport = options;
+                        data.assinatura = req.body.assinatura;
+                        data.isDeleted = req.body.isDeleted;
+                        data.editions.push(Date.now());
+                        data.save(function (err, data) {
+                            if (err) {
+                                return next(err);
+                            }
+                        });
+
+                        var editPost = new Post({
+                            titulo: data.titulo,
+                            mail: email,
+                            mail_transport: options,
+                            imagem: data.imagem,
+                            texto: data.texto,
+                            assinatura: data.assinatura,
+                            editions: data.editions,
+                            data: data.data
+                        });
 
                         var date = new Date(editPost.data);
                         var agendamento = schedule.scheduleJob(date, function () {
