@@ -266,6 +266,20 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, $locati
                 }
             }
         })
+        .state('kb_2',{
+            url: "/kb2",
+            templateUrl: "page/kb/dummy_sample_page.html",
+            data: {pageTitle: 'Base de Conhecimento'},
+            resolve: {
+                loadPlugin: function ($ocLazyLoad) {
+                    return $ocLazyLoad.load([
+                        {
+                           // files: ['js/plugins/jsTree/jstree.min.js', 'css/plugins/jsTree/style.min.css']
+                        }
+                    ]);
+                }
+            }
+        })
         .state('kb_insert', {
             url: "/kb_insert",
             templateUrl: "page/kb/insertkb.html",
