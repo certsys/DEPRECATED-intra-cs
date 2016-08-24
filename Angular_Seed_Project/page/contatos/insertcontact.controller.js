@@ -132,7 +132,8 @@ function insertcontacts($scope, $http, $timeout, $state, userService) {
             mail: $scope.mail,
             phone: $scope.phone,
             skype: $scope.skype,
-            imagem: $scope.thumbnail.dataUrl
+            imagem: $scope.thumbnail.dataUrl,
+            datanasc: $scope.datanasc
         };
 
         var output = JSON.stringify(data);
