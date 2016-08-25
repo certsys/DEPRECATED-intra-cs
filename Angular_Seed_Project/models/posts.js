@@ -8,7 +8,6 @@ var postSchema = new mongoose.Schema({
     data: {type: Date, default: Date.now},
     editions: [],
     mail: Object,
-    mail_transport: Object,
     isDeleted: {type: Boolean, default: false}
 });
 

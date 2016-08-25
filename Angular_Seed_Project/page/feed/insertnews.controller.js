@@ -74,32 +74,16 @@ function insertnews($scope, $http, $timeout, $state, userService, peopleGroups) 
             var date = angular.element('#data-postagem').val();
             $scope.changeDateToISO(date);
             if ($scope.selectedDate >= $scope.today) {
-                if ($scope.mala == true) {
-                    var usermail = angular.element('#usermail').val();
-                    var password = angular.element('#password').val();
-                    var data = {
-                        titulo: $scope.titulo
-                        , imagem: $scope.thumbnail.dataUrl
-                        , texto: $scope.texto
-                        , assinatura: $scope.assinatura
-                        , editions: editions
-                        , data: $scope.selectedDate
-                        , sendBy: userService.getUser().displayName
-                        , usermail: usermail
-                        , password: password
-                    };
-                }
-                else {
-                    var data = {
-                        titulo: $scope.titulo
-                        , imagem: $scope.thumbnail.dataUrl
-                        , texto: $scope.texto
-                        , assinatura: $scope.assinatura
-                        , editions: editions
-                        , data: $scope.selectedDate
-                        , sendBy: userService.getUser().displayName
-                    };
-                }
+                var data = {
+                    titulo: $scope.titulo
+                    , imagem: $scope.thumbnail.dataUrl
+                    , texto: $scope.texto
+                    , assinatura: $scope.assinatura
+                    , editions: editions
+                    , data: $scope.selectedDate
+                    , sendBy: userService.getUser().displayName
+                    , mala: $scope.mala
+                };
             }
             else {
                 swal({
@@ -115,30 +99,15 @@ function insertnews($scope, $http, $timeout, $state, userService, peopleGroups) 
         }
         else {
             console.log("Data não futura!!");
-            if ($scope.mala == true) {
-                var usermail = angular.element('#usermail').val();
-                var password = angular.element('#password').val();
-                var data = {
-                    titulo: $scope.titulo
-                    , imagem: $scope.thumbnail.dataUrl
-                    , texto: $scope.texto
-                    , assinatura: $scope.assinatura
-                    , editions: editions
-                    , sendBy: userService.getUser().displayName
-                    , usermail: usermail
-                    , password: password
-                };
-            }
-            else {
-                var data = {
-                    titulo: $scope.titulo
-                    , imagem: $scope.thumbnail.dataUrl
-                    , texto: $scope.texto
-                    , assinatura: $scope.assinatura
-                    , editions: editions
-                    , sendBy: userService.getUser().displayName
-                };
-            }
+            var data = {
+                titulo: $scope.titulo
+                , imagem: $scope.thumbnail.dataUrl
+                , texto: $scope.texto
+                , assinatura: $scope.assinatura
+                , editions: editions
+                , sendBy: userService.getUser().displayName
+                , mala: $scope.mala
+            };
         }
         var output = angular.toJson(data);
         //
@@ -149,44 +118,28 @@ function insertnews($scope, $http, $timeout, $state, userService, peopleGroups) 
             , data: output
             , params: {token: userService.getToken()}
         }).then(function (response) {
-            //your code in case the post succeeds
-            console.log(response);
-            status = response.data.status;
-            if (angular.isDefined(response.data.mail)) {
-                if (!status) {
-                    swal({
-                        title: "OPS!",
-                        text: "Usuário e/ou Senha Inválidos!",
-                        type: "error",
-                        confirmButtonColor: "#DD6B55",
-                        confirmButtonText: "Ok",
-                        closeOnConfirm: false
-                    });
-                } else {
-                    swal({
-                        title: "Sucesso!",
-                        text: "Seu post foi inserido com sucesso!",
-                        type: "success"
-                    });
-                    $state.go('manageposts');
-                }
-            }
-            else {
+                //your code in case the post succeeds
+                console.log(response);
+                status = response.data.status;
+
                 swal({
                     title: "Sucesso!",
                     text: "Seu post foi inserido com sucesso!",
                     type: "success"
                 });
                 $state.go('manageposts');
+
             }
-        }).catch(function (err) {
-            //your code in case your post fails
-            console.log(err);
-        });
+        )
+            .catch(function (err) {
+                //your code in case your post fails
+                console.log(err);
+            });
 
 
-    };
-    // Opções da Caixa de Texto do Corpo do Arquivo
+    }
+    ;
+// Opções da Caixa de Texto do Corpo do Arquivo
     $scope.options = {
         text: ""
         , height: 300
@@ -200,7 +153,7 @@ function insertnews($scope, $http, $timeout, $state, userService, peopleGroups) 
         ]
     };
 
-    // Pega uma String do tipo dd/mm/aaaa hh:mm e transforma em ISODate
+// Pega uma String do tipo dd/mm/aaaa hh:mm e transforma em ISODate
     $scope.changeDateToISO = function (date) {
         var dia = date.slice(0, 2);
         var mes = date.slice(3, 5);
@@ -215,6 +168,7 @@ function insertnews($scope, $http, $timeout, $state, userService, peopleGroups) 
         $scope.selectedDate = new Date(iso_date);
     };
 
-};
+}
+;
 
 angular.module('inspinia').controller('insertnews', insertnews);

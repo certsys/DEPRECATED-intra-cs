@@ -70,59 +70,19 @@ function editnews($http, $scope, postService, $state, $timeout, userService, peo
         }
     };
     $scope.edit = function () {
-        if (angular.isDefined($scope.thumbnail) && angular.isDefined($scope.thumbnail.dataUrl)) {
-            if ($scope.mala == true) {
-                var usermail = angular.element('#usermail').val();
-                var password = angular.element('#password').val();
-                var data = {
-                    titulo: $scope.postagem.titulo
-                    , imagem: $scope.thumbnail.dataUrl
-                    , texto: $scope.postagem.texto
-                    , assinatura: $scope.postagem.assinatura
-                    , sendBy: userService.getUser().displayName
-                    , isDeleted: false
-                    , usermail: usermail
-                    , password: password
-                };
-            }
-            else {
-                var data = {
-                    titulo: $scope.postagem.titulo
-                    , imagem: $scope.thumbnail.dataUrl
-                    , texto: $scope.postagem.texto
-                    , sendBy: userService.getUser().displayName
-                    , assinatura: $scope.postagem.assinatura
-                    , isDeleted: false
-                };
-            }
-        }
-        else {
-            if ($scope.mala == true) {
-                var usermail = angular.element('#usermail').val();
-                var password = angular.element('#password').val();
-                var data = {
-                    titulo: $scope.postagem.titulo
-                    , imagem: null
-                    , texto: $scope.postagem.texto
-                    , sendBy: userService.getUser().displayName
-                    , assinatura: $scope.postagem.assinatura
-                    , isDeleted: false
-                    , usermail: usermail
-                    , password: password
-                };
-            }
-            else {
-                var data = {
-                    titulo: $scope.postagem.titulo
-                    , imagem: null
-                    , texto: $scope.postagem.texto
-                    , sendBy: userService.getUser().displayName
-                    , assinatura: $scope.postagem.assinatura
-                    , isDeleted: false
-                };
-            }
-        }
+        var imagem = null;
+        if (angular.isDefined($scope.thumbnail) && angular.isDefined($scope.thumbnail.dataUrl))
+            imagem = $scope.thumbnail.dataUrl;
 
+        var data = {
+            titulo: $scope.postagem.titulo
+            , imagem: imagem
+            , texto: $scope.postagem.texto
+            , sendBy: userService.getUser().displayName
+            , assinatura: $scope.postagem.assinatura
+            , isDeleted: false
+            , mala: $scope.mala
+        };
         var status;
         $http({
             method: 'PUT'
