@@ -6,13 +6,13 @@ function kbCtrl($scope, $http, $state, userService) {
         params: {token: userService.getToken()}
     }).then(function (response) {
         //your code in case the post succeeds
-        console.log(response);
+        // console.log(response);
     }).catch(function (err) {
         $state.go('login');
-        console.log(err);
+        // console.log(err);
     });
 
-    $scope.title = "Base de Conhecimento - VERSÃO BETA!!!";
+    $scope.title = "Base de Conhecimento - Versão Alpha";
 
     $scope.treeConfig = {
         'plugins' : [ 'types', 'dnd' ],
@@ -114,10 +114,10 @@ function kbCtrl($scope, $http, $state, userService) {
             a.download = archiveName + ".pdf";
             a.target = '_blank';
             a.click();
-            console.log();
+            // console.log();
         }).catch(function (err) {
             //your code in case your post fails
-            console.log(err);
+            // console.log(err);
         });
     };
 }

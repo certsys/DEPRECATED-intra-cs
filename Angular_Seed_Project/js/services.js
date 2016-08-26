@@ -1,4 +1,4 @@
- function contactService() {
+ function contactService($sessionStorage) {
 
   var sendContact = function(newObj) {
     d= new Date(newObj.datanasc);
@@ -7,7 +7,7 @@
   };
 
   var getContact = function(){
-      return angular.fromJson(sessionStorage.contact);
+      return angular.fromJson($sessionStorage.contact);
   };
 
   return {
@@ -17,13 +17,13 @@
 
 };
 
- function postService() {
+ function postService($sessionStorage) {
      var sendPost = function(newObj) {
-         sessionStorage.post= angular.toJson(newObj);
+         $sessionStorage.post= angular.toJson(newObj);
      };
 
      var getPost = function(){
-         return angular.fromJson(sessionStorage.post);
+         return angular.fromJson($sessionStorage.post);
      };
 
      return {
@@ -34,7 +34,7 @@
  };
 
 
- function userService() {
+ function userService($sessionStorage) {
 
      var DEV = [
          'eduardo.hyodo',
@@ -45,19 +45,19 @@
      ];
 
      var sendUser = function (newObj) {
-         sessionStorage.user = angular.toJson(newObj);
+         $sessionStorage.user = angular.toJson(newObj);
      };
 
      var getUser = function(){
-         return angular.fromJson(sessionStorage.user);
+         return angular.fromJson($sessionStorage.user);
      };
 
      var sendToken = function(newObj) {
-         sessionStorage.token = angular.toJson(newObj);
+         $sessionStorage.token = angular.toJson(newObj);
      };
 
      var getToken = function(){
-         return angular.fromJson(sessionStorage.token);
+         return angular.fromJson($sessionStorage.token);
      };
 
      var insideGroup = function(array) {
@@ -137,9 +137,31 @@ function peopleGroups($http, $q) {
     };
 }
 
+ String.prototype.startWith = function (str) {
+     return this.indexOf(str) == 0;
+ };
+
+ 'use strict';
+ function linkFilter() {
+     return function (link) {
+         var result;
+         var startingUrl = "http://";
+         var httpsStartingUrl = "https://";
+         if(link.startWith(startingUrl)||link.startWith(httpsStartingUrl)){
+             result = link;
+         }
+         else {
+             result = startingUrl + link;
+         }
+         return result;
+     }
+ }
+
+
 angular
     .module('inspinia')
     .service('contactService', contactService)
     .service('postService', postService)
     .service('userService', userService)
-    .service('peopleGroups', peopleGroups);
+    .service('peopleGroups', peopleGroups)
+    .filter('linkFilter', linkFilter);

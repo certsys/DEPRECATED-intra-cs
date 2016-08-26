@@ -23,7 +23,7 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, $locati
     //    });
     $stateProvider
         .state('feed', {
-            url: "/"
+            url: "/feed"
             , templateUrl: "page/feed/feed.html"
             , data: {
                 pageTitle: 'Feed de Notícias'
@@ -305,6 +305,21 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, $locati
             }
         })
 
+        .state('insertkb', {
+            url: "/insertkb",
+            templateUrl: "page/kb/kb_subscribe.html",
+            data: {pageTitle: 'Cadastrar novo item'},
+            resolve: {
+                loadPlugin: function ($ocLazyLoad) {
+                    return $ocLazyLoad.load([
+                        {
+                            files: ['css/plugins/iCheck/custom.css', 'js/plugins/iCheck/icheck.min.js']
+                        }
+                    ]);
+                }
+            }
+        })
+
         .state('perfil', {
             url: "/perfil",
             templateUrl: "page/perfil/perfil.html",
@@ -482,7 +497,7 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, $locati
         }
     }) //Este será usado quando houver um artigo a ser visto. abrirá nesta página
         .state('login', {
-            url: "/login"
+            url: "/"
             , templateUrl: "page/login/login.html"
             , data: {
                 pageTitle: 'Login'

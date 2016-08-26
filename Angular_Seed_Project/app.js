@@ -1,5 +1,7 @@
 var express = require('express');
 var mongoose = require('mongoose');
+var http = require('http');
+var compression = require('compression'); // Compressão do site para melhor performance
 
 var path = require('path');
 var favicon = require('serve-favicon');
@@ -29,6 +31,8 @@ var app = express();
 app.set('views', path.join(__dirname));
 app.set('view engine', 'ejs');
 
+app.use(compression());
+
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
@@ -54,6 +58,33 @@ app.use('/contacts', contacts);
 app.use('/users', users);
 app.use('/groups', groups);
 app.use('/institucional', institucional);
+
+// Acessa a rota para reprogramar todos os emails agendados, no caso de ter ocorrido alguma falha
+var options = {
+    host: 'localhost',
+    port: '3000',
+    path: '/posts/reschedule'
+};
+
+var req = http.get(options, function(res) {
+    // console.log('STATUS: ' + res.statusCode);
+    // console.log('HEADERS: ' + JSON.stringify(res.headers));
+    //
+    // // Buffer the body entirely for processing as a whole.
+    // var bodyChunks = [];
+    // res.on('data', function(chunk) {
+    //     // You can process streamed parts here...
+    //     bodyChunks.push(chunk);
+    // }).on('end', function() {
+    //     var body = Buffer.concat(bodyChunks);
+    //     console.log('BODY: ' + body);
+    //     // ...and/or process the entire body here.
+    // })
+});
+
+req.on('error', function(e) {
+    console.log('ERROR: ' + e.message);
+});
 
 
 // catch 404 and forward to error handler!

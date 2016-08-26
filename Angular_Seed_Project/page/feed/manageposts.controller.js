@@ -8,7 +8,7 @@ function postManager($scope, $http, postService, $state, userService, peopleGrou
         $scope.feed = response.data;
     }).catch(function (err) {
         $state.go('login');
-        console.log(err);
+        // console.log(err);
     });
 
     $scope.permissions = {
@@ -31,12 +31,11 @@ function postManager($scope, $http, postService, $state, userService, peopleGrou
                 if (userService.insideGroup(data[3].users)) $scope.permissions.prevendas = true;
                 if (userService.insideGroup(data[1].users)) $scope.permissions.tecnico = true;
             }
+            if (!($scope.permissions.debug || $scope.permissions.admin || $scope.permissions.diretores))
+                $state.go('feed');
         }, function(error){
-            console.log('error', error);
+            // console.log('error', error);
         });
-
-    if(!($scope.permissions.debug || $scope.permissions.admin || $scope.permissions.diretores))
-        $state.go('feed');
 
     // Só administradores do sistema podem entrar nessa view
     // if(!userService.isAdmin())
@@ -62,10 +61,10 @@ function postManager($scope, $http, postService, $state, userService, peopleGrou
             }).then(function (response) {
                 //your code in case the post succeeds
 
-                console.log(response);
+                // console.log(response);
             }).catch(function (err) {
                 //your code in case your post fails
-                console.log(err);
+                // console.log(err);
             });
             swal("Deletado!", "O Post foi deletado com sucesso!", "success");
             var index = $scope.feed.indexOf(currentPost);

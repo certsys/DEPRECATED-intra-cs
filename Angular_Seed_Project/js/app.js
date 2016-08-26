@@ -13,7 +13,8 @@
         'infinite-scroll',              // Scroll Infinito
 		'ui.switchery',					// Switch iOS 7
         'ngJsTree',                     // Árvore do KB
-        'ngImgCrop'                     // Image Crop
+        'ngImgCrop',                    // Image Crop
+        'ngStorage'                     // Armazenamento de dados da sessão Angularizado
     ])
 })();
 
