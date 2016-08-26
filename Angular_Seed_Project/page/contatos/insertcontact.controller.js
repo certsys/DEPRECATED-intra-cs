@@ -7,13 +7,43 @@ function insertcontacts($scope, $http, $timeout, $state, userService) {
         //your code in case the post succeeds
     }).catch(function (err) {
         $state.go('login');
-        console.log(err);
+        // console.log(err);
     });
 
-    // Só administradores do sistema podem entrar nessa view
-    if(!userService.isAdmin())
+    $scope.permissions = {
+        debug: false,
+        admin: false,
+        comercial: false,
+        diretores: false,
+        prevendas: false,
+        tecnico: false
+    };
+
+    if(userService.devGroup()) $scope.permissions.debug = true;
+
+    peopleGroups.GROUPS()
+        .then(function(data) {
+            if(angular.isDefined(data)) {
+                // console.log(data);
+                if (userService.insideGroup(data[0].users)) $scope.permissions.admin = true;
+                if (userService.insideGroup(data[4].users)) $scope.permissions.comercial = true;
+                if (userService.insideGroup(data[2].users)) $scope.permissions.diretores = true;
+                if (userService.insideGroup(data[3].users)) $scope.permissions.prevendas = true;
+                if (userService.insideGroup(data[1].users)) $scope.permissions.tecnico = true;
+            }
+        }, function(error){
+            // console.log('error', error);
+        });
+
+    if(!($scope.permissions.debug || $scope.permissions.admin || $scope.permissions.diretores))
         $state.go('feed');
+    
     $scope.title='Novo Contato';
+
+    // Só administradores do sistema podem entrar nessa view
+    // if(!userService.isAdmin())
+    //     $state.go('feed');
+    // $scope.title='Novo Contato';
 
     $scope.maintools = [];
     $scope.tools_basic = [];
@@ -70,13 +100,11 @@ function insertcontacts($scope, $http, $timeout, $state, userService) {
         var inter_array = [];
         var advanced_array = [];
         var log = [];
-        console.log("Entrei");
         for(var i = 0; i < $scope.tools_basic.length; i++) {
             angular.forEach($scope.tools_basic[i], function(value, key) {
                 if (key != "$$hashKey" && key != "worktool") basic_array.push(value);
             }, log);
         }
-        console.log("Sai");
         for(var i = 0; i < $scope.tools_intermediate.length; i++) {
             angular.forEach($scope.tools_intermediate[i], function(value, key) {
                 if (key != "$$hashKey" && key != "worktool") inter_array.push(value);
@@ -84,7 +112,6 @@ function insertcontacts($scope, $http, $timeout, $state, userService) {
         }
 
         for(var i = 0; i < $scope.tools_advanced.length; i++) {
-            console.log($scope.tools_advanced[i]);
             angular.forEach($scope.tools_advanced[i], function(value, key) {
                 if (key != "$$hashKey" && key != "worktool") advanced_array.push(value);
             }, log);
@@ -100,15 +127,17 @@ function insertcontacts($scope, $http, $timeout, $state, userService) {
         var data = {
             nome: $scope.name,
             sobre: $scope.sobre,
+            grupo: $scope.grupo,
             tooltable: tooltable,
             mail: $scope.mail,
             phone: $scope.phone,
             skype: $scope.skype,
-            imagem: $scope.thumbnail.dataUrl
+            imagem: $scope.thumbnail.dataUrl,
+            datanasc: $scope.datanasc
         };
 
         var output = JSON.stringify(data);
-        console.log(output);
+        // console.log(output);
         $http({method: 'POST', url:'/contacts', data: output, params: {token: userService.getToken()}})
         	.then(function(response){
         		//your code in case the post succeeds

@@ -23,7 +23,7 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, $locati
     //    });
     $stateProvider
         .state('feed', {
-            url: "/"
+            url: "/feed"
             , templateUrl: "page/feed/feed.html"
             , data: {
                 pageTitle: 'Feed de Notícias'
@@ -44,9 +44,9 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, $locati
             }
         })
 
-	
-	.state('institucional', {
-              url: "/institucional"
+
+        .state('institucional', {
+            url: "/institucional"
             , templateUrl: "page/institucional/institucional.html"
             , data: {
                 pageTitle: 'Institucional'
@@ -56,20 +56,54 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, $locati
                     return $ocLazyLoad.load([
                         {
                             files: ['css/bootstrap-theme.css',
-									'css/bootstrap-theme.css.map',
-									'css/bootstrap-theme.min.css',
-									'js/pace.min.js',
-									'js/wow.min.js',
-									'js/classie.js',
-									'js/cbpAnimatedHeader.js'
-									
-									
-								    ]
+                                'css/bootstrap-theme.css.map',
+                                'css/bootstrap-theme.min.css',
+                                'js/pace.min.js',
+                                'js/wow.min.js',
+                                'js/classie.js',
+                                'js/cbpAnimatedHeader.js'
+
+
+                            ]
                         }
                     ]);
                 }
             }
         })
+	
+	
+	
+    	
+	
+    // .state('politicas', {
+    //         url: "/institucional/politicas"
+    //         , templateUrl: "page/institucional/politicas/politicas.html"
+    //         , data: {
+    //             pageTitle: 'Políticas'
+    //         }
+    //         , resolve: {
+    //             loadPlugin: function ($ocLazyLoad) {
+    //                 return $ocLazyLoad.load([
+    //                     {
+    //                         files: ['js/pace.min.js',
+    //                             'js/wow.min.js',
+    //                             'js/classie.js',
+    //                             'js/cbpAnimatedHeader.js',
+    //                             'css/animate.css',
+    //                             'js/plugins/slimscroll/jquery.slimscroll.min.js'
+    //
+    //
+    //
+    //
+    //                         ]
+    //                     }
+    //                 ]);
+    //             }
+    //         }
+    //     })
+	
+	
+	
 
         .state('insertnews', {
             url: "/insertnews"
@@ -85,20 +119,20 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, $locati
                         }
                         , {
                             files: ['js/bower_components/summernote/dist/summernote.css'
-                            , 'js/bower_components/summernote/dist/summernote.js']
+                                , 'js/bower_components/summernote/dist/summernote.js']
                         }
                         , {
                             files: ['css/plugins/switchery/switchery.css'
-                            , 'js/plugins/switchery/switchery.js']
+                                , 'js/plugins/switchery/switchery.js']
                         }
                         , {
                             name: 'datePicker',
                             files: ['js/plugins/moment/moment.min.js', 'css/plugins/datapicker/angular-datapicker.css',
-                            'js/plugins/datapicker/angular-datepicker.js', 'js/plugins/datapicker/pt-br.js']
+                                'js/plugins/datapicker/angular-datepicker.js', 'js/plugins/datapicker/pt-br.js']
                         }
                         , {
                             files: ['css/plugins/clockpicker/clockpicker.css',
-                            'js/plugins/clockpicker/clockpicker.js']
+                                'js/plugins/clockpicker/clockpicker.js']
 
                         }
                         , {
@@ -127,10 +161,38 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, $locati
                                 , 'js/bower_components/summernote/dist/summernote.js'
                             ]
                         }
+                        , {
+                            files: ['css/plugins/switchery/switchery.css'
+                                , 'js/plugins/switchery/switchery.js']
+                        }
                     ]);
                 }
             }
 
+        })
+
+        .state('editcontact', {
+            url: "/editcontact"
+            , templateUrl: "page/contatos/editcontact.html"
+            , data: {
+                pageTitle: 'Editar Perfil'
+            }
+            , resolve: {
+                loadPlugin: function ($ocLazyLoad) {
+                    return $ocLazyLoad.load([
+                        {
+                            files: ['css/plugins/iCheck/custom.css', 'js/plugins/iCheck/icheck.min.js']
+                        },
+                        {
+                            name: 'ngTagsInput',
+                            files: ['js/plugins/ng-tags-input/ng-tags-input.min.js', 'css/plugins/ng-tags-input/ng-tags-input.min.css', 'css/plugins/ng-tags-input/ng-tags-input.bootstrap.min.css']
+                        },
+                        {
+                            files: ['js/plugins/jasny/jasny-bootstrap.min.js', 'css/plugins/jasny/jasny-bootstrap.min.css']
+                        }
+                    ]);
+                }
+            }
         })
 
         .state('contatos', {
@@ -168,24 +230,27 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, $locati
             }
 
         })
-        .state('insertcontato', {
-            url: "/insertcontact",
-            templateUrl: "page/contatos/insertcontact.html",
-            data: {pageTitle: 'Novo Contato'},
-            resolve: {
-                loadPlugin: function ($ocLazyLoad) {
-                    return $ocLazyLoad.load([
-                        {
-                            files: ['css/plugins/iCheck/custom.css', 'js/plugins/iCheck/icheck.min.js']
-                        },
-                        {
-                            name: 'ngTagsInput',
-                            files: ['js/plugins/ng-tags-input/ng-tags-input.min.js', 'css/plugins/ng-tags-input/ng-tags-input.min.css', 'css/plugins/ng-tags-input/ng-tags-input.bootstrap.min.css']
-                        }
-                    ]);
-                }
-            }
-        })
+        // .state('insertcontato', {
+        //     url: "/insertcontact",
+        //     templateUrl: "page/contatos/insertcontact.html",
+        //     data: {pageTitle: 'Novo Contato'},
+        //     resolve: {
+        //         loadPlugin: function ($ocLazyLoad) {
+        //             return $ocLazyLoad.load([
+        //                 {
+        //                     files: ['css/plugins/iCheck/custom.css', 'js/plugins/iCheck/icheck.min.js']
+        //                 },
+        //                 {
+        //                     name: 'ngTagsInput',
+        //                     files: ['js/plugins/ng-tags-input/ng-tags-input.min.js', 'css/plugins/ng-tags-input/ng-tags-input.min.css', 'css/plugins/ng-tags-input/ng-tags-input.bootstrap.min.css']
+        //                 },
+        //                 {
+        //                     files: ['js/plugins/jasny/jasny-bootstrap.min.js', 'css/plugins/jasny/jasny-bootstrap.min.css']
+        //                 }
+        //             ]);
+        //         }
+        //     }
+        // })
 
         .state('kb', {
             url: "/kb",
@@ -196,6 +261,59 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, $locati
                     return $ocLazyLoad.load([
                         {
                             files: ['js/plugins/jsTree/jstree.min.js', 'css/plugins/jsTree/style.min.css']
+                        }
+                    ]);
+                }
+            }
+        })
+        .state('kb2',{
+            url: "/kb2",
+            templateUrl: "page/kb/dummy_sample_page.html",
+            data: {pageTitle: 'Base de Conhecimento'},
+            controller: "kbCtrl",
+            resolve: {
+                loadPlugin: function ($ocLazyLoad) {
+                    return $ocLazyLoad.load([
+                        {
+                           // files: ['js/plugins/jsTree/jstree.min.js', 'css/plugins/jsTree/style.min.css']
+                        }
+                    ]);
+                }
+            }
+        })
+        .state('kb_insert', {
+            url: "/kb_insert",
+            templateUrl: "page/kb/insertkb.html",
+            data: {pageTitle: 'Inserir na Base de Conhecimento'},
+            controller: "kb_insert",
+            resolve: {
+                loadPlugin: function ($ocLazyLoad) {
+                    return $ocLazyLoad.load([
+                        {
+                            files: ['css/plugins/iCheck/custom.css', 'js/plugins/iCheck/icheck.min.js']
+                        },{
+                            files: ['js/bower_components/summernote/dist/summernote.css', 'js/bower_components/summernote/dist/summernote.js'
+                            ]
+                        }
+                        , {
+                            files: ['css/plugins/switchery/switchery.css', 'js/plugins/switchery/switchery.js']
+                        },{
+                            files: ['js/plugins/jsTree/jstree.min.js', 'css/plugins/jsTree/style.min.css']
+                        }
+                    ]);
+                }
+            }
+        })
+
+        .state('insertkb', {
+            url: "/insertkb",
+            templateUrl: "page/kb/kb_subscribe.html",
+            data: {pageTitle: 'Cadastrar novo item'},
+            resolve: {
+                loadPlugin: function ($ocLazyLoad) {
+                    return $ocLazyLoad.load([
+                        {
+                            files: ['css/plugins/iCheck/custom.css', 'js/plugins/iCheck/icheck.min.js']
                         }
                     ]);
                 }
@@ -379,7 +497,7 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, $locati
         }
     }) //Este será usado quando houver um artigo a ser visto. abrirá nesta página
         .state('login', {
-            url: "/login"
+            url: "/"
             , templateUrl: "page/login/login.html"
             , data: {
                 pageTitle: 'Login'

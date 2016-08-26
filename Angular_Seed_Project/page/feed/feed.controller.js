@@ -1,4 +1,4 @@
-function feed($scope, $http, $state, userService) {
+function feed($scope, $http, $state, $sce, userService) {
     $http({
         url: '/posts',
         method: "GET",
@@ -6,10 +6,12 @@ function feed($scope, $http, $state, userService) {
     }).then(function (response) {
         //your code in case the post succeeds
         $scope.feed = response.data;
-        console.log(response);
+        $scope.feed.forEach(function(postagem) {
+            postagem.texto = $sce.trustAsHtml(postagem.texto);
+        });
     }).catch(function (err) {
         $state.go('login');
-        console.log(err);
+        // console.log(err);
     });
 
     var today = new Date();
@@ -22,9 +24,9 @@ function feed($scope, $http, $state, userService) {
             return true;
         return false;
     }
-
+    
     $scope.title = "Newsfeed Certsys";
-    $scope.limit = 4; // TODO: Problema se a pessoa agendar 5 posts!!!
+    $scope.limit = 2;
 
     $scope.loadMore = function () {
         $scope.limit = $scope.limit + 1;

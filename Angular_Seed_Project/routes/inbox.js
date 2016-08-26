@@ -5,7 +5,7 @@ var Imap = require('imap'),
     inspect = require('util').inspect;
 
 var imap = new Imap({
-  user: 'pedro.strabeli@certsys.com.br',
+  user: 'henrique.cavalcante@certsys.com.br',
   password: '',
   host: 'webmail.exchange.locaweb.com.br', //this is locaweb's exchange host. formerly was using imap.gmail.com',
   port: 993,
@@ -21,24 +21,20 @@ router.get('/', function(req, res, next) {
     //var req = http.request({}, imap.connect);
     imap.connect();
     //req.end();
-    
-    console.log('denovo novo');
-    console.log('denovo novo');
-    console.log('denovo novo');
-    console.log('denovo novo');
+
     console.log(maillist);
     //json.stringify(maillist); 
     //res.json(maillist);
 //    res.send('HelloWorld maillist');//asd
-    function sendres(maillist){
+    function send_res(maillist){
       res.json(maillist);
     }
-//    
+//
 //    next();
 });
 
 function openInbox(cb) {
-    imap.openBox('INBOX', true, cb);    
+    imap.openBox('INBOX', true, cb);
     }
 
     imap.once('ready', function() {
@@ -63,7 +59,7 @@ function openInbox(cb) {
                 maillist.push(inspect(Imap.parseHeader(buffer))); //aqui ele enche o maillist com os itens.
                 //maillist += ','
                //console.log("maillist: " + inspect(maillist));
-                
+
             });
           });
           msg.once('attributes', function(attrs) {
@@ -85,10 +81,10 @@ function openInbox(cb) {
         });
           //console.log(f);
           //res.send(f);
-          
+
       });
     });
-    
+
     imap.once('error', function(err) {
       console.log(err);
     });

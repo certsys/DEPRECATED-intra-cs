@@ -5,6 +5,7 @@
 (function () {
     angular.module('inspinia', [
         'ui.router',                    // Routing
+        // 'ui.bootstrap.transition',
         'oc.lazyLoad',                  // ocLazyLoad
         'pascalprecht.translate',       // Angular Translate
         'ui.bootstrap',                 // Ui Bootstrap
@@ -12,7 +13,9 @@
         'ngSanitize',                   // Para display de código HTML
         'infinite-scroll',              // Scroll Infinito
 		'ui.switchery',					// Switch iOS 7
-        'ngJsTree'                     // Árvore do KB
+        'ngJsTree',                     // Árvore do KB
+        'ngImgCrop',                    // Image Crop
+        'ngStorage'                     // Armazenamento de dados da sessão Angularizado
     ])
 })();
 

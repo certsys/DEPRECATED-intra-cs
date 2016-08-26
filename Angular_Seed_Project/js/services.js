@@ -1,11 +1,13 @@
- function contactService() {
+ function contactService($sessionStorage) {
 
   var sendContact = function(newObj) {
-      sessionStorage.contact = angular.toJson(newObj); 
+    d= new Date(newObj.datanasc);
+    newObj.datanasc_parsed = d.getDate()+'/'+(d.getMonth()+1)+'/'+d.getFullYear();
+    sessionStorage.contact = angular.toJson(newObj);
   };
 
   var getContact = function(){
-      return angular.fromJson(sessionStorage.contact);
+      return angular.fromJson($sessionStorage.contact);
   };
 
   return {
@@ -15,13 +17,13 @@
 
 };
 
- function postService() {
+ function postService($sessionStorage) {
      var sendPost = function(newObj) {
-         sessionStorage.post= angular.toJson(newObj);
+         $sessionStorage.post= angular.toJson(newObj);
      };
 
      var getPost = function(){
-         return angular.fromJson(sessionStorage.post);
+         return angular.fromJson($sessionStorage.post);
      };
 
      return {
@@ -32,50 +34,127 @@
  };
 
 
- function userService() {
+ function userService($sessionStorage, peopleGroups) {
 
-     var ADMINS = [
-         'augusto.kiramoto',
-         'bianca.novo',
+     var DEV = [
          'eduardo.hyodo',
          'henrique.cavalcante',
          'ivan.zoppetti',
          'lucas.felgueiras',
-         'pedro.strabeli',
-         'stiverson.palma',
-         'vanessa.assis'
+         'pedro.strabeli'
      ];
 
      var sendUser = function (newObj) {
-         sessionStorage.user = angular.toJson(newObj);
+         $sessionStorage.user = angular.toJson(newObj);
      };
 
      var getUser = function(){
-         return angular.fromJson(sessionStorage.user);
+         return angular.fromJson($sessionStorage.user);
      };
 
-     var sendToken = function (newObj) {
-         sessionStorage.token = angular.toJson(newObj);
+     var sendToken = function(newObj) {
+         $sessionStorage.token = angular.toJson(newObj);
      };
 
      var getToken = function(){
-         return angular.fromJson(sessionStorage.token);
+         return angular.fromJson($sessionStorage.token);
      };
 
-     var isAdmin = function() {
-         for(var i = 0; i < ADMINS.length; i++){
-             if (getUser().mail == ADMINS[i]) return true;
+     var insideGroup = function(array) {
+         for (var i = 0; i < array.length; i++) {
+             if (getUser().sAMAccountName == array[i]) return true;
          }
          return false;
      };
+
+     var devGroup = function() {
+         for (var i = 0; i < DEV.length; i++) {
+             if (getUser().sAMAccountName == DEV[i]) return true;
+         }
+         return false;
+     };
+
+    var Authenticate = function(){
+         $sessionStorage.permissions = {
+            debug: false,
+            admin: false,
+            comercial: false,
+            diretores: false,
+            prevendas: false,
+            tecnico: false
+        };
+
+        if (devGroup()) $sessionStorage.permissions.debug = true;
+
+        peopleGroups.GROUPS()
+            .then(function (data) {
+                if (angular.isDefined(data)) {
+                    for (i=0; i<data.length; i++){
+                        if (insideGroup(data[i].users)) $sessionStorage.permissions.admin = true;
+                        if (insideGroup(data[i].users)) $sessionStorage.permissions.comercial = true;
+                        if (insideGroup(data[i].users)) $sessionStorage.permissions.diretores = true;
+                        if (insideGroup(data[i].users)) $sessionStorage.permissions.prevendas = true;
+                        if (insideGroup(data[i].users)) $sessionStorage.permissions.tecnico = true;
+                    }
+                }
+            }, function (error) {
+                console.log('error', error);
+            });
+
+        if (!($sessionStorage.permissions.debug || $sessionStorage.permissions.admin || $sessionStorage.permissions.diretores))
+            $state.go('feed');
+
+        // Só administradores do sistema podem entrar nessa view
+        // if(!userService.isAdmin())
+        //     $state.go('feed')
+    }
 
      return {
          sendUser: sendUser,
          getUser: getUser,
          sendToken: sendToken,
          getToken: getToken,
-         isAdmin: isAdmin
+         insideGroup: insideGroup,
+         devGroup: devGroup,
+         Authenticate: Authenticate
      };
+}
+
+function peopleGroups($http, $q) {
+    var GROUPS = function () {
+        return $http({
+            url: '/groups',
+            method: "GET"
+        }).then(function (response) {
+            return (response.data);
+        }, function(response) {
+            return $q.reject(response.data);
+        });
+    };
+
+    return {
+        GROUPS: GROUPS
+    };
+}
+
+ String.prototype.startWith = function (str) {
+     return this.indexOf(str) == 0;
+ };
+
+ 'use strict';
+ function linkFilter() {
+     return function (link) {
+         var result;
+         var startingUrl = "http://";
+         var httpsStartingUrl = "https://";
+         if(link.startWith(startingUrl)||link.startWith(httpsStartingUrl)){
+             result = link;
+         }
+         else {
+             result = startingUrl + link;
+         }
+         return result;
+     }
  }
 
 
@@ -83,4 +162,6 @@ angular
     .module('inspinia')
     .service('contactService', contactService)
     .service('postService', postService)
-    .service('userService', userService);
+    .service('userService', userService)
+    .service('peopleGroups', peopleGroups)
+    .filter('linkFilter', linkFilter);

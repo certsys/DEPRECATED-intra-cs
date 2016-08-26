@@ -5,10 +5,10 @@ function institucional($scope, $http, userService, $state) {
 		params: {token: userService.getToken()}
 	}).then(function (response) {
 		//your code in case the post succeeds
-		console.log(response);
+		// console.log(response);
 	}).catch(function (err) {
 		$state.go('login');
-		console.log(err);
+		// console.log(err);
 	});
 
 

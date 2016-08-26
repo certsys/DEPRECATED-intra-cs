@@ -7,9 +7,6 @@
 	height: 100% !important;
 }
 
-
-
-
 .full-width {
     width: 100%;
     height: auto;
@@ -319,11 +316,16 @@
 }
 
 
+.cropArea {
+    background: transparent;
+    overflow: hidden;
+    width:100%;
+    height:100%;
+}
 
 
 
-
-
+            
 /* UI Sortable */
 
 .ui-sortable .ibox-title {
@@ -365,8 +367,13 @@
   /*border-width: 1px 0; */
 }
 
-
-.remove-tag-button {
+.remove-tag-button{
     position: relative;
     float: right;
+}
+
+.dropdown:hover .dropdown-menu {
+    display: block;
+    margin-top: 0; // remove the gap so it doesn't close
+
 }
