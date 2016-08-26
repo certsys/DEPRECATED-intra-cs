@@ -7,7 +7,7 @@ function insertcontacts($scope, $http, $timeout, $state, userService) {
         //your code in case the post succeeds
     }).catch(function (err) {
         $state.go('login');
-        console.log(err);
+        // console.log(err);
     });
 
     $scope.permissions = {
@@ -24,7 +24,7 @@ function insertcontacts($scope, $http, $timeout, $state, userService) {
     peopleGroups.GROUPS()
         .then(function(data) {
             if(angular.isDefined(data)) {
-                console.log(data);
+                // console.log(data);
                 if (userService.insideGroup(data[0].users)) $scope.permissions.admin = true;
                 if (userService.insideGroup(data[4].users)) $scope.permissions.comercial = true;
                 if (userService.insideGroup(data[2].users)) $scope.permissions.diretores = true;
@@ -32,7 +32,7 @@ function insertcontacts($scope, $http, $timeout, $state, userService) {
                 if (userService.insideGroup(data[1].users)) $scope.permissions.tecnico = true;
             }
         }, function(error){
-            console.log('error', error);
+            // console.log('error', error);
         });
 
     if(!($scope.permissions.debug || $scope.permissions.admin || $scope.permissions.diretores))
@@ -136,7 +136,7 @@ function insertcontacts($scope, $http, $timeout, $state, userService) {
         };
 
         var output = JSON.stringify(data);
-        console.log(output);
+        // console.log(output);
         $http({method: 'POST', url:'/contacts', data: output, params: {token: userService.getToken()}})
         	.then(function(response){
         		//your code in case the post succeeds

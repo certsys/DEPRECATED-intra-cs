@@ -8,7 +8,7 @@ function editnews($http, $scope, postService, $state, $timeout, userService, peo
         // console.log(response);
     }).catch(function (err) {
         $state.go('login');
-        console.log(err);
+        // console.log(err);
     });
 
     $scope.permissions = {
@@ -34,7 +34,7 @@ function editnews($http, $scope, postService, $state, $timeout, userService, peo
             if (!($scope.permissions.debug || $scope.permissions.admin || $scope.permissions.diretores))
                 $state.go('feed');
         }, function (error) {
-            console.log('error', error);
+            // console.log('error', error);
         });
 
     // Só administradores do sistema podem entrar nessa view
@@ -46,6 +46,8 @@ function editnews($http, $scope, postService, $state, $timeout, userService, peo
     $scope.postagem = postService.getPost();
 
     $scope.thumbnail = [];
+
+    $scope.wasPressed = false;
 
     $scope.noImage = function () {
         if ($scope.thumbnail.length) return true;
@@ -69,60 +71,7 @@ function editnews($http, $scope, postService, $state, $timeout, userService, peo
             }
         }
     };
-    $scope.edit = function () {
-        var imagem = null;
-        if (angular.isDefined($scope.thumbnail) && angular.isDefined($scope.thumbnail.dataUrl))
-            imagem = $scope.thumbnail.dataUrl;
 
-        var data = {
-            titulo: $scope.postagem.titulo
-            , imagem: imagem
-            , texto: $scope.postagem.texto
-            , sendBy: userService.getUser().displayName
-            , assinatura: $scope.postagem.assinatura
-            , isDeleted: false
-            , mala: $scope.mala
-        };
-        var status;
-        $http({
-            method: 'PUT'
-            , url: '/posts/edit/' + $scope.postagem._id
-            , data: data
-            , params: {token: userService.getToken()}
-        }).then(function (response) {
-            status = response.data.status;
-            if (angular.isDefined(response.data.mail)) {
-                if (!status) {
-                    swal({
-                        title: "OPS!",
-                        text: "Usuário e/ou Senha Inválidos!",
-                        type: "error",
-                        confirmButtonColor: "#DD6B55",
-                        confirmButtonText: "Ok",
-                        closeOnConfirm: false
-                    });
-                } else {
-                    swal({
-                        title: "Sucesso!",
-                        text: "Seu post foi editado com sucesso!",
-                        type: "success"
-                    });
-                    $state.go('manageposts');
-                }
-            }
-            else {
-                swal({
-                    title: "Sucesso!",
-                    text: "Seu post foi editado com sucesso!",
-                    type: "success"
-                });
-                $state.go('manageposts');
-            }
-        }).catch(function (err) {
-            //your code in case your post fails
-            console.log(err);
-        });
-    };
 
     $scope.options = {
         text: ""
@@ -136,6 +85,66 @@ function editnews($http, $scope, postService, $state, $timeout, userService, peo
             , ['view', ['fullscreen', 'codeview']]
         ]
     };
+
+
+    $scope.edit = function () {
+        if (!$scope.wasPressed) {
+            $scope.wasPressed = true;
+            var imagem = null;
+            if (angular.isDefined($scope.thumbnail) && angular.isDefined($scope.thumbnail.dataUrl))
+                imagem = $scope.thumbnail.dataUrl;
+
+            var data = {
+                titulo: $scope.postagem.titulo
+                , imagem: imagem
+                , texto: $scope.postagem.texto
+                , sendBy: userService.getUser().displayName
+                , assinatura: $scope.postagem.assinatura
+                , isDeleted: false
+                , mala: $scope.mala
+            };
+            var status;
+            $http({
+                method: 'PUT'
+                , url: '/posts/edit/' + $scope.postagem._id
+                , data: data
+                , params: {token: userService.getToken()}
+            }).then(function (response) {
+                status = response.data.status;
+                if (angular.isDefined(response.data.mail)) {
+                    if (!status) {
+                        swal({
+                            title: "OPS!",
+                            text: "Usuário e/ou Senha Inválidos!",
+                            type: "error",
+                            confirmButtonColor: "#DD6B55",
+                            confirmButtonText: "Ok",
+                            closeOnConfirm: false
+                        });
+                    } else {
+                        swal({
+                            title: "Sucesso!",
+                            text: "Seu post foi editado com sucesso!",
+                            type: "success"
+                        });
+                        $state.go('manageposts');
+                    }
+                }
+                else {
+                    swal({
+                        title: "Sucesso!",
+                        text: "Seu post foi editado com sucesso!",
+                        type: "success"
+                    });
+                    $state.go('manageposts');
+                }
+            }).catch(function (err) {
+                //your code in case your post fails
+                // console.log(err);
+            });
+        }
+
+    }
 }
 
 angular

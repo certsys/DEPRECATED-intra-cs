@@ -7,15 +7,18 @@ var nodemailer = require('nodemailer');
 var schedule = require('node-schedule');
 var smtpTransport = require('nodemailer-smtp-transport');
 
-// var EMAIL_CERTSYS = 'intranet@certsys.com.br';
-// var EMAIL_CS_CONSULTING = 'intranet@csconsulting.com.br';
-// var EMAIL_PASS = 'dQx-k4a-Hw7-PkY';
+var EMAIL_CERTSYS = 'intranet@certsys.com.br';
+var EMAIL_CS_CONSULTING = 'intranet@csconsulting.com.br';
+var EMAIL_PASS = 'dQx-k4a-Hw7-PkY';
+
+// var TODOS_CERTSYS = 'todos@certsys.com.br';
+// var TODOS_CS_CONSULTING = 'todos@csconsulting.com.br';
 
 var CERTSYS = 'certsys';
 var CS_CONSULTING = 'csconsulting';
-var EMAIL_CERTSYS = 'henrique.cavalcante@certsys.com.br';
-var EMAIL_CS_CONSULTING = 'henrique.cavalcante@certsys.com.br';
-var EMAIL_PASS = '';
+// var EMAIL_CERTSYS = 'henrique.cavalcante@certsys.com.br';
+// var EMAIL_CS_CONSULTING = 'henrique.cavalcante@certsys.com.br';
+// var EMAIL_PASS = '';
 
 var TODOS_CERTSYS = 'henrique.hashimoto.cavalcante@usp.br';
 var TODOS_CS_CONSULTING = 'henrique_hashimoto@hotmail.com';
@@ -360,13 +363,14 @@ router.delete('/remove/:id', function (req, res) {
             if (err) {
                 console.log(err);
             }
+
+            var indice = search(data, CERTSYS);
+            if (indice > -1) {
+                mailsCs[indice].cancel();
+                mailsCsConsulting[indice].cancel();
+            }
             res.json(data);
         });
-        var indice = search(data, CERTSYS);
-        if (indice > -1) {
-            mailsCs[indice].cancel();
-            mailsCsConsulting[indice].cancel();
-        }
     });
     // Post.findByIdAndRemove(req.params.id, function(err, data) {
     //     res.json(data);
@@ -377,7 +381,9 @@ router.put('/edit/:id', function (req, res, next) {
     Post.findById(req.params.id, function (err, data) {
 
         var indice = search(data, CERTSYS);
-        var email = criarEmail(req.body.assinatura, EMAIL_CERTSYS, req.body.titulo, req.body.texto, req.body.imagem, CERTSYS);
+        var email = null;
+        if(req.body.mala)
+            email = criarEmail(req.body.assinatura, EMAIL_CERTSYS, req.body.titulo, req.body.texto, req.body.imagem, CERTSYS);
 
         data.titulo = req.body.titulo;
         if (req.body.imagem !== null) {
@@ -475,11 +481,17 @@ router.put('/edit/:id', function (req, res, next) {
                 });
 
 
-            } else
+            } else {
+
+                if (indice > -1) {
+                    mailsCs[indice].cancel();
+                    mailsCsConsulting[indice].cancel();
+                }
+
                 res.json({
                     status: true
                 });
-
+            }
         } else res.json({status: true});
     });
 });

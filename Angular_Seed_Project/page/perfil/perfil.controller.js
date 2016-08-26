@@ -5,10 +5,10 @@ function perfil_ctrl($scope, contactService, $state, $http, userService) {
         params: {token: userService.getToken()}
     }).then(function (response) {
         //your code in case the post succeeds
-        console.log(response);
+        // console.log(response);
     }).catch(function (err) {
         $state.go('login');
-        console.log(err);
+        // console.log(err);
     });
 
     $scope.perfil=contactService.getContact();

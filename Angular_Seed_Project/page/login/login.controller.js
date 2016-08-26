@@ -6,10 +6,10 @@ function loginCrtl($scope, $http, $state, userService) {
         method: "GET",
         params: {token: userService.getToken()}
     }).then(function (response) {
-        console.log(response);
+        // console.log(response);
         $state.go('feed');
     }).catch(function (err) {
-        console.log(err);
+        // console.log(err);
     });
 
     $scope.incorrectData = function () {
@@ -43,12 +43,12 @@ function loginCrtl($scope, $http, $state, userService) {
                 userService.sendToken(response.data.token);
                 $state.go('feed');
             } else {
-                console.log(response.data);
+                // console.log(response.data);
                 $scope.incorrectData();
             }
         }).catch(function (err) {
             //your code in case your post fails
-            console.log(err);
+            // console.log(err);
         });
     };
 

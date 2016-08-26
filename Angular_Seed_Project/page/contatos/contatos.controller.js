@@ -14,7 +14,7 @@ function contacts($scope, $http, contactService, userService, $state) {
         $scope.contatos = response.data;
     }).catch(function (err) {
         $state.go('login');
-        console.log(err);
+        // console.log(err);
     });
 
 
@@ -35,10 +35,10 @@ function contacts($scope, $http, contactService, userService, $state) {
             }).then(function (response) {
                 //your code in case the post succeeds
                 $scope.contatos = response.data;
-                console.log(response);
+                // console.log(response);
             }).catch(function (err) {
                 $state.go('login');
-                console.log(err);
+                // console.log(err);
             });
         }
     });

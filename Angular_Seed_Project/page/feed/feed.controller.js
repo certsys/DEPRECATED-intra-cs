@@ -11,7 +11,7 @@ function feed($scope, $http, $state, $sce, userService) {
         });
     }).catch(function (err) {
         $state.go('login');
-        console.log(err);
+        // console.log(err);
     });
 
     var today = new Date();

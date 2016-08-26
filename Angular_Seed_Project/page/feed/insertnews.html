@@ -23,7 +23,7 @@
                     </h5>
                 </div>
                 <div class="ibox-content">
-                    <form ng-submit="submit()" class="form-horizontal"><h2>Título</h2>
+                    <form class="form-horizontal"><h2>Título</h2>
 
                         <input required class="col-sm-12" type="text" ng-model="titulo" name="Título">
                         <br>
@@ -86,7 +86,7 @@
                                                                      name="Mail"></h2>
                         <br>
                         <br>
-                        <input ng-model="postar" onClick="this.disabled=true; this.value='Postando…';" ng-click="submit()" class="col-sm-12 btn btn-primary" type="submit" value="Postar">
+                        <input ng-model="postar" ng-disabled="wasPressed" ng-click="submit()" class="col-sm-12 btn btn-primary" type="submit" value="Postar">
                     </form>
                     <br>
                     <br>
