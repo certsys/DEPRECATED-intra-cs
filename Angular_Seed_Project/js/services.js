@@ -74,13 +74,49 @@
          return false;
      };
 
+    var Authenticate = function(){
+         $scope.permissions = {
+            debug: false,
+            admin: false,
+            comercial: false,
+            diretores: false,
+            prevendas: false,
+            tecnico: false
+        };
+
+        if (userService.devGroup()) $scope.permissions.debug = true;
+
+        peopleGroups.GsROUPS()
+            .then(function (data) {
+                if (angular.isDefined(data)) {
+                    for (i=0; i<data.length; i++){
+                        if (userService.insideGroup(data[i].users)) $scope.permissions.admin = true;
+                        if (userService.insideGroup(data[i].users)) $scope.permissions.comercial = true;
+                        if (userService.insideGroup(data[i].users)) $scope.permissions.diretores = true;
+                        if (userService.insideGroup(data[i].users)) $scope.permissions.prevendas = true;
+                        if (userService.insideGroup(data[i].users)) $scope.permissions.tecnico = true;
+                    }
+                }
+            }, function (error) {
+                console.log('error', error);
+            });
+
+        if (!($scope.permissions.debug || $scope.permissions.admin || $scope.permissions.diretores))
+            $state.go('feed');
+
+        // Só administradores do sistema podem entrar nessa view
+        // if(!userService.isAdmin())
+        //     $state.go('feed')
+    }
+
      return {
          sendUser: sendUser,
          getUser: getUser,
          sendToken: sendToken,
          getToken: getToken,
          insideGroup: insideGroup,
-         devGroup: devGroup
+         devGroup: devGroup,
+         Authenticate: Authenticate
      };
 }
 

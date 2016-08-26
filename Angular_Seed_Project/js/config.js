@@ -266,10 +266,11 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, $locati
                 }
             }
         })
-        .state('kb_2',{
+        .state('kb2',{
             url: "/kb2",
             templateUrl: "page/kb/dummy_sample_page.html",
             data: {pageTitle: 'Base de Conhecimento'},
+            controller: "kbCtrl",
             resolve: {
                 loadPlugin: function ($ocLazyLoad) {
                     return $ocLazyLoad.load([

@@ -50,22 +50,46 @@ var kbtree = require('../models/kb');
 //
 // })
 
+var rootFolderId;
+
 router.get('/', function (req, res) {
+    var array_montado
+    kbtree.find({text:"Produtos"}, function (err, folders) {
+        if (err) return console.error(err);
+        //console.log(folders[0]._id)
+        rootFolderId=folders[0]._id
+        kbtree.find({parent: rootFolderId}, function(err,lvl1){
+            res.json(lvl1);
+        })
+    })
+
     // res.download('util/fotos.csv');
-    res.json(null);
+    // res.json(folders[0]._id);
 });
 
-var rootFolderId
+
+
+
 router.get('/get_folders', function (req, res) {
     // get folders from mongo;
     kbtree.find({}, function (err, folders) {
         if (err) return console.error(err);
-        // for (i=0; i<folders.length; i++){
-        //         if (folders[i].text=='Produto' && !rootFolderId) rootFolderId=folder[i]._id
-        //     }
         res.json(folders);
     })
 });
+
+
+router.get('/get_folders', function (req, res) {
+    // get folders from mongo;
+    kbtree.find({}, function (err, folders) {
+        if (err) return console.error(err);
+        for (i=0; i<folders.length; i++){
+                if (folders[i].text=='Produto' && !rootFolderId) rootFolderId=folder[i]._id
+            }
+        res.json(folders);
+    })
+});
+
 
 router.post('/', function (req, res) {
     console.log(req.body.id);
