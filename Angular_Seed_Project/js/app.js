@@ -5,6 +5,7 @@
 (function () {
     angular.module('inspinia', [
         'ui.router',                    // Routing
+        // 'ui.bootstrap.transition',
         'oc.lazyLoad',                  // ocLazyLoad
         'pascalprecht.translate',       // Angular Translate
         'ui.bootstrap',                 // Ui Bootstrap

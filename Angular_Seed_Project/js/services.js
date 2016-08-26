@@ -34,7 +34,7 @@
  };
 
 
- function userService($sessionStorage) {
+ function userService($sessionStorage, peopleGroups) {
 
      var DEV = [
          'eduardo.hyodo',
@@ -75,7 +75,7 @@
      };
 
     var Authenticate = function(){
-         $scope.permissions = {
+         $sessionStorage.permissions = {
             debug: false,
             admin: false,
             comercial: false,
@@ -84,24 +84,24 @@
             tecnico: false
         };
 
-        if (userService.devGroup()) $scope.permissions.debug = true;
+        if (devGroup()) $sessionStorage.permissions.debug = true;
 
-        peopleGroups.GsROUPS()
+        peopleGroups.GROUPS()
             .then(function (data) {
                 if (angular.isDefined(data)) {
                     for (i=0; i<data.length; i++){
-                        if (userService.insideGroup(data[i].users)) $scope.permissions.admin = true;
-                        if (userService.insideGroup(data[i].users)) $scope.permissions.comercial = true;
-                        if (userService.insideGroup(data[i].users)) $scope.permissions.diretores = true;
-                        if (userService.insideGroup(data[i].users)) $scope.permissions.prevendas = true;
-                        if (userService.insideGroup(data[i].users)) $scope.permissions.tecnico = true;
+                        if (insideGroup(data[i].users)) $sessionStorage.permissions.admin = true;
+                        if (insideGroup(data[i].users)) $sessionStorage.permissions.comercial = true;
+                        if (insideGroup(data[i].users)) $sessionStorage.permissions.diretores = true;
+                        if (insideGroup(data[i].users)) $sessionStorage.permissions.prevendas = true;
+                        if (insideGroup(data[i].users)) $sessionStorage.permissions.tecnico = true;
                     }
                 }
             }, function (error) {
                 console.log('error', error);
             });
 
-        if (!($scope.permissions.debug || $scope.permissions.admin || $scope.permissions.diretores))
+        if (!($sessionStorage.permissions.debug || $sessionStorage.permissions.admin || $sessionStorage.permissions.diretores))
             $state.go('feed');
 
         // Só administradores do sistema podem entrar nessa view
