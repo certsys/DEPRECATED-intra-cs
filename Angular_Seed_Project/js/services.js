@@ -33,6 +33,22 @@
 
  };
 
+  function universidadeService($sessionStorage) {
+
+  var sendCurso = function(newObj) {
+    sessionStorage.curso = angular.toJson(newObj);
+  };
+
+  var getCurso = function(){
+      return angular.fromJson($sessionStorage.curso);
+  };
+
+  return {
+         sendCurso: sendCurso,
+         getCurso: getCurso
+     };
+
+};
 
  function userService($sessionStorage, peopleGroups) {
 
@@ -162,6 +178,7 @@ angular
     .module('inspinia')
     .service('contactService', contactService)
     .service('postService', postService)
+    .service('universidadeService', universidadeService)
     .service('userService', userService)
     .service('peopleGroups', peopleGroups)
     .filter('linkFilter', linkFilter);

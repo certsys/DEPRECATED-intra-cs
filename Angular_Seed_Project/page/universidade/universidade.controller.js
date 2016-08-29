@@ -1,4 +1,4 @@
-function universidade($scope, $http, userService, $state) {
+function universidade($scope, $http, userService, $state, universidadeService) {
 	$http({
 		url: '/institucional',
 		method: "GET",
@@ -11,10 +11,9 @@ function universidade($scope, $http, userService, $state) {
 		// console.log(err);
 	});
 
-
+	$scope.curso=universidadeService.getCurso()
     $scope.title = "universidade";
 
-   
 };
 
 
