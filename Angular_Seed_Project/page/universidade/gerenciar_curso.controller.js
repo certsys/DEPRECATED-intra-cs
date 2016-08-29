@@ -1,4 +1,4 @@
-function universidade($scope, $http, userService, $state, universidadeService) {
+function gerenciar_curso($scope, $http, userService, $state) {
 	$http({
 		url: '/institucional',
 		method: "GET",
@@ -11,12 +11,13 @@ function universidade($scope, $http, userService, $state, universidadeService) {
 		// console.log(err);
 	});
 
-    $scope.title = "universidade";
-
+    $scope.title = "Gerenciar curso | ";
+    $scope.curso;
+    
 };
 
 
 angular
     .module('inspinia')
-    .controller('universidade', universidade);
+    .controller('gerenciar_curso', gerenciar_curso);
 
