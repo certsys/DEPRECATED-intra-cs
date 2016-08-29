@@ -1,16 +1,16 @@
 function kb_insert($scope, $http, $state, userService, peopleGroups) {
-	$http({
-        url: '/kb',
-        method: "GET",
-        params: {token: userService.getToken()}
-    }).then(function (response) {
-        //your code in case the post succeeds
-    }).catch(function (err) {
-        $state.go('login');
-        console.log(err);
-    });
+	// $http({
+ //        url: '/kb',
+ //        method: "GET",
+ //        params: {token: userService.getToken()}
+ //    }).then(function (response) {
+ //        //your code in case the post succeeds
+ //    }).catch(function (err) {
+ //        $state.go('login');
+ //        console.log(err);
+ //    });
 
-    userService.Authenticate();
+ //    userService.Authenticate();
 
     // Só administradores do sistema podem entrar nessa view
     // if(!userService.isAdmin())
@@ -32,12 +32,14 @@ function kb_insert($scope, $http, $state, userService, peopleGroups) {
     		$scope.products=response.data
     	})
     	.catch(function(err){console.log('Something went wrong...', err)})
-    }();
+    };
+
+    getFolders();
 
     $scope.submitFolder=function(){
-        console.log(angular.element('#parent').val())
+        console.log(angular.element('#folder_parent').val())
     	var output={
-    		parent: angular.element('#parent').val(),
+    		parent: angular.element('#folder_parent').val(),
     		text: angular.element('#newFolder').val(),
     		type: 'folder',
     		children: []

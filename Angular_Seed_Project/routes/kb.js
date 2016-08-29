@@ -58,7 +58,8 @@ router.get('/', function (req, res) {
         if (err) return console.error(err);
         //console.log(folders[0]._id)
         rootFolderId=folders[0]._id
-        kbtree.find({parent: rootFolderId}, function(err,lvl1){
+        //console.log(folders[0]._id)
+        kbtree.find({parent: folders[0]._id.toString()}, function(err,lvl1){
             res.json(lvl1);
         })
     })
@@ -70,13 +71,16 @@ router.get('/', function (req, res) {
 
 
 
-router.get('/get_folders', function (req, res) {
+router.get('/get_lvl2_id:id_parent', function (req, res) {
     // get folders from mongo;
-    kbtree.find({}, function (err, folders) {
+    var id_parent= req.params.id_parent;
+    kbtree.find({parent: id_parent}, function (err, folders) {
         if (err) return console.error(err);
         res.json(folders);
     })
 });
+
+
 
 
 router.get('/get_folders', function (req, res) {

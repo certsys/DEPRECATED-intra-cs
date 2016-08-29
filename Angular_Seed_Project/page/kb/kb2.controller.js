@@ -7,11 +7,19 @@ function kbCtrl($scope, $http, $state, userService) {
     }).then(function (response) {
         //your code in case the post succeeds
         console.log(response);
+        $scope.folders=response.data;
     }).catch(function (err) {
         $state.go('login');
         console.log(err);
     });
 
+    $scope.get_lvl2 = function(parent_id){
+        console.log(parent_id)
+        $http.get('/kb/get_lvl2_id'+parent_id).then(function(response){
+            console.log(response)
+            $scope.lvl2=response.data;
+        }).catch(function(err){console.log("something went wrong when getting lvl 2")})
+    }
 
     $scope.getSelectedNode = function() {
         var selectedNode = $scope.treeInstance.jstree(true).get_node($scope.treeInstance.jstree(true).get_selected());
