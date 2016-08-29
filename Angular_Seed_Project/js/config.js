@@ -335,6 +335,37 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, $locati
                 }
             }
          })
+	
+	
+	
+	//página universidade certsys
+	.state('universidade', {
+            url: "/universidade",
+            templateUrl: "page/universidade/universidade.html",
+            data: {pageTitle: 'Universidade Certsys'},
+            controller: "universidade",
+            resolve: {
+                loadPlugin: function ($ocLazyLoad) {
+                    return $ocLazyLoad.load([
+                        {
+                            files: ['css/plugins/iCheck/custom.css', 'js/plugins/iCheck/icheck.min.js']
+                        },
+						
+						{
+                            files: ['js/bower_components/summernote/dist/summernote.css', 'js/bower_components/summernote/dist/summernote.js'
+                            ]
+                        }, 
+						{
+                            files: ['css/plugins/switchery/switchery.css', 'js/plugins/switchery/switchery.js']
+                        }
+                    ]);
+                }
+            }
+        })
+	
+	
+	
+	
     // .state('outlook', {
     //     url: "/outlook"
     //     , templateUrl: "page/outlook/outlook.html"
