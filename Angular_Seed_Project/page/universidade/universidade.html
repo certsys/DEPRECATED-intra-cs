@@ -62,12 +62,14 @@
                                 <td class="project-completion">
                                     <small>Pessoas inscritas: {{curso.inscritos.length}}/{{curso.max_inscritos}}</small>
                                     <div class="progress progress-mini">
-                                        <div style="width: {{(curso.inscritos.length/cursos.maximo)*100}}%;" class="progress-bar"></div>
+                                        <div style="width: {{(curso.inscritos.length/curso.max_inscritos)*100}}%;" class="progress-bar"></div>
                                     </div>
                                 </td>
-                                <td class="project-actions">
-                                    <a href="" class="btn btn-white btn-sm"><i class="fa fa-folder"></i> View </a>
-                                    <a href="" class="btn btn-white btn-sm"><i class="fa fa-pencil"></i> Edit </a>
+                                <td class="project-actions" ng-if="subscribed(curso)">
+                                    <a href="" class="btn btn-primary btn-sm fixed-width" ng-click="removeSubscription(curso)"><i class="fa fa-check"></i> Inscrito </a>
+                                </td>
+                                <td class="project-actions" ng-if="!subscribed(curso)">
+                                    <a href="" class="btn btn-white btn-sm fixed-width" ng-click="addSubscription(curso)"><i class="fa fa-pencil"></i> Inscrever </a>
                                 </td>
                             </tr>
                             </tbody>

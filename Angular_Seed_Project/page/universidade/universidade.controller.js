@@ -13,6 +13,24 @@ function universidade($scope, $http, userService, $state) {
 	});
 
     $scope.title = "Universidade Certsys";
+
+    $scope.subscribed = function (curso){
+        var retorno = false;
+        curso.inscritos.forEach(function(inscrito){
+
+           if(inscrito === userService.getUser().sAMAccountName) retorno = true;
+        });
+        return retorno;
+    };
+
+    $scope.addSubscription = function (curso){
+        curso.inscritos.push(userService.getUser().sAMAccountName);
+    };
+
+    $scope.removeSubscription = function (curso){
+        var index = curso.inscritos.indexOf(userService.getUser().sAMAccountName);
+        if(index > -1) curso.inscritos.splice(index, 1);
+    };
 }
 
 

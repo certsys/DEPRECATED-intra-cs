@@ -15,6 +15,9 @@
 .fixed-height {
     height: 350px !important;
 }
+.fixed-width {
+    width: 100px !important;
+}
 
 .highlight {
     background: yellow;
