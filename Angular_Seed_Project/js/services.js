@@ -41,9 +41,11 @@
          'henrique.cavalcante',
          'ivan.zoppetti',
          'lucas.felgueiras',
-         'pedro.strabeli'
+         'pedro.strabeli',
+         'marcos.hosoya'
      ];
 
+     
      var sendUser = function (newObj) {
          $sessionStorage.user = angular.toJson(newObj);
      };
@@ -89,7 +91,7 @@
         peopleGroups.GROUPS()
             .then(function (data) {
                 if (angular.isDefined(data)) {
-                    for (i=0; i<data.length; i++){
+                    for (var i=0; i<data.length; i++){
                         if (insideGroup(data[i].users)) $sessionStorage.permissions.admin = true;
                         if (insideGroup(data[i].users)) $sessionStorage.permissions.comercial = true;
                         if (insideGroup(data[i].users)) $sessionStorage.permissions.diretores = true;

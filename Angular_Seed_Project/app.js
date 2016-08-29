@@ -14,6 +14,7 @@ var inbox = require('./routes/inbox');
 var login = require('./routes/login');
 var kb = require('./routes/kb');
 var institucional = require('./routes/institucional');
+var cursos = require ('./routes/cursos');
 
 // Rotas relacionadas ao Mongo DB
 var posts = require('./routes/posts'); // Posts do Newsfeed
@@ -58,6 +59,7 @@ app.use('/contacts', contacts);
 app.use('/users', users);
 app.use('/groups', groups);
 app.use('/institucional', institucional);
+app.use('/cursos', cursos);
 
 // Acessa a rota para reprogramar todos os emails agendados, no caso de ter ocorrido alguma falha
 var options = {
