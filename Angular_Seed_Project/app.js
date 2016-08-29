@@ -2,7 +2,6 @@ var express = require('express');
 var mongoose = require('mongoose');
 var http = require('http');
 var compression = require('compression'); // Compressão do site para melhor performance
-
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
@@ -40,6 +39,7 @@ var app = express();
 app.set('views', path.join(__dirname));
 app.set('view engine', 'ejs');
 
+app.use(favicon('./img/favicon.ico'));
 app.use(compression());
 
 // uncomment after placing your favicon in /public
