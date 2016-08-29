@@ -41,7 +41,14 @@
          'henrique.cavalcante',
          'ivan.zoppetti',
          'lucas.felgueiras',
-         'pedro.strabeli'
+         'pedro.strabeli',
+         'marcos.hosoya'
+     ];
+
+     var INSTRUCTORS  = [
+         'carlos.custodio',
+         'herbert.santos'
+         //'marcos.hosoya'
      ];
 
      var sendUser = function (newObj) {
@@ -74,6 +81,13 @@
          return false;
      };
 
+     var instructorGroup = function() {
+         for (var i = 0; i < INSTRUCTORS.length; i++) {
+             if (getUser().sAMAccountName == INSTRUCTORS[i]) return true;
+         }
+         return false;
+     };
+
     var Authenticate = function(){
          $sessionStorage.permissions = {
             debug: false,
@@ -81,10 +95,12 @@
             comercial: false,
             diretores: false,
             prevendas: false,
-            tecnico: false
+            tecnico: false,
+            instructors: false
         };
 
         if (devGroup()) $sessionStorage.permissions.debug = true;
+        if (instructorGroup()) $sessionStorage.permissions.instructors = true;
 
         peopleGroups.GROUPS()
             .then(function (data) {
