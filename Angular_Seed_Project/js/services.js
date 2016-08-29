@@ -1,7 +1,9 @@
  function contactService($sessionStorage) {
 
   var sendContact = function(newObj) {
-      $sessionStorage.contact = angular.toJson(newObj);
+    d= new Date(newObj.datanasc);
+    newObj.datanasc_parsed = d.getDate()+'/'+(d.getMonth()+1)+'/'+d.getFullYear();
+    sessionStorage.contact = angular.toJson(newObj);
   };
 
   var getContact = function(){
@@ -32,7 +34,7 @@
  };
 
 
- function userService($sessionStorage) {
+ function userService($sessionStorage, peopleGroups) {
 
      var DEV = [
          'eduardo.hyodo',
@@ -72,13 +74,49 @@
          return false;
      };
 
+    var Authenticate = function(){
+         $sessionStorage.permissions = {
+            debug: false,
+            admin: false,
+            comercial: false,
+            diretores: false,
+            prevendas: false,
+            tecnico: false
+        };
+
+        if (devGroup()) $sessionStorage.permissions.debug = true;
+
+        peopleGroups.GROUPS()
+            .then(function (data) {
+                if (angular.isDefined(data)) {
+                    for (i=0; i<data.length; i++){
+                        if (insideGroup(data[i].users)) $sessionStorage.permissions.admin = true;
+                        if (insideGroup(data[i].users)) $sessionStorage.permissions.comercial = true;
+                        if (insideGroup(data[i].users)) $sessionStorage.permissions.diretores = true;
+                        if (insideGroup(data[i].users)) $sessionStorage.permissions.prevendas = true;
+                        if (insideGroup(data[i].users)) $sessionStorage.permissions.tecnico = true;
+                    }
+                }
+            }, function (error) {
+                console.log('error', error);
+            });
+
+        if (!($sessionStorage.permissions.debug || $sessionStorage.permissions.admin || $sessionStorage.permissions.diretores))
+            $state.go('feed');
+
+        // Só administradores do sistema podem entrar nessa view
+        // if(!userService.isAdmin())
+        //     $state.go('feed')
+    }
+
      return {
          sendUser: sendUser,
          getUser: getUser,
          sendToken: sendToken,
          getToken: getToken,
          insideGroup: insideGroup,
-         devGroup: devGroup
+         devGroup: devGroup,
+         Authenticate: Authenticate
      };
 }
 

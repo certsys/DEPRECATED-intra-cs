@@ -26,15 +26,6 @@ mongoose.connect('mongodb://localhost/intra-cs');
 
 var app = express();
 
-//AD setup
-// var ActiveDirectory = require('activedirectory');
-// var config = { url: 'ldap://dc.certsys.com.br',
-//                baseDN: 'dc=Certsys,dc=local',
-//                username: 'username@certsys.com.br',
-//                password: 'password' }
-// var ad = new ActiveDirectory(config);
-
-
 // view engine setup
 app.set('views', path.join(__dirname));
 app.set('view engine', 'ejs');

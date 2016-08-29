@@ -180,7 +180,8 @@ function editcontact($scope, $http, $state, userService, contactService) {
             telefone: $scope.edit_perfil.telefone,
             skype: $scope.edit_perfil.skype,
             linkedin: $scope.edit_perfil.linkedin,
-            imagem: $scope.myCroppedImage
+            imagem: $scope.myCroppedImage,
+            datanasc: $scope.datanasc
         };
 
         var output = JSON.stringify(data);

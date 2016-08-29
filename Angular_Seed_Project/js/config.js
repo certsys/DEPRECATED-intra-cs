@@ -266,6 +266,44 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, $locati
                 }
             }
         })
+        .state('kb2',{
+            url: "/kb2",
+            templateUrl: "page/kb/dummy_sample_page.html",
+            data: {pageTitle: 'Base de Conhecimento'},
+            controller: "kbCtrl",
+            resolve: {
+                loadPlugin: function ($ocLazyLoad) {
+                    return $ocLazyLoad.load([
+                        {
+                           // files: ['js/plugins/jsTree/jstree.min.js', 'css/plugins/jsTree/style.min.css']
+                        }
+                    ]);
+                }
+            }
+        })
+        .state('kb_insert', {
+            url: "/kb_insert",
+            templateUrl: "page/kb/insertkb.html",
+            data: {pageTitle: 'Inserir na Base de Conhecimento'},
+            controller: "kb_insert",
+            resolve: {
+                loadPlugin: function ($ocLazyLoad) {
+                    return $ocLazyLoad.load([
+                        {
+                            files: ['css/plugins/iCheck/custom.css', 'js/plugins/iCheck/icheck.min.js']
+                        },{
+                            files: ['js/bower_components/summernote/dist/summernote.css', 'js/bower_components/summernote/dist/summernote.js'
+                            ]
+                        }
+                        , {
+                            files: ['css/plugins/switchery/switchery.css', 'js/plugins/switchery/switchery.js']
+                        },{
+                            files: ['js/plugins/jsTree/jstree.min.js', 'css/plugins/jsTree/style.min.css']
+                        }
+                    ]);
+                }
+            }
+        })
 
         .state('insertkb', {
             url: "/insertkb",
