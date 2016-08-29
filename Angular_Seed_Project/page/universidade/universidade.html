@@ -1,0 +1,90 @@
+<!-- Wrapper-->
+<div id="wrapper" class="top-navigation">
+
+    <!-- Navigation -->
+    <div ng-include="'views/common/navigation.html'"></div>
+
+
+    <!-- Page wraper -->
+    <!-- ng-class with current state name give you the ability to extended customization your view -->
+    <div id="page-wrapper" class="gray-bg {{$state.current.name}}" ng-controller="universidade">
+
+        <!-- Page wrapper -->
+
+        <!-- Main view  -->
+        <div class="row wrapper border-bottom white-bg page-heading padding-0">
+            <div class="col-lg-10">
+                <h2>{{title}}</h2>
+            </div>
+            <div class="col-lg-2">
+
+            </div>
+        </div>
+
+        <div class="wrapper wrapper-content animated fadeInDown padding-0">
+
+            <div class="ibox">
+                <div class="ibox-title">
+                    <h5>Todos os cursos</h5>
+
+                    <div class="ibox-tools">
+                        <a href="" class="btn btn-primary btn-xs">Criar Curso Novo</a>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <div class="row m-b-sm m-t-sm">
+                        <div class="col-md-1">
+                            <button type="button" id="loading-example-btn" class="btn btn-white btn-sm"><i
+                                    class="fa fa-filter"></i> Filtrar
+                            </button>
+                        </div>
+                        <div class="col-md-11">
+                            <div class="input-group"><input type="text" placeholder="Pesquisar cursos..."
+                                                            class="input-sm form-control"> <span
+                                    class="input-group-btn">
+				 <button type="button" class="btn btn-sm btn-primary"> Pesquisar!</button> </span></div>
+                        </div>
+                    </div>
+
+                    <div class="project-list">
+
+                        <table class="table table-hover">
+                            <tbody ng-repeat="curso in cursos">
+                            <tr>
+                                <td class="project-status">
+                                    <span class="label label-primary">Ativo</span>
+                                </td>
+                                <td class="project-title">
+                                    <a ui-sref="project_detail">{{curso.nome}}</a>
+                                    <br/>
+                                    <small>Inscrições abertas até {{curso.data_limite_inscricao | date:'dd/MM/yyyy HH:mm'}}</small>
+                                </td>
+                                <td class="project-completion">
+                                    <small>Pessoas inscritas: {{curso.inscritos.length}}/{{curso.max_inscritos}}</small>
+                                    <div class="progress progress-mini">
+                                        <div style="width: {{(curso.inscritos.length/cursos.maximo)*100}}%;" class="progress-bar"></div>
+                                    </div>
+                                </td>
+                                <td class="project-actions">
+                                    <a href="" class="btn btn-white btn-sm"><i class="fa fa-folder"></i> View </a>
+                                    <a href="" class="btn btn-white btn-sm"><i class="fa fa-pencil"></i> Edit </a>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Footer -->
+        <div ng-include="'views/common/footer.html'"></div>
+
+    </div>
+    <!-- End page wrapper-->
+
+</div>
+<!-- End wrapper-->
+
+

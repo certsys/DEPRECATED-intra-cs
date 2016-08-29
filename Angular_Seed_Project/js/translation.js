@@ -46,6 +46,7 @@ function config($translateProvider) {
             MAILCOMPOSE: 'Escrever Email',
             MAILTEMPLATE: 'Template de Email',
             OUTLOOK: 'Outlook',
+		    UNIVERSIDADE: 'Universidade Certsys',
             
             
 
@@ -102,6 +103,7 @@ function config($translateProvider) {
             MAILCOMPOSE: 'Compose email',
             MAILTEMPLATE: 'Email template',
             OUTLOOK: 'Outlook',
+		    UNIVERSIDADE: 'Universidade Certsys',
             
             
 
@@ -156,7 +158,7 @@ function config($translateProvider) {
             MAILCOMPOSE: 'Compose email',
             MAILTEMPLATE: 'Email template',
             OUTLOOK: 'Outlook',
-            
+            UNIVERSIDADE: 'Universidade Certsys',
         
         //REVISAR PELO AMOR DE DEUS
             
