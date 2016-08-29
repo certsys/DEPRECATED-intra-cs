@@ -75,21 +75,23 @@ function insertnews($scope, $http, $timeout, $state, userService, peopleGroups) 
         }
     };
     $scope.submit = function () {
-        console.log($scope.wasPressed);
-        var date = angular.element('#data-postagem').val();
-        $scope.changeDateToISO(date);
-        console.log($scope.selectedDate);
-        if ($scope.selectedDate <= $scope.today) {
-            swal({
-                title: "OPS!",
-                text: "Data anterior a atual, corrija a data de postagem!",
-                type: "error",
-                confirmButtonColor: "#DD6B55",
-                confirmButtonText: "Ok",
-                closeOnConfirm: false
-            });
-            return;
-        } else if ($scope.selectedDate >= $scope.today) {
+        var date;
+        if ($scope.futuro == true) {
+            date = angular.element('#data-postagem').val();
+            $scope.changeDateToISO(date);
+        }
+        if ($scope.selectedDate <= $scope.today && $scope.futuro == true) {
+                swal({
+                    title: "OPS!",
+                    text: "Data anterior a atual, corrija a data de postagem!",
+                    type: "error",
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "Ok",
+                    closeOnConfirm: false
+                });
+                return;
+        }
+         else if ($scope.selectedDate >= $scope.today || $scope.futuro == false || angular.isUndefined($scope.futuro)) {
             if (!$scope.wasPressed) {
                 $scope.wasPressed = true;
                 var editions = [];
