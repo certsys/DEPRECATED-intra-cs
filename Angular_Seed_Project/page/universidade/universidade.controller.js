@@ -1,12 +1,11 @@
-function universidade($scope, $http, userService, $state) {
-
-    $http({
-		url: '/cursos',
+function universidade($scope, $http, userService, $state, universidadeService) {
+	$http({
+		url: '/institucional',
 		method: "GET",
 		params: {token: userService.getToken()}
 	}).then(function (response) {
 		//your code in case the post succeeds
-		$scope.cursos = response.data;
+		// console.log(response);
 	}).catch(function (err) {
 		$state.go('login');
 		// console.log(err);
