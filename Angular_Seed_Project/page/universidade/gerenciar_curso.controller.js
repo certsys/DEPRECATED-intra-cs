@@ -13,6 +13,13 @@ function gerenciar_curso($scope, $http, userService, $state) {
 
     $scope.title = "Gerenciar curso | ";
     $scope.curso;
+	$scope.apertei = false;
+	
+	
+	$scope.pressionado = function () {
+	$scope.apertei = true;
+		
+	}
     
 };
 
