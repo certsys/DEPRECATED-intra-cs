@@ -1,4 +1,4 @@
-function universidade($scope, $http, userService, $state) {
+function universidade($scope, $http, userService, $state, $modal) {
 	$http({
 		url: '/institucional',
 		method: "GET",
@@ -14,11 +14,14 @@ function universidade($scope, $http, userService, $state) {
 
     $scope.title = "universidade";
 
-   
+ 	
 };
-
 
 angular
     .module('inspinia')
     .controller('universidade', universidade);
+
+
+
+
 

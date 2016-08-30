@@ -15,7 +15,8 @@
 		'ui.switchery',					// Switch iOS 7
         'ngJsTree',                     // Árvore do KB
         'ngImgCrop',                    // Image Crop
-        'ngStorage'                     // Armazenamento de dados da sessão Angularizado
+        'ngStorage',                    // Armazenamento de dados da sessão Angularizado  
+		             // mínimo e máximo de alunos
     ])
 })();
 
