@@ -1,5 +1,5 @@
 <!-- Wrapper-->
-<div id="wrapper" class="top-navigation">	
+<div id="wrapper" class="top-navigation">
 
     <!-- Navigation -->
     <div ng-include="'views/common/navigation.html'"></div>
@@ -9,8 +9,8 @@
     <!-- ng-class with current state name give you the ability to extended customization your view -->
     <div id="page-wrapper" class="gray-bg {{$state.current.name}}" ng-controller="universidade">
 
-		<!-- Page wrapper -->
-        
+        <!-- Page wrapper -->
+
         <!-- Main view  -->
         <div class="row wrapper border-bottom white-bg page-heading padding-0">
             <div class="col-lg-10">
@@ -19,148 +19,68 @@
             <div class="col-lg-2">
 
             </div>
-        </div>	
-		
-      <div class="wrapper wrapper-content animated fadeInDown padding-0">
+        </div>
 
-<div class="ibox">
-<div class="ibox-title">
-    <h5>Todos os cursos da Universidade Certsys</h5>
 
-    <div class="ibox-tools" ng-controller="modalDemoCtrl">
-        <button class="btn btn-primary btn-xs" ng-click="open()">Criar Curso</button>
-    </div>
-</div>
-<div class="ibox-content">
-		<div class="row m-b-sm m-t-sm">
-			<div class="col-md-1">
-				<button type="button" id="loading-example-btn" class="btn btn-white btn-sm"><i class="fa fa-refresh"></i> Refresh</button>
-			</div>
-			<div class="col-md-11">
-				<div class="input-group"><input type="text" placeholder="Search" class="input-sm form-control"> <span class="input-group-btn">
-				 <button type="button" class="btn btn-sm btn-primary"> Go!</button> </span></div>
-			</div>
-		</div>
+        <div class="wrapper wrapper-content animated fadeInDown padding-0">
 
-<div class="project-list">
+            <div class="ibox">
+                <div class="ibox-title">
+                    <h5>Todos os cursos</h5>
+					    <div class="ibox-tools" ng-controller="modalDemoCtrl">
+        					<a class="btn btn-primary btn-xs" ng-click="open()">Criar Curso</a>
+    				    </div>
+					
+                    
+                </div>
+                <div class="ibox-content">
+                    <div class="row m-b-sm m-t-sm">
+                        <div class="col-md-1">
+                            <button type="button" id="loading-example-btn" class="btn btn-white btn-sm"><i
+                                    class="fa fa-filter"></i> Filtrar
+                            </button>
+                        </div>
+                        <div class="col-md-11">
+                            <div class="input-group"><input type="text" placeholder="Pesquisar cursos..."
+                                                            class="input-sm form-control"> <span
+                                    class="input-group-btn">
+				 <button type="button" class="btn btn-sm btn-primary"> Pesquisar!</button> </span></div>
+                        </div>
+                    </div>
 
-		<table class="table table-hover">
-			<tbody>
-				<tr>
-					<td class="project-status">
-						<span class="label label-primary">Active</span>
-					</td>
-					<td class="project-title">
-						<a ui-sref="project_detail">Contract with Zender Company</a>
-						<br/>
-						<small>Created 14.08.2014</small>
-					</td>
-					<td class="project-completion">
-						<small>Completion with: 48%</small>
-						<div class="progress progress-mini">
-							<div style="width: 48%;" class="progress-bar"></div>
-						</div>
-					</td>
-					<td class="project-people">
-						<a href=""><img alt="image" class="img-circle" src="img/a3.jpg"></a>
-						<a href=""><img alt="image" class="img-circle" src="img/a1.jpg"></a>
-						<a href=""><img alt="image" class="img-circle" src="img/a2.jpg"></a>
-						<a href=""><img alt="image" class="img-circle" src="img/a4.jpg"></a>
-						<a href=""><img alt="image" class="img-circle" src="img/a5.jpg"></a>
-					</td>
-					<td class="project-actions">
-						<a href="" class="btn btn-white btn-sm"><i class="fa fa-folder"></i> View </a>
-						<a href="" class="btn btn-white btn-sm"><i class="fa fa-pencil"></i> Edit </a>
-					</td>
-				</tr>
-				<tr>
-					<td class="project-status">
-						<span class="label label-primary">Active</span>
-					</td>
-					<td class="project-title">
-						<a ui-sref="project_detail">There are many variations of passages</a>
-						<br/>
-						<small>Created 11.08.2014</small>
-					</td>
-					<td class="project-completion">
-						<small>Completion with: 28%</small>
-						<div class="progress progress-mini">
-							<div style="width: 28%;" class="progress-bar"></div>
-						</div>
-					</td>
-					<td class="project-people">
-						<a href=""><img alt="image" class="img-circle" src="img/a7.jpg"></a>
-						<a href=""><img alt="image" class="img-circle" src="img/a6.jpg"></a>
-						<a href=""><img alt="image" class="img-circle" src="img/a3.jpg"></a>
-					</td>
-					<td class="project-actions">
-						<a href="" class="btn btn-white btn-sm"><i class="fa fa-folder"></i> View </a>
-						<a href="" class="btn btn-white btn-sm"><i class="fa fa-pencil"></i> Edit </a>
-					</td>
-				</tr>
-				<tr>
-					<td class="project-status">
-						<span class="label label-default">Unactive</span>
-					</td>
-					<td class="project-title">
-						<a ui-sref="project_detail">Many desktop publishing packages and web</a>
-						<br/>
-						<small>Created 10.08.2014</small>
-					</td>
-					<td class="project-completion">
-						<small>Completion with: 8%</small>
-						<div class="progress progress-mini">
-							<div style="width: 8%;" class="progress-bar"></div>
-						</div>
-					</td>
-					<td class="project-people">
-						<a href=""><img alt="image" class="img-circle" src="img/a5.jpg"></a>
-						<a href=""><img alt="image" class="img-circle" src="img/a3.jpg"></a>
-					</td>
-					<td class="project-actions">
-						<a href="" class="btn btn-white btn-sm"><i class="fa fa-folder"></i> View </a>
-						<a href="" class="btn btn-white btn-sm"><i class="fa fa-pencil"></i> Edit </a>
-					</td>
-				</tr>
-				<tr>
-					<td class="project-status">
-						<span class="label label-primary">Active</span>
-					</td>
-					<td class="project-title">
-						<a ui-sref="project_detail">Letraset sheets containing</a>
-						<br/>
-						<small>Created 22.07.2014</small>
-					</td>
-					<td class="project-completion">
-						<small>Completion with: 83%</small>
-						<div class="progress progress-mini">
-							<div style="width: 83%;" class="progress-bar"></div>
-						</div>
-					</td>
-					<td class="project-people">
-						<a href=""><img alt="image" class="img-circle" src="img/a2.jpg"></a>
-						<a href=""><img alt="image" class="img-circle" src="img/a3.jpg"></a>
-						<a href=""><img alt="image" class="img-circle" src="img/a1.jpg"></a>
-						<a href=""><img alt="image" class="img-circle" src="img/a7.jpg"></a>
-					</td>
-					<td class="project-actions">
-						<a href="" class="btn btn-white btn-sm"><i class="fa fa-folder"></i> View </a>
-						<a href="" class="btn btn-white btn-sm"><i class="fa fa-pencil"></i> Edit </a>
-					</td>
-				</tr>
-				
-				
-				
-				
-				
-				
-			</tbody>
-		</table>
-	</div>
-  </div>
- </div>
-</div>
- 
+                    <div class="project-list">
+
+                        <table class="table table-hover">
+                            <tbody ng-repeat="curso in cursos">
+                            <tr>
+                                <td class="project-status">
+                                    <span class="label label-primary">Ativo</span>
+                                </td>
+                                <td class="project-title">
+                                    <a ui-sref="project_detail">{{curso.nome}}</a>
+                                    <br/>
+                                    <small>Inscrições abertas até {{curso.data_limite_inscricao | date:'dd/MM/yyyy HH:mm'}}</small>
+                                </td>
+                                <td class="project-completion">
+                                    <small>Pessoas inscritas: {{curso.inscritos.length}}/{{curso.max_inscritos}}</small>
+                                    <div class="progress progress-mini">
+                                        <div style="width: {{(curso.inscritos.length/curso.max_inscritos)*100}}%;" class="progress-bar"></div>
+                                    </div>
+                                </td>
+                                <td class="project-actions" ng-if="subscribed(curso)">
+                                    <a href="" class="btn btn-primary btn-sm fixed-width" ng-click="removeSubscription(curso)"><i class="fa fa-check"></i> Inscrito </a>
+                                </td>
+                                <td class="project-actions" ng-if="!subscribed(curso)">
+                                    <a href="" class="btn btn-white btn-sm fixed-width" ng-click="addSubscription(curso)"><i class="fa fa-pencil"></i> Inscrever </a>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
 
         <!-- Footer -->
         <div ng-include="'views/common/footer.html'"></div>

@@ -2,7 +2,6 @@ var express = require('express');
 var mongoose = require('mongoose');
 var http = require('http');
 var compression = require('compression'); // Compressão do site para melhor performance
-
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
@@ -15,6 +14,7 @@ var inbox = require('./routes/inbox');
 var login = require('./routes/login');
 var kb = require('./routes/kb');
 var institucional = require('./routes/institucional');
+var cursos = require ('./routes/cursos');
 
 // Rotas relacionadas ao Mongo DB
 var posts = require('./routes/posts'); // Posts do Newsfeed
@@ -31,6 +31,7 @@ var app = express();
 app.set('views', path.join(__dirname));
 app.set('view engine', 'ejs');
 
+app.use(favicon('./img/favicon.ico'));
 app.use(compression());
 
 // uncomment after placing your favicon in /public
@@ -58,6 +59,7 @@ app.use('/contacts', contacts);
 app.use('/users', users);
 app.use('/groups', groups);
 app.use('/institucional', institucional);
+app.use('/cursos', cursos);
 
 // Acessa a rota para reprogramar todos os emails agendados, no caso de ter ocorrido alguma falha
 var options = {
