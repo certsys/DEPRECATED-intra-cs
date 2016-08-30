@@ -52,6 +52,17 @@ function universidade($scope, $http, userService, $state, universidadeService) {
             // console.log(err);
         });
     };
+	$scope.permissions = {
+		debug: false,
+		admin: false,
+		comercial: false,
+		diretores: false,
+		prevendas: false,
+		tecnico: false,
+		instructors: false
+	};
+
+	if(userService.instructorGroup()) $scope.permissions.instructors = true;
 }
 
 
