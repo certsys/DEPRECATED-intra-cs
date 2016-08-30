@@ -21,15 +21,17 @@
             </div>
         </div>
 
+
         <div class="wrapper wrapper-content animated fadeInDown padding-0">
 
             <div class="ibox">
                 <div class="ibox-title">
                     <h5>Todos os cursos</h5>
 
-                    <div class="ibox-tools" ng-if="permissions.instructors">
-                        <a href="" class="btn btn-primary btn-xs">Criar Curso Novo</a>
-                    </div>
+					    <div class="ibox-tools" ng-if="permissions.instructors" ng-controller="modalDemoCtrl">
+        					<a class="btn btn-primary btn-xs" ng-click="open()">Criar Curso</a>
+    				    </div>
+                    
                 </div>
                 <div class="ibox-content">
                     <div class="row m-b-sm m-t-sm">

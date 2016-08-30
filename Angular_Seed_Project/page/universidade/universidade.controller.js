@@ -16,6 +16,7 @@ function universidade($scope, $http, userService, $state, universidadeService) {
     var INSCRICOES_ENCERRADAS = "Inscrições Encerradas";
     var ENCERRADO = "Encerrado";
 
+
     $scope.title = "Universidade Certsys";
 
     $scope.buttonDisabled = false;
@@ -24,6 +25,7 @@ function universidade($scope, $http, userService, $state, universidadeService) {
         var retorno = false;
         curso.inscritos.forEach(function (inscrito) {
             if (inscrito.sAMAccountName === userService.getUser().sAMAccountName) retorno = true;
+
         });
         return retorno;
     };
@@ -128,8 +130,11 @@ function universidade($scope, $http, userService, $state, universidadeService) {
     if (userService.instructorGroup()) $scope.permissions.instructors = true;
 }
 
-
 angular
     .module('inspinia')
     .controller('universidade', universidade);
+
+
+
+
 
