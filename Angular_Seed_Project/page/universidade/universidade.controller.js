@@ -1,4 +1,5 @@
-function universidade($scope, $http, userService, $state, universidadeService) {
+
+function universidade($scope, $http, userService, $state, universidadeService, $modal) {
 	$http({
 		url: '/institucional',
 		method: "GET",
@@ -17,6 +18,7 @@ function universidade($scope, $http, userService, $state, universidadeService) {
         var retorno = false;
         curso.inscritos.forEach(function(inscrito){
 
+
            if(inscrito === userService.getUser().sAMAccountName) retorno = true;
         });
         return retorno;
@@ -32,8 +34,11 @@ function universidade($scope, $http, userService, $state, universidadeService) {
     };
 }
 
-
 angular
     .module('inspinia')
     .controller('universidade', universidade);
+
+
+
+
 
