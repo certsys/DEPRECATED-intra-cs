@@ -16,6 +16,8 @@ function kb_insert($scope, $http, $state, userService, peopleGroups) {
     // if(!userService.isAdmin())
     //     $state.go('feed')
 
+    var rootNode;
+
     $scope.today = new Date();
     $scope.title = "Base de Conhecimento CS - Novo elemento";
     $scope.products = [];// preencher com os pais e filhos.
@@ -28,13 +30,20 @@ function kb_insert($scope, $http, $state, userService, peopleGroups) {
     	$http.get('/kb/get_folders')
     	.then(function(response){
     		//montar o array identado
-    		console.log(response.data)
+            for(i=0; i<data.length; i++){
+                if (data[i].text=="Produtos")  {
+                    rootNode = data[i]._id;
+                    break;
+                }
+            }
     		$scope.products=response.data
     	})
-    	.catch(function(err){console.log('Something went wrong...', err)})
+
+
     };
 
     getFolders();
+
 
     $scope.submitFolder=function(){
         console.log(angular.element('#folder_parent').val())

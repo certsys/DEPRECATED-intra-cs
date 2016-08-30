@@ -1,13 +1,36 @@
 function kbCtrl($scope, $http, $state, userService) {
+    
+    var rootNode;
 
     $http({
-        url: '/kb',
+        url: '/kb/get_folders',
         method: "GET",
         params: {token: userService.getToken()}
     }).then(function (response) {
         //your code in case the post succeeds
-        console.log(response);
-        $scope.folders=response.data;
+        var data= response.data
+        var tree = [];
+        
+        //console.log(data);
+        for(i=0; i<data.length; i++){
+            if (data[i].text=="Produtos")  {
+                rootNode = data[i]._id;
+                break;
+            }
+        }
+        // for(i=0; i<data.length; i++){
+        //     if(data[i].parent == rootNode) {
+        //         tree.push(data[i]); //coloca as paginas de nivel 1
+        //         for(j=0; j<data.length; j++)
+        //             if(data[j].parent == data[i]._id) {
+        //                 data[i].children.push(data[j]) //coloca paginas de nivel 2
+        //                 for(k=0; k<data.length; k++)
+        //                     if(data[k].parent == data[j].)
+        //             }
+        //     }
+        // }
+        console.log(tree)
+        $scope.folders=tree;
     }).catch(function (err) {
         $state.go('login');
         console.log(err);
