@@ -160,6 +160,31 @@ router.put('/edit/:id', function (req, res, next) {
 
 });
 
+router.put('/addSubscription/:id', function (req, res, next) {
+
+    Curso.findById(req.params.id, function (err, data) {
+        data.inscritos.push(req.body.sAMAccountName);
+        data.save(function (err, data) {
+            if (err) throw err;
+            res.json({data: 'Pessoa inscrita com successo!'});
+        });
+    });
+
+});
+
+router.put('/removeSubscription/:id', function (req, res, next) {
+
+    Curso.findById(req.params.id, function (err, data) {
+        var index = data.inscritos.indexOf(req.body.sAMAccountName);
+        if(index > -1) data.inscritos.splice(index, 1);
+        data.save(function (err, data) {
+            if (err) throw err;
+            res.json({data: 'Pessoa removida com successo!'});
+        });
+    });
+
+});
+
 router.delete('/remove/:id', function (req, res) {
     Curso.findById(req.params.id, function (err, data) { //Soft delete
         data.isDeleted = true;
