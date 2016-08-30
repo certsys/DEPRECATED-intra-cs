@@ -3,7 +3,8 @@
   var sendContact = function(newObj) {
     var d = new Date(newObj.datanasc);
     newObj.datanasc_parsed = d.getDate()+'/'+(d.getMonth()+1)+'/'+d.getFullYear();
-    sessionStorage.contact = angular.toJson(newObj);
+    $sessionStorage.contact = angular.toJson(newObj);
+
   };
 
   var getContact = function(){
