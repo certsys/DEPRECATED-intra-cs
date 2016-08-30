@@ -3,6 +3,7 @@ var mongoose = require('mongoose');
 var cursoSchema = new mongoose.Schema({
     nome: String,
     descricao: String,
+    local: String,
     data_inicio: Date,
     data_fim: Date,
     data_limite_inscricao: Date,

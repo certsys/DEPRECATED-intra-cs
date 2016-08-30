@@ -68,7 +68,6 @@ router.post('/', function (req, res) {
     var minuto_curso_fim = curso_fim.substring(10, 12);
 
 
-
     var encerramento = req.body.data_limite_inscricao;
 
     var ano_enc = encerramento.substring(0, 4);
@@ -78,14 +77,14 @@ router.post('/', function (req, res) {
     var minuto_enc = encerramento.substring(10, 12);
 
 
-
-    var date_curso_inicio = new Date(ano_curso_inicio, mes_curso_inicio-1, dia_curso_inicio, hora_curso_inicio, minuto_curso_inicio);
-    var date_curso_fim = new Date(ano_curso_fim, mes_curso_fim-1, dia_curso_fim, hora_curso_fim, minuto_curso_fim);
-    var date_encerramento = new Date(ano_enc, mes_enc-1, dia_enc, hora_enc, minuto_enc);
+    var date_curso_inicio = new Date(ano_curso_inicio, mes_curso_inicio - 1, dia_curso_inicio, hora_curso_inicio, minuto_curso_inicio);
+    var date_curso_fim = new Date(ano_curso_fim, mes_curso_fim - 1, dia_curso_fim, hora_curso_fim, minuto_curso_fim);
+    var date_encerramento = new Date(ano_enc, mes_enc - 1, dia_enc, hora_enc, minuto_enc);
 
     var newCurso = new Curso({
         nome: req.body.nome,
         descricao: req.body.descricao,
+        local: req.body.local,
         data_inicio: date_curso_inicio,
         data_fim: date_curso_fim,
         data_limite_inscricao: date_encerramento,
@@ -124,7 +123,6 @@ router.put('/edit/:id', function (req, res, next) {
     var minuto_curso_fim = curso_fim.substring(10, 12);
 
 
-
     var encerramento = req.body.data_limite_inscricao;
 
     var ano_enc = encerramento.substring(0, 4);
@@ -134,14 +132,14 @@ router.put('/edit/:id', function (req, res, next) {
     var minuto_enc = encerramento.substring(10, 12);
 
 
-
-    var date_curso_inicio = new Date(ano_curso_inicio, mes_curso_inicio-1, dia_curso_inicio, hora_curso_inicio, minuto_curso_inicio);
-    var date_curso_fim = new Date(ano_curso_fim, mes_curso_fim-1, dia_curso_fim, hora_curso_fim, minuto_curso_fim);
-    var date_encerramento = new Date(ano_enc, mes_enc-1, dia_enc, hora_enc, minuto_enc);
+    var date_curso_inicio = new Date(ano_curso_inicio, mes_curso_inicio - 1, dia_curso_inicio, hora_curso_inicio, minuto_curso_inicio);
+    var date_curso_fim = new Date(ano_curso_fim, mes_curso_fim - 1, dia_curso_fim, hora_curso_fim, minuto_curso_fim);
+    var date_encerramento = new Date(ano_enc, mes_enc - 1, dia_enc, hora_enc, minuto_enc);
 
     Curso.findById(req.params.id, function (err, data) {
         data.nome = req.body.nome;
         data.descricao = req.body.descricao;
+        data.local = req.body.local;
         data.data_inicio = date_curso_inicio;
         data.data_fim = date_curso_fim;
         data.data_limite_inscricao = date_encerramento;
@@ -153,7 +151,7 @@ router.put('/edit/:id', function (req, res, next) {
         data.isDeleted = false;
         data.save(function (err, data) {
             if (err) throw err;
-                res.json({data: 'Curso editado com successo!'});
+            res.json({data: 'Curso editado com successo!'});
         });
     });
 
@@ -163,11 +161,23 @@ router.put('/edit/:id', function (req, res, next) {
 router.put('/addSubscription/:id', function (req, res, next) {
 
     Curso.findById(req.params.id, function (err, data) {
-        data.inscritos.push(req.body.sAMAccountName);
-        data.save(function (err, data) {
-            if (err) throw err;
-            res.json({data: 'Pessoa inscrita com successo!'});
-        });
+        var index = data.inscritos.map(function (inscrito) {
+            return inscrito.sAMAccountName;
+        }).indexOf(req.body.sAMAccountName);
+        
+        if (index === -1) {
+            var dados = {
+                _id: req.body._id,
+                sAMAccountName: req.body.sAMAccountName,
+                data_inscricao: req.body.data_inscricao,
+                presente: req.body.presente
+            };
+            data.inscritos.push(dados);
+            data.save(function (err, data) {
+                if (err) throw err;
+                res.json({data: 'Pessoa inscrita com successo!'});
+            });
+        }
     });
 
 });
@@ -175,8 +185,10 @@ router.put('/addSubscription/:id', function (req, res, next) {
 router.put('/removeSubscription/:id', function (req, res, next) {
 
     Curso.findById(req.params.id, function (err, data) {
-        var index = data.inscritos.indexOf(req.body.sAMAccountName);
-        if(index > -1) data.inscritos.splice(index, 1);
+        var index = data.inscritos.map(function (inscrito) {
+        return inscrito.sAMAccountName;
+    }).indexOf(req.body.sAMAccountName);
+        if (index > -1) data.inscritos.splice(index, 1);
         data.save(function (err, data) {
             if (err) throw err;
             res.json({data: 'Pessoa removida com successo!'});

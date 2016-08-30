@@ -64,6 +64,7 @@
      var INSTRUCTORS  = [
          'carlos.custodio',
          'herbert.santos'
+         // 'henrique.cavalcante'
         // 'marcos.hosoya'
      ];
 
