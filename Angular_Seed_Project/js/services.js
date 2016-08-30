@@ -42,13 +42,12 @@
          'ivan.zoppetti',
          'lucas.felgueiras',
          'pedro.strabeli',
-         'marcos.hosoya'
-     ];
+         'marcos.hosoya'     ];
 
      var INSTRUCTORS  = [
          'carlos.custodio',
          'herbert.santos'
-         //'marcos.hosoya'
+        // 'marcos.hosoya'
      ];
 
      
@@ -133,7 +132,8 @@
          getToken: getToken,
          insideGroup: insideGroup,
          devGroup: devGroup,
-         Authenticate: Authenticate
+         Authenticate: Authenticate,
+         instructorGroup: instructorGroup
      };
 }
 
