@@ -16,7 +16,7 @@ function navigationCrtl($scope, $state, userService, contactService, peopleGroup
     };
 
     if(userService.devGroup()) $scope.permissions.debug = true;
-    
+
     peopleGroups.GROUPS()
         .then(function(data) {
             if(angular.isDefined(data)) {

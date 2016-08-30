@@ -362,6 +362,29 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, $locati
                 }
             }
         })
+    .state('universidade_manage', {
+            url: "/universidade/gerenciar_curso",
+            templateUrl: "page/universidade/gerenciar_curso.html",
+            data: {pageTitle: 'Gerenciar Curso | Universidade Certsys'},
+            controller: "gerenciar_curso",
+            resolve: {
+                loadPlugin: function ($ocLazyLoad) {
+                    return $ocLazyLoad.load([
+                        {
+                            files: ['css/plugins/iCheck/custom.css', 'js/plugins/iCheck/icheck.min.js']
+                        },
+                        
+                        {
+                            files: ['js/bower_components/summernote/dist/summernote.css', 'js/bower_components/summernote/dist/summernote.js'
+                            ]
+                        }, 
+                        {
+                            files: ['css/plugins/switchery/switchery.css', 'js/plugins/switchery/switchery.js']
+                        }
+                    ]);
+                }
+            }
+        })
 	
 	
 	

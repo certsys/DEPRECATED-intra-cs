@@ -33,6 +33,22 @@
 
  };
 
+  function universidadeService($sessionStorage) {
+
+  var sendCurso = function(newObj) {
+    sessionStorage.curso = angular.toJson(newObj);
+  };
+
+  var getCurso = function(){
+      return angular.fromJson($sessionStorage.curso);
+  };
+
+  return {
+         sendCurso: sendCurso,
+         getCurso: getCurso
+     };
+
+};
 
  function userService($sessionStorage, peopleGroups) {
 
@@ -43,6 +59,12 @@
          'lucas.felgueiras',
          'pedro.strabeli',
          'marcos.hosoya'
+     ];
+
+     var INSTRUCTORS  = [
+         'carlos.custodio',
+         'herbert.santos'
+         //'marcos.hosoya'
      ];
 
      
@@ -76,6 +98,13 @@
          return false;
      };
 
+     var instructorGroup = function() {
+         for (var i = 0; i < INSTRUCTORS.length; i++) {
+             if (getUser().sAMAccountName == INSTRUCTORS[i]) return true;
+         }
+         return false;
+     };
+
     var Authenticate = function(){
          $sessionStorage.permissions = {
             debug: false,
@@ -83,10 +112,12 @@
             comercial: false,
             diretores: false,
             prevendas: false,
-            tecnico: false
+            tecnico: false,
+            instructors: false
         };
 
         if (devGroup()) $sessionStorage.permissions.debug = true;
+        if (instructorGroup()) $sessionStorage.permissions.instructors = true;
 
         peopleGroups.GROUPS()
             .then(function (data) {
@@ -164,6 +195,7 @@ angular
     .module('inspinia')
     .service('contactService', contactService)
     .service('postService', postService)
+    .service('universidadeService', universidadeService)
     .service('userService', userService)
     .service('peopleGroups', peopleGroups)
     .filter('linkFilter', linkFilter);
