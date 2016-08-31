@@ -82,7 +82,7 @@ router.get('/get_folders', function (req, res) {
         if (err) return console.error(err);
         // console.log(produtos)
         rootFolderId=produtos[0]._id
-        kbtree.find({},[],{sort:{text: 1}}, function (err, folders) {
+        kbtree.find({}, function (err, folders) {
         if (err) return console.error(err);
         // for (i=0; i<folders.length; i++){
         //         if (folders[i].text=='Produto' && !rootFolderId) rootFolderId=folder[i]._id
@@ -95,7 +95,7 @@ router.get('/get_folders', function (req, res) {
 
 router.get('/get_pages', function (req, res) {
     // get pages from mongo;
-        kbcontent.find({},[],{sort:{title: 1}}, function (err, pages) {
+        kbcontent.find({}, function (err, pages) {
         if (err) return console.error(err);
         res.json(pages);
     })
@@ -189,7 +189,7 @@ router.post('/uploadfile', multipartMiddleware, function(req, res){
     // console.log(req.files.files.originalFilename)
     fs.readFile(req.files.files.path, function (err, data) {
   // ...
-          var newPath = __dirname.substring(0, __dirname.indexOf("routes"))+"uploads/cursos/"+originalFilename;
+          var newPath = __dirname.substring(0, __dirname.indexOf("routes"))+"uploads/kb/"+originalFilename;
           fs.writeFile(newPath, data, function (err) {
             //res.redirect("back");
         });
@@ -213,7 +213,7 @@ router.post('/uploadfile2', function(req, res){
 
 router.post('/download', function (req, res) {
     console.log(req.body.filename);
-    var file = 'uploads/cursos/' + req.body.filename;
+    var file = 'uploads/kb/' + req.body.filename;
     res.download(file);
     // res.json(file);
 });
