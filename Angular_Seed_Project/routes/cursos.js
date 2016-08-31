@@ -2,6 +2,10 @@ var express = require('express');
 var router = express.Router();
 var Curso = require('../models/cursos');
 var jwt = require('jsonwebtoken');
+var fs = require('fs');
+var multiparty = require('connect-multiparty')
+var multipartMiddleware = multiparty();
+
 
 // router.use(function (req, res, next) {
 //
@@ -197,5 +201,39 @@ router.delete('/remove/:id', function (req, res) {
     });
 });
 
+router.post('/uploadfile', multipartMiddleware, function(req, res){
+    //console.log(req.body)
+    var originalFilename = req.files.files.originalFilename
+    // console.log(req.files.files.originalFilename)
+    fs.readFile(req.files.files.path, function (err, data) {
+  // ...
+          var newPath = __dirname.substring(0, __dirname.indexOf("routes"))+"uploads/cursos/"+originalFilename;
+          fs.writeFile(newPath, data, function (err) {
+            //res.redirect("back");
+        });
+          res.json(originalFilename)
+    });
+})
+
+router.post('/uploadfilecourse', function(req, res){
+    var cursoId=req.body._id;
+    Curso.findByIdAndUpdate(cursoId, {$push: {arquivos: req.body.originalFilename}},
+        {safe: true, upsert: true, new : true},
+        function(err, model) {
+            if (err) console.log(err);
+            else {
+                console.log(model)
+                res.json({success: true})
+                }
+        });
+
+})
+
+router.post('/download', function (req, res) {
+    console.log(req.body.filename);
+    var file = 'uploads/cursos/' + req.body.filename;
+    res.download(file);
+    // res.json(file);
+});
 
 module.exports = router;
