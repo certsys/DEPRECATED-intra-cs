@@ -1,16 +1,14 @@
-function kbCtrl($scope, $http, $state, userService) {
+function kbCtrl($scope, $http, $state, userService, fileUpload) {
     
     var rootNode;
 
     $http({
-        url: '/kb/get_folders',
+        url: '/kb',
         method: "GET",
         params: {token: userService.getToken()}
     }).then(function (response) {
         //your code in case the post succeeds
         var data= response.data
-        var tree = [];
-        
         //console.log(data);
         for(i=0; i<data.length; i++){
             if (data[i].text=="Produtos")  {
@@ -18,32 +16,24 @@ function kbCtrl($scope, $http, $state, userService) {
                 break;
             }
         }
-        // for(i=0; i<data.length; i++){
-        //     if(data[i].parent == rootNode) {
-        //         tree.push(data[i]); //coloca as paginas de nivel 1
-        //         for(j=0; j<data.length; j++)
-        //             if(data[j].parent == data[i]._id) {
-        //                 data[i].children.push(data[j]) //coloca paginas de nivel 2
-        //                 for(k=0; k<data.length; k++)
-        //                     if(data[k].parent == data[j].)
-        //             }
-        //     }
-        // }
-        console.log(tree)
-        $scope.folders=tree;
+        $scope.folders=data;
+        // $scope.folders=data;
     }).catch(function (err) {
         $state.go('login');
         console.log(err);
     });
 
-    $scope.get_lvl2 = function(parent_id){
-        console.log(parent_id)
-        $http.get('/kb/get_lvl2_id'+parent_id).then(function(response){
-            console.log(response)
-            $scope.lvl2=response.data;
-        }).catch(function(err){console.log("something went wrong when getting lvl 2")})
+    $scope.getPages = function(id){
+        $http.get('/kb/pages'+id)
+        .then(function(response){
+            $scope.pages=response.data;
+        }).catch(function(err){console.log(err)})
     }
 
+    $scope.sendPage=function(Obj){
+        $scope.page=Obj;
+    }
+    
     $scope.getSelectedNode = function() {
         var selectedNode = $scope.treeInstance.jstree(true).get_node($scope.treeInstance.jstree(true).get_selected());
         // $http.get('/kb').then(function (response) {
@@ -81,6 +71,25 @@ function kbCtrl($scope, $http, $state, userService) {
             console.log(err);
         });
     };
+
+    $scope.uploadFile = function(){
+    var file = $scope.myFile;
+
+    console.log('file is ' );
+    console.dir(file);
+
+    var uploadUrl = "/kb/uploadfile";
+    fileUpload.uploadFileToUrl(file, uploadUrl);
+    };
+
+
+    //download de arquivos
+    $scope.downloadFile=function(filename, cursoId){
+        $http.post('/kb/download',{filename: filename, cursoId: cursoId})
+        .then(function(response){
+
+        }).catch(function(err){console.log(err)})
+    }
 }
 
 angular.module('inspinia').controller('kbCtrl', kbCtrl);

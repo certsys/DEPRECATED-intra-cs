@@ -1,6 +1,6 @@
 function gerenciar_curso($scope, $http, userService, fileUpload, $state ) {
 	$http({
-		url: '/institucional',
+		url: '/cursos',
 		method: "GET",
 		params: {token: userService.getToken()}
 	}).then(function (response) {
@@ -28,8 +28,8 @@ function gerenciar_curso($scope, $http, userService, fileUpload, $state ) {
 
 
 	//download de arquivos
-	$scope.downloadFile(filename, cursoId){
-		$http.post('/download',{filename: filename, cursoId: cursoId})
+	$scope.downloadFile=function(filename, cursoId){
+		$http.post('/cursos/download',{filename: filename, cursoId: cursoId})
 		.then(function(response){
 
 		}).catch(function(err){console.log(err)})

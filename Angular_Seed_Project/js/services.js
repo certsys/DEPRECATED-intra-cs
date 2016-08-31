@@ -203,7 +203,7 @@ function fileUpload($http){
        .then(function(response){
         var data = {_id: _id,
             originalFilename: response.data}
-         $http.post('cursos/uploadfilecourse', data).
+         $http.post(uploadUrl+'2', data). //2 é a rota que acrescenta no mongo.
          then(function(response){console.log("ok")}).catch(function(err){console.log(err)})
        })
        .catch(function(){

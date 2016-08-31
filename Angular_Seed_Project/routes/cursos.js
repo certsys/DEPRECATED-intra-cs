@@ -215,7 +215,7 @@ router.post('/uploadfile', multipartMiddleware, function(req, res){
     });
 })
 
-router.post('/uploadfilecourse', function(req, res){
+router.post('/uploadfile2', function(req, res){
     var cursoId=req.body._id;
     Curso.findByIdAndUpdate(cursoId, {$push: {arquivos: req.body.originalFilename}},
         {safe: true, upsert: true, new : true},

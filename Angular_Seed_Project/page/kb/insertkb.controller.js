@@ -10,7 +10,7 @@ function kb_insert($scope, $http, $state, userService, peopleGroups) {
  //        console.log(err);
  //    });
 
- //    userService.Authenticate();
+     userService.Authenticate();
 
     // Só administradores do sistema podem entrar nessa view
     // if(!userService.isAdmin())
@@ -24,32 +24,43 @@ function kb_insert($scope, $http, $state, userService, peopleGroups) {
     $scope.thumbnail = [];
     $scope.fileReaderSupported = window.FileReader != null
     $scope.dateHolder = new Date();
+    $scope.page = {};
+    $scope.folder = {};
     //$scope.selectedDate;
 
     var getFolders = function(){
     	$http.get('/kb/get_folders')
     	.then(function(response){
     		//montar o array identado
+            console.log(response.data)
+            data= response.data;
             for(i=0; i<data.length; i++){
                 if (data[i].text=="Produtos")  {
                     rootNode = data[i]._id;
                     break;
                 }
-            }
+            // $scope.tree=[];
+            // for(i=0; i<data.length; i++){
+            //     if(data[i].text=="Produtos"){}
+            //     else{
+            //         tree.push
+                }
     		$scope.products=response.data
     	})
-
-
+        $http.get('/kb/get_pages').then(function(response){
+            console.log(response.data)
+            $scope.pages=response.data
+        }).catch(function(err){})
     };
 
     getFolders();
 
 
     $scope.submitFolder=function(){
-        console.log(angular.element('#folder_parent').val())
+        //console.log(angular.element('#folder_parent').val())
     	var output={
-    		parent: angular.element('#folder_parent').val(),
-    		text: angular.element('#newFolder').val(),
+    		parent: $scope.folder.parent,
+    		text: $scope.folder.newFolder,
     		type: 'folder',
     		children: []
     	}
@@ -68,19 +79,19 @@ function kb_insert($scope, $http, $state, userService, peopleGroups) {
 
     $scope.submitPage=function(){
     	var output={
-    		parent: angular.element('#page_parent').val(),
-    		title: angular.element('#page_title').val(),
-    		text: angular.element('#page_text').val(),
-    		type: 'page',
-    		children: []
+    		parent: $scope.page.parent,
+    		title: $scope.page.titulo,
+    		text: $scope.page.text,
+            assinatura: userService.getUser().sAMAccountName,
+            data: Date(),
+            tags: $scope.page.tags
     	}
     	console.log(output);
     	$http({method: 'POST', url:'/kb/ins_page', data: output, params: {token: userService.getToken()}})
         	.then(function(response){
-        		//your code in case the post succeeds
         		//console.log(response);
-                alert('Produto inserido com sucesso.');
-                // $state.go('contatos');
+                alert('Página inserida com sucesso.');
+                getFolders()
         	})
         	.catch(function(err){
         		//your code in case your post fails
@@ -89,27 +100,46 @@ function kb_insert($scope, $http, $state, userService, peopleGroups) {
         	});
     }
 
-    $scope.submitFile=function(){
-    	var output={
-    		parent: angular.element('#file').val(),
-    		// title: angular.element('#page_title').val(),
-    		// text: angular.element('#page_text').val(),
-    		type: 'file',
-    	}
-    	console.log(output);
-    	$http({method: 'POST', url:'/kb/ins_file', data: output, params: {token: userService.getToken()}})
-        	.then(function(response){
-        		//your code in case the post succeeds
-        		//console.log(response);
-                alert('Produto inserido com sucesso.');
-                // $state.go('contatos');
-        	})
-        	.catch(function(err){
-        		//your code in case your post fails
-        		//console.log(err);
-                alert('Ocorreu um erro. Produto não adicionado. \nErro: '+JSON.stringify(err));
-        	});
+    $scope.uploadFile = function(){
+    var file = $scope.myFile;
+
+    console.log('file is ' );
+    console.dir(file);
+
+    var uploadUrl = "/kb/uploadfile";
+    fileUpload.uploadFileToUrl(file, uploadUrl);
+    };
+
+
+    //download de arquivos
+    $scope.downloadFile=function(filename, cursoId){
+        $http.post('/kb/download',{filename: filename, cursoId: cursoId})
+        .then(function(response){
+
+        }).catch(function(err){console.log(err)})
     }
+
+    // $scope.submitFile=function(){
+    // 	var output={
+    // 		parent: angular.element('#file').val(),
+    // 		// title: angular.element('#page_title').val(),
+    // 		// text: angular.element('#page_text').val(),
+    // 		type: 'file',
+    // 	}
+    // 	console.log(output);
+    // 	$http({method: 'POST', url:'/kb/ins_file', data: output, params: {token: userService.getToken()}})
+    //     	.then(function(response){
+    //     		//your code in case the post succeeds
+    //     		//console.log(response);
+    //             alert('Produto inserido com sucesso.');
+    //             // $state.go('contatos');
+    //     	})
+    //     	.catch(function(err){
+    //     		//your code in case your post fails
+    //     		//console.log(err);
+    //             alert('Ocorreu um erro. Produto não adicionado. \nErro: '+JSON.stringify(err));
+    //     	});
+    // }
 }
 
 angular.module('inspinia').controller('kb_insert', kb_insert);
