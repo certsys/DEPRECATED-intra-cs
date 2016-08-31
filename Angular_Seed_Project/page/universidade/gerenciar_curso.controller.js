@@ -12,7 +12,11 @@ function gerenciar_curso($scope, $http, userService, $state) {
 	});
 
     $scope.title = "Gerenciar curso | ";
-    $scope.curso;
+    $scope.curso = {
+		nome: "NETBECKUP",
+		descricao: "vargner moura é viadinho",
+		instrutor: "fatma bernardes #pas"
+	};
 	$scope.apertei = false;
 	
 	
