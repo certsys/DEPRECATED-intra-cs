@@ -1,37 +1,4 @@
-function modalDemoCtrl($scope, $modal) {
-
-    $scope.open = function () {
-
-        var modalInstance = $modal.open({
-            templateUrl: 'page/modais/modalUniversidade.html',
-            controller: ModalInstanceCtrl,
-            resolve: {
-                loadPlugin: function ($ocLazyLoad) {
-                    return $ocLazyLoad.load([
-                        {
-                            name: 'datePicker',
-                            files: ['js/plugins/moment/moment.min.js', 'css/plugins/datapicker/angular-datapicker.css',
-                                'js/plugins/datapicker/angular-datepicker.js']
-                        },
-                        {
-                            name: 'pasvaz.bindonce',
-                            files: ['js/plugins/bindonce/bindonce.min.js']
-                        },
-                        {
-                            files: ['css/plugins/clockpicker/clockpicker.css', 'js/plugins/clockpicker/clockpicker.js']
-                        },
-                        {
-                            files: ['css/plugins/sweetalert/sweetalert.css', 'js/plugins/sweetalert/sweetalert.min.js']
-                        }
-                    ]);
-                }
-            }
-        });
-    }
-
-};
-
-function ModalInstanceCtrl($scope, $modalInstance, $http, userService) {
+function ModalInstanceCtrl($scope, $modalInstance, $http, userService, getCurso, universidadeService) {
 
     $http({
         url: '/contacts',
@@ -43,10 +10,40 @@ function ModalInstanceCtrl($scope, $modalInstance, $http, userService) {
     }).catch(function (err) {
         // console.log(err);
     });
+    universidadeService.sendSalvou(false);
+    $scope.editar = false;
+    // Se o modal vier com dados pré cadastrados
+    if (angular.isDefined(getCurso)) {
+        $scope.editar = true;
+        $http({
+            url: '/contacts/perfil',
+            method: "GET",
+            params: {token: userService.getToken(), mail: getCurso.instrutor.sAMAccountName}
+        }).then(function (response) {
+            //your code in case the post succeeds
+            // console.log(response.data.lenght > 0);
+            $scope.titulo = getCurso.nome;
+            $scope.descricao = getCurso.descricao;
+            $scope.local = getCurso.local;
+            $scope.minInscritos = getCurso.min_inscritos;
+            $scope.maxInscritos = getCurso.max_inscritos;
+            var data_inicio = new Date(getCurso.data_inicio);
+            var data_fim = new Date(getCurso.data_fim);
+            $scope.diaInicio = data_inicio;
+            $scope.horarioInicio = data_inicio.getHours() + ":" + data_inicio.getMinutes();
+            $scope.horarioFim = data_fim.getHours() + ":" + data_fim.getMinutes();
+            $scope.dataLimiteInscricao = new Date(getCurso.data_limite_inscricao);
+            $scope.selected = response.data[0];
+        }).catch(function (err) {
+            // console.log(err);
+        });
+        //     instrutor: instrutor,
+    } else {
+        $scope.minInscritos = 0;
+        $scope.maxInscritos = 0;
+        $scope.diaInicio = new Date();
+    }
 
-    $scope.minInscritos = 0;
-
-    $scope.maxInscritos = 0;
 
     $scope.onChangeMinimo = function () {
         if ($scope.minInscritos > $scope.maxInscritos) $scope.maxInscritos = $scope.minInscritos;
@@ -68,8 +65,8 @@ function ModalInstanceCtrl($scope, $modalInstance, $http, userService) {
         var minutoInicio = horarioInicio.slice(3, 5);
         var horaFim = horarioFim.slice(0, 2);
         var minutoFim = horarioFim.slice(3, 5);
-        $scope.dataInicial = new Date(ano, mes-1, dia, horaInicio, minutoInicio);
-        $scope.dataFinal = new Date(ano, mes-1, dia, horaFim, minutoFim);
+        $scope.dataInicial = new Date(ano, mes - 1, dia, horaInicio, minutoInicio);
+        $scope.dataFinal = new Date(ano, mes - 1, dia, horaFim, minutoFim);
         $scope.cargaHoraria = ($scope.dataFinal.getHours() - $scope.dataInicial.getHours()) + (($scope.dataFinal.getMinutes() - $scope.dataInicial.getMinutes()) / 60);
     };
 
@@ -114,28 +111,58 @@ function ModalInstanceCtrl($scope, $modalInstance, $http, userService) {
             carga_horaria: $scope.cargaHoraria
         };
 
-        $http({
-            method: 'POST'
-            , url: '/cursos'
-            , data: data
-            , params: {token: userService.getToken()}
-        }).then(function (response) {
-                //your code in case the post succeeds
-                // console.log(response);
-                swal({
-                    title: "Sucesso!",
-                    text: "Seu curso foi criado com sucesso!",
-                    type: "success"
+
+        if ($scope.editar) {
+            $http({
+                method: 'PUT'
+                , url: '/cursos/edit/' + getCurso._id
+                , data: data
+                , params: {token: userService.getToken()}
+            }).then(function (response) {
+                    //your code in case the post succeeds
+                    // console.log(response);
+                    swal({
+                        title: "Sucesso!",
+                        text: "Seu curso foi editado com sucesso!",
+                        type: "success"
+                    });
+
+                    universidadeService.sendSalvou(true);
+                    $modalInstance.close();
+
+                }
+            )
+                .catch(function (err) {
+                    //your code in case your post fails
+                    // console.log(err);
                 });
+        } else {
+            $http({
+                method: 'POST'
+                , url: '/cursos'
+                , data: data
+                , params: {token: userService.getToken()}
+            }).then(function (response) {
+                    //your code in case the post succeeds
+                    // console.log(response);
+                    swal({
+                        title: "Sucesso!",
+                        text: "Seu curso foi criado com sucesso!",
+                        type: "success"
+                    });
 
-                $modalInstance.close();
+                    universidadeService.sendSalvou(true);
+                    $modalInstance.close();
 
-            }
-        )
-            .catch(function (err) {
-                //your code in case your post fails
-                // console.log(err);
-            });
+                }
+            )
+                .catch(function (err) {
+                    //your code in case your post fails
+                    // console.log(err);
+                });
+        }
+
+
     };
 
 
@@ -144,5 +171,4 @@ function ModalInstanceCtrl($scope, $modalInstance, $http, userService) {
 
 angular
     .module('inspinia')
-    .controller('modalDemoCtrl', modalDemoCtrl)
-    .controller('ModalInstanceCtrl', ModalInstanceCtrl);
+    .controller('ModalInstanceCtrl', ['getCurso', ModalInstanceCtrl]);

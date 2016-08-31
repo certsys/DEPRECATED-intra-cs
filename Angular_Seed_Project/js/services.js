@@ -1,113 +1,126 @@
- function contactService($sessionStorage) {
+function contactService($sessionStorage) {
 
-  var sendContact = function(newObj) {
-    var d = new Date(newObj.datanasc);
-    newObj.datanasc_parsed = d.getDate()+'/'+(d.getMonth()+1)+'/'+d.getFullYear();
-    $sessionStorage.contact = angular.toJson(newObj);
+    var sendContact = function (newObj) {
+        var d = new Date(newObj.datanasc);
+        newObj.datanasc_parsed = d.getDate() + '/' + (d.getMonth() + 1) + '/' + d.getFullYear();
+        $sessionStorage.contact = angular.toJson(newObj);
 
-  };
+    };
 
-  var getContact = function(){
-      return angular.fromJson($sessionStorage.contact);
-  };
+    var getContact = function () {
+        return angular.fromJson($sessionStorage.contact);
+    };
 
-  return {
-         sendContact: sendContact,
-         getContact: getContact
-     };
-
-};
-
- function postService($sessionStorage) {
-     var sendPost = function(newObj) {
-         $sessionStorage.post= angular.toJson(newObj);
-     };
-
-     var getPost = function(){
-         return angular.fromJson($sessionStorage.post);
-     };
-
-     return {
-         sendPost: sendPost,
-         getPost: getPost
-     };
-
- };
-
-  function universidadeService($sessionStorage) {
-
-  var sendCurso = function(newObj) {
-    sessionStorage.curso = angular.toJson(newObj);
-  };
-
-  var getCurso = function(){
-      return angular.fromJson($sessionStorage.curso);
-  };
-
-  return {
-         sendCurso: sendCurso,
-         getCurso: getCurso
-     };
+    return {
+        sendContact: sendContact,
+        getContact: getContact
+    };
 
 };
 
- function userService($sessionStorage, peopleGroups) {
+function postService($sessionStorage) {
+    var sendPost = function (newObj) {
+        $sessionStorage.post = angular.toJson(newObj);
+    };
 
-     var DEV = [
-         'eduardo.hyodo',
-         'henrique.cavalcante',
-         'ivan.zoppetti',
-         'lucas.felgueiras',
-         'pedro.strabeli',
-         'marcos.hosoya'     ];
+    var getPost = function () {
+        return angular.fromJson($sessionStorage.post);
+    };
 
-     var INSTRUCTORS  = [
-         'carlos.custodio',
-         'herbert.santos',
-         'henrique.cavalcante'
+    return {
+        sendPost: sendPost,
+        getPost: getPost
+    };
+
+};
+
+function universidadeService($sessionStorage) {
+
+    var salvou = false;
+
+    var sendCurso = function (newObj) {
+        $sessionStorage.curso = angular.toJson(newObj);
+    };
+
+    var getCurso = function () {
+        return salvou
+    };
+
+    var sendSalvou = function (newObj) {
+        salvou = newObj;
+    };
+
+    var getSalvou = function () {
+        return salvou;
+    };
+
+
+    return {
+        sendCurso: sendCurso,
+        getCurso: getCurso,
+        sendSalvou: sendSalvou,
+        getSalvou: getSalvou
+    };
+
+};
+
+function userService($sessionStorage, peopleGroups) {
+
+    var DEV = [
+        'eduardo.hyodo',
+        'henrique.cavalcante',
+        'ivan.zoppetti',
+        'lucas.felgueiras',
+        'pedro.strabeli',
+        'marcos.hosoya'];
+
+    var INSTRUCTORS = [
+        'carlos.custodio',
+        'herbert.santos',
+        'henrique.cavalcante'
         // 'marcos.hosoya'
-     ];
+    ];
 
-     
-     var sendUser = function (newObj) {
-         $sessionStorage.user = angular.toJson(newObj);
-     };
 
-     var getUser = function(){
-         return angular.fromJson($sessionStorage.user);
-     };
+    var sendUser = function (newObj) {
+        $sessionStorage.user = angular.toJson(newObj);
+    };
 
-     var sendToken = function(newObj) {
-         $sessionStorage.token = angular.toJson(newObj);
-     };
+    var getUser = function () {
+        return angular.fromJson($sessionStorage.user);
+    };
 
-     var getToken = function(){
-         return angular.fromJson($sessionStorage.token);
-     };
+    var sendToken = function (newObj) {
+        $sessionStorage.token = angular.toJson(newObj);
+    };
 
-     var insideGroup = function(array) {
-         for (var i = 0; i < array.length; i++) {
-             if (getUser().sAMAccountName == array[i]) return true;
-         }
-         return false;
-     };
+    var getToken = function () {
+        return angular.fromJson($sessionStorage.token);
+    };
 
-     var devGroup = function() {
-         for (var i = 0; i < DEV.length; i++) {
-             if (getUser().sAMAccountName == DEV[i]) return true;
-         }
-         return false;
-     };
+    var insideGroup = function (array) {
+        for (var i = 0; i < array.length; i++) {
+            if (getUser().sAMAccountName == array[i]) return true;
+        }
+        return false;
+    };
 
-     var instructorGroup = function() {
-         for (var i = 0; i < INSTRUCTORS.length; i++) {
-             if (getUser().sAMAccountName == INSTRUCTORS[i]) return true;
-         }
-         return false;
-     };
+    var devGroup = function () {
+        for (var i = 0; i < DEV.length; i++) {
+            if (getUser().sAMAccountName == DEV[i]) return true;
+        }
+        return false;
+    };
 
-    var Authenticate = function(){
-         $sessionStorage.permissions = {
+    var instructorGroup = function () {
+        for (var i = 0; i < INSTRUCTORS.length; i++) {
+            if (getUser().sAMAccountName == INSTRUCTORS[i]) return true;
+        }
+        return false;
+    };
+
+    var Authenticate = function () {
+        $sessionStorage.permissions = {
             debug: false,
             admin: false,
             comercial: false,
@@ -123,7 +136,7 @@
         peopleGroups.GROUPS()
             .then(function (data) {
                 if (angular.isDefined(data)) {
-                    for (var i=0; i<data.length; i++){
+                    for (var i = 0; i < data.length; i++) {
                         if (insideGroup(data[i].users)) $sessionStorage.permissions.admin = true;
                         if (insideGroup(data[i].users)) $sessionStorage.permissions.comercial = true;
                         if (insideGroup(data[i].users)) $sessionStorage.permissions.diretores = true;
@@ -143,16 +156,16 @@
         //     $state.go('feed')
     }
 
-     return {
-         sendUser: sendUser,
-         getUser: getUser,
-         sendToken: sendToken,
-         getToken: getToken,
-         insideGroup: insideGroup,
-         devGroup: devGroup,
-         Authenticate: Authenticate,
-         instructorGroup: instructorGroup
-     };
+    return {
+        sendUser: sendUser,
+        getUser: getUser,
+        sendToken: sendToken,
+        getToken: getToken,
+        insideGroup: insideGroup,
+        devGroup: devGroup,
+        Authenticate: Authenticate,
+        instructorGroup: instructorGroup
+    };
 }
 
 function peopleGroups($http, $q) {
@@ -162,7 +175,7 @@ function peopleGroups($http, $q) {
             method: "GET"
         }).then(function (response) {
             return (response.data);
-        }, function(response) {
+        }, function (response) {
             return $q.reject(response.data);
         });
     };
@@ -172,25 +185,25 @@ function peopleGroups($http, $q) {
     };
 }
 
- String.prototype.startWith = function (str) {
-     return this.indexOf(str) == 0;
- };
+String.prototype.startWith = function (str) {
+    return this.indexOf(str) == 0;
+};
 
- 'use strict';
- function linkFilter() {
-     return function (link) {
-         var result;
-         var startingUrl = "http://";
-         var httpsStartingUrl = "https://";
-         if(link.startWith(startingUrl)||link.startWith(httpsStartingUrl)){
-             result = link;
-         }
-         else {
-             result = startingUrl + link;
-         }
-         return result;
-     }
- }
+'use strict';
+function linkFilter() {
+    return function (link) {
+        var result;
+        var startingUrl = "http://";
+        var httpsStartingUrl = "https://";
+        if (link.startWith(startingUrl) || link.startWith(httpsStartingUrl)) {
+            result = link;
+        }
+        else {
+            result = startingUrl + link;
+        }
+        return result;
+    }
+}
 
 
 angular

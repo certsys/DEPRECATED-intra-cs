@@ -1,4 +1,4 @@
-function universidade($scope, $http, userService, $state, universidadeService) {
+function universidade($scope, $http, userService, $state, universidadeService, $modal) {
     $http({
         url: '/cursos',
         method: "GET",
@@ -12,10 +12,91 @@ function universidade($scope, $http, userService, $state, universidadeService) {
         // console.log(err);
     });
 
+    $scope.service = universidadeService;
     var INSCRICOES_ABERTAS = "Inscrições Abertas";
     var INSCRICOES_ENCERRADAS = "Inscrições Encerradas";
     var ENCERRADO = "Encerrado";
 
+    $scope.$watch('service.getSalvou()', function (newValue, oldValue) {
+        // Evita carregar se vierem os mesmos dados
+        if (newValue !== oldValue) {
+            $http({
+                url: '/cursos',
+                method: "GET",
+                params: {token: userService.getToken()}
+            }).then(function (response) {
+                //your code in case the post succeeds
+                $scope.cursos = response.data;
+            }).catch(function (err) {
+                // console.log(err);
+            });
+            $scope.service.sendSalvou(false);
+        }
+    });
+
+    $scope.open = function () {
+
+        var modalInstance = $modal.open({
+            templateUrl: 'page/modais/modalUniversidade.html',
+            controller: ModalInstanceCtrl,
+            resolve: {
+                getCurso: function () {
+                    return undefined;
+                },
+                loadPlugin: function ($ocLazyLoad) {
+                    return $ocLazyLoad.load([
+                        {
+                            name: 'datePicker',
+                            files: ['js/plugins/moment/moment.min.js', 'css/plugins/datapicker/angular-datapicker.css',
+                                'js/plugins/datapicker/angular-datepicker.js']
+                        },
+                        {
+                            name: 'pasvaz.bindonce',
+                            files: ['js/plugins/bindonce/bindonce.min.js']
+                        },
+                        {
+                            files: ['css/plugins/clockpicker/clockpicker.css', 'js/plugins/clockpicker/clockpicker.js']
+                        },
+                        {
+                            files: ['css/plugins/sweetalert/sweetalert.css', 'js/plugins/sweetalert/sweetalert.min.js']
+                        }
+                    ]);
+                }
+            }
+        });
+    };
+
+    $scope.edit = function (curso) {
+
+        var modalInstance = $modal.open({
+            templateUrl: 'page/modais/modalUniversidade.html',
+            controller: ModalInstanceCtrl,
+            resolve: {
+                getCurso: function () {
+                    return curso;
+                },
+                loadPlugin: function ($ocLazyLoad) {
+                    return $ocLazyLoad.load([
+                        {
+                            name: 'datePicker',
+                            files: ['js/plugins/moment/moment.min.js', 'css/plugins/datapicker/angular-datapicker.css',
+                                'js/plugins/datapicker/angular-datepicker.js']
+                        },
+                        {
+                            name: 'pasvaz.bindonce',
+                            files: ['js/plugins/bindonce/bindonce.min.js']
+                        },
+                        {
+                            files: ['css/plugins/clockpicker/clockpicker.css', 'js/plugins/clockpicker/clockpicker.js']
+                        },
+                        {
+                            files: ['css/plugins/sweetalert/sweetalert.css', 'js/plugins/sweetalert/sweetalert.min.js']
+                        }
+                    ]);
+                }
+            }
+        });
+    };
 
     $scope.title = "Universidade Certsys";
 
@@ -99,20 +180,20 @@ function universidade($scope, $http, userService, $state, universidadeService) {
             $scope.backgroundColor = '#3dadd0';
             $scope.color = '#ffffff';
             return INSCRICOES_ABERTAS;
-        }else if (data_atual > data_inicio){
+        } else if (data_atual > data_inicio) {
             $scope.backgroundColor = 'red';
             $scope.color = '#ffffff';
             return ENCERRADO;
         }
-        else{
+        else {
             $scope.backgroundColor = '#d1dade';
             $scope.color = '#676a6c';
             return INSCRICOES_ENCERRADAS;
         }
     };
 
-    $scope.allowSubscription = function (curso){
-        if(curso.inscritos.length >= curso.max_inscritos) return false;
+    $scope.allowSubscription = function (curso) {
+        if (curso.inscritos.length >= curso.max_inscritos) return false;
         else if ($scope.status(curso) !== INSCRICOES_ABERTAS) return false;
         return true;
     };

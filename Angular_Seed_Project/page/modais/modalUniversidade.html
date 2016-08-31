@@ -32,7 +32,7 @@
                 <label class="col-sm-2 control-label">Data:</label>
                 <div class="col-sm-4 input-group-2 date">
                     <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                    <input id="data-inicio" type="text" date-time="" data-ng-model="dateHolder"
+                    <input id="data-inicio" watch-direct-changes="true" type="text" date-time="diaInicio" data-ng-model="diaInicio"
                            format="DD/MM/YYYY" view="date" min-view="date" auto-close="true"
                            class="ng-pristine ng-valid ng-scope ng-touched form-control">
                     <!--<input type="text" class="form-control" data-ng-model="programado.checkOut" name="programado" date-time required min="{{ today | date: 'yyyy-MM-dd' }}" view="date" auto-close="true" min-view="date" format="DD/MM/YYYY">-->
@@ -55,7 +55,7 @@
             <div class="form-group"><label class="col-sm-2 control-label">Limite:</label>
                 <div class="col-sm-10 input-group-2 date">
                     <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                    <input id="data-limite-inscricao" type="text" date-time="" data-ng-model="dateHolder"
+                    <input id="data-limite-inscricao" type="text" date-time="" data-ng-model="dataLimiteInscricao"
                            format="DD/MM/YYYY HH:mm" view="date" min-view="hours" auto-close="true"
                            class="ng-pristine ng-valid ng-scope ng-touched form-control">
                     <!--<input type="text" class="form-control" data-ng-model="programado.checkOut" name="programado" date-time required min="{{ today | date: 'yyyy-MM-dd' }}" view="date" auto-close="true" min-view="date" format="DD/MM/YYYY">-->
