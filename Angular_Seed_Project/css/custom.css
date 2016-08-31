@@ -382,3 +382,13 @@
     margin-top: 0; // remove the gap so it doesn't close
 
 }
+
+.input-group-2 {
+    position: relative;
+    display: table;
+    border-collapse: separate;
+}
+
+.clockpicker-popover{
+    z-index: 10000;
+}

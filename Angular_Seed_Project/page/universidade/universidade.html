@@ -31,7 +31,7 @@
 					    <div class="ibox-tools" ng-if="permissions.instructors" ng-controller="modalDemoCtrl">
         					<a class="btn btn-primary btn-xs" ng-click="open()">Criar Curso</a>
     				    </div>
-                    
+
                 </div>
                 <div class="ibox-content">
                     <div class="row m-b-sm m-t-sm">
@@ -51,8 +51,8 @@
                     <div class="project-list">
 
                         <table class="table table-hover">
-                            <tbody bindonce ng-repeat="curso in cursos | orderBy:'-data_inicio' | filter:search">
-                            <tr>
+                            <tbody>
+                            <tr bindonce ng-repeat="curso in cursos | orderBy:'-data_inicio' | filter:search">
                                 <td class="project-status">
                                     <span ng-style="{'background-color': backgroundColor, 'color': color}"
                                           class="label">{{status(curso)}}</span>

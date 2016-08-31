@@ -172,9 +172,12 @@ function minimalizaSidebar($timeout) {
  */
 function clockPicker() {
     return {
-        restrict: 'A',
+        restrict: 'EA',
         link: function(scope, element) {
-                element.clockpicker();
+                element.clockpicker({
+                    donetext: 'OK',
+                    autoclose: true
+                });
         }
     };
 }

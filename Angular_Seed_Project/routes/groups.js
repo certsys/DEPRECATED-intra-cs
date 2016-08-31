@@ -23,7 +23,8 @@ var GROUPS = [
     'Financeiro',
     'Juridico',
     'PreVendas',
-    'Técnico'
+    'Técnico',
+    'RH'
 ];
 
 
@@ -304,6 +305,58 @@ router.post('/tecnico', function (req, res, next) {
                     else if (data == null) {
                         var newGroup = new Group({
                             name: GROUPS[6],
+                            users: admins,
+                            permissions: false
+                        });
+
+                        newGroup.save(function (err) {
+                            if (err) return err;
+                        });
+                    }
+                    else if (data != null) {
+                        data.users = admins;
+                        data.save(function (err, data) {
+                            if (err) return next(err);
+                        });
+                    }
+                });
+                res.json(null);
+            });
+        }
+    });
+});
+
+
+router.post('/rh', function (req, res, next) {
+    var admins = [];
+    var calls = [];
+    ad.getUsersForGroup(groupName, function (err, users) {
+        if (err) {
+            res.json('ERROR: ' + JSON.stringify(err));
+            return;
+        }
+
+        if (!users) res.json({data: 'Group: ' + groupName + ' not found.'});
+        else {
+            async.each(users, function (user, callback) {
+                ad.isUserMemberOf(user.sAMAccountName, GROUPS[7], function (err, isMember) {
+
+                    if (isMember) {
+                        admins.push(user.sAMAccountName);
+                    }
+                    if (err) {
+                        console.log('ERROR: ' + JSON.stringify(err));
+                        callback(err);
+                    } else
+                        callback(null);
+                });
+            }, function (err) {
+                if (err) return console.log(err);
+                Group.findOne({name: GROUPS[7]}, function (err, data) {
+                    if (err) return err;
+                    else if (data == null) {
+                        var newGroup = new Group({
+                            name: GROUPS[7],
                             users: admins,
                             permissions: false
                         });

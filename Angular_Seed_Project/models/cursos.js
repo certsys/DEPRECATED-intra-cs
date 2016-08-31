@@ -10,7 +10,7 @@ var cursoSchema = new mongoose.Schema({
     min_inscritos: Number,
     max_inscritos: Number,
     created_by: String,
-    instrutor: String,
+    instrutor: Object,
     carga_horaria: Number,
     data_criacao: {type: Date, default: Date.now},
     inscritos: [], //of objects
