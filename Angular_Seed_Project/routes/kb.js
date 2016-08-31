@@ -58,34 +58,45 @@ router.get('/', function (req, res) {
         if (err) return console.error(err);
         //console.log(folders[0]._id)
         rootFolderId=folders[0]._id
-        kbtree.find({parent: rootFolderId}, function(err,lvl1){
+        //console.log(folders[0]._id)
+        kbtree.find({parent: folders[0]._id.toString()}, function(err,lvl1){
+            //console.log(lvl1)
+            // for (i=0; i<lvl1.length; i++){
+            //     kbtree.find({parent: lvl1[i]._id.toString()}, function(err,lvl2){
+            //         if(lvl2.length>0) {
+            //             console.log(lvl1[i])
+            //             for(j=0; j<lvl2.length; j++) lvl1[i].children.push(lvl2[j]);
+            //         }
+            //     })
+            // }
             res.json(lvl1);
         })
     })
-
-    // res.download('util/fotos.csv');
-    // res.json(folders[0]._id);
 });
 
 
 
 
-router.get('/get_folders', function (req, res) {
+
+router.get('/get_lvl2_id:id_parent', function (req, res) {
     // get folders from mongo;
-    kbtree.find({}, function (err, folders) {
+    var id_parent= req.params.id_parent;
+    kbtree.find({parent: id_parent}, function (err, folders) {
         if (err) return console.error(err);
         res.json(folders);
     })
 });
 
 
+
+
 router.get('/get_folders', function (req, res) {
     // get folders from mongo;
     kbtree.find({}, function (err, folders) {
         if (err) return console.error(err);
-        for (i=0; i<folders.length; i++){
-                if (folders[i].text=='Produto' && !rootFolderId) rootFolderId=folder[i]._id
-            }
+        // for (i=0; i<folders.length; i++){
+        //         if (folders[i].text=='Produto' && !rootFolderId) rootFolderId=folder[i]._id
+        //     }
         res.json(folders);
     })
 });
@@ -105,6 +116,9 @@ router.post('/ins_folder', function (req, res) {
         type: req.body.type, //[folder, page, file]
         children: req.body.children //recebe todos os filhos deste produto.
     });
+    //push to array if nested.
+    kbtree.find()
+
     newTreeNode.save(function (err) {
         if (err) throw err;
     });

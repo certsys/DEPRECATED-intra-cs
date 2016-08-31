@@ -1,17 +1,48 @@
 function kbCtrl($scope, $http, $state, userService) {
+    
+    var rootNode;
 
     $http({
-        url: '/kb',
+        url: '/kb/get_folders',
         method: "GET",
         params: {token: userService.getToken()}
     }).then(function (response) {
         //your code in case the post succeeds
-        console.log(response);
+        var data= response.data
+        var tree = [];
+        
+        //console.log(data);
+        for(i=0; i<data.length; i++){
+            if (data[i].text=="Produtos")  {
+                rootNode = data[i]._id;
+                break;
+            }
+        }
+        // for(i=0; i<data.length; i++){
+        //     if(data[i].parent == rootNode) {
+        //         tree.push(data[i]); //coloca as paginas de nivel 1
+        //         for(j=0; j<data.length; j++)
+        //             if(data[j].parent == data[i]._id) {
+        //                 data[i].children.push(data[j]) //coloca paginas de nivel 2
+        //                 for(k=0; k<data.length; k++)
+        //                     if(data[k].parent == data[j].)
+        //             }
+        //     }
+        // }
+        console.log(tree)
+        $scope.folders=tree;
     }).catch(function (err) {
         $state.go('login');
         console.log(err);
     });
 
+    $scope.get_lvl2 = function(parent_id){
+        console.log(parent_id)
+        $http.get('/kb/get_lvl2_id'+parent_id).then(function(response){
+            console.log(response)
+            $scope.lvl2=response.data;
+        }).catch(function(err){console.log("something went wrong when getting lvl 2")})
+    }
 
     $scope.getSelectedNode = function() {
         var selectedNode = $scope.treeInstance.jstree(true).get_node($scope.treeInstance.jstree(true).get_selected());
