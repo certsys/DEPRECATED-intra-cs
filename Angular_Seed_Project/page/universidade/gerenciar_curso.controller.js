@@ -1,39 +1,39 @@
-function gerenciar_curso($scope, $http, userService, fileUpload, $state ) {
-	$http({
-		url: '/cursos',
-		method: "GET",
-		params: {token: userService.getToken()}
-	}).then(function (response) {
-		//your code in case the post succeeds
-		// console.log(response);
-	}).catch(function (err) {
-		$state.go('login');
-		// console.log(err);
-	});
+function gerenciar_curso($scope, $http, userService, fileUpload, $state) {
+    $http({
+        url: '/cursos',
+        method: "GET",
+        params: {token: userService.getToken()}
+    }).then(function (response) {
+        //your code in case the post succeeds
+        // console.log(response);
+    }).catch(function (err) {
+        $state.go('login');
+        // console.log(err);
+    });
 
     $scope.title = "Gerenciar curso | ";
-    $scope.curso;
-
 
     // upload de arquivos
-    $scope.uploadFile = function(){
-	var file = $scope.myFile;
+    $scope.uploadFile = function () {
+        var file = $scope.myFile;
 
-	console.log('file is ' );
-	console.dir(file);
+        console.log('file is ');
+        console.dir(file);
 
-	var uploadUrl = "/cursos/uploadfile";
-	fileUpload.uploadFileToUrl(file, uploadUrl);
-	};
+        var uploadUrl = "/cursos/uploadfile";
+        fileUpload.uploadFileToUrl(file, uploadUrl);
+    };
 
 
-	//download de arquivos
-	$scope.downloadFile=function(filename, cursoId){
-		$http.post('/cursos/download',{filename: filename, cursoId: cursoId})
-		.then(function(response){
+    //download de arquivos
+    $scope.downloadFile = function (filename, cursoId) {
+        $http.post('/cursos/download', {filename: filename, cursoId: cursoId})
+            .then(function (response) {
 
-		}).catch(function(err){console.log(err)})
-	}
+            }).catch(function (err) {
+            console.log(err)
+        })
+    };
 
 
 // 	$scope.uploadFile = function(){
@@ -50,8 +50,20 @@ function gerenciar_curso($scope, $http, userService, fileUpload, $state ) {
 //       });
 //     };
 // };
-};
+    $scope.curso = {
+        nome: "NETBECKUP",
+        descricao: "vargner moura é viadinho",
+        instrutor: "fatma bernardes #pas"
+    };
+    $scope.apertei = false;
 
+
+    $scope.pressionado = function () {
+        $scope.apertei = true;
+
+    }
+
+};
 
 
 angular

@@ -1,117 +1,287 @@
-<div class="row wrapper border-bottom white-bg page-heading">
-    <div class="col-sm-4">
-        <h2>{{title}}</h2>
-    </div>
-</div>
-<div class="row">
-<div class="col-lg-9">
-<div class="wrapper wrapper-content animated fadeInRight">
-<div class="ibox">
-<div class="ibox-content">
-<div class="row">
-    <div class="col-lg-12">
-        <div class="m-b-md">
+<!-- Wrapper-->
+<div id="wrapper" class="top-navigation">
 
-            <h2>{{curso.nome}}</h2>
+    <!-- Navigation -->
+    <div ng-include="'views/common/navigation.html'"></div>
+
+
+    <!-- Page wraper -->
+    <!-- ng-class with current state name give you the ability to extended customization your view -->
+    <div id="page-wrapper" class="gray-bg {{$state.current.name}}">
+
+
+        <div class="row wrapper border-bottom white-bg page-heading">
+            <div class="col-sm-4">
+                <h2>{{title}}</h2>
+            </div>
         </div>
-        <dl class="dl-horizontal">
-            <dt>Status:</dt>
-            <dd><span class="label label-primary">Active</span></dd>
-        </dl>
-    </div>
-</div>
-<div class="row">
-    <div class="col-lg-5">
-        <dl class="dl-horizontal">
 
-            <dt>Created by:</dt>
-            <dd>Alex Smith</dd>
-            <dt>Messages:</dt>
-            <dd> 162</dd>
-            <dt>Client:</dt>
-            <dd><a href="" class="text-navy"> Zender Company</a></dd>
-            <dt>Version:</dt>
-            <dd> v1.4.2</dd>
-        </dl>
-    </div>
-    <div class="col-lg-7" id="cluster_info">
-        <dl class="dl-horizontal">
 
-            <dt>Last Updated:</dt>
-            <dd>16.08.2014 12:15:57</dd>
-            <dt>Created:</dt>
-            <dd> 10.07.2014 23:36:57</dd>
-            <dt>Participants:</dt>
-            
-        </dl>
-    </div>
-</div>
-<div class="row">
-    <div class="col-lg-12">
-        <dl class="dl-horizontal">
-            <dt>Presentes:</dt>
-            <dd>
-                <div class="progress progress-striped active m-b-sm">
-                    <div style="width: {{presents_percentage}}%;" class="progress-bar"></div>
+        <div class="row">
+            <div class="col-lg-9">
+                <div class="wrapper wrapper-content animated fadeInRight">
+                    <div class="ibox">
+                        <div class="ibox-content">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="m-b-md">
+
+                                        <h2>{{curso.nome}}</h2>
+                                    </div>
+                                    <dl class="dl-horizontal">
+                                        <dt>Status:</dt>
+                                        <dd><span class="label label-primary">Active</span></dd>
+                                    </dl>
+                                </div>
+
+                            </div>
+
+
+                            <div class="row">
+                                <div class="col-lg-5">
+                                    <dl class="dl-horizontal">
+
+                                        <dt>Título do Curso:</dt>
+                                        <dd>IBM Websphere 12.2.3</dd>
+                                        <dt>Quem Ministrou:</dt>
+                                        <dd>Willyson Santos</dd>
+                                        <dt>Local:</dt>
+                                        <dd><a href="" class="text-navy">Certsys</a> / Sala de Reunião</dd>
+                                        <dt>Data do Curso:</dt>
+                                        <dd>12/12/2018</dd>
+                                        <dt>Limite de Inscrição:</dt>
+                                        <dd>01/12/2018</dd>
+                                        <dt>Número de Inscritos:</dt>
+                                        <dd>7</dd>
+                                        <dt>Presentes:</dt>
+                                        <dd>6</dd>
+                                    </dl>
+                                </div>
+                                <div class="col-lg-7" id="cluster_info">
+                                    <dl class="dl-horizontal">
+
+                                        <dt>Carga do Curso:</dt>
+                                        <dd>16 horas</dd>
+                                        <dt>Criado em:</dt>
+                                        <dd>10.07.2014 23:36:57</dd>
+                                        <dt>Participantes:</dt>
+                                        <dd class="project-people">
+                                            <a href=""><img alt="image" class="img-circle"
+                                                            src="../../util/cicero.lima.png"></a>
+                                            <a href=""><img alt="image" class="img-circle"
+                                                            src="../../util/cicero.lima.png"></a>
+                                            <a href=""><img alt="image" class="img-circle"
+                                                            src="../../util/cicero.lima.png"></a>
+                                            <a href=""><img alt="image" class="img-circle"
+                                                            src="../../util/cicero.lima.png"></a>
+                                            <a href=""><img alt="image" class="img-circle"
+                                                            src="../../util/cicero.lima.png"></a>
+                                        </dd>
+                                    </dl>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <dl class="dl-horizontal">
+                                        <dt>Presentes:</dt>
+                                        <dd>
+                                            <div class="progress progress-striped active m-b-sm">
+                                                <div style="width:{{presents_percentage}}%;" class="progress-bar"></div>
+                                            </div>
+                                            <small>Curso teve <strong>{{presents_percentage}}%</strong> de presença.
+                                            </small>
+                                        </dd>
+                                    </dl>
+                                </div>
+                            </div>
+                            <div class="row m-t-sm">
+                                <div class="col-lg-12">
+                                    <div class="panel blank-panel ui-tab">
+
+                                        <tabset>
+                                            <tab heading="Lista de Presença" active="tab.active" class="dsads">
+                                                <div class="feed-activity-list">
+                                                    <div class="form-group">
+
+                                                        <div class="feed-element">
+                                                            <div>
+                                                                <input ng-click="Here()" class="pull-left"
+                                                                       style="width:40px; height:20px;" icheck
+                                                                       type="checkbox" ng-model="main.check1">
+                                                                <div style="marging:10px;">
+                                                                    <a href="" class="pull-left">
+                                                                        <img alt="image" class="img-circle"
+                                                                             src="../../util/cicero.lima.png">
+                                                                    </a>
+                                                                </div>
+                                                                <div class="media-body ">
+                                                                    <small class="pull-right">2h atrás</small>
+                                                                    <strong>Mark Johnson</strong> se inscreveu no curso
+                                                                    <strong>{{curso.nome}}</strong><br>
+                                                                    <small class="text-muted">Instrito: 2:10 pm -
+                                                                        12.06.201
+                                                                    </small>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+
+                                                        <div class="feed-element">
+                                                            <div>
+                                                                <input ng-click="Here()" class="pull-left"
+                                                                       style="width:40px; height:20px;" icheck
+                                                                       type="checkbox" ng-model="main.check3">
+                                                                <div style="marging:10px;">
+                                                                    <a href="" class="pull-left">
+                                                                        <img alt="image" class="img-circle"
+                                                                             src="../../util/cicero.lima.png">
+                                                                    </a>
+                                                                </div>
+                                                                <div class="media-body ">
+                                                                    <small class="pull-right">2h atrás</small>
+                                                                    <strong>Mark Johnson</strong> se inscreveu no curso
+                                                                    <strong>{{curso.nome}}</strong><br>
+                                                                    <small class="text-muted">Instrito: 2:10 pm -
+                                                                        12.06.201
+                                                                    </small>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="feed-element">
+                                                            <div>
+                                                                <input ng-click="Here()" class="pull-left"
+                                                                       style="width:40px; height:20px;" icheck
+                                                                       type="checkbox" ng-model="main.check4">
+                                                                <div style="marging:10px;">
+                                                                    <a href="" class="pull-left">
+                                                                        <img alt="image" class="img-circle"
+                                                                             src="../../util/cicero.lima.png">
+                                                                    </a>
+                                                                </div>
+                                                                <div class="media-body ">
+                                                                    <small class="pull-right">2h atrás</small>
+                                                                    <strong>Mark Johnson</strong> se inscreveu no curso
+                                                                    <strong>{{curso.nome}}</strong><br>
+                                                                    <small class="text-muted">Instrito: 2:10 pm -
+                                                                        12.06.201
+                                                                    </small>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="feed-element">
+                                                            <div>
+                                                                <input ng-click="Here()" class="pull-left"
+                                                                       style="width:40px; height:20px;" icheck
+                                                                       type="checkbox" ng-model="main.check5">
+                                                                <div style="marging:10px;">
+                                                                    <a href="" class="pull-left">
+                                                                        <img alt="image" class="img-circle"
+                                                                             src="../../util/cicero.lima.png">
+                                                                    </a>
+                                                                </div>
+                                                                <div class="media-body ">
+                                                                    <small class="pull-right">2h atrás</small>
+                                                                    <strong>Mark Johnson</strong> se inscreveu no curso
+                                                                    <strong>{{curso.nome}}</strong><br>
+                                                                    <small class="text-muted">Instrito: 2:10 pm -
+                                                                        12.06.201
+                                                                    </small>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+
+                                                    </div>
+                                                </div>
+                                            </tab>
+
+
+                                            <tab heading="Informações e Arquivos do Curso">
+
+
+                                                <div class="row">
+                                                    <div class="col-lg-12">
+                                                        <div class="ibox float-e-margins">
+                                                            <h2>
+                                                                {{curso.nome}}<br/>
+                                                            </h2>
+                                                            <p><strong>
+                                                                <small>{{curso.instrutor}}</small>
+                                                            </strong></p>
+                                                            <h3>
+                                                                {{curso.descricao}}
+                                                            </h3>
+                                                        </div>
+
+
+                                                        <div class="row">
+                                                            <div class="col-lg-12">
+                                                                <div ng-repeat="file in curso.arquivos"
+                                                                     class="file-box">
+                                                                    <div class="file">
+                                                                        <a href="">
+                                                                            <span class="corner"></span>
+                                                                            <div class="icon">
+                                                                                <i class="fa fa-file"></i>
+                                                                            </div>
+                                                                            <div class="file-name">
+                                                                                {{file.nome}}
+                                                                                <br/>
+                                                                                <small>Adicionado: Jan 11, 2016</small>
+                                                                            </div>
+                                                                        </a>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="row">
+                                                            <div class="col-lg-12">
+                                                                <form>
+                                                                    <div>
+                                                                        <input name="file" type="file"
+                                                                               ng-click="pressionado()"
+                                                                               file-model="myFile"/>
+                                                                        <div ng-if="apertei">
+                                                                            <br>
+                                                                            <button class="btn btn-lg btn-primary"
+                                                                                    ng-click="uploadFile()">Enviar
+                                                                                Arquivo
+                                                                            </button>
+                                                                        </div>
+                                                                    </div>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </tab>
+                                        </tabset>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <small>Curso teve <strong>{{presents_percentage}}%</strong> de presença.</small>
-            </dd>
-        </dl>
-    </div>
-</div>
-<div class="row m-t-sm">
-<div class="col-lg-12">
-<div class="panel ">
-<h3>Lista de presença</h3>
-<a href="" class="btn btn-white btn-xs pull-right"><i class="fa fa-plus"></i>  Adicionar Participante</a></div>
-<div class="row m-t-sm">
-<div class="col-lg-5">
-    <h4> Participantes</h4>
-    <ul> 
-        <li class="btn btn-default" ng-click="Here()">Me</li>
-    </ul>
-</div>
-<div class="col-lg-1">
-    <a class="btn btn-default">>></a>
-    </div>
-<div class="col-lg-5">
-    <h4> Presentes</h4>
-    </div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="col-lg-3">
-    <div class="wrapper wrapper-content project-manager">
-        <h4>Curso: {{curso.nome}}</h4>
-        <h5>Instrutor: {{curso.instrutor}}</h5>
-        <p class="small">
-            {{curso.descricao}}
-        </p>
-        <h4>Tags do curso</h5>
-        <ul class="tag-list" style="padding: 0">
-            <li ng-repeat="tag in curso.tags"><a href=""><i class="fa fa-tag"></i> {{tag}}</a></li>
-            <li><a href=""><i class="fa fa-tag"></i> Lorem ipsum</a></li>
-            <li><a href=""><i class="fa fa-tag"></i> Passages</a></li>
-            <li><a href=""><i class="fa fa-tag"></i> Variations</a></li>
-        </ul>
-        <div class="text-left m-t-md">
-        <h5>Arquivos do curso</h5>
-        <ul class="list-unstyled project-files">
-            <li ng-repeat="file in curso.arquivos"><a href=""><i class="fa fa-file"></i>{{file.nome}}</a></li>
-            <li><a href=""><i class="fa fa-file-picture-o"></i> Logo_zender_company.jpg</a></li>
-            <li><a href=""><i class="fa fa-stack-exchange"></i> Email_from_Alex.mln</a></li>
-            <li><a href=""><i class="fa fa-file"></i> Contract_20_11_2014.docx</a></li>
-        </ul>
+            </div>
+            <div class="col-lg-3">
+                <div class="wrapper wrapper-content animated fadeInRight">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-content">
+                            <div class="hr-line-dashed"></div>
+                            <h4>
+                                <small>Instrutor:</small>
+                                <br> {{curso.instrutor}}
+                            </h4>
+                            <div class="hr-line-dashed"></div>
+                            <img src="../../util/herbert.santos.png" class="img-circle img-responsive">
+                            <br/>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="text-center m-t-md">
-        <form><input name="file" type = "file" file-model = "myFile"/>
-         <button class="btn btn-xs btn-primary" ng-click = "uploadFile()">Adicionar Arquivo</button>
-        </div></form>
     </div>
-</div>
 </div>
