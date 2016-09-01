@@ -58,14 +58,15 @@
          'henrique.cavalcante',
          'ivan.zoppetti',
          'lucas.felgueiras',
-         'pedro.strabeli',
-         'marcos.hosoya'     ];
+         'pedro.strabeli'
+         //'marcos.hosoya'
+     ];
 
      var INSTRUCTORS  = [
          'carlos.custodio',
-         'herbert.santos'
+         'herbert.santos',
          // 'henrique.cavalcante'
-        // 'marcos.hosoya'
+         'marcos.hosoya'
      ];
 
      

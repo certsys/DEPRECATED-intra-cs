@@ -357,6 +357,9 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, $locati
                         }, 
 						{
                             files: ['css/plugins/switchery/switchery.css', 'js/plugins/switchery/switchery.js']
+                        },
+                        {
+                            files: ['css/plugins/metisMenu/metisMenu.min.css', 'js/plugins/metisMenu/jquery.metisMenu.js']
                         }
                     ]);
                 }

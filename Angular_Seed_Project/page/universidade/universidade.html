@@ -51,8 +51,8 @@
                     <div class="project-list">
 
                         <table class="table table-hover">
-                            <tbody bindonce ng-repeat="curso in cursos | orderBy:'-data_inicio' | filter:search">
-                            <tr>
+                            <tbody>
+                            <tr ng-repeat-start="curso in cursos | orderBy:'-data_inicio' | filter:search"">
                                 <td class="project-status">
                                     <span ng-style="{'background-color': backgroundColor, 'color': color}"
                                           class="label">{{status(curso)}}</span>
@@ -86,8 +86,25 @@
                                     <a class="btn btn-white btn-sm fixed-width" ng-disabled="buttonDisabled"
                                        ng-click="addSubscription(curso)"><i class="fa fa-pencil"></i> Inscrever </a>
                                 </td>
+                                <td class="project-actions">
+                                    <a ng-if="curso.expanded" ng-click="curso.expanded = false">
+                                        <i class="fa fa-chevron-up"></i> </a>
+                                    <a ng-if="!curso.expanded" ng-click="curso.expanded = true">
+                                        <i class="fa fa-chevron-down"></i> </a>
+                                </td>
+                            </tr>
+                            <tr ng-if="curso.expanded" ng-repeat-end="" class="animated fadeInRight">
+                                <td colspan="3">
+                                    <small><b>Descrição</b></small>
+                                    <br>
+                                    <smal>{{curso.descricao}}</smal>
+                                </td>
+                                <td colspan="4">
+
+                                </td>
                             </tr>
                             </tbody>
+
                         </table>
                     </div>
                 </div>
