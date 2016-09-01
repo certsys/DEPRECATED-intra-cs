@@ -1,8 +1,7 @@
-    var express = require('express');
+var express = require('express');
 var router = express.Router();
 var async = require('async');
 var Contact = require('../models/contacts');
-var jwt = require('jsonwebtoken');
 var ActiveDirectory = require('activedirectory');
 
 var config = {
@@ -29,40 +28,40 @@ router.put('/', function (req, res, next) {
 
         if (!users) res.json({data: 'Group: ' + groupName + ' not found.'});
         else {
-            users.forEach(function(user) {
+            users.forEach(function (user) {
                 var sAMAccountName = user.sAMAccountName;
                 var final = [];
                 var extra_groups = user.dn.split(",");
 
-                ad.getGroupMembershipForUser(sAMAccountName, function(err, groups) {
+                ad.getGroupMembershipForUser(sAMAccountName, function (err, groups) {
                     if (err) {
-                        console.log('ERROR: ' +JSON.stringify(err));
+                        console.log('ERROR: ' + JSON.stringify(err));
                         return;
                     }
 
                     if (!groups) console.log('User: ' + sAMAccountName + ' not found.');
                     else {
-                        extra_groups.forEach(function(extra) {
+                        extra_groups.forEach(function (extra) {
                             extra = (extra.split("="))[1];
                             if (extra != null && final.indexOf(extra) == -1) final.push(extra);
                         });
 
-                        groups.forEach(function(group) {
+                        groups.forEach(function (group) {
                             var group_cn = group.cn.split(",");
                             var group_dn = group.dn.split(",");
 
-                            group_cn.forEach(function(element) {
+                            group_cn.forEach(function (element) {
                                 element = (element.split("="))[1];
                                 if (element != null && final.indexOf(element) == -1) final.push(element);
                             });
 
-                            group_dn.forEach(function(element) {
+                            group_dn.forEach(function (element) {
                                 element = (element.split("="))[1];
                                 if (element != null && final.indexOf(element) == -1) final.push(element);
                             });
 
                         });
-                        Contact.findOne({nome : user.cn}, function (err, data) {
+                        Contact.findOne({nome: user.cn}, function (err, data) {
                             if (err) return err;
                             else if (user.sAMAccountName === "marco.villa.adm") {
                             }
@@ -88,7 +87,7 @@ router.put('/', function (req, res, next) {
                             }
                             else if (data != null) {
                                 if (final.indexOf("Ex-Funcionarios") > -1) {
-                                    data.remove(function(err, data) {
+                                    data.remove(function (err, data) {
                                         if (err) return next(err);
                                     });
                                 }
@@ -139,44 +138,13 @@ router.put('/', function (req, res, next) {
 });
 
 router.use(function (req, res, next) {
-
-    // check header or url parameters or post parameters for token
-    var token = req.body.token || req.param('token') || req.headers['x-access-token'];
-
-    // decode token
-    if (token) {
-
-        // verifies secret and checks exp
-        jwt.verify(token, 'Cert0104sys', function (err, decoded) {
-            if (err) {
-                return res.status(403).send({
-                    success: false,
-                    message: 'Falha de autenticação do Token'
-                });
-            } else {
-                // if everything is good, save to request for use in other routes
-                req.decoded = decoded;
-                next();
-            }
-        });
-
-    } else {
-
-        // if there is no token
-        // return an error
-        return res.status(403).send({
-            success: false,
-            message: 'No token provided.'
-        });
-
-    }
-
+    global.verificaToken(req, res, next)
 });
 
 // Pega usuário pelo email
 router.get('/perfil', function (req, res) {
     var mail = req.param("mail");
-    if(mail !== "") {
+    if (mail !== "") {
         var query = Contact.where({mail: new RegExp(mail, 'ig')});
         query.find(function (err, data) {
             if (err) return console.error(err);

@@ -17,23 +17,6 @@ function universidade($scope, $http, userService, $state, universidadeService, $
     var INSCRICOES_ENCERRADAS = "Inscrições Encerradas";
     var ENCERRADO = "Encerrado";
 
-    $scope.$watch('service.getSalvou()', function (newValue, oldValue) {
-        // Evita carregar se vierem os mesmos dados
-        if (newValue !== oldValue) {
-            $http({
-                url: '/cursos',
-                method: "GET",
-                params: {token: userService.getToken()}
-            }).then(function (response) {
-                //your code in case the post succeeds
-                $scope.cursos = response.data;
-            }).catch(function (err) {
-                // console.log(err);
-            });
-            $scope.service.sendSalvou(false);
-        }
-    });
-
     $scope.open = function () {
 
         var modalInstance = $modal.open({

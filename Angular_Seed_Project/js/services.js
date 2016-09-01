@@ -87,6 +87,13 @@ function userService($sessionStorage, peopleGroups) {
     };
 
     var getUser = function () {
+
+        // return {
+        //     sAMAccountName : 'henrique.cavalcante',
+        //     name : 'Henrique Hashimoto Cavalcante',
+        //     givenName : 'Henrique'
+        // };
+        
         return angular.fromJson($sessionStorage.user);
     };
 

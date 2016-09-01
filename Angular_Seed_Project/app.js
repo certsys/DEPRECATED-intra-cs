@@ -3,6 +3,7 @@ var mongoose = require('mongoose');
 var http = require('http');
 var compression = require('compression'); // Compressão do site para melhor performance
 var path = require('path');
+var jwt = require('jsonwebtoken');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
@@ -27,6 +28,40 @@ mongoose.connect('mongodb://localhost/intra-cs');
 
 var app = express();
 
+global.verificaToken = function (req, res, next) {
+
+    // check header or url parameters or post parameters for token
+    var token = req.body.token || req.param('token') || req.headers['x-access-token'];
+    // decode token
+    if (token) {
+
+        // verifies secret and checks exp
+        jwt.verify(token, 'Cert0104sys', function (err, decoded) {
+            if (err) {
+                return res.status(403).send({
+                    success: false,
+                    message: 'Falha de autenticação do Token'
+                });
+            } else {
+                // if everything is good, save to request for use in other routes
+                req.decoded = decoded;
+                next();
+            }
+        });
+
+    } else {
+
+        // if there is no token
+        // return an error
+        return res.status(403).send({
+            success: false,
+            message: 'No token provided.'
+        });
+
+    }
+
+};
+    
 // view engine setup
 app.set('views', path.join(__dirname));
 app.set('view engine', 'ejs');
