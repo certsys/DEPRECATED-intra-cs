@@ -17,6 +17,8 @@ var kb = require('./routes/kb');
 var institucional = require('./routes/institucional');
 var cursos = require ('./routes/cursos');
 
+//var multipartMiddleware = multipart();
+
 // Rotas relacionadas ao Mongo DB
 var posts = require('./routes/posts'); // Posts do Newsfeed
 var contacts = require('./routes/contacts'); // Contatos dos Funcionários
@@ -68,6 +70,9 @@ app.set('view engine', 'ejs');
 
 app.use(favicon('./img/favicon.ico'));
 app.use(compression());
+
+
+
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));

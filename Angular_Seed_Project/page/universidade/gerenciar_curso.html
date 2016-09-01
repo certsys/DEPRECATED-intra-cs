@@ -42,13 +42,7 @@
             <dt>Created:</dt>
             <dd> 10.07.2014 23:36:57</dd>
             <dt>Participants:</dt>
-            <dd class="project-people">
-                <a href=""><img alt="image" class="img-circle" src="img/a3.jpg"></a>
-                <a href=""><img alt="image" class="img-circle" src="img/a1.jpg"></a>
-                <a href=""><img alt="image" class="img-circle" src="img/a2.jpg"></a>
-                <a href=""><img alt="image" class="img-circle" src="img/a4.jpg"></a>
-                <a href=""><img alt="image" class="img-circle" src="img/a5.jpg"></a>
-            </dd>
+            
         </dl>
     </div>
 </div>
@@ -115,10 +109,9 @@
         </ul>
         </div>
         <div class="text-center m-t-md">
-            <a href="" class="btn btn-xs btn-primary">Add files</a>
-            <a href="" class="btn btn-xs btn-primary">Report contact</a>
-
-        </div>
+        <form><input name="file" type = "file" file-model = "myFile"/>
+         <button class="btn btn-xs btn-primary" ng-click = "uploadFile()">Adicionar Arquivo</button>
+        </div></form>
     </div>
 </div>
 </div>

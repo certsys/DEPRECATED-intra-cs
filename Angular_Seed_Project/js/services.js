@@ -212,6 +212,28 @@ function linkFilter() {
     }
 }
 
+function fileUpload($http){
+    this.uploadFileToUrl = function(file, uploadUrl){
+       var fd = new FormData();
+       fd.append('files', file, file.name);
+        console.log(fd)
+       $http.post(uploadUrl, fd, {
+          transformRequest: angular.identity,
+          headers: {'Content-Type': undefined}
+       })
+       .then(function(response){
+        var data = {_id: _id,
+            originalFilename: response.data}
+         $http.post(uploadUrl+'2', data). //2 é a rota que acrescenta no mongo.
+         then(function(response){console.log("ok")}).catch(function(err){console.log(err)})
+       })
+       .catch(function(){
+
+       });
+    }
+}
+
+
 
 angular
     .module('inspinia')
@@ -220,4 +242,5 @@ angular
     .service('universidadeService', universidadeService)
     .service('userService', userService)
     .service('peopleGroups', peopleGroups)
+    .service('fileUpload', fileUpload)
     .filter('linkFilter', linkFilter);

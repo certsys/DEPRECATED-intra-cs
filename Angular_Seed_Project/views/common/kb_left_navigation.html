@@ -1,18 +1,17 @@
-<div>
+<div class="row border-bottom white-bg">
 <nav class="navbar-default navbar-static-side" role="navigation">
     <div class="sidebar-collapse">
         <ul side-navigation class="nav metismenu" id="side-menu">
-            
             <li ng-repeat="folder in folders"><a href=""><i class="fa fa-sitemap"></i> <span class="nav-label">{{folder.text}}</span><span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse">
-                    <li><a href="">WebSphere SOA/BPM <span class="fa arrow"></span></a>
-                        <ul class="nav nav-third-level">
-                            <li>
-                                <a href="">Third Level Item</a>
+                    <li ng-repeat="i in folder.children track by $index"><a ng-click="getPages(i._id)""><span class="nav-label">{{i.text}}</span><span class="fa arrow"></span></a>
+                        <ul class="nav nav-third-level-collapse collapse">
+                            <li ng-repeat="j in pages">
+                                <a ng-click="sendPage(j)">{{j.title}}</a>
                             </li>
                         </ul>
                     </li>
-				</ul>	
+
             </li>
 			<!--
 			<li>
