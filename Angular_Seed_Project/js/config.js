@@ -360,6 +360,9 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, $locati
                         },
                         {
                             files: ['css/plugins/metisMenu/metisMenu.min.css', 'js/plugins/metisMenu/jquery.metisMenu.js']
+                        },
+                        {
+                            files: ['js/bootstrap/ui-bootstrap-tpls-2.1.3.min.js']
                         }
                     ]);
                 }

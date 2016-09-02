@@ -19,6 +19,31 @@ function universidade($scope, $http, userService, $state, universidadeService) {
 
     $scope.title = "Universidade Certsys";
 
+    $scope.tiposStatus = ["Inscrições Abertas","Inscrições Encerradas","Encerrado"];
+
+    $scope.selectedStatus =[];
+    $scope.searchByStatus = function (){
+        var status = this.status;
+        for (var i=0; i < $scope.selectedStatus.length; i++ ){
+            if ($scope.selectedStatus[i] == status) {
+                $scope.selectedStatus.splice(i,1);
+                return;
+            }
+        }
+        $scope.selectedStatus.push(status);
+
+    }
+
+    $scope.isChecked = function (status) {
+        for (var i = 0; i < $scope.selectedStatus.length; i++ ) {
+            if ($scope.selectedStatus[i] == status ) {
+                return 'icon-ok pull right';
+            }
+        }
+        return false;
+    };
+
+
     $scope.buttonDisabled = false;
 
     $scope.subscribed = function (curso) {
@@ -98,15 +123,18 @@ function universidade($scope, $http, userService, $state, universidadeService) {
         if (data_atual < data_limite_inscricao) {
             $scope.backgroundColor = '#3dadd0';
             $scope.color = '#ffffff';
+            curso.status = INSCRICOES_ABERTAS; //---added here
             return INSCRICOES_ABERTAS;
         }else if (data_atual > data_inicio){
             $scope.backgroundColor = 'red';
             $scope.color = '#ffffff';
+            curso.status= ENCERRADO; //---added here
             return ENCERRADO;
         }
         else{
             $scope.backgroundColor = '#d1dade';
             $scope.color = '#676a6c';
+            curso.status = INSCRICOES_ENCERRADAS; //---added here
             return INSCRICOES_ENCERRADAS;
         }
     };
@@ -127,12 +155,45 @@ function universidade($scope, $http, userService, $state, universidadeService) {
         instructors: false
     };
 
+    // $scope.myFilter = function (selectedStatus, cursos) {
+    //     if (!cursos) return;
+    //     console.log(selectedStatus);
+    //     console.log(cursos);
+    //     return cursos
+    // }
+
     if (userService.instructorGroup()) $scope.permissions.instructors = true;
+}
+
+function cursoStatusFilter () {
+    return function (cursos, selectedStatus) {
+        if (!cursos || !selectedStatus) return;
+        console.log(cursos);
+        console.log(selectedStatus)
+
+        if (!angular.isUndefined(cursos) && !angular.isUndefined(selectedStatus) && selectedStatus.length > 0) {
+            var filtredCursos = [];
+            angular.forEach(selectedStatus, function (status) {
+                angular.forEach(cursos, function (curso) {
+                    if (angular.equals(curso.status, status)) {
+                        filtredCursos.push(curso);
+                    }
+                });
+            });
+            //console.log(tempClients)
+            return filtredCursos;
+
+        } else {
+            return cursos;
+        }
+    }
 }
 
 angular
     .module('inspinia')
-    .controller('universidade', universidade);
+    .controller('universidade', universidade)
+    .filter('cursoStatusFilter', cursoStatusFilter);
+
 
 
 
