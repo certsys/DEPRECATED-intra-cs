@@ -121,6 +121,7 @@ function userService($sessionStorage, peopleGroups) {
 
     var Authenticate = function () {
         $sessionStorage.permissions = {
+
             debug: false,
             admin: false,
             comercial: false,

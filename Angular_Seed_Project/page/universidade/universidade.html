@@ -35,10 +35,15 @@
                 </div>
                 <div class="ibox-content">
                     <div class="row m-b-sm m-t-sm">
-                        <div class="col-md-1">
-                            <button type="button" id="loading-example-btn" class="btn btn-white btn-sm"><i
+                        <div class="col-md-1 btn-group" dropdown auto-close="disable">
+                            <div data-toggle="dropdown" type="button" id="loading-example-btn" class="btn btn-white btn-sm dropdown-toggle"><i
                                     class="fa fa-filter"></i> Filtrar
-                            </button>
+                            </div>
+                            <ul class="dropdown-menu">
+                                <li ng-repeat="status in tiposStatus">
+                                    <a ng-click="searchByStatus()">{{status}}<span data-ng-class="isChecked(status)"></span></a>
+                                </li>
+                            </ul>
                         </div>
                         <div class="col-md-11">
                             <div class="input-group"><input type="text" placeholder="Pesquisar cursos..."
@@ -52,7 +57,8 @@
 
                         <table class="table table-hover">
                             <tbody>
-                            <tr bindonce ng-repeat="curso in cursos | orderBy:'-data_inicio' | filter:search">
+                            <!--<tr ng-repeat-start="curso in cursos | orderBy:'-data_inicio'| filter: myFilter(selectedStatus,cursos) | filter: search">-->
+                            <tr ng-repeat-start="curso in filtered = ( cursos | orderBy:'-data_inicio' | cursoStatusFilter:selectedStatus | filter: search)">
                                 <td class="project-status">
                                     <span ng-style="{'background-color': backgroundColor, 'color': color}"
                                           class="label">{{status(curso)}}</span>
@@ -91,8 +97,25 @@
                                     <a class="btn btn-white btn-sm fixed-width" ng-disabled="buttonDisabled"
                                        ng-click="addSubscription(curso)"><i class="fa fa-pencil"></i> Inscrever </a>
                                 </td>
+                                <td class="project-actions">
+                                    <a ng-if="curso.expanded" ng-click="curso.expanded = false">
+                                        <i class="fa fa-chevron-up"></i> </a>
+                                    <a ng-if="!curso.expanded" ng-click="curso.expanded = true">
+                                        <i class="fa fa-chevron-down"></i> </a>
+                                </td>
+                            </tr>
+                            <tr ng-if="curso.expanded" ng-repeat-end="" class="animated fadeInRight">
+                                <td colspan="3">
+                                    <small><b>Descrição</b></small>
+                                    <br>
+                                    <smal>{{curso.descricao}}</smal>
+                                </td>
+                                <td colspan="4">
+
+                                </td>
                             </tr>
                             </tbody>
+
                         </table>
                     </div>
                 </div>
