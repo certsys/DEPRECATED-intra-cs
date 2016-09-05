@@ -35,11 +35,15 @@
                 </div>
                 <div class="ibox-content">
                     <div class="row m-b-sm m-t-sm">
-                        <div class="col-md-1 btn-group" dropdown auto-close="disable">
+                        <div class="col-md-1 btn-group">
                             <div data-toggle="dropdown" type="button" id="loading-example-btn" class="btn btn-white btn-sm dropdown-toggle"><i
                                     class="fa fa-filter"></i> Filtrar
                             </div>
-                            <ul class="dropdown-menu">
+                            <ul class="dropdown-menu" style="min-width: 200px;">
+                                <li>
+                                    <a ng-click="selectedStatus=[]"><span class="fa fa-times pull-right-universidadeFilter"></span>Desmarcar Todos</a>
+                                </li>
+                                <li class="divider"></li>
                                 <li ng-repeat="status in tiposStatus">
                                     <a ng-click="searchByStatus()">{{status}}<span data-ng-class="isChecked(status)"></span></a>
                                 </li>
@@ -57,7 +61,6 @@
 
                         <table class="table table-hover">
                             <tbody>
-                            <!--<tr ng-repeat-start="curso in cursos | orderBy:'-data_inicio'| filter: myFilter(selectedStatus,cursos) | filter: search">-->
                             <tr ng-repeat-start="curso in filtered = ( cursos | orderBy:'-data_inicio' | cursoStatusFilter:selectedStatus | filter: search)">
                                 <td class="project-status">
                                     <span ng-style="{'background-color': backgroundColor, 'color': color}"

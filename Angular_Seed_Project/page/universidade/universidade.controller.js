@@ -37,9 +37,11 @@ function universidade($scope, $http, userService, $state, universidadeService) {
     $scope.isChecked = function (status) {
         for (var i = 0; i < $scope.selectedStatus.length; i++ ) {
             if ($scope.selectedStatus[i] == status ) {
-                return 'icon-ok pull right';
+                console.log('myicon')
+                return 'fa fa-check pull-right-universidadeFilter';
             }
         }
+        console.log('false')
         return false;
     };
 
@@ -168,8 +170,6 @@ function universidade($scope, $http, userService, $state, universidadeService) {
 function cursoStatusFilter () {
     return function (cursos, selectedStatus) {
         if (!cursos || !selectedStatus) return;
-        console.log(cursos);
-        console.log(selectedStatus)
 
         if (!angular.isUndefined(cursos) && !angular.isUndefined(selectedStatus) && selectedStatus.length > 0) {
             var filtredCursos = [];
