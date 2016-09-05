@@ -10,37 +10,9 @@ function postManager($scope, $http, postService, $state, userService, peopleGrou
         $state.go('login');
         // console.log(err);
     });
-
-    $scope.permissions = {
-        debug: false,
-        admin: false,
-        comercial: false,
-        diretores: false,
-        prevendas: false,
-        tecnico: false
-    };
-
-    if(userService.devGroup()) $scope.permissions.debug = true;
-
-    peopleGroups.GROUPS()
-        .then(function(data) {
-            if(angular.isDefined(data)) {
-                if (userService.insideGroup(data[0].users)) $scope.permissions.admin = true;
-                if (userService.insideGroup(data[4].users)) $scope.permissions.comercial = true;
-                if (userService.insideGroup(data[2].users)) $scope.permissions.diretores = true;
-                if (userService.insideGroup(data[3].users)) $scope.permissions.prevendas = true;
-                if (userService.insideGroup(data[1].users)) $scope.permissions.tecnico = true;
-            }
-            if (!($scope.permissions.debug || $scope.permissions.admin || $scope.permissions.diretores))
-                $state.go('feed');
-        }, function(error){
-            // console.log('error', error);
-        });
-
-    // Só administradores do sistema podem entrar nessa view
-    // if(!userService.isAdmin())
-    //     $state.go('feed');
-
+    
+    if (!(userService.Authenticate().debug || userService.Authenticate().admin || userService.Authenticate().diretores))
+        $state.go('feed');
 
     $scope.title = "Controle dos Posts";
 

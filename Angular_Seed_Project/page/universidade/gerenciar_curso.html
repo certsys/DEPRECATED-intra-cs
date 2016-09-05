@@ -11,6 +11,9 @@
 
 
         <div class="row wrapper border-bottom white-bg page-heading">
+
+            <i ng-if="loading" class="centered fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+
             <div class="col-sm-4">
                 <h2>{{title}}</h2>
             </div>
@@ -40,42 +43,31 @@
                             <div class="row">
                                 <div class="col-lg-5">
                                     <dl class="dl-horizontal">
-
-                                        <dt>Título do Curso:</dt>
-                                        <dd>IBM Websphere 12.2.3</dd>
-                                        <dt>Quem Ministrou:</dt>
-                                        <dd>Willyson Santos</dd>
+                                        <dt>Instrutor:</dt>
+                                        <dd>{{instrutor.nome}}</dd>
                                         <dt>Local:</dt>
-                                        <dd><a href="" class="text-navy">Certsys</a> / Sala de Reunião</dd>
+                                        <dd>{{curso.local}}</dd>
                                         <dt>Data do Curso:</dt>
-                                        <dd>12/12/2018</dd>
+                                        <dd>{{dataInicio}}</dd>
                                         <dt>Limite de Inscrição:</dt>
-                                        <dd>01/12/2018</dd>
+                                        <dd>{{dataLimite}}</dd>
                                         <dt>Número de Inscritos:</dt>
-                                        <dd>7</dd>
+                                        <dd>{{curso.inscritos.length}}</dd>
                                         <dt>Presentes:</dt>
-                                        <dd>6</dd>
+                                        <dd>{{presentes}}</dd>
                                     </dl>
                                 </div>
                                 <div class="col-lg-7" id="cluster_info">
                                     <dl class="dl-horizontal">
 
                                         <dt>Carga do Curso:</dt>
-                                        <dd>16 horas</dd>
+                                        <dd>{{curso.carga_horaria}} horas</dd>
                                         <dt>Criado em:</dt>
-                                        <dd>10.07.2014 23:36:57</dd>
+                                        <dd>{{dataCriacao}}</dd>
                                         <dt>Participantes:</dt>
                                         <dd class="project-people">
-                                            <a href=""><img alt="image" class="img-circle"
-                                                            src="../../util/cicero.lima.png"></a>
-                                            <a href=""><img alt="image" class="img-circle"
-                                                            src="../../util/cicero.lima.png"></a>
-                                            <a href=""><img alt="image" class="img-circle"
-                                                            src="../../util/cicero.lima.png"></a>
-                                            <a href=""><img alt="image" class="img-circle"
-                                                            src="../../util/cicero.lima.png"></a>
-                                            <a href=""><img alt="image" class="img-circle"
-                                                            src="../../util/cicero.lima.png"></a>
+                                            <a ng-repeat="participante in participantes track by $index" ng-click="goToPerfil(participante)"><img alt="image" class="img-circle"
+                                                            src="{{participante.imagem}}"></a>
                                         </dd>
                                     </dl>
                                 </div>
@@ -86,9 +78,9 @@
                                         <dt>Presentes:</dt>
                                         <dd>
                                             <div class="progress progress-striped active m-b-sm">
-                                                <div style="width:{{presents_percentage}}%;" class="progress-bar"></div>
+                                                <div style="width:{{presentes/curso.inscritos.length*100}}%;" class="progress-bar"></div>
                                             </div>
-                                            <small>Curso teve <strong>{{presents_percentage}}%</strong> de presença.
+                                            <small>Curso teve <strong>{{presentes/curso.inscritos.length*100}}%</strong> de presença.
                                             </small>
                                         </dd>
                                     </dl>
@@ -103,96 +95,24 @@
                                                 <div class="feed-activity-list">
                                                     <div class="form-group">
 
-                                                        <div class="feed-element">
+                                                        <div class="feed-element" ng-repeat="inscrito in inscritos">
                                                             <div>
-                                                                <input ng-click="Here()" class="pull-left"
+                                                                <input ng-click="marcarPresenca(curso, inscrito)" class="pull-left"
                                                                        style="width:40px; height:20px;" icheck
-                                                                       type="checkbox" ng-model="main.check1">
+                                                                       type="checkbox" ng-checked="conferirPresenca(curso, inscrito)">
                                                                 <div style="marging:10px;">
                                                                     <a href="" class="pull-left">
                                                                         <img alt="image" class="img-circle"
-                                                                             src="../../util/cicero.lima.png">
+                                                                             src="{{inscrito.imagem}}">
                                                                     </a>
                                                                 </div>
                                                                 <div class="media-body ">
-                                                                    <small class="pull-right">2h atrás</small>
-                                                                    <strong>Mark Johnson</strong> se inscreveu no curso
+                                                                    <strong>{{inscrito.nome}}</strong> se inscreveu no curso
                                                                     <strong>{{curso.nome}}</strong><br>
-                                                                    <small class="text-muted">Instrito: 2:10 pm -
-                                                                        12.06.201
-                                                                    </small>
+                                                                    <small class="text-muted">Inscrito: {{getDataInscricao(curso, inscrito) | date:'dd/MM/yyyy HH:mm'}}</small>
                                                                 </div>
                                                             </div>
                                                         </div>
-
-
-                                                        <div class="feed-element">
-                                                            <div>
-                                                                <input ng-click="Here()" class="pull-left"
-                                                                       style="width:40px; height:20px;" icheck
-                                                                       type="checkbox" ng-model="main.check3">
-                                                                <div style="marging:10px;">
-                                                                    <a href="" class="pull-left">
-                                                                        <img alt="image" class="img-circle"
-                                                                             src="../../util/cicero.lima.png">
-                                                                    </a>
-                                                                </div>
-                                                                <div class="media-body ">
-                                                                    <small class="pull-right">2h atrás</small>
-                                                                    <strong>Mark Johnson</strong> se inscreveu no curso
-                                                                    <strong>{{curso.nome}}</strong><br>
-                                                                    <small class="text-muted">Instrito: 2:10 pm -
-                                                                        12.06.201
-                                                                    </small>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="feed-element">
-                                                            <div>
-                                                                <input ng-click="Here()" class="pull-left"
-                                                                       style="width:40px; height:20px;" icheck
-                                                                       type="checkbox" ng-model="main.check4">
-                                                                <div style="marging:10px;">
-                                                                    <a href="" class="pull-left">
-                                                                        <img alt="image" class="img-circle"
-                                                                             src="../../util/cicero.lima.png">
-                                                                    </a>
-                                                                </div>
-                                                                <div class="media-body ">
-                                                                    <small class="pull-right">2h atrás</small>
-                                                                    <strong>Mark Johnson</strong> se inscreveu no curso
-                                                                    <strong>{{curso.nome}}</strong><br>
-                                                                    <small class="text-muted">Instrito: 2:10 pm -
-                                                                        12.06.201
-                                                                    </small>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="feed-element">
-                                                            <div>
-                                                                <input ng-click="Here()" class="pull-left"
-                                                                       style="width:40px; height:20px;" icheck
-                                                                       type="checkbox" ng-model="main.check5">
-                                                                <div style="marging:10px;">
-                                                                    <a href="" class="pull-left">
-                                                                        <img alt="image" class="img-circle"
-                                                                             src="../../util/cicero.lima.png">
-                                                                    </a>
-                                                                </div>
-                                                                <div class="media-body ">
-                                                                    <small class="pull-right">2h atrás</small>
-                                                                    <strong>Mark Johnson</strong> se inscreveu no curso
-                                                                    <strong>{{curso.nome}}</strong><br>
-                                                                    <small class="text-muted">Instrito: 2:10 pm -
-                                                                        12.06.201
-                                                                    </small>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-
                                                     </div>
                                                 </div>
                                             </tab>
@@ -208,7 +128,7 @@
                                                                 {{curso.nome}}<br/>
                                                             </h2>
                                                             <p><strong>
-                                                                <small>{{curso.instrutor}}</small>
+                                                                <small>{{instrutor.nome}}</small>
                                                             </strong></p>
                                                             <h3>
                                                                 {{curso.descricao}}
@@ -273,10 +193,10 @@
                             <div class="hr-line-dashed"></div>
                             <h4>
                                 <small>Instrutor:</small>
-                                <br> {{curso.instrutor}}
+                                <br> {{instrutor.nome}}
                             </h4>
                             <div class="hr-line-dashed"></div>
-                            <img src="../../util/herbert.santos.png" class="img-circle img-responsive">
+                            <img ng-src="{{instrutor.imagem}}" class="img-circle img-responsive">
                             <br/>
                         </div>
                     </div>

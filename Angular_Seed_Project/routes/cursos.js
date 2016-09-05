@@ -107,6 +107,31 @@ router.put('/removeSubscription/:id', function (req, res, next) {
 
 });
 
+router.put('/mudaPresenca/:id', function (req, res, next) {
+
+    Curso.findById(req.params.id, function (err, data) {
+        var index = data.inscritos.map(function (inscrito) {
+            return inscrito.sAMAccountName;
+        }).indexOf(req.body.sAMAccountName);
+
+        if (index > -1) {
+            data.inscritos.splice(index, 1);
+            var dados = {
+                _id: req.body._id,
+                sAMAccountName: req.body.sAMAccountName,
+                data_inscricao: req.body.data_inscricao,
+                presente: req.body.presente
+            };
+            data.inscritos.push(dados);
+            data.save(function (err, data) {
+                if (err) throw err;
+                res.json({data: 'Pessoa mudou a presenca com successo!'});
+            });
+        }
+    });
+
+});
+
 router.delete('/remove/:id', function (req, res) {
     Curso.findById(req.params.id, function (err, data) { //Soft delete
         data.isDeleted = true;

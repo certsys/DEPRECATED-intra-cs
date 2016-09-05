@@ -43,7 +43,7 @@ function universidadeService($sessionStorage) {
     };
 
     var getCurso = function () {
-        return salvou
+        return angular.fromJson($sessionStorage.curso);
     };
 
     var sendSalvou = function (newObj) {
@@ -87,13 +87,6 @@ function userService($sessionStorage, peopleGroups) {
     };
 
     var getUser = function () {
-
-        // return {
-        //     sAMAccountName : 'henrique.cavalcante',
-        //     name : 'Henrique Hashimoto Cavalcante',
-        //     givenName : 'Henrique'
-        // };
-        
         return angular.fromJson($sessionStorage.user);
     };
 
@@ -155,13 +148,15 @@ function userService($sessionStorage, peopleGroups) {
                 console.log('error', error);
             });
 
-        if (!($sessionStorage.permissions.debug || $sessionStorage.permissions.admin || $sessionStorage.permissions.diretores))
-            $state.go('feed');
+        // if (!($sessionStorage.permissions.debug || $sessionStorage.permissions.admin || $sessionStorage.permissions.diretores))
+        //     $state.go('feed');
+
+        return $sessionStorage.permissions;
 
         // Só administradores do sistema podem entrar nessa view
         // if(!userService.isAdmin())
         //     $state.go('feed')
-    }
+    };
 
     return {
         sendUser: sendUser,

@@ -11,7 +11,10 @@ function editnews($http, $scope, postService, $state, $timeout, userService, peo
         // console.log(err);
     });
 
-    userService.Authenticate();
+
+    if (!(userService.Authenticate().debug || userService.Authenticate().admin || userService.Authenticate().diretores))
+        $state.go('feed');
+
     // Só administradores do sistema podem entrar nessa view
     // if (!userService.isAdmin())
     //     $state.go('feed');

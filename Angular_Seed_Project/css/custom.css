@@ -392,3 +392,12 @@
 .clockpicker-popover{
     z-index: 10000;
 }
+
+.centered {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    z-index: 10000;
+    /* bring your own prefixes */
+    transform: translate(-50%, -50%);
+}

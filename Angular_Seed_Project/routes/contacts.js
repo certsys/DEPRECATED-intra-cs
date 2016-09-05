@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var async = require('async');
+var fs = require('fs');
 var Contact = require('../models/contacts');
 var ActiveDirectory = require('activedirectory');
 
@@ -152,6 +153,25 @@ router.get('/perfil', function (req, res) {
         })
     }
     else res.json(null);
+});
+
+//Pega os inscritos de um curso
+router.post('/inscritos', function (req, res) {
+    var inscritos = req.body;
+    if (inscritos.length >= 1) {
+        var mails = [];
+        inscritos.forEach(function (inscrito) {
+            mails.push(new RegExp(inscrito.sAMAccountName, 'ig'));
+        });
+        if (mails.length) {
+            Contact.find().where('mail').in(mails).exec(function (err, contacts) {
+                res.json(contacts);
+            });
+        }
+        else
+            res.json(null);
+    }
+
 });
 
 // Pega todos os contatos

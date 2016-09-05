@@ -10,7 +10,9 @@ function kb_insert($scope, $http, $state, userService, peopleGroups) {
  //        console.log(err);
  //    });
 
-     userService.Authenticate();
+
+    if (!(userService.Authenticate().debug || userService.Authenticate().admin || userService.Authenticate().diretores))
+        $state.go('feed');
 
     // Só administradores do sistema podem entrar nessa view
     // if(!userService.isAdmin())

@@ -11,8 +11,7 @@ function universidade($scope, $http, userService, $state, universidadeService, $
         $state.go('login');
         // console.log(err);
     });
-
-    $scope.service = universidadeService;
+    
     var INSCRICOES_ABERTAS = "Inscrições Abertas";
     var INSCRICOES_ENCERRADAS = "Inscrições Encerradas";
     var ENCERRADO = "Encerrado";
@@ -182,16 +181,14 @@ function universidade($scope, $http, userService, $state, universidadeService, $
     };
 
     $scope.permissions = {
-        debug: false,
-        admin: false,
-        comercial: false,
-        diretores: false,
-        prevendas: false,
-        tecnico: false,
-        instructors: false
+        debug: userService.Authenticate().debug,
+        admin: userService.Authenticate().admin,
+        comercial: userService.Authenticate().comercial,
+        diretores: userService.Authenticate().diretores,
+        prevendas: userService.Authenticate().prevendas,
+        tecnico: userService.Authenticate().tecnico,
+        instructors: userService.Authenticate().instructors
     };
-
-    if (userService.instructorGroup()) $scope.permissions.instructors = true;
 }
 
 angular

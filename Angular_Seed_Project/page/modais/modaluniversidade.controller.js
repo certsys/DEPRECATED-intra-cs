@@ -1,4 +1,4 @@
-function ModalInstanceCtrl($scope, $modalInstance, $http, userService, getCurso, universidadeService) {
+function ModalInstanceCtrl($scope, $modalInstance, $http, userService, getCurso, universidadeService, $state) {
 
     $http({
         url: '/contacts',
@@ -10,6 +10,7 @@ function ModalInstanceCtrl($scope, $modalInstance, $http, userService, getCurso,
     }).catch(function (err) {
         // console.log(err);
     });
+
     universidadeService.sendSalvou(false);
     $scope.editar = false;
     // Se o modal vier com dados pré cadastrados
@@ -57,6 +58,19 @@ function ModalInstanceCtrl($scope, $modalInstance, $http, userService, getCurso,
         $modalInstance.dismiss('cancel');
     };
 
+    $scope.gerenciar = function (){
+        if (angular.isDefined(getCurso)){
+            universidadeService.sendCurso(getCurso);
+            $state.go('universidade_manage');
+            $modalInstance.close();
+
+        }
+    };
+
+    $scope.isCreate = function () {
+        return (angular.isDefined(getCurso));
+    };
+
     var criarDatas = function (date, horarioInicio, horarioFim) {
         var dia = date.slice(0, 2);
         var mes = date.slice(3, 5);
@@ -71,7 +85,7 @@ function ModalInstanceCtrl($scope, $modalInstance, $http, userService, getCurso,
     };
 
     // Pega uma String do tipo dd/mm/aaaa hh:mm e transforma em ISODate
-    var changeDateToISO = function (date) {
+    var criarDataLimiteInscricao = function (date) {
         var dia = date.slice(0, 2);
         var mes = date.slice(3, 5);
         var ano = date.slice(6, 10);
@@ -90,7 +104,7 @@ function ModalInstanceCtrl($scope, $modalInstance, $http, userService, getCurso,
         };
 
         criarDatas(angular.element('#data-inicio').val(), $scope.horarioInicio, $scope.horarioFim);
-        changeDateToISO(angular.element('#data-limite-inscricao').val());
+        criarDataLimiteInscricao(angular.element('#data-limite-inscricao').val());
 
         var data = {
             nome: $scope.titulo,
