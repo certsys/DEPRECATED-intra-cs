@@ -6,9 +6,9 @@ var multiparty = require('connect-multiparty');
 var multipartMiddleware = multiparty();
 
 
-// router.use(function (req, res, next) {
-//     global.verificaToken(req, res, next)
-// });
+router.use(function (req, res, next) {
+    global.verificaToken(req, res, next)
+});
 
 // Pega todos os cursos
 router.get('/', function (req, res) {

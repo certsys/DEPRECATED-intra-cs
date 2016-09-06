@@ -8,6 +8,7 @@ function contactService($sessionStorage) {
     };
 
     var getContact = function () {
+
         return angular.fromJson($sessionStorage.contact);
     };
 

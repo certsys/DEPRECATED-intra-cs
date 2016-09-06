@@ -24,8 +24,9 @@ function feed($scope, $http, $state, $sce, userService) {
             return true;
         return false;
     }
-    
-    $scope.title = "Newsfeed Certsys";
+
+
+    $scope.title = "Campos viado";
     $scope.limit = 2;
 
     $scope.loadMore = function () {

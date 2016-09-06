@@ -334,6 +334,22 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, $locati
             }
         })
 
+        .state('campos', {
+            url: "/campos",
+            templateUrl: "views/common/navigation.html",
+            controller: "feed",
+            data: {pageTitle: 'Perfil'},
+            resolve: {
+                loadPlugin: function ($ocLazyLoad) {
+                    return $ocLazyLoad.load([
+                        {
+                            files: ['js/plugins/sparkline/jquery.sparkline.min.js']
+                        }
+                    ]);
+                }
+            }
+        })
+
 
 
         //página universidade certsys
