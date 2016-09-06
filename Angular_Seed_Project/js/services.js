@@ -56,7 +56,7 @@
      var DEV = [
          'eduardo.hyodo',
          'henrique.cavalcante',
-         'ivan.zoppetti',
+         //'ivan.zoppetti',
          'lucas.felgueiras',
          'pedro.strabeli'
          //'marcos.hosoya'
@@ -66,6 +66,7 @@
          'carlos.custodio',
          'herbert.santos',
          // 'henrique.cavalcante'
+		 'ivan.zoppetti',
          'marcos.hosoya'
      ];
 
