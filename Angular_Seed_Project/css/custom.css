@@ -1,3 +1,11 @@
+/* pull-right customizado */
+
+.pull-right-universidadeFilter {
+    float: right;
+    padding-top: 0.5em;
+
+}
+
 .nav--img-logo {
     width: 100%;
 }
