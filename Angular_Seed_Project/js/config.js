@@ -21,6 +21,7 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, $locati
     //      enabled: true//,
     //    //  requireBase: false
     //    });
+
     $stateProvider
         .state('feed', {
             url: "/feed"
@@ -43,7 +44,6 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, $locati
                 }
             }
         })
-
 
         .state('institucional', {
             url: "/institucional"
@@ -71,10 +71,6 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, $locati
             }
         })
 
-
-
-
-
         // .state('politicas', {
         //         url: "/institucional/politicas"
         //         , templateUrl: "page/institucional/politicas/politicas.html"
@@ -101,7 +97,6 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, $locati
         //             }
         //         }
         //     })
-
 
         .state('insertnews', {
             url: "/insertnews"
@@ -228,6 +223,7 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, $locati
             }
 
         })
+
         // .state('insertcontato', {
         //     url: "/insertcontact",
         //     templateUrl: "page/contatos/insertcontact.html",
@@ -264,6 +260,7 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, $locati
                 }
             }
         })
+
         .state('kb2', {
             url: "/kb2",
             templateUrl: "page/kb/dummy_sample_page.html",
@@ -279,6 +276,7 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, $locati
                 }
             }
         })
+
         .state('kb_insert', {
             url: "/kb_insert",
             templateUrl: "page/kb/insertkb.html",
@@ -350,8 +348,6 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, $locati
             }
         })
 
-
-
         //página universidade certsys
         .state('universidade', {
             url: "/universidade",
@@ -377,10 +373,10 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, $locati
                         },
                         {
                             files: ['css/plugins/metisMenu/metisMenu.min.css', 'js/plugins/metisMenu/jquery.metisMenu.js']
-                        },
-                        {
-                            files: ['js/bootstrap/ui-bootstrap-tpls-2.1.3.min.js']
                         }
+                        // {
+                        //     files: ['js/bootstrap/ui-bootstrap-tpls-2.1.3.min.js']
+                        // }
                     ]);
                 }
             }
@@ -408,9 +404,6 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, $locati
                 }
             }
         })
-
-
-
 
         // .state('outlook', {
         //     url: "/outlook"
@@ -566,13 +559,17 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, $locati
         //         pageTitle: 'Visualizar Arquivos'
         //     }
         // })
+
+        //Este será usado quando houver um artigo a ser visto. abrirá nesta página
         .state('kb.article', {
             url: "/article"
             , templateUrl: "page/kb/article.html"
             , data: {
                 pageTitle: 'Visualizar Artigo'
             }
-        }) //Este será usado quando houver um artigo a ser visto. abrirá nesta página
+        })
+
+        //Tela de Login
         .state('login', {
             url: "/"
             , templateUrl: "page/login/login.html"
@@ -588,14 +585,16 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, $locati
                     ]);
                 }
             }
-        }) //Tela de Login
+        })
+
+        //Tela de Registro
         .state('register', {
             url: "/register"
             , templateUrl: "page/register/register.html"
             , data: {
                 pageTitle: 'Registrar-se'
             }
-        }) //Tela de Registro
+        })
 }
 angular.module('inspinia').config(config).config(compileProvider).run(function ($rootScope, $state) {
     $rootScope.$state = $state;

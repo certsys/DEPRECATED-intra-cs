@@ -28,7 +28,7 @@ function gerenciar_curso($scope, $http, userService, fileUpload, $state, univers
         //your code in case the post succeeds
         // console.log(response.data.lenght > 0);
         $scope.inscritos = response.data;
-        // console.log($scope.inscritos);
+         console.log($scope.inscritos);
     }).catch(function (err) {
         $state.go('login');
         // console.log(err);
@@ -40,22 +40,6 @@ function gerenciar_curso($scope, $http, userService, fileUpload, $state, univers
     $scope.curso.inscritos.forEach(function (inscrito) {
         if (inscrito.presente) dados.push(inscrito);
     });
-
-    $http({
-        url: '/contacts/inscritos',
-        method: "POST",
-        params: {token: userService.getToken()},
-        data: dados
-    }).then(function (response) {
-        //your code in case the post succeeds
-        // console.log(response.data.lenght > 0);
-        $scope.participantes = response.data;
-        // console.log($scope.inscritos);
-    }).catch(function (err) {
-        $state.go('login');
-        // console.log(err);
-    });
-
 
     $scope.title = "Gerenciar curso | " + $scope.curso.nome;
     var data_criacao = new Date($scope.curso.data_criacao);
@@ -69,16 +53,16 @@ function gerenciar_curso($scope, $http, userService, fileUpload, $state, univers
     $scope.curso.inscritos.forEach(function(inscrito){
         if(inscrito.presente) $scope.presentes++;
     });
+
     $scope.uploadFile = function () {
         var file = $scope.myFile;
 
         console.log('file is ');
         console.dir(file);
 
-        var uploadUrl = "/cursos/uploadfile";
-        fileUpload.uploadFileToUrl(file, uploadUrl);
+        // var uploadUrl = "/cursos/uploadfile";
+        // fileUpload.uploadFileToUrl(file, uploadUrl);
     };
-
 
     //download de arquivos
     $scope.downloadFile = function (filename, cursoId) {
@@ -89,7 +73,6 @@ function gerenciar_curso($scope, $http, userService, fileUpload, $state, univers
             console.log(err)
         })
     };
-
 
 // 	$scope.uploadFile = function(){
 //  	$scope.fileSelected = function(files) {
@@ -107,7 +90,6 @@ function gerenciar_curso($scope, $http, userService, fileUpload, $state, univers
 // };
 //     console.log($scope.curso);
     $scope.apertei = false;
-
 
     $scope.pressionado = function () {
         $scope.apertei = true;
@@ -166,8 +148,43 @@ function gerenciar_curso($scope, $http, userService, fileUpload, $state, univers
 
 }
 
+function fileModel($parse) {
+    return {
+        restrict: 'A',
+        link: function (scope, element, attrs) {
+            var model = $parse(attrs.fileModel);
+            var modelSetter = model.assign;
+
+            element.bind('change', function () {
+                scope.$apply(function () {
+                    modelSetter(scope, element[0].files[0]);
+                });
+            });
+        }
+    };
+}
+
+function fileUpload ($http) {
+    this.uploadFileToUrl = function(file, uploadUrl){
+        var fd = new FormData();
+        fd.append('file', file);
+        $http.post(uploadUrl, fd, {
+            transformRequest: angular.identity,
+            headers: {'Content-Type': undefined}
+        })
+
+        .success(function(){
+        })
+        .error(function(){
+        });
+    }
+}
 
 angular
     .module('inspinia')
+    .directive('fileModel', fileModel )
+    .service('fileUpload', fileUpload)
     .controller('gerenciar_curso', gerenciar_curso);
+
+
 

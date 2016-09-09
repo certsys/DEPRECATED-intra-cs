@@ -161,15 +161,17 @@ router.post('/inscritos', function (req, res) {
     if (inscritos.length >= 1) {
         var mails = [];
         inscritos.forEach(function (inscrito) {
-            mails.push(new RegExp(inscrito.sAMAccountName, 'ig'));
+            mails.push(new RegExp(inscrito.sAMAccountName, 'ig'));                  //find the subscribers' emails
         });
         if (mails.length) {
-            Contact.find().where('mail').in(mails).exec(function (err, contacts) {
+            Contact.find().where('mail').in(mails).exec(function (err, contacts) {  //find the contacts with the listed emails above inside the database
                 res.json(contacts);
             });
         }
         else
             res.json(null);
+    } else {
+        res.json(null);
     }
 
 });

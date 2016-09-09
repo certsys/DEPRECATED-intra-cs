@@ -7,7 +7,7 @@
 
     <!-- Page wraper -->
     <!-- ng-class with current state name give you the ability to extended customization your view -->
-    <div id="page-wrapper" class="gray-bg {{$state.current.name}}">
+    <div id="page-wrapper" class="gray-bg {{$state.current.name}}" ng-controller="gerenciar_curso">
 
 
         <div class="row wrapper border-bottom white-bg page-heading">
@@ -161,14 +161,11 @@
                                                             <div class="col-lg-12">
                                                                 <form>
                                                                     <div>
-                                                                        <input name="file" type="file"
-                                                                               ng-click="pressionado()"
-                                                                               file-model="myFile"/>
+                                                                        <input type="file" file-model="myFile" ng-click="pressionado()" />
                                                                         <div ng-if="apertei">
                                                                             <br>
                                                                             <button class="btn btn-lg btn-primary"
-                                                                                    ng-click="uploadFile()">Enviar
-                                                                                Arquivo
+                                                                                    ng-click="uploadFile()">Enviar Arquivo
                                                                             </button>
                                                                         </div>
                                                                     </div>
