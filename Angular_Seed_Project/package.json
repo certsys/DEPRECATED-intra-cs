@@ -23,6 +23,7 @@
     "mongoose": "^4.5.4",
     "morgan": "^1.7.0",
     "multer": "^1.2.0",
+    "ng-file-upload": "^12.2.9",
     "node-schedule": "^1.1.1",
     "nodemailer": "^2.5.0",
     "nodemailer-smtp-transport": "^2.6.0",

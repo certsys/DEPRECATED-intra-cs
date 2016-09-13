@@ -247,7 +247,6 @@ function fileUpload($http){
 //     }
 // }
 
-
 angular
     .module('inspinia')
     .service('contactService', contactService)

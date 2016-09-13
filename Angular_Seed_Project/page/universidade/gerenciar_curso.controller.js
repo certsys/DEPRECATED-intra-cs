@@ -10,7 +10,7 @@ function gerenciar_curso($scope, $http, userService, fileUpload, $state, univers
         //your code in case the post succeeds
         // console.log(response.data.lenght > 0);
         $scope.instrutor = response.data[0];
-        if(response.data != null && response.data.length > 0) {
+        if (response.data != null && response.data.length > 0) {
         } else {
             alert("Infelizmente o seu usuário ainda não tem dados no sistema :(");
         }
@@ -28,7 +28,7 @@ function gerenciar_curso($scope, $http, userService, fileUpload, $state, univers
         //your code in case the post succeeds
         // console.log(response.data.lenght > 0);
         $scope.inscritos = response.data;
-         console.log($scope.inscritos);
+        console.log($scope.inscritos);
     }).catch(function (err) {
         $state.go('login');
         // console.log(err);
@@ -45,13 +45,13 @@ function gerenciar_curso($scope, $http, userService, fileUpload, $state, univers
     var data_criacao = new Date($scope.curso.data_criacao);
     var data_inicio = new Date($scope.curso.data_inicio);
     var data_limite_inscricao = new Date($scope.curso.data_limite_inscricao);
-    $scope.dataCriacao = data_criacao.getDate() + '/' + (data_criacao.getMonth()+1) + '/' + data_criacao.getFullYear();
-    $scope.dataInicio = data_inicio.getDate() + '/' + (data_inicio.getMonth()+1) + '/' + data_inicio.getFullYear();
-    $scope.dataLimite = data_limite_inscricao.getDate() + '/' + (data_limite_inscricao.getMonth()+1) + '/' + data_limite_inscricao.getFullYear() + ' - ' + data_limite_inscricao.getHours() + ':' + data_limite_inscricao.getMinutes() + '0';
+    $scope.dataCriacao = data_criacao.getDate() + '/' + (data_criacao.getMonth() + 1) + '/' + data_criacao.getFullYear();
+    $scope.dataInicio = data_inicio.getDate() + '/' + (data_inicio.getMonth() + 1) + '/' + data_inicio.getFullYear();
+    $scope.dataLimite = data_limite_inscricao.getDate() + '/' + (data_limite_inscricao.getMonth() + 1) + '/' + data_limite_inscricao.getFullYear() + ' - ' + data_limite_inscricao.getHours() + ':' + data_limite_inscricao.getMinutes() + '0';
     // upload de arquivos
     $scope.presentes = 0;
-    $scope.curso.inscritos.forEach(function(inscrito){
-        if(inscrito.presente) $scope.presentes++;
+    $scope.curso.inscritos.forEach(function (inscrito) {
+        if (inscrito.presente) $scope.presentes++;
     });
 
     // $scope.uploadFile = function () {
@@ -64,7 +64,8 @@ function gerenciar_curso($scope, $http, userService, fileUpload, $state, univers
     //     // fileUpload.uploadFileToUrl(file, uploadUrl);
     // };
 
-    $scope.uploadFiles = function(file, errFiles) {
+    $scope.uploadFiles = function (file, errFiles) {
+        console.log(file);
         $scope.f = file;
         $scope.errFile = errFiles && errFiles[0];
         if (file) {
@@ -76,16 +77,28 @@ function gerenciar_curso($scope, $http, userService, fileUpload, $state, univers
 
             var data = universidadeService.getCurso();
             data.arquivos.push(file);
-            console.log(data.arquivos);
-
-            $http({
+            // console.log(data.arquivos);
+            Upload.upload({
                 url: 'cursos/uploadfile',
                 method: 'POST',
-                params: {token: userService.getToken()},
-                data: data
-            }).then(function(response){
-                console.log('uploaded')
-            })
+                data: data, // Any data needed to be submitted along with the files
+                file: file
+            }).then(function (resp) {
+                console.log('Success ' + resp.config.data.file.name + ' uploaded. Response: ' + resp.data);
+            }, function (resp) {
+                console.log('Error status: ' + resp.status);
+            }, function (evt) {
+                var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+                console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
+            });
+            // $http({
+            //     url: 'cursos/uploadfile',
+            //     method: 'POST',
+            //     params: {token: userService.getToken()},
+            //     data: data
+            // }).then(function (response) {
+            //     console.log('uploaded')
+            // })
 
             // file.upload.then(function (response) {
             //     $timeout(function () {
@@ -111,6 +124,25 @@ function gerenciar_curso($scope, $http, userService, fileUpload, $state, univers
         })
     };
 
+    $scope.uploadFile = function (files) {
+        var fd = new FormData();
+        //Take the first selected file
+        fd.append("file", files[0]);
+
+        console.log(fd);
+
+        $http.post('/cursos/uploadfile', fd, {
+            withCredentials: true,
+            headers: {'Content-Type': undefined},
+            transformRequest: angular.identity
+        }).success(function (data) {
+            console.log(data, 'uploaded');
+        }).error(function (data) {
+            console.log(data);
+        });
+
+    };
+
 // 	$scope.uploadFile = function(){
 //  	$scope.fileSelected = function(files) {
 //      if (files && files.length) {
@@ -133,25 +165,25 @@ function gerenciar_curso($scope, $http, userService, fileUpload, $state, univers
 
     };
 
-    $scope.getDataInscricao = function (curso, inscrito){
-        for(var i = 0; i < curso.inscritos.length; i++){
-            if(curso.inscritos[i].sAMAccountName === inscrito.mail.substring(0, inscrito.mail.indexOf('@'))){
+    $scope.getDataInscricao = function (curso, inscrito) {
+        for (var i = 0; i < curso.inscritos.length; i++) {
+            if (curso.inscritos[i].sAMAccountName === inscrito.mail.substring(0, inscrito.mail.indexOf('@'))) {
                 return curso.inscritos[i].data_inscricao;
             }
         }
     };
 
     $scope.conferirPresenca = function (curso, inscrito) {
-        for(var i = 0; i < curso.inscritos.length; i++){
-            if(curso.inscritos[i].sAMAccountName === inscrito.mail.substring(0, inscrito.mail.indexOf('@'))){
+        for (var i = 0; i < curso.inscritos.length; i++) {
+            if (curso.inscritos[i].sAMAccountName === inscrito.mail.substring(0, inscrito.mail.indexOf('@'))) {
                 return curso.inscritos[i].presente;
             }
         }
     };
 
     $scope.marcarPresenca = function (curso, inscrito) {
-        for(var i = 0; i < curso.inscritos.length; i++){
-            if(curso.inscritos[i].sAMAccountName === inscrito.mail.substring(0, inscrito.mail.indexOf('@'))){
+        for (var i = 0; i < curso.inscritos.length; i++) {
+            if (curso.inscritos[i].sAMAccountName === inscrito.mail.substring(0, inscrito.mail.indexOf('@'))) {
                 curso.inscritos[i].presente = !curso.inscritos[i].presente;
                 if (curso.inscritos[i].presente) {
                     $scope.participantes.push(inscrito);
@@ -177,8 +209,8 @@ function gerenciar_curso($scope, $http, userService, fileUpload, $state, univers
     };
 
     var searchParticipanteIndex = function (inscrito) {
-        for (var i = 0; i < $scope.participantes.length; i++){
-            if($scope.participantes[i].mail === inscrito.mail) return i;
+        for (var i = 0; i < $scope.participantes.length; i++) {
+            if ($scope.participantes[i].mail === inscrito.mail) return i;
         }
         return -1;
     };
@@ -220,7 +252,7 @@ function gerenciar_curso($scope, $http, userService, fileUpload, $state, univers
 angular
     .module('inspinia')
     // .directive('fileModel', fileModel)
-   // .service('fileUpload', fileUpload)
+    // .service('fileUpload', fileUpload)
     .controller('gerenciar_curso', gerenciar_curso);
 
 
