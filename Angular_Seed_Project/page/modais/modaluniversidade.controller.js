@@ -170,12 +170,29 @@ function ModalInstanceCtrl($scope, $modalInstance, $http, userService, getCurso,
                     // console.log(err);
                 });
         }
+    };
+
+    $scope.remove = function () {
+
+        swal({
+            title: "Are you sure?",
+            text: "You will not be able to recover this imaginary file!",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "Yes, delete it!",
+            closeOnConfirm: false
+        }, function(){
+            console.log(getCurso);
 
 
+            swal("Deleted!", "Your imaginary file has been deleted.", "success");
+            $modalInstance.dismiss('cancel');
+        });
     };
 
 
-};
+}
 
 
 angular
