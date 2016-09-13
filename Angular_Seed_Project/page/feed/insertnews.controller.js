@@ -76,6 +76,7 @@ function insertnews($scope, $http, $timeout, $state, userService, peopleGroups) 
             }
         }
     };
+
     $scope.submit = function () {
         var date;
         if ($scope.futuro == true) {

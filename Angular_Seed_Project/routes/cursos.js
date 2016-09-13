@@ -144,18 +144,37 @@ router.delete('/remove/:id', function (req, res) {
     });
 });
 
-router.post('/uploadfile', multipartMiddleware, function(req, res){
-    //console.log(req.body)
-    var originalFilename = req.files.files.originalFilename;
-    // console.log(req.files.files.originalFilename)
-    fs.readFile(req.files.files.path, function (err, data) {
-  // ...
-          var newPath = __dirname.substring(0, __dirname.indexOf("routes"))+"uploads/cursos/"+originalFilename;
-          fs.writeFile(newPath, data, function (err) {
-            //res.redirect("back");
-        });
-          res.json(originalFilename)
-    });
+// router.post('/uploadfile', multipartMiddleware, function(req, res){
+//     console.log('hello upload FILE')
+//     console.log(req.body)
+//     res.json(null)
+//   //   var originalFilename = req.files.files.originalFilename;
+//   //   // console.log(req.files.files.originalFilename)
+//   //   fs.readFile(req.files.files.path, function (err, data) {
+//   // // ...
+//   //         var newPath = __dirname.substring(0, __dirname.indexOf("routes"))+"uploads/cursos/"+originalFilename;
+//   //         fs.writeFile(newPath, data, function (err) {
+//   //           //res.redirect("back");
+//   //       });
+//   //         res.json(originalFilename)
+//   //   });
+// })
+
+router.post('/uploadfile', function(req, res){
+    console.log('hello upload FILE')
+    console.log(req.body)
+    console.log(req.body.arquivos[0])
+    res.json(null)
+  //   var originalFilename = req.files.files.originalFilename;
+  //   // console.log(req.files.files.originalFilename)
+  //   fs.readFile(req.files.files.path, function (err, data) {
+  // // ...
+  //         var newPath = __dirname.substring(0, __dirname.indexOf("routes"))+"uploads/cursos/"+originalFilename;
+  //         fs.writeFile(newPath, data, function (err) {
+  //           //res.redirect("back");
+  //       });
+  //         res.json(originalFilename)
+  //   });
 })
 
 router.post('/uploadfile2', function(req, res){

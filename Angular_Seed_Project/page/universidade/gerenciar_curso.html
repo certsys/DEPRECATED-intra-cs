@@ -168,6 +168,15 @@
                                                                                     ng-click="uploadFile()">Enviar Arquivo
                                                                             </button>
                                                                         </div>
+                                                                        <button type="file" ngf-select="uploadFiles($file, $invalidFiles)" ngf-max-height="1000" ngf-max-size="10MB">
+                                                                            Select File
+                                                                        </button>
+                                                                        <div style="font-size: smaller">{{f.name}} {{errFile.name}} {{errFile.$error}} {{errFile.$errorParam}}
+                                                                            <span class="progress" ng-show="f.progress >= 0">
+          <div style="width:{{f.progress}}%"
+               ng-bind="f.progress + '%'"></div>
+      </span>
+                                                                        </div>
                                                                     </div>
                                                                 </form>
                                                             </div>

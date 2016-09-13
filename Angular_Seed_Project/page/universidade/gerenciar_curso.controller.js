@@ -1,4 +1,4 @@
-function gerenciar_curso($scope, $http, userService, fileUpload, $state, universidadeService) {
+function gerenciar_curso($scope, $http, userService, fileUpload, $state, universidadeService, Upload) {
     $scope.participantes = [];
     $scope.loading = 0;
 
@@ -54,15 +54,52 @@ function gerenciar_curso($scope, $http, userService, fileUpload, $state, univers
         if(inscrito.presente) $scope.presentes++;
     });
 
-    $scope.uploadFile = function () {
-        var file = $scope.myFile;
+    // $scope.uploadFile = function () {
+    //     var file = $scope.myFile;
+    //
+    //     console.log('file is ');
+    //     console.dir(file);
+    //
+    //     // var uploadUrl = "/cursos/uploadfile";
+    //     // fileUpload.uploadFileToUrl(file, uploadUrl);
+    // };
 
-        console.log('file is ');
-        console.dir(file);
+    $scope.uploadFiles = function(file, errFiles) {
+        $scope.f = file;
+        $scope.errFile = errFiles && errFiles[0];
+        if (file) {
+            //console.log(file)
+            // file.upload = Upload.upload({
+            //     url: 'https://angular-file-upload-cors-srv.appspot.com/upload',
+            //     data: {file: file}
+            // });
 
-        // var uploadUrl = "/cursos/uploadfile";
-        // fileUpload.uploadFileToUrl(file, uploadUrl);
-    };
+            var data = universidadeService.getCurso();
+            data.arquivos.push(file);
+            console.log(data.arquivos);
+
+            $http({
+                url: 'cursos/uploadfile',
+                method: 'POST',
+                params: {token: userService.getToken()},
+                data: data
+            }).then(function(response){
+                console.log('uploaded')
+            })
+
+            // file.upload.then(function (response) {
+            //     $timeout(function () {
+            //         file.result = response.data;
+            //     });
+            // }, function (response) {
+            //     if (response.status > 0)
+            //         $scope.errorMsg = response.status + ': ' + response.data;
+            // }, function (evt) {
+            //     file.progress = Math.min(100, parseInt(100.0 *
+            //         evt.loaded / evt.total));
+            // });
+        }
+    }
 
     //download de arquivos
     $scope.downloadFile = function (filename, cursoId) {
@@ -148,42 +185,42 @@ function gerenciar_curso($scope, $http, userService, fileUpload, $state, univers
 
 }
 
-function fileModel($parse) {
-    return {
-        restrict: 'A',
-        link: function (scope, element, attrs) {
-            var model = $parse(attrs.fileModel);
-            var modelSetter = model.assign;
+// function fileModel($parse) {
+//     return {
+//         restrict: 'A',
+//         link: function (scope, element, attrs) {
+//             var model = $parse(attrs.fileModel);
+//             var modelSetter = model.assign;
+//
+//             element.bind('change', function () {
+//                 scope.$apply(function () {
+//                     modelSetter(scope, element[0].files[0]);
+//                 });
+//             });
+//         }
+//     };
+// }
 
-            element.bind('change', function () {
-                scope.$apply(function () {
-                    modelSetter(scope, element[0].files[0]);
-                });
-            });
-        }
-    };
-}
-
-function fileUpload ($http) {
-    this.uploadFileToUrl = function(file, uploadUrl){
-        var fd = new FormData();
-        fd.append('file', file);
-        $http.post(uploadUrl, fd, {
-            transformRequest: angular.identity,
-            headers: {'Content-Type': undefined}
-        })
-
-        .success(function(){
-        })
-        .error(function(){
-        });
-    }
-}
+// function fileUpload ($http) {
+//     this.uploadFileToUrl = function(file, uploadUrl){
+//         var fd = new FormData();
+//         fd.append('file', file);
+//         console.log(file);
+//         $http.post(uploadUrl, fd, {
+//             transformRequest: angular.identity,
+//             headers: {'Content-Type': undefined}
+//         })
+//         .success(function(){
+//         })
+//         .error(function(){
+//         });
+//     }
+// }
 
 angular
     .module('inspinia')
-    .directive('fileModel', fileModel )
-    .service('fileUpload', fileUpload)
+    // .directive('fileModel', fileModel)
+   // .service('fileUpload', fileUpload)
     .controller('gerenciar_curso', gerenciar_curso);
 
 

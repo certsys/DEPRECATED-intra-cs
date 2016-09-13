@@ -72,8 +72,8 @@ function userService($sessionStorage, peopleGroups) {
         'henrique.cavalcante',
         'ivan.zoppetti',
         'lucas.felgueiras',
-        'pedro.strabeli'
-        //'marcos.hosoya'
+        'pedro.strabeli',
+        'marcos.hosoya'
     ];
 
     var INSTRUCTORS = [
@@ -214,7 +214,6 @@ function fileUpload($http){
     this.uploadFileToUrl = function(file, uploadUrl){
        var fd = new FormData();
        fd.append('files', file, file.name);
-        console.log(fd)
        $http.post(uploadUrl, fd, {
           transformRequest: angular.identity,
           headers: {'Content-Type': undefined}
@@ -231,6 +230,22 @@ function fileUpload($http){
     }
 }
 
+//univ
+// function fileUpload ($http) {
+//     this.uploadFileToUrl = function(file, uploadUrl){
+//         var fd = new FormData();
+//         fd.append('file', file);
+//         console.log(file);
+//         $http.post(uploadUrl, fd, {
+//             transformRequest: angular.identity,
+//             headers: {'Content-Type': undefined}
+//         })
+//             .success(function(){
+//             })
+//             .error(function(){
+//             });
+//     }
+// }
 
 
 angular

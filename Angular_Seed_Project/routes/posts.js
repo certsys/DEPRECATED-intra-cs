@@ -366,6 +366,7 @@ router.put('/edit/:id', function (req, res, next) {
             if (err)
                 return next(err);
         });
+
         if (indice > -1) {
             if (req.body.mala) {
 
