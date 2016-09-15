@@ -61,8 +61,8 @@
 
                         <table class="table table-hover">
                             <tbody>
-                            <tr ng-repeat-start="curso in filtered = ( cursos | orderBy:'-data_inicio' | cursoStatusFilter:selectedStatus | filter: search)">
-                                <td class="project-status">
+                            <tr ng-repeat-start="curso in filtered = ( cursos | orderBy:'-data_inicio' | cursoStatusFilter:selectedStatus | filter: search | filter: cursoDeletedFilter )"  >
+                                <td class="project-status" >
                                     <span ng-style="{'background-color': backgroundColor, 'color': color}"
                                           class="label">{{status(curso)}}</span>
                                 </td>

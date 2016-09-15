@@ -72,8 +72,8 @@ function userService($sessionStorage, peopleGroups) {
         'henrique.cavalcante',
         'ivan.zoppetti',
         'lucas.felgueiras',
-        'pedro.strabeli'
-        //'marcos.hosoya'
+        'pedro.strabeli',
+        'marcos.hosoya'
     ];
 
     var INSTRUCTORS = [

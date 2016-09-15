@@ -183,11 +183,32 @@ function ModalInstanceCtrl($scope, $modalInstance, $http, userService, getCurso,
             confirmButtonText: "Yes, delete it!",
             closeOnConfirm: false
         }, function(){
-            console.log(getCurso);
+            // console.log(getCurso);
+            $http({
+                method: 'DELETE'
+                , url: '/cursos/remove/' + getCurso._id
+                , params: {token: userService.getToken()}
+            }).then(function (response) {
+                swal({
+                    title: "Removido!",
+                    text: "Curso removido com sucesso.",
+                    type: "success",
+                    showConfirmButton: false
+                });
+                //$modalInstance.dismiss('cancel');
+                setTimeout(function (){
+                    // after 1500ms, reloads the page to refresh the courses table
+                    location.reload()
+                },1000);
+
+                // console.log(response);
+            }).catch(function (err) {
+                //your code in case your post fails
+                // console.log(err);
+            });
 
 
-            swal("Deleted!", "Your imaginary file has been deleted.", "success");
-            $modalInstance.dismiss('cancel');
+
         });
     };
 

@@ -98,6 +98,14 @@ function universidade($scope, $http, userService, $state, universidadeService, $
 
     }
 
+    $scope.cursoDeletedFilter= function (curso) {
+        if (curso.isDeleted) {
+            return false; // curso is deleted, so does NOT show on table
+        } else {
+            return true;  // curso is NOT deleted, so it is showed on table
+        }
+    };
+
     $scope.isChecked = function (status) {
         for (var i = 0; i < $scope.selectedStatus.length; i++ ) {
             if ($scope.selectedStatus[i] == status ) {
