@@ -246,75 +246,75 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, $locati
         //     }
         // })
 
-        .state('kb', {
-            url: "/kb",
-            templateUrl: "page/kb/kb.html",
-            data: {pageTitle: 'Base de Conhecimento'},
-            resolve: {
-                loadPlugin: function ($ocLazyLoad) {
-                    return $ocLazyLoad.load([
-                        {
-                            files: ['js/plugins/jsTree/jstree.min.js', 'css/plugins/jsTree/style.min.css']
-                        }
-                    ]);
-                }
-            }
-        })
+        // .state('kb', {
+        //     url: "/kb",
+        //     templateUrl: "page/kb/kb.html",
+        //     data: {pageTitle: 'Base de Conhecimento'},
+        //     resolve: {
+        //         loadPlugin: function ($ocLazyLoad) {
+        //             return $ocLazyLoad.load([
+        //                 {
+        //                     files: ['js/plugins/jsTree/jstree.min.js', 'css/plugins/jsTree/style.min.css']
+        //                 }
+        //             ]);
+        //         }
+        //     }
+        // })
 
-        .state('kb2', {
-            url: "/kb2",
-            templateUrl: "page/kb/dummy_sample_page.html",
-            data: {pageTitle: 'Base de Conhecimento'},
-            controller: "kbCtrl",
-            resolve: {
-                loadPlugin: function ($ocLazyLoad) {
-                    return $ocLazyLoad.load([
-                        {
-                            // files: ['js/plugins/jsTree/jstree.min.js', 'css/plugins/jsTree/style.min.css']
-                        }
-                    ]);
-                }
-            }
-        })
+        // .state('kb2', {
+        //     url: "/kb2",
+        //     templateUrl: "page/kb/dummy_sample_page.html",
+        //     data: {pageTitle: 'Base de Conhecimento'},
+        //     controller: "kbCtrl",
+        //     resolve: {
+        //         loadPlugin: function ($ocLazyLoad) {
+        //             return $ocLazyLoad.load([
+        //                 {
+        //                     // files: ['js/plugins/jsTree/jstree.min.js', 'css/plugins/jsTree/style.min.css']
+        //                 }
+        //             ]);
+        //         }
+        //     }
+        // })
+        //
+        // .state('kb_insert', {
+        //     url: "/kb_insert",
+        //     templateUrl: "page/kb/insertkb.html",
+        //     data: {pageTitle: 'Inserir na Base de Conhecimento'},
+        //     controller: "kb_insert",
+        //     resolve: {
+        //         loadPlugin: function ($ocLazyLoad) {
+        //             return $ocLazyLoad.load([
+        //                 {
+        //                     files: ['css/plugins/iCheck/custom.css', 'js/plugins/iCheck/icheck.min.js']
+        //                 }, {
+        //                     files: ['js/bower_components/summernote/dist/summernote.css', 'js/bower_components/summernote/dist/summernote.js'
+        //                     ]
+        //                 }
+        //                 , {
+        //                     files: ['css/plugins/switchery/switchery.css', 'js/plugins/switchery/switchery.js']
+        //                 }, {
+        //                     files: ['js/plugins/jsTree/jstree.min.js', 'css/plugins/jsTree/style.min.css']
+        //                 }
+        //             ]);
+        //         }
+        //     }
+        // })
 
-        .state('kb_insert', {
-            url: "/kb_insert",
-            templateUrl: "page/kb/insertkb.html",
-            data: {pageTitle: 'Inserir na Base de Conhecimento'},
-            controller: "kb_insert",
-            resolve: {
-                loadPlugin: function ($ocLazyLoad) {
-                    return $ocLazyLoad.load([
-                        {
-                            files: ['css/plugins/iCheck/custom.css', 'js/plugins/iCheck/icheck.min.js']
-                        }, {
-                            files: ['js/bower_components/summernote/dist/summernote.css', 'js/bower_components/summernote/dist/summernote.js'
-                            ]
-                        }
-                        , {
-                            files: ['css/plugins/switchery/switchery.css', 'js/plugins/switchery/switchery.js']
-                        }, {
-                            files: ['js/plugins/jsTree/jstree.min.js', 'css/plugins/jsTree/style.min.css']
-                        }
-                    ]);
-                }
-            }
-        })
-
-        .state('insertkb', {
-            url: "/insertkb",
-            templateUrl: "page/kb/kb_subscribe.html",
-            data: {pageTitle: 'Cadastrar novo item'},
-            resolve: {
-                loadPlugin: function ($ocLazyLoad) {
-                    return $ocLazyLoad.load([
-                        {
-                            files: ['css/plugins/iCheck/custom.css', 'js/plugins/iCheck/icheck.min.js']
-                        }
-                    ]);
-                }
-            }
-        })
+        // .state('insertkb', {
+        //     url: "/insertkb",
+        //     templateUrl: "page/kb/kb_subscribe.html",
+        //     data: {pageTitle: 'Cadastrar novo item'},
+        //     resolve: {
+        //         loadPlugin: function ($ocLazyLoad) {
+        //             return $ocLazyLoad.load([
+        //                 {
+        //                     files: ['css/plugins/iCheck/custom.css', 'js/plugins/iCheck/icheck.min.js']
+        //                 }
+        //             ]);
+        //         }
+        //     }
+        // })
 
         .state('perfil', {
             url: "/perfil",
@@ -561,13 +561,13 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, $locati
         // })
 
         //Este será usado quando houver um artigo a ser visto. abrirá nesta página
-        .state('kb.article', {
-            url: "/article"
-            , templateUrl: "page/kb/article.html"
-            , data: {
-                pageTitle: 'Visualizar Artigo'
-            }
-        })
+        // .state('kb.article', {
+        //     url: "/article"
+        //     , templateUrl: "page/kb/article.html"
+        //     , data: {
+        //         pageTitle: 'Visualizar Artigo'
+        //     }
+        // })
 
         //Tela de Login
         .state('login', {

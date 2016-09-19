@@ -11,7 +11,7 @@ function universidade($scope, $http, userService, $state, universidadeService, $
         $state.go('login');
         // console.log(err);
     });
-    console.log("GET cursos")
+    // console.log("GET cursos")
     
     var INSCRICOES_ABERTAS = "Inscrições Abertas";
     var INSCRICOES_ENCERRADAS = "Inscrições Encerradas";

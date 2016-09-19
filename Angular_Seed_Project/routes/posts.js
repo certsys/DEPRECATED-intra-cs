@@ -10,8 +10,8 @@ var EMAIL_CERTSYS = 'intranet@certsys.com.br';
 var EMAIL_CS_CONSULTING = 'intranet@csconsulting.com.br';
 var EMAIL_PASS = 'dQx-k4a-Hw7-PkY';
 
-// var TODOS_CERTSYS = 'todos@certsys.com.br';
-// var TODOS_CS_CONSULTING = 'todos@csconsulting.com.br';
+var TODOS_CERTSYS = 'todos@certsys.com.br';
+var TODOS_CS_CONSULTING = 'todos@csconsulting.com.br';
 
 var CERTSYS = 'certsys';
 var CS_CONSULTING = 'csconsulting';
@@ -19,8 +19,8 @@ var CS_CONSULTING = 'csconsulting';
 // var EMAIL_CS_CONSULTING = 'henrique.cavalcante@certsys.com.br';
 // var EMAIL_PASS = '';
 
-var TODOS_CERTSYS = 'henrique.hashimoto.cavalcante@usp.br';
-var TODOS_CS_CONSULTING = 'henrique_hashimoto@hotmail.com';
+// var TODOS_CERTSYS = 'henrique.hashimoto.cavalcante@usp.br';
+// var TODOS_CS_CONSULTING = 'henrique_hashimoto@hotmail.com';
 
 var HOST = 'webmail.exchange.locaweb.com.br';
 var SMTP_PORT = 587;

@@ -64,11 +64,6 @@
                                         <dd>{{curso.carga_horaria}} horas</dd>
                                         <dt>Criado em:</dt>
                                         <dd>{{dataCriacao}}</dd>
-                                        <dt>Participantes:</dt>
-                                        <dd class="project-people">
-                                            <a ng-repeat="participante in participantes track by $index" ng-click="goToPerfil(participante)"><img alt="image" class="img-circle"
-                                                            src="{{participante.imagem}}"></a>
-                                        </dd>
                                     </dl>
                                 </div>
                             </div>
@@ -136,42 +131,42 @@
                                                         </div>
 
 
-                                                        <div class="row">
-                                                            <div class="col-lg-12">
-                                                                <div ng-repeat="file in curso.arquivos"
-                                                                     class="file-box">
-                                                                    <div class="file">
-                                                                        <a href="">
-                                                                            <span class="corner"></span>
-                                                                            <div class="icon">
-                                                                                <i class="fa fa-file"></i>
-                                                                            </div>
-                                                                            <div class="file-name">
-                                                                                {{file.nome}}
-                                                                                <br/>
-                                                                                <small>Adicionado: Jan 11, 2016</small>
-                                                                            </div>
-                                                                        </a>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
+                                                        <!--<div class="row">-->
+                                                            <!--<div class="col-lg-12">-->
+                                                                <!--<div ng-repeat="file in curso.arquivos"-->
+                                                                     <!--class="file-box">-->
+                                                                    <!--<div class="file">-->
+                                                                        <!--<a href="">-->
+                                                                            <!--<span class="corner"></span>-->
+                                                                            <!--<div class="icon">-->
+                                                                                <!--<i class="fa fa-file"></i>-->
+                                                                            <!--</div>-->
+                                                                            <!--<div class="file-name">-->
+                                                                                <!--{{file.nome}}-->
+                                                                                <!--<br/>-->
+                                                                                <!--<small>Adicionado: Jan 11, 2016</small>-->
+                                                                            <!--</div>-->
+                                                                        <!--</a>-->
+                                                                    <!--</div>-->
+                                                                <!--</div>-->
+                                                            <!--</div>-->
+                                                        <!--</div>-->
 
-                                                        <div class="row">
-                                                            <div class="col-lg-12">
-                                                                <form>
-                                                                    <div>
-                                                                        <input type="file" file-model="myFile" ng-click="pressionado()" />
-                                                                        <div ng-if="apertei">
-                                                                            <br>
-                                                                            <button class="btn btn-lg btn-primary"
-                                                                                    ng-click="uploadFile()">Enviar Arquivo
-                                                                            </button>
-                                                                        </div>
-                                                                    </div>
-                                                                </form>
-                                                            </div>
-                                                        </div>
+                                                        <!--<div class="row">-->
+                                                            <!--<div class="col-lg-12">-->
+                                                                <!--<form>-->
+                                                                    <!--<div>-->
+                                                                        <!--<input type="file" file-model="myFile" ng-click="pressionado()" />-->
+                                                                        <!--<div ng-if="apertei">-->
+                                                                            <!--<br>-->
+                                                                            <!--<button class="btn btn-lg btn-primary"-->
+                                                                                    <!--ng-click="uploadFile()">Enviar Arquivo-->
+                                                                            <!--</button>-->
+                                                                        <!--</div>-->
+                                                                    <!--</div>-->
+                                                                <!--</form>-->
+                                                            <!--</div>-->
+                                                        <!--</div>-->
                                                     </div>
                                                 </div>
                                             </tab>

@@ -58,8 +58,8 @@ function ModalInstanceCtrl($scope, $modalInstance, $http, userService, getCurso,
         $modalInstance.dismiss('cancel');
     };
 
-    $scope.gerenciar = function (){
-        if (angular.isDefined(getCurso)){
+    $scope.gerenciar = function () {
+        if (angular.isDefined(getCurso)) {
             universidadeService.sendCurso(getCurso);
             $state.go('universidade_manage');
             $modalInstance.close();
@@ -138,6 +138,10 @@ function ModalInstanceCtrl($scope, $modalInstance, $http, userService, getCurso,
 
                     universidadeService.sendSalvou(true);
                     $modalInstance.close();
+                    setTimeout(function () {
+                        // after 1500ms, reloads the page to refresh the courses table
+                        location.reload()
+                    }, 1000);
 
                 }
             )
@@ -162,6 +166,10 @@ function ModalInstanceCtrl($scope, $modalInstance, $http, userService, getCurso,
 
                     universidadeService.sendSalvou(true);
                     $modalInstance.close();
+                    setTimeout(function () {
+                        // after 1500ms, reloads the page to refresh the courses table
+                        location.reload()
+                    }, 1000);
 
                 }
             )
@@ -175,14 +183,14 @@ function ModalInstanceCtrl($scope, $modalInstance, $http, userService, getCurso,
     $scope.remove = function () {
 
         swal({
-            title: "Are you sure?",
-            text: "You will not be able to recover this imaginary file!",
+            title: "Você tem certeza?",
+            text: "Você não poderá recuperar esse curso!",
             type: "warning",
             showCancelButton: true,
             confirmButtonColor: "#DD6B55",
-            confirmButtonText: "Yes, delete it!",
+            confirmButtonText: "Deletar!",
             closeOnConfirm: false
-        }, function(){
+        }, function () {
             // console.log(getCurso);
             $http({
                 method: 'DELETE'
@@ -196,17 +204,16 @@ function ModalInstanceCtrl($scope, $modalInstance, $http, userService, getCurso,
                     showConfirmButton: false
                 });
                 //$modalInstance.dismiss('cancel');
-                setTimeout(function (){
+                setTimeout(function () {
                     // after 1500ms, reloads the page to refresh the courses table
                     location.reload()
-                },1000);
+                }, 1000);
 
                 // console.log(response);
             }).catch(function (err) {
                 //your code in case your post fails
                 // console.log(err);
             });
-
 
 
         });

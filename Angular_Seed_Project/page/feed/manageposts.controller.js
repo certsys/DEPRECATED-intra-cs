@@ -32,15 +32,16 @@ function postManager($scope, $http, postService, $state, userService, peopleGrou
                 , params: {token: userService.getToken()}
             }).then(function (response) {
                 //your code in case the post succeeds
-
+                setTimeout(function () {
+                    // after 1500ms, reloads the page to refresh the courses table
+                    location.reload()
+                }, 1000);
                 // console.log(response);
             }).catch(function (err) {
                 //your code in case your post fails
                 // console.log(err);
             });
             swal("Deletado!", "O Post foi deletado com sucesso!", "success");
-            var index = $scope.feed.indexOf(currentPost);
-            $scope.feed.splice(index, 1);
         });
 
 

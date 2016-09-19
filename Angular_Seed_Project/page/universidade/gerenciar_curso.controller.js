@@ -28,7 +28,6 @@ function gerenciar_curso($scope, $http, userService, fileUpload, $state, univers
         //your code in case the post succeeds
         // console.log(response.data.lenght > 0);
         $scope.inscritos = response.data;
-         console.log($scope.inscritos);
     }).catch(function (err) {
         $state.go('login');
         // console.log(err);
@@ -57,8 +56,8 @@ function gerenciar_curso($scope, $http, userService, fileUpload, $state, univers
     $scope.uploadFile = function () {
         var file = $scope.myFile;
 
-        console.log('file is ');
-        console.dir(file);
+        // console.log('file is ');
+        // console.dir(file);
 
         // var uploadUrl = "/cursos/uploadfile";
         // fileUpload.uploadFileToUrl(file, uploadUrl);
@@ -70,7 +69,7 @@ function gerenciar_curso($scope, $http, userService, fileUpload, $state, univers
             .then(function (response) {
 
             }).catch(function (err) {
-            console.log(err)
+            // console.log(err)
         })
     };
 
