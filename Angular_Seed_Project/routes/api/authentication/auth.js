@@ -1,4 +1,9 @@
+var express = require('express');
+var router = express.Router();
 var jwt = require('jsonwebtoken');
+var ActiveDirectory = require('../maintenance/activeDirectory');
+
+var ad = ActiveDirectory.getActiveDirectory();
 
 exports.auth = function (req, res, next) {
     // check header or url parameters or post parameters for token
@@ -30,4 +35,40 @@ exports.auth = function (req, res, next) {
         });
 
     }
+};
+
+exports.createCredentials = function (req, res) {
+    ad.authenticate(req.body.username, req.body.password, function (err, auth) {
+        // ad.authenticate(username, password, function (err, auth) {
+        if (err) {
+            res.json(JSON.stringify(err));
+            return;
+        }
+
+        if (auth) {
+            // res.json({data: 'Entrou!'});
+            ad.findUser(req.body.username, function (err, user) {
+                if (err) {
+                    res.json(JSON.stringify(err));
+                    return;
+                }
+
+                if (!user) res.json({data: 'User: ' + req.body.username + ' not found.'});
+                else {
+                    var token = jwt.sign(user, 'Cert0104sys', {
+                        expiresIn: 14400 // Tempo em segundos ( 1 hora )
+                    });
+
+                    res.json({
+                        success: true,
+                        user: user,
+                        token: token
+                    });
+                }
+            });
+        }
+        else {
+            res.json({data: 'Falha de autenticação...'});
+        }
+    });
 };

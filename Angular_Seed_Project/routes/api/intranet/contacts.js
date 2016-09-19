@@ -1,22 +1,11 @@
 var express = require('express');
 var router = express.Router();
-var async = require('async');
-var fs = require('fs');
 var Contact = require('../../../models/contacts');
-var ActiveDirectory = require('activedirectory');
+var Auth = require('../authentication/auth');
+var Debug = require('../../debug');
+var ActiveDirectory = require('../maintenance/activeDirectory');
 
-var config = {
-    url: 'ldap://192.168.129.2:389',
-    baseDN: 'OU=Certsys,DC=certsys,DC=local',
-    username: 'svc_intranet@certsys.local',
-    password: 'dAgAcupU6rA='
-};
-
-var ad = new ActiveDirectory(config);
-// var username = 'pedro.strabeli@certsys.com.br';
-var username = 'svc_intranet@certsys.local';
-// var password = 'password';
-var password = 'dAgAcupU6rA=';
+var ad = ActiveDirectory.getActiveDirectory();
 var groupName = 'Certsys';
 
 /* PUT users listing. */
@@ -138,9 +127,11 @@ router.put('/', function (req, res, next) {
     });
 });
 
-// router.use(function (req, res, next) {
-//     global.verificaToken(req, res, next)
-// });
+if (!Debug.isDebug()) {
+    router.use(function (req, res, next) {
+        Auth.auth(req, res, next);
+    });
+}
 
 // Pega usuário pelo email
 router.get('/perfil', function (req, res) {

@@ -4,11 +4,14 @@ var kbtree = require('../../../models/kbtree');
 var kbcontent = require('../../../models/kbcontent');
 var multiparty = require('connect-multiparty');
 var multipartMiddleware = multiparty();
+var Auth = require('../authentication/auth');
+var Debug = require('../../debug');
 
-// router.use(function (req, res, next) {
-//     global.verificaToken(req, res, next);
-// });
-
+if (!Debug.isDebug()) {
+    router.use(function (req, res, next) {
+        Auth.auth(req, res, next);
+    });
+}
 // router.get('/set', function(req, res){
 //     KB.findOne({ 'text': 'Certsys' }, 'name occupation', function (err, person) {
 //   if (err) return handleError(err);

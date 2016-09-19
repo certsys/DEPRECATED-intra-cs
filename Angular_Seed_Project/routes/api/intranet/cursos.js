@@ -1,14 +1,19 @@
 var express = require('express');
 var router = express.Router();
 var Curso = require('../../../models/cursos');
+var Auth = require('../authentication/auth');
+var Debug = require('../../debug');
 var fs = require('fs');
 var multiparty = require('connect-multiparty');
 var multipartMiddleware = multiparty();
 
 
-// router.use(function (req, res, next) {
-//     global.verificaToken(req, res, next)
-// });
+if (!Debug.isDebug()) {
+    router.use(function (req, res, next) {
+        Auth.auth(req, res, next);
+    });
+}
+
 
 // Pega todos os cursos
 router.get('/', function (req, res) {
@@ -45,7 +50,6 @@ router.post('/', function (req, res) {
 
 router.put('/edit/:id', function (req, res, next) {
 
-    console.log(req.body.data_limite_inscricao);
     Curso.findById(req.params.id, function (err, data) {
         data.nome = req.body.nome;
         data.descricao = req.body.descricao;

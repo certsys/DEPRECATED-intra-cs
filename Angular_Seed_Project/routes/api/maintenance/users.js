@@ -1,26 +1,10 @@
 var express = require('express');
 var router = express.Router();
 var User = require('../../../models/user');
-var ActiveDirectory = require('activedirectory');
+var ActiveDirectory = require('../maintenance/activeDirectory');
 
-var config = {
-    url: 'ldap://192.168.129.2:389',
-    baseDN: 'OU=Certsys,DC=certsys,DC=local',
-    username: 'svc_intranet@certsys.local',
-    password: 'dAgAcupU6rA='
-};
-
-var ad = new ActiveDirectory(config);
-// var username = 'pedro.strabeli@certsys.com.br';
-var username = 'svc_intranet@certsys.local';
-// var password = 'password';
-var password = 'dAgAcupU6rA=';
+var ad = ActiveDirectory.getActiveDirectory();
 var groupName = 'Certsys';
-
-
-// router.use(function (req, res, next) {
-//     global.verificaToken(req, res, next)
-// });
 
 /* PUT users listing. */
 router.put('/', function (req, res, next) {

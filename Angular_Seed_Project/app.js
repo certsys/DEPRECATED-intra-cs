@@ -1,7 +1,8 @@
+// Módulos
+//==========================================================================================================
 var express = require('express');
 var mongoose = require('mongoose');
 var http = require('http');
-var compression = require('compression'); // Compressão do site para melhor performance
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
@@ -10,40 +11,44 @@ var bodyParser = require('body-parser');
 
 var routes = require('./routes');
 
+// Settings do sistema
+//==========================================================================================================
+
 // Conecta com o Mongo
 mongoose.connect('mongodb://localhost/intra-cs');
 
+// Inicializa express
 var app = express();
     
 // view engine setup
 app.set('views', path.join(__dirname));
 app.set('view engine', 'ejs');
 
+// Favicon da intranet
 app.use(favicon('./img/favicon.ico'));
-app.use(compression());
 
-
-
-
-// uncomment after placing your favicon in /public
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+// Logger
 app.use(logger('dev'));
 
 // Tamanho do arquivo que pode ser enviado pelas rotas
 app.use(bodyParser.json({limit: '500mb'}));
 app.use(bodyParser.urlencoded({limit: '500mb'}));
-
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname)));
 
 
+// Roteamento
+//==========================================================================================================
+
+
+// Início
 app.use('/', routes.api.home);
 
 // Authentication
-// app.use('/login', routes.api.authentication.login);
 app.use('/login', routes.api.authentication.login);
+
 // Intranet
 app.use('/controldesk', routes.api.intranet.controldesk);
 app.use('/mailbox/inbox', routes.api.intranet.inbox);
@@ -57,21 +62,26 @@ app.use('/cursos', routes.api.intranet.cursos);
 app.use('/users', routes.api.maintenance.users);
 app.use('/groups', routes.api.maintenance.groups);
 
+
 // Acessa a rota para reprogramar todos os emails agendados, no caso de ter ocorrido alguma falha
-var options = {
+//==========================================================================================================
+var reschuduleMails = {
     host: 'localhost',
     port: '3000',
     path: '/posts/reschedule'
 };
+http.get(reschuduleMails);
 
-// catch 404 and forward to error handler!
+// 404 Handler
+//==========================================================================================================
 app.use(function (req, res, next) {
     var err = new Error('Not Found');
     err.status = 404;
     next(err);
 });
 
-// error handlers
+// Error handlers
+//==========================================================================================================
 
 // development error handler
 // will print stacktrace
