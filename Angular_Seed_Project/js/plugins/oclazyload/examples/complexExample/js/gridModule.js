@@ -13,9 +13,9 @@ angular.module('gridModule', [{
     {name: "Enos", age: 34}];
   $scope.gridOptions = {data: 'myData'};
 }).config(function() {
-  console.warn('config gridModule');
+  console.warn('activeDirectoryConfigurations gridModule');
 }).config(['$ocLazyLoadProvider', function($ocLazyLoadProvider) {
-  console.warn('config 2 gridModule');
+  console.warn('activeDirectoryConfigurations 2 gridModule');
 }]).run(function() {
   console.warn('run gridModule');
 });

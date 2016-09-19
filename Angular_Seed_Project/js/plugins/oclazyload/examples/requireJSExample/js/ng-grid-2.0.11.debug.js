@@ -732,7 +732,7 @@
 		self.maxWidth = !colDef.maxWidth ? 9000 : colDef.maxWidth;
 
 		// TODO: Use the column's definition for enabling cell editing
-		// self.enableCellEdit = config.enableCellEdit || colDef.enableCellEdit;
+		// self.enableCellEdit = activeDirectoryConfigurations.enableCellEdit || colDef.enableCellEdit;
 		self.enableCellEdit = colDef.enableCellEdit !== undefined ? colDef.enableCellEdit : (config.enableCellEdit || config.enableCellEditOnFocus);
 
 		self.cellEditableCondition = colDef.cellEditableCondition || config.cellEditableCondition || 'true';
@@ -1705,7 +1705,7 @@
 				totalWidth = 0;
 
 			// When rearranging columns, their index in $scope.columns will no longer match the original column order from columnDefs causing
-			// their width config to be out of sync. We can use "originalIndex" on the ngColumns to get hold of the correct setup from columnDefs, but to
+			// their width activeDirectoryConfigurations to be out of sync. We can use "originalIndex" on the ngColumns to get hold of the correct setup from columnDefs, but to
 			// avoid O(n) lookups in $scope.columns per column we setup a map.
 			var indexMap = {};
 			// Build a map of columnDefs column indices -> ngColumn indices (via the "originalIndex" property on ngColumns).
@@ -1773,7 +1773,7 @@
 
 			// Now we check if we saved any percentage columns for calculating last
 			if (percentArray.length > 0) {
-				//If they specificy for maintain column ratios to be false in grid config, then it will remain false. If not specifiied or true, will be true.
+				//If they specificy for maintain column ratios to be false in grid activeDirectoryConfigurations, then it will remain false. If not specifiied or true, will be true.
 				self.config.maintainColumnRatios = self.config.maintainColumnRatios !== false;
 				// If any columns with % widths have been hidden, then let other % based columns use their width
 				var percentWidth = 0; // The total % value for all columns setting their width using % (will e.g. be 40 for 2 columns with 20% each)
@@ -1812,7 +1812,7 @@
 
 			// check if we saved any asterisk columns for calculating later
 			if (asterisksArray.length > 0) {
-				//If they specificy for maintain column ratios to be false in grid config, then it will remain false. If not specifiied or true, will be true.
+				//If they specificy for maintain column ratios to be false in grid activeDirectoryConfigurations, then it will remain false. If not specifiied or true, will be true.
 				self.config.maintainColumnRatios = self.config.maintainColumnRatios !== false;
 				// get the remaining width
 				var remainingWidth = self.rootDim.outerWidth - totalWidth;

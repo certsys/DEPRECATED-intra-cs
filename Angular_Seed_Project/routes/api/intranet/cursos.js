@@ -1,14 +1,14 @@
 var express = require('express');
 var router = express.Router();
-var Curso = require('../models/cursos');
+var Curso = require('../../../models/cursos');
 var fs = require('fs');
 var multiparty = require('connect-multiparty');
 var multipartMiddleware = multiparty();
 
 
-router.use(function (req, res, next) {
-    global.verificaToken(req, res, next)
-});
+// router.use(function (req, res, next) {
+//     global.verificaToken(req, res, next)
+// });
 
 // Pega todos os cursos
 router.get('/', function (req, res) {

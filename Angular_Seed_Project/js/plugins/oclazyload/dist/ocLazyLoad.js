@@ -176,7 +176,7 @@
            * @type Function
            * @param paths array list of js files to load
            * @param callback to call when everything is loaded. We use a callback and not a promise
-           * @param params object config parameters
+           * @param params object activeDirectoryConfigurations parameters
            * because the user can overwrite jsLoader and it will probably not use promises :(
            */
           jsLoader = function(paths, callback, params) {
@@ -199,7 +199,7 @@
            * @type Function
            * @param paths array list of css files to load
            * @param callback to call when everything is loaded. We use a callback and not a promise
-           * @param params object config parameters
+           * @param params object activeDirectoryConfigurations parameters
            * because the user can overwrite cssLoader and it will probably not use promises :(
            */
           cssLoader = function(paths, callback, params) {
@@ -222,7 +222,7 @@
            * @type Function
            * @param paths array list of css files to load
            * @param callback to call when everything is loaded. We use a callback and not a promise
-           * @param params object config parameters for $http
+           * @param params object activeDirectoryConfigurations parameters for $http
            * because the user can overwrite templatesLoader and it will probably not use promises :(
            */
           templatesLoader = function(paths, callback, params) {
@@ -337,7 +337,7 @@
 
         return {
           /**
-           * Let you get a module config object
+           * Let you get a module activeDirectoryConfigurations object
            * @param moduleName String the name of the module
            * @returns {*}
            */
@@ -352,13 +352,13 @@
           },
 
           /**
-           * Let you define a module config object
-           * @param moduleConfig Object the module config object
+           * Let you define a module activeDirectoryConfigurations object
+           * @param moduleConfig Object the module activeDirectoryConfigurations object
            * @returns {*}
            */
           setModuleConfig: function(moduleConfig) {
             if(!angular.isObject(moduleConfig)) {
-              throw new Error('You need to give the module config object to set');
+              throw new Error('You need to give the module activeDirectoryConfigurations object to set');
             }
             modules[moduleConfig.name] = moduleConfig;
             return moduleConfig;
@@ -403,7 +403,7 @@
 
           /**
            * Load a module or a list of modules into Angular
-           * @param module Mixed the name of a predefined module config object, or a module config object, or an array of either
+           * @param module Mixed the name of a predefined module activeDirectoryConfigurations object, or a module activeDirectoryConfigurations object, or an array of either
            * @param params Object optional parameters
            * @returns promise
            */
@@ -738,7 +738,7 @@
           if(isNew && angular.isDefined(provider)) {
             provider[args[1]].apply(provider, args[2]);
           }
-        } else { // config block
+        } else { // activeDirectoryConfigurations block
           var callInvoke = function(fct) {
             var invoked = regConfigs.indexOf(moduleName + '-' + fct);
             if(invoked === -1 || reconfig) {

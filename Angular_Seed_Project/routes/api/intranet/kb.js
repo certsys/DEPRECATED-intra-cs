@@ -1,13 +1,13 @@
 var express = require('express');
 var router = express.Router();
-var kbtree = require('../models/kbtree');
-var kbcontent = require('../models/kbcontent');
+var kbtree = require('../../../models/kbtree');
+var kbcontent = require('../../../models/kbcontent');
 var multiparty = require('connect-multiparty');
 var multipartMiddleware = multiparty();
 
-router.use(function (req, res, next) {
-    global.verificaToken(req, res, next);
-});
+// router.use(function (req, res, next) {
+//     global.verificaToken(req, res, next);
+// });
 
 // router.get('/set', function(req, res){
 //     KB.findOne({ 'text': 'Certsys' }, 'name occupation', function (err, person) {

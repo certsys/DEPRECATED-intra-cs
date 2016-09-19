@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var async = require('async');
 var fs = require('fs');
-var Contact = require('../models/contacts');
+var Contact = require('../../../models/contacts');
 var ActiveDirectory = require('activedirectory');
 
 var config = {
@@ -138,9 +138,9 @@ router.put('/', function (req, res, next) {
     });
 });
 
-router.use(function (req, res, next) {
-    global.verificaToken(req, res, next)
-});
+// router.use(function (req, res, next) {
+//     global.verificaToken(req, res, next)
+// });
 
 // Pega usuário pelo email
 router.get('/perfil', function (req, res) {

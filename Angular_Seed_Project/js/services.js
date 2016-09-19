@@ -89,7 +89,12 @@ function userService($sessionStorage, peopleGroups) {
     };
 
     var getUser = function () {
-        return angular.fromJson($sessionStorage.user);
+        var user = {
+            givenName: "Henrique",
+            sAMAccountName: "henrique.cavalcante"
+        };
+        return user;
+        // return angular.fromJson($sessionStorage.user);
     };
 
     var sendToken = function (newObj) {

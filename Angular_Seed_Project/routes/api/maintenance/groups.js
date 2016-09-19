@@ -1,7 +1,7 @@
 var express = require('express');
 var async = require('async');
 var router = express.Router();
-var Group = require('../models/groups');
+var Group = require('../../../models/groups');
 var ActiveDirectory = require('activedirectory');
 var jwt = require('jsonwebtoken');
 

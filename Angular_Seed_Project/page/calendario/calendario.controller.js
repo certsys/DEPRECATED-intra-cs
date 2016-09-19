@@ -33,7 +33,7 @@ function CalendarCtrl($scope) {
         $scope.alertMessage = (event.title +': Resized to make dayDelta ' + minuteDelta);
     };
 
-    /* config object */
+    /* activeDirectoryConfigurations object */
     $scope.uiConfig = {
         calendar:{
             height: 450,

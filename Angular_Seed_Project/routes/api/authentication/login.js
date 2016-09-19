@@ -4,18 +4,14 @@ var ActiveDirectory = require('activedirectory');
 var jwt = require('jsonwebtoken');
 
 
-var config = {
+var activeDirectoryConfigurations = {
     url: 'ldap://192.168.129.2:389',
     baseDN: 'DC=certsys,DC=local',
     username: 'svc_intranet@certsys.local',
     password: 'dAgAcupU6rA='
-}
+};
 
-var ad = new ActiveDirectory(config);
-var username = 'henrique.cavalcante';
-var password = 'dAgAcupU6rA=';
-var groupName = 'Certsys';
-var sAMAccountName = 'henrique.cavalcante';
+var ad = new ActiveDirectory(activeDirectoryConfigurations);
 
 
 router.get('/ex', function (req, res, next) {

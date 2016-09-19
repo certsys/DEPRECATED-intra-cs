@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var User = require('../models/user');
+var User = require('../../../models/user');
 var ActiveDirectory = require('activedirectory');
 
 var config = {
@@ -18,9 +18,9 @@ var password = 'dAgAcupU6rA=';
 var groupName = 'Certsys';
 
 
-router.use(function (req, res, next) {
-    global.verificaToken(req, res, next)
-});
+// router.use(function (req, res, next) {
+//     global.verificaToken(req, res, next)
+// });
 
 /* PUT users listing. */
 router.put('/', function (req, res, next) {
