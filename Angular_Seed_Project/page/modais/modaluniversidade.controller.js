@@ -67,7 +67,7 @@ function ModalInstanceCtrl($scope, $modalInstance, $http, userService, getCurso,
         }
     };
 
-    $scope.isCreate = function () {
+    $scope.isCreated = function () {
         return (angular.isDefined(getCurso));
     };
 
@@ -214,14 +214,10 @@ function ModalInstanceCtrl($scope, $modalInstance, $http, userService, getCurso,
                 //your code in case your post fails
                 // console.log(err);
             });
-
-
         });
     };
 
-
 }
-
 
 angular
     .module('inspinia')
