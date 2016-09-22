@@ -228,10 +228,8 @@ router.get('/reschedule', function (req, res) {
 });
 
 if (!Debug.isDebug()) {
-    router.use(function (req, res, next) {
-        Auth.auth(req, res, next);
-    });
-};
+    router.use(Auth.auth);
+}
 
 // Pega todos os Posts que não foram deletados e que possuem data anterior à atual
 router.get('/', function (req, res) {

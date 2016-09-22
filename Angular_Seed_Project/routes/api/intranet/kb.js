@@ -8,9 +8,7 @@ var Auth = require('../authentication/auth');
 var Debug = require('../../debug');
 
 if (!Debug.isDebug()) {
-    router.use(function (req, res, next) {
-        Auth.auth(req, res, next);
-    });
+    router.use(Auth.auth);
 }
 // router.get('/set', function(req, res){
 //     KB.findOne({ 'text': 'Certsys' }, 'name occupation', function (err, person) {
