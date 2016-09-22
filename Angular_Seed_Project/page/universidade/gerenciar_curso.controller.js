@@ -145,6 +145,14 @@ function gerenciar_curso($scope, $http, userService, fileUpload, $state, univers
         return -1;
     };
 
+    $scope.cargaHoraria = function () {
+        var exactTime = $scope.curso.carga_horaria;
+        var hours = Math.floor(exactTime);
+        var minutes = exactTime % 1;
+        minutes = parseInt(minutes*60);
+        var hourMinutes = hours + " hora(s) e " + minutes + " minuto(s)";
+        return hourMinutes;
+    }
 }
 
 function fileModel($parse) {
