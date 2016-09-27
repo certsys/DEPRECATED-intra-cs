@@ -12,7 +12,7 @@ function editnews($http, $scope, postService, $state, $timeout, userService, peo
     });
 
 
-    if (!(userService.Authenticate().debug || userService.Authenticate().admin || userService.Authenticate().diretores))
+    if (!(userService.Authenticate().debug || userService.Authenticate().admin || userService.Authenticate().diretores || userService.Authenticate().rh))
         $state.go('feed');
 
     // Só administradores do sistema podem entrar nessa view

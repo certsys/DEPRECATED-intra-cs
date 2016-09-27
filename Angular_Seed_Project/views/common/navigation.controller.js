@@ -14,7 +14,8 @@ function navigationCrtl($scope, $state, userService, contactService, peopleGroup
         diretores: userService.Authenticate().diretores,
         prevendas: userService.Authenticate().prevendas,
         tecnico: userService.Authenticate().tecnico,
-        instructors: userService.Authenticate().instructors
+        instructors: userService.Authenticate().instructors,
+        rh: userService.Authenticate().rh // temp code
     };
 
     $scope.perfil = function () {

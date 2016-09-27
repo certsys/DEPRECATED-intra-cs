@@ -11,7 +11,7 @@ function insertnews($scope, $http, $timeout, $state, userService, peopleGroups) 
     });
 
 
-    if (!(userService.Authenticate().debug || userService.Authenticate().admin || userService.Authenticate().diretores))
+    if (!(userService.Authenticate().debug || userService.Authenticate().admin || userService.Authenticate().diretores || userService.Authenticate().rh ))
         $state.go('feed');
 
     // Só administradores do sistema podem entrar nessa view

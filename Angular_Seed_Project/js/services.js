@@ -72,16 +72,24 @@ function userService($sessionStorage, peopleGroups) {
         'henrique.cavalcante',
         'ivan.zoppetti',
         'lucas.felgueiras',
-        'pedro.strabeli',
-        'marcos.hosoya'
+        'pedro.strabeli'
+        //'marcos.hosoya'
     ];
 
     var INSTRUCTORS = [
         'carlos.custodio',
         'herbert.santos',
-        'henrique.cavalcante',
-        'marcos.hosoya'
+        'henrique.cavalcante'
+       // 'marcos.hosoya'
     ];
+
+    // temp code refazer posteriormente
+    var RH = [
+        'vanessa.assis',
+        'bianca.novo',
+        "elizabeth.kurihara"
+    ];
+    // =======
 
 
     var sendUser = function (newObj) {
@@ -124,6 +132,15 @@ function userService($sessionStorage, peopleGroups) {
         return false;
     };
 
+    // temp code
+    var rhGroup = function () {
+        for (var i = 0; i < RH.length; i++) {
+            if (getUser().sAMAccountName == RH[i]) return true;
+        }
+        return false;
+    };
+    // =====
+
     var Authenticate = function () {
         $sessionStorage.permissions = {
 
@@ -133,11 +150,13 @@ function userService($sessionStorage, peopleGroups) {
             diretores: false,
             prevendas: false,
             tecnico: false,
-            instructors: false
+            instructors: false,
+            rh: false // temp code
         };
 
         if (devGroup()) $sessionStorage.permissions.debug = true;
         if (instructorGroup()) $sessionStorage.permissions.instructors = true;
+        if (rhGroup()) $sessionStorage.permissions.rh = true; // temporary code
 
         peopleGroups.GROUPS()
             .then(function (data) {
@@ -148,6 +167,7 @@ function userService($sessionStorage, peopleGroups) {
                         if (insideGroup(data[i].users)) $sessionStorage.permissions.diretores = true;
                         if (insideGroup(data[i].users)) $sessionStorage.permissions.prevendas = true;
                         if (insideGroup(data[i].users)) $sessionStorage.permissions.tecnico = true;
+                        if (insideGroup(data[i].users)) $sessionStorage.permissions.rh = true;  // temp code
                     }
                 }
             }, function (error) {
@@ -172,7 +192,8 @@ function userService($sessionStorage, peopleGroups) {
         insideGroup: insideGroup,
         devGroup: devGroup,
         Authenticate: Authenticate,
-        instructorGroup: instructorGroup
+        instructorGroup: instructorGroup,
+        rhGroup: rhGroup // temp code
     };
 }
 

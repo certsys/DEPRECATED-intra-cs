@@ -12,7 +12,7 @@
         <div ng-controller="navigationCrtl">
             <div class="navbar-collapse collapse" id="navbar">
                 <ul class="nav navbar-nav">
-                    <li ng-if="permissions.debug || permissions.diretores || permissions.admin" ui-sref-active="active" class="dropdown">
+                    <li ng-if="permissions.debug || permissions.diretores || permissions.admin || permissions.rh" ui-sref-active="active" class="dropdown">
                         <a  ui-sref="feed" dropdown-toggle><i class="fa fa-globe"></i>{{ 'HOME' | translate }}</a>
                         <ul role="menu" class="dropdown-menu">
                             <li><a ui-sref="insertnews">Inserir Novo Post</a></li>

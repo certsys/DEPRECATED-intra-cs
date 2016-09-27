@@ -11,7 +11,7 @@ function postManager($scope, $http, postService, $state, userService, peopleGrou
         // console.log(err);
     });
     
-    if (!(userService.Authenticate().debug || userService.Authenticate().admin || userService.Authenticate().diretores))
+    if (!(userService.Authenticate().debug || userService.Authenticate().admin || userService.Authenticate().diretores || userService.Authenticate().rh))
         $state.go('feed');
 
     $scope.title = "Controle dos Posts";
