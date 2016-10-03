@@ -19,7 +19,7 @@
                             <li><a ui-sref="manageposts">Gerenciar Posts</a></li>
                         </ul>
                     </li>
-                    <li ng-if="!permissions.debug && !permissions.diretores && !permissions.admin" ui-sref-active="active">
+                    <li ng-if="!permissions.debug && !permissions.diretores && !permissions.admin && !permissions.rh" ui-sref-active="active">
                         <a ui-sref="feed"><i class="fa fa-globe"></i> {{ 'HOME' | translate }}</a>
                     </li>
                     <!--<li ui-sref-active="active">-->
