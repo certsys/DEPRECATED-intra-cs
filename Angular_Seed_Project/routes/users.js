@@ -2,7 +2,6 @@ var express = require('express');
 var router = express.Router();
 var User = require('../models/user');
 var ActiveDirectory = require('activedirectory');
-var jwt = require('jsonwebtoken');
 
 var config = {
     url: 'ldap://192.168.129.2:389',
@@ -18,40 +17,10 @@ var username = 'svc_intranet@certsys.local';
 var password = 'dAgAcupU6rA=';
 var groupName = 'Certsys';
 
-// router.use(function (req, res, next) {
-//
-//     // check header or url parameters or post parameters for token
-//     var token = req.body.token || req.param('token') || req.headers['x-access-token'];
-//
-//     // decode token
-//     if (token) {
-//
-//         // verifies secret and checks exp
-//         jwt.verify(token, 'Cert0104sys', function (err, decoded) {
-//             if (err) {
-//                 return res.status(403).send({
-//                     success: false,
-//                     message: 'Falha de autenticação do Token'
-//                 });
-//             } else {
-//                 // if everything is good, save to request for use in other routes
-//                 req.decoded = decoded;
-//                 next();
-//             }
-//         });
-//
-//     } else {
-//
-//         // if there is no token
-//         // return an error
-//         return res.status(403).send({
-//             success: false,
-//             message: 'No token provided.'
-//         });
-//
-//     }
-//
-// });
+
+router.use(function (req, res, next) {
+    global.verificaToken(req, res, next)
+});
 
 /* PUT users listing. */
 router.put('/', function (req, res, next) {

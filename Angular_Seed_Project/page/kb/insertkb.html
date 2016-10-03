@@ -1,0 +1,136 @@
+<!-- Wrapper-->
+<div id="blueimp-gallery" class="blueimp-gallery">
+    <div class="slides"></div>
+</div>
+<div id="wrapper" class="top-navigation">
+    <!-- Navigation -->
+    <div ng-include="'views/common/navigation.html'"></div>
+    <!-- Page wraper -->
+    <!-- ng-class with current state name give you the ability to extended customization your view -->
+    <div id="page-wrapper" class="gray-bg {{$state.current.name}}">
+        <!-- Page wrapper -->
+        <!-- Main view  -->
+        <div ng-controller="kb_insert">
+            <div class="row wrapper border-bottom white-bg page-heading">
+                    <h2>{{title}}</h2> </div>
+            </div>
+            <div class="wrapper col-lg-12" >
+                <div class="col-lg-4">
+                <div class="ibox float-e-margins">
+                <div class="row">
+                <div class="ibox-content">
+                    <form ng-submit="submitFolder()" class="form-horizontal"> 
+                        <img ng-src="{{ thumbnail.dataUrl }}" />
+                        <h2>Adicionar Pasta de Produto <input type="checkbox" class="js-switch" ui-switch="{color:'#3DADD0'}" ng-model="folder" name="Folder"></h2>
+                        <br>
+                        <br>
+                        <div ng-if="folder">
+                            <h3>Selecione local da nova pasta</h3>
+                            <select required ng-model="folder.parent" class="col-sm-12">
+                              <option value="">Selecione onde inserir o novo Produto</option>
+                              <option ng-repeat="i in products" value="{{i._id}}">{{i.text}}</option>
+                            </select>
+                            <br>
+                            <br>
+                            <br>
+                            <br>
+                            <h3>Nome da nova pasta:</h3>
+                            <input id="newFolder" required class="col-sm-12" type="text" ng-model="folder.newFolder">
+                            <!--<div><span>Selected date: {{dateHolder | date}}</span></div>-->
+                            <br>
+                            <br>
+                            <br>
+                            <br>
+                            <input class="col-sm-12 btn btn-primary" type="submit" value="Criar Pasta">
+                        </div>
+                        </form>
+                        </div>
+                        </div>
+                        </div>
+                        </div>
+                        <div class="col-lg-4">
+                        <div class="ibox float-e-margins">
+                        <div class="row">
+                        <div class="ibox-content">
+                        <form ng-submit="submitPage()" class="form-horizontal">
+                        <br><h2>Adicionar Página de Produto <input type="checkbox" class="js-switch" ui-switch="{color:'#3DADD0'}" ng-model="page" name="Page"></h2>
+                        <br>
+                        <br>
+                        <div ng-if="page">
+                            <div class="form-horizontal">
+                            <h3>Título</h3>
+                        <input id="page_title" required class="col-sm-12" type="text" ng-model="page.titulo" name="Título">
+                        <br>
+                        <br>
+                            <h3>Selecione local da nova página</h3>
+                            <select required name="Parent" ng-model="page.parent" value="Parent" class="col-sm-12">
+                              <option value="">Selecione onde inserir a nova Página</option>
+                              <optgroup ng-repeat="product in products" label="{{product.text}}">
+                                <option ng-repeat="i in product.children track by $index" value="{{i._id}}">{{i.text}}</option>
+                            </select>
+                        <br>
+                        <br>
+                            <h3>Corpo</h3>
+                            <summernote class="col-sm-12"  type="text" ng-model="page.text" config="options">
+                            </summernote>
+                            <h3>Tags</h3>
+                        <input id="page_tags" required class="col-sm-12" type="text" ng-model="page.tags">
+
+                            </div>
+                            <!--<div><span>Selected date: {{dateHolder | date}}</span></div>-->
+                            <br>
+                            <br>
+                            <br>
+                            <input class="col-sm-12 btn btn-primary" type="submit" value="Criar Página">
+                        </div>
+                        </form>
+                        </div>
+                        </div>
+                        </div>
+                        </div>
+                        <div class="col-lg-4">
+                        <div class="ibox float-e-margins">
+                        <div class="row">
+                        <div class="ibox-content">
+                        <form ng-submit="uploadFile()" class="form-horizontal">
+                        <br><h2>Adicionar Arquivo <input type="checkbox" class="js-switch" ui-switch="{color:'#3DADD0'}" ng-model="file" name="File"></h2>
+                        <br>
+                        <br>
+                        <div ng-if="file">
+
+                            <h3>Selecione a página do novo arquivo</h3>
+                            <select id="file_parent" required name="Parent" ng-model="file.parent" value="Parent" class="col-sm-12">
+                              <option value="">Selecione a página onde o arquivo será inserido</option>
+                              <option ng-repeat="i in pages">{{i.title}}</option>
+                            </select>
+                            <br>
+                            <br>
+                            <div class="form-horizontal">
+                                <h3>Escolha o Arquivo</h3><br>
+                        <div><input name="file" type = "file" file-model = "myFile"/>
+                        </div>
+                        <br>
+                            </div>
+                            <!--<div><span>Selected date: {{dateHolder | date}}</span></div>-->
+                            <br>
+                            <br>
+                            <br>
+                            <input class="col-sm-12 btn btn-primary" type="submit" value="Enviar Arquivo">
+                        </div>
+                    </form>
+                    </div>
+                    <br>
+                    <br>
+                    <br>
+                    <br> </div>
+            </div>
+        <br>
+        <br>
+        <br>
+        </div>
+        <!-- Footer -->
+        <div ng-include="'views/common/footer.html'"></div>
+    </div>
+    <!-- End page wrapper-->
+</div>
+<!-- End wrapper-->

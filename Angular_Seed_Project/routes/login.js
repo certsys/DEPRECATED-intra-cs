@@ -2,7 +2,6 @@ var express = require('express');
 var router = express.Router();
 var ActiveDirectory = require('activedirectory');
 var jwt = require('jsonwebtoken');
-var Contact = require('../models/contacts');
 
 
 var config = {
@@ -18,42 +17,6 @@ var password = 'dAgAcupU6rA=';
 var groupName = 'Certsys';
 var sAMAccountName = 'henrique.cavalcante';
 
-
-/* GET users listing. */
-router.get('/', function (req, res, next) {
-
-    var contacts = Contact.find(function (err, contacts) {
-        if (err) return console.error(err);
-        ad.getUsersForGroup('Certsys', function (err, users) {
-            if (err) {
-                res.json('ERROR: ' + JSON.stringify(err));
-                return;
-            }
-
-            if (!users) res.json({data: 'Group: ' + groupName + ' not found.'});
-            else {
-                var usuarios = JSON.parse(JSON.stringify(users));
-                var nomes = [];
-                for (var i = 0; i < usuarios.length; i++) {
-                    ad.isUserMemberOf(usuarios[i].sAMAccountName, 'Ex-Funcionarios', function (err, isMember) {
-                        if (err) {
-                            console.log('ERROR: ' + JSON.stringify(err));
-                            return;
-                        }
-
-                        if (isMember)
-                            nomes.push(usuarios[i].sAMAccountName);
-                    });
-                }
-
-                res.json(JSON.stringify(nomes));
-
-            }
-        });
-    });
-
-
-});
 
 router.get('/ex', function (req, res, next) {
     
@@ -79,7 +42,7 @@ router.post('/', function (req, res) {
                 if (!user) res.json({data: 'User: ' + req.body.username + ' not found.'});
                 else {
                     var token = jwt.sign(user, 'Cert0104sys', {
-                        expiresIn: 3600 // Tempo em segundos ( 1 hora )
+                        expiresIn: 14400 // Tempo em segundos ( 1 hora )
                     });
 
                     res.json({

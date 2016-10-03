@@ -6,29 +6,17 @@ function navigationCrtl($scope, $state, userService, contactService, peopleGroup
         $state.go('login');
     };
 
-    $scope.permissions = {
-        debug: false,
-        admin: false,
-        comercial: false,
-        diretores: false,
-        prevendas: false,
-        tecnico: false
-    };
 
-    if(userService.devGroup()) $scope.permissions.debug = true;
-    
-    peopleGroups.GROUPS()
-        .then(function(data) {
-            if(angular.isDefined(data)) {
-                if (userService.insideGroup(data[0].users)) $scope.permissions.admin = true;
-                if (userService.insideGroup(data[4].users)) $scope.permissions.comercial = true;
-                if (userService.insideGroup(data[2].users)) $scope.permissions.diretores = true;
-                if (userService.insideGroup(data[3].users)) $scope.permissions.prevendas = true;
-                if (userService.insideGroup(data[1].users)) $scope.permissions.tecnico = true;
-            }
-        }, function(error){
-            console.log('error', error);
-        });
+    $scope.permissions = {
+        debug: userService.Authenticate().debug,
+        admin: userService.Authenticate().admin,
+        comercial: userService.Authenticate().comercial,
+        diretores: userService.Authenticate().diretores,
+        prevendas: userService.Authenticate().prevendas,
+        tecnico: userService.Authenticate().tecnico,
+        instructors: userService.Authenticate().instructors,
+        rh: userService.Authenticate().rh // temp code
+    };
 
     $scope.perfil = function () {
         $http({

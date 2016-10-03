@@ -13,54 +13,63 @@
         <div ng-controller="insertnews">
             <div class="row wrapper border-bottom white-bg page-heading">
                 <div class="col-lg-10">
-                    <h2>{{title}}</h2> </div>
+                    <h2>{{title}}</h2></div>
             </div>
             <br>
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
                     <h5>Inserir Nova Postagem:
                         <small>Comunique toda a Certsys!</small>
-                    </h5> </div>
+                    </h5>
+                </div>
                 <div class="ibox-content">
-                    <form ng-submit="submit()" class="form-horizontal"> <h2>Título</h2>
-                        
+                    <form class="form-horizontal"><h2>Título</h2>
+
                         <input required class="col-sm-12" type="text" ng-model="titulo" name="Título">
-                        <br> 
-                        <br> 
-                        <h2>Imagem</h2><br>
-                        <input required class="col-sm-12" type="file" accept="image/*" file-model="imagem" ng-model="imagem" name="Imagem" onchange="angular.element(this).scope().photoChanged(this.files)">
                         <br>
-                        <img ng-src="{{ thumbnail.dataUrl }}" />
+                        <br>
+                        <h2>Imagem</h2><br>
+                        <input required class="col-sm-12" type="file" accept="image/*" file-model="imagem"
+                               ng-model="imagem" name="Imagem"
+                               onchange="angular.element(this).scope().photoChanged(this.files)">
+                        <br>
+                        <img ng-src="{{ thumbnail.dataUrl }}"/>
                         <br>
                         <h2>Corpo</h2><br>
-                        <summernote class="col-sm-12"  type="text" ng-model="texto" name="Texto" config="options"></summernote>
-                        <br> <h2>Assinatura</h2>
+                        <summernote class="col-sm-12" type="text" ng-model="texto" name="Texto"
+                                    config="options"></summernote>
+                        <br>
+                        <h2>Assinatura</h2>
                         <br>
                         <select required name="Assinatura" ng-model="assinatura" value="Assinatura" class="col-sm-12">
-                              <option value="">Assinatura</option>
-                              <option value="Recursos Humanos - Certificações">Recursos Humanos - Certificações</option>
-                              <option value="Recursos Humanos - Treinamentos">Recursos Humanos - Treinamentos</option>
-                              <option value="Recursos Humanos - Colaboradores">Recursos Humanos - Colaboradores</option>
-                              <option value="Recursos Humanos - Aniversário">Recursos Humanos - Aniversário</option>
-                              <option value="Recursos Humanos - Eventos">Recursos Humanos - Eventos</option>
-                              <option value="Recursos Humanos - Parcerias">Recursos Humanos - Parcerias</option>
-                              <option value="Financeiro">Financeiro</option>
+                            <option value="">Assinatura</option>
+                            <option value="Recursos Humanos - Certificações">Recursos Humanos - Certificações</option>
+                            <option value="Recursos Humanos - Treinamentos">Recursos Humanos - Treinamentos</option>
+                            <option value="Recursos Humanos - Colaboradores">Recursos Humanos - Colaboradores</option>
+                            <option value="Recursos Humanos - Aniversário">Recursos Humanos - Aniversário</option>
+                            <option value="Recursos Humanos - Eventos">Recursos Humanos - Eventos</option>
+                            <option value="Recursos Humanos - Parcerias">Recursos Humanos - Parcerias</option>
+                            <option value="Financeiro">Financeiro</option>
                         </select>
                         <br>
                         <br>
-                        <br><h2>Postagem Futura? <input type="checkbox" class="js-switch" ui-switch="{color:'#3DADD0'}" ng-model="futuro" name="Futuro"></h2>
+                        <br>
+                        <h2>Postagem Futura? <input type="checkbox" class="js-switch" ui-switch="{color:'#3DADD0'}"
+                                                    ng-model="futuro" name="Futuro"></h2>
                         <br>
                         <br>
                         <div ng-if="futuro">
                             <div class="col-sm-10">
                                 <div class="input-group date">
                                     <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                                    <input id="data-postagem" type="text" date-time="" data-ng-model="dateHolder" format="DD/MM/YYYY HH:mm" view="date" min-view="hours" class="ng-pristine ng-valid ng-scope ng-touched">
+                                    <input id="data-postagem" type="text" date-time="" data-ng-model="dateHolder"
+                                           format="DD/MM/YYYY HH:mm" view="date" min-view="hours" auto-close="true"
+                                           class="ng-pristine ng-valid ng-scope ng-touched">
                                     <!--<input type="text" class="form-control" data-ng-model="programado.checkOut" name="programado" date-time required min="{{ today | date: 'yyyy-MM-dd' }}" view="date" auto-close="true" min-view="date" format="DD/MM/YYYY">-->
                                 </div>
                                 <!--<div class="input-group" clock-picker data-autoclose="true">-->
-                                    <!--<span class="input-group-addon"><i class="fa fa-clock-o"></i></span>-->
-                                    <!--<input type="text" class="form-control" data-ng-model="hora.checkOut" name="hora" value="00:00">-->
+                                <!--<span class="input-group-addon"><i class="fa fa-clock-o"></i></span>-->
+                                <!--<input type="text" class="form-control" data-ng-model="hora.checkOut" name="hora" value="00:00">-->
                                 <!--</div>-->
                             </div>
                             <!--<div><span>Selected date: {{dateHolder | date}}</span></div>-->
@@ -71,28 +80,18 @@
                             <br>
                             <br>
                         </div>
-                        <br><h2>Enviar por e-mail para toda a CS? <input type="checkbox" class="js-switch" ui-switch="{color:'#3DADD0'}" ng-model="mala" name="Mail"></h2>
+                        <br>
+                        <h2>Enviar por e-mail para toda a CS? <input type="checkbox" class="js-switch"
+                                                                     ui-switch="{color:'#3DADD0'}" ng-model="mala"
+                                                                     name="Mail"></h2>
                         <br>
                         <br>
-                        <div ng-if="mala">
-                            <div class="form-horizontal">
-                                Digite seu e-mail:
-                                <input id="usermail" required class="col-sm-12" type="text" ng-model="usermail" name="E-mail">
-                                <br>
-                                Digite sua senha:
-                                <input id="password" required class="col-sm-12" type="password" ng-model="password" name="Senha">
-                            </div>
-                            <!--<div><span>Selected date: {{dateHolder | date}}</span></div>-->
-                            <br>
-                            <br>
-                            <br>
-                        </div>
-                        <input class="col-sm-12 btn btn-primary" type="submit" value="Postar">
+                        <input ng-model="postar" ng-disabled="wasPressed" ng-click="submit()" class="col-sm-12 btn btn-primary" type="submit" value="Postar">
                     </form>
                     <br>
                     <br>
                     <br>
-                    <br> </div>
+                    <br></div>
             </div>
         </div>
         <br>

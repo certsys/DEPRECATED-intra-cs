@@ -10,7 +10,8 @@ var contactSchema = new mongoose.Schema({
     skype: String,
     linkedin: String,
     imagem: String,
-    cargo: String
+    cargo: String,
+    datanasc: String
 });
 
 var Contact = mongoose.model('Contact', contactSchema);

@@ -1,8 +1,8 @@
-    var express = require('express');
+var express = require('express');
 var router = express.Router();
 var async = require('async');
+var fs = require('fs');
 var Contact = require('../models/contacts');
-var jwt = require('jsonwebtoken');
 var ActiveDirectory = require('activedirectory');
 
 var config = {
@@ -29,40 +29,40 @@ router.put('/', function (req, res, next) {
 
         if (!users) res.json({data: 'Group: ' + groupName + ' not found.'});
         else {
-            users.forEach(function(user) {
+            users.forEach(function (user) {
                 var sAMAccountName = user.sAMAccountName;
                 var final = [];
                 var extra_groups = user.dn.split(",");
 
-                ad.getGroupMembershipForUser(sAMAccountName, function(err, groups) {
+                ad.getGroupMembershipForUser(sAMAccountName, function (err, groups) {
                     if (err) {
-                        console.log('ERROR: ' +JSON.stringify(err));
+                        console.log('ERROR: ' + JSON.stringify(err));
                         return;
                     }
 
                     if (!groups) console.log('User: ' + sAMAccountName + ' not found.');
                     else {
-                        extra_groups.forEach(function(extra) {
+                        extra_groups.forEach(function (extra) {
                             extra = (extra.split("="))[1];
                             if (extra != null && final.indexOf(extra) == -1) final.push(extra);
                         });
 
-                        groups.forEach(function(group) {
+                        groups.forEach(function (group) {
                             var group_cn = group.cn.split(",");
                             var group_dn = group.dn.split(",");
 
-                            group_cn.forEach(function(element) {
+                            group_cn.forEach(function (element) {
                                 element = (element.split("="))[1];
                                 if (element != null && final.indexOf(element) == -1) final.push(element);
                             });
 
-                            group_dn.forEach(function(element) {
+                            group_dn.forEach(function (element) {
                                 element = (element.split("="))[1];
                                 if (element != null && final.indexOf(element) == -1) final.push(element);
                             });
 
                         });
-                        Contact.findOne({nome : user.cn}, function (err, data) {
+                        Contact.findOne({nome: user.cn}, function (err, data) {
                             if (err) return err;
                             else if (user.sAMAccountName === "marco.villa.adm") {
                             }
@@ -88,7 +88,7 @@ router.put('/', function (req, res, next) {
                             }
                             else if (data != null) {
                                 if (final.indexOf("Ex-Funcionarios") > -1) {
-                                    data.remove(function(err, data) {
+                                    data.remove(function (err, data) {
                                         if (err) return next(err);
                                     });
                                 }
@@ -139,49 +139,40 @@ router.put('/', function (req, res, next) {
 });
 
 router.use(function (req, res, next) {
-
-    // check header or url parameters or post parameters for token
-    var token = req.body.token || req.param('token') || req.headers['x-access-token'];
-
-    // decode token
-    if (token) {
-
-        // verifies secret and checks exp
-        jwt.verify(token, 'Cert0104sys', function (err, decoded) {
-            if (err) {
-                return res.status(403).send({
-                    success: false,
-                    message: 'Falha de autenticação do Token'
-                });
-            } else {
-                // if everything is good, save to request for use in other routes
-                req.decoded = decoded;
-                next();
-            }
-        });
-
-    } else {
-
-        // if there is no token
-        // return an error
-        return res.status(403).send({
-            success: false,
-            message: 'No token provided.'
-        });
-
-    }
-
+    global.verificaToken(req, res, next)
 });
 
 // Pega usuário pelo email
 router.get('/perfil', function (req, res) {
-
     var mail = req.param("mail");
-    var query = Contact.where({mail: new RegExp(mail, 'ig')});
-    query.find(function (err, data) {
-        if (err) return console.error(err);
-        res.json(data);
-    })
+    if (mail !== "") {
+        var query = Contact.where({mail: new RegExp(mail, 'ig')});
+        query.find(function (err, data) {
+            if (err) return console.error(err);
+            res.json(data);
+        })
+    }
+    else res.json(null);
+});
+
+//Pega os inscritos de um curso
+router.post('/inscritos', function (req, res) {
+    var inscritos = req.body;
+    if (inscritos.length >= 1) {
+        var mails = [];
+        inscritos.forEach(function (inscrito) {
+            mails.push(new RegExp(inscrito.sAMAccountName, 'ig'));                  //find the subscribers' emails
+        });
+        if (mails.length) {
+            Contact.find().where('mail').in(mails).exec(function (err, contacts) {  //find the contacts with the listed emails above inside the database
+                res.json(contacts);
+            });
+        }
+        else
+            res.json(null);
+    } else {
+        res.json(null);
+    }
 
 });
 
@@ -215,7 +206,8 @@ router.post('/', function (req, res) {
         telefone: req.body.phone,
         skype: req.body.skype,
         linkedin: req.body.linkedin,
-        imagem: req.body.imagem
+        imagem: req.body.imagem,
+        datanasc: req.body.datanasc
     });
 
 
@@ -236,6 +228,7 @@ router.put('/edit', function (req, res, next) {
         data.telefone = req.body.telefone;
         data.skype = req.body.skype;
         data.linkedin = req.body.linkedin;
+        data.datanasc = req.body.datanasc;
         if (req.body.imagem != null && req.body.imagem !== "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMgAAADICAYAAACtWK6eAAAFIklEQVR4Xu3VsRHAMAzEsHj/pTOBXbB9pFchyLycz0eAwFXgsCFA4C4gEK+DwENAIJ4HAYF4AwSagD9IczM1IiCQkUNbswkIpLmZGhEQyMihrdkEBNLcTI0ICGTk0NZsAgJpbqZGBAQycmhrNgGBNDdTIwICGTm0NZuAQJqbqREBgYwc2ppNQCDNzdSIgEBGDm3NJiCQ5mZqREAgI4e2ZhMQSHMzNSIgkJFDW7MJCKS5mRoREMjIoa3ZBATS3EyNCAhk5NDWbAICaW6mRgQEMnJoazYBgTQ3UyMCAhk5tDWbgECam6kRAYGMHNqaTUAgzc3UiIBARg5tzSYgkOZmakRAICOHtmYTEEhzMzUiIJCRQ1uzCQikuZkaERDIyKGt2QQE0txMjQgIZOTQ1mwCAmlupkYEBDJyaGs2AYE0N1MjAgIZObQ1m4BAmpupEQGBjBzamk1AIM3N1IiAQEYObc0mIJDmZmpEQCAjh7ZmExBIczM1IiCQkUNbswkIpLmZGhEQyMihrdkEBNLcTI0ICGTk0NZsAgJpbqZGBAQycmhrNgGBNDdTIwICGTm0NZuAQJqbqREBgYwc2ppNQCDNzdSIgEBGDm3NJiCQ5mZqREAgI4e2ZhMQSHMzNSIgkJFDW7MJCKS5mRoREMjIoa3ZBATS3EyNCAhk5NDWbAICaW6mRgQEMnJoazYBgTQ3UyMCAhk5tDWbgECam6kRAYGMHNqaTUAgzc3UiIBARg5tzSYgkOZmakRAICOHtmYTEEhzMzUiIJCRQ1uzCQikuZkaERDIyKGt2QQE0txMjQgIZOTQ1mwCAmlupkYEBDJyaGs2AYE0N1MjAgIZObQ1m4BAmpupEQGBjBzamk1AIM3N1IiAQEYObc0mIJDmZmpEQCAjh7ZmExBIczM1IiCQkUNbswkIpLmZGhEQyMihrdkEBNLcTI0ICGTk0NZsAgJpbqZGBAQycmhrNgGBNDdTIwICGTm0NZuAQJqbqREBgYwc2ppNQCDNzdSIgEBGDm3NJiCQ5mZqREAgI4e2ZhMQSHMzNSIgkJFDW7MJCKS5mRoREMjIoa3ZBATS3EyNCAhk5NDWbAICaW6mRgQEMnJoazYBgTQ3UyMCAhk5tDWbgECam6kRAYGMHNqaTUAgzc3UiIBARg5tzSYgkOZmakRAICOHtmYTEEhzMzUiIJCRQ1uzCQikuZkaERDIyKGt2QQE0txMjQgIZOTQ1mwCAmlupkYEBDJyaGs2AYE0N1MjAgIZObQ1m4BAmpupEQGBjBzamk1AIM3N1IiAQEYObc0mIJDmZmpEQCAjh7ZmExBIczM1IiCQkUNbswkIpLmZGhEQyMihrdkEBNLcTI0ICGTk0NZsAgJpbqZGBAQycmhrNgGBNDdTIwICGTm0NZuAQJqbqREBgYwc2ppNQCDNzdSIgEBGDm3NJiCQ5mZqREAgI4e2ZhMQSHMzNSIgkJFDW7MJCKS5mRoREMjIoa3ZBATS3EyNCAhk5NDWbAICaW6mRgQEMnJoazYBgTQ3UyMCAhk5tDWbgECam6kRAYGMHNqaTUAgzc3UiIBARg5tzSYgkOZmakRAICOHtmYTEEhzMzUiIJCRQ1uzCQikuZkaERDIyKGt2QQE0txMjQgIZOTQ1mwCAmlupkYEBDJyaGs2AYE0N1MjAgIZObQ1m4BAmpupEQGBjBzamk1AIM3N1IiAQEYObc0mIJDmZmpEQCAjh7ZmExBIczM1IiCQkUNbswkIpLmZGhH4AStUAMmSuOW2AAAAAElFTkSuQmCC")
             data.imagem = req.body.imagem;
         data.save(function (err, data) {

@@ -7,35 +7,10 @@ function insertcontacts($scope, $http, $timeout, $state, userService) {
         //your code in case the post succeeds
     }).catch(function (err) {
         $state.go('login');
-        console.log(err);
+        // console.log(err);
     });
-
-    $scope.permissions = {
-        debug: false,
-        admin: false,
-        comercial: false,
-        diretores: false,
-        prevendas: false,
-        tecnico: false
-    };
-
-    if(userService.devGroup()) $scope.permissions.debug = true;
-
-    peopleGroups.GROUPS()
-        .then(function(data) {
-            if(angular.isDefined(data)) {
-                console.log(data);
-                if (userService.insideGroup(data[0].users)) $scope.permissions.admin = true;
-                if (userService.insideGroup(data[4].users)) $scope.permissions.comercial = true;
-                if (userService.insideGroup(data[2].users)) $scope.permissions.diretores = true;
-                if (userService.insideGroup(data[3].users)) $scope.permissions.prevendas = true;
-                if (userService.insideGroup(data[1].users)) $scope.permissions.tecnico = true;
-            }
-        }, function(error){
-            console.log('error', error);
-        });
-
-    if(!($scope.permissions.debug || $scope.permissions.admin || $scope.permissions.diretores))
+    
+    if (!(userService.Authenticate().debug || userService.Authenticate().admin || userService.Authenticate().diretores))
         $state.go('feed');
     
     $scope.title='Novo Contato';
@@ -132,11 +107,12 @@ function insertcontacts($scope, $http, $timeout, $state, userService) {
             mail: $scope.mail,
             phone: $scope.phone,
             skype: $scope.skype,
-            imagem: $scope.thumbnail.dataUrl
+            imagem: $scope.thumbnail.dataUrl,
+            datanasc: $scope.datanasc
         };
 
         var output = JSON.stringify(data);
-        console.log(output);
+        // console.log(output);
         $http({method: 'POST', url:'/contacts', data: output, params: {token: userService.getToken()}})
         	.then(function(response){
         		//your code in case the post succeeds

@@ -1,5 +1,17 @@
 function editcontact($scope, $http, $state, userService, contactService) {
 
+    $http({
+        url: '/institucional',
+        method: "GET",
+        params: {token: userService.getToken()}
+    }).then(function (response) {
+        //your code in case the post succeeds
+        // console.log(response);
+    }).catch(function (err) {
+        $state.go('login');
+        // console.log(err);
+    });
+
     // Somente permite editar o próprio contato
     $http({
         url: '/contacts/perfil',
@@ -10,13 +22,13 @@ function editcontact($scope, $http, $state, userService, contactService) {
         // console.log(response.data.lenght > 0);
         contactService.sendContact(response.data[0]);
         $scope.carregaDados();
-        if(response.data.length > 0) {
-        }else{
-            alert("Infelizmente o seu usuário ainda não tem dados no sistema :(")
+        if(response.data != null && response.data.length > 0) {
+        } else {
+            alert("Infelizmente o seu usuário ainda não tem dados no sistema :(");
         }
     }).catch(function (err) {
         $state.go('login');
-        console.log(err);
+        // console.log(err);
     });
 
     $scope.title = 'Editar Perfil';
@@ -168,25 +180,26 @@ function editcontact($scope, $http, $state, userService, contactService) {
             telefone: $scope.edit_perfil.telefone,
             skype: $scope.edit_perfil.skype,
             linkedin: $scope.edit_perfil.linkedin,
-            imagem: $scope.myCroppedImage
+            imagem: $scope.myCroppedImage,
+            datanasc: $scope.datanasc
         };
 
         var output = JSON.stringify(data);
-        console.log(output);
+        // console.log(output);
 
         $http({
             method: 'PUT'
             , url: '/contacts/edit/'
             , data: data
-            , params: {token: userService.getToken(), mail: userService.getUser().mail}
+            , params: {token: userService.getToken(), mail: userService.getUser().sAMAccountName}
         }).then(function (response) {
             //your code in case the post succeeds
-            console.log(response.data);
+            // console.log(response.data);
             contactService.sendContact(response.data);
             $state.go('perfil');
         }).catch(function (err) {
             //your code in case your post fails
-            console.log(err);
+            // console.log(err);
         });
     }
 

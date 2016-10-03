@@ -1,3 +1,11 @@
+/* pull-right customizado */
+
+.pull-right-universidadeFilter {
+    float: right;
+    padding-top: 0.5em;
+
+}
+
 .nav--img-logo {
     width: 100%;
 }
@@ -14,6 +22,9 @@
 
 .fixed-height {
     height: 350px !important;
+}
+.fixed-width {
+    width: 100px !important;
 }
 
 .highlight {
@@ -50,13 +61,15 @@
 }
 
 .padding-0{
-    padding: 0 !important;
+    padding: 0 ;
 }
 
 .fit-image{
     width: 100%;
     height: auto;
 }
+
+
 
 
 
@@ -177,7 +190,7 @@
 }
 .carousel-caption {
   position: absolute;
-  top: 100px;
+  top: 80px;
   bottom: auto;
   text-align: center;
 	
@@ -218,7 +231,7 @@
 
 .carousel-caption h1 {
   font-weight: 700;
-  font-size: 58px;
+  font-size: 50px;
   text-transform: uppercase;
   /*text-shadow: none;*/
   letter-spacing: -0.5px;
@@ -376,4 +389,23 @@
     display: block;
     margin-top: 0; // remove the gap so it doesn't close
 
+}
+
+.input-group-2 {
+    position: relative;
+    display: table;
+    border-collapse: separate;
+}
+
+.clockpicker-popover{
+    z-index: 10000;
+}
+
+.centered {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    z-index: 10000;
+    /* bring your own prefixes */
+    transform: translate(-50%, -50%);
 }

@@ -25,7 +25,21 @@ function pageTitle($rootScope, $timeout) {
 }
 
 
-
+function fileModel($parse) {
+            return {
+               restrict: 'A',
+               link: function(scope, element, attrs) {
+                  var model = $parse(attrs.fileModel);
+                  var modelSetter = model.assign;
+                  
+                  element.bind('change', function(){
+                     scope.$apply(function(){
+                        modelSetter(scope, element[0].files[0]);
+                     });
+                  });
+               }
+            };
+         };
 
 function mytooltip($timeout) {
     return {
@@ -172,9 +186,12 @@ function minimalizaSidebar($timeout) {
  */
 function clockPicker() {
     return {
-        restrict: 'A',
+        restrict: 'EA',
         link: function(scope, element) {
-                element.clockpicker();
+                element.clockpicker({
+                    donetext: 'OK',
+                    autoclose: true
+                });
         }
     };
 }
@@ -215,6 +232,7 @@ function elemReady ( $parse ) {
 angular
     .module('inspinia')
     .directive('pageTitle', pageTitle)
+    .directive('fileModel', fileModel)
     .directive('sideNavigation', sideNavigation)
     .directive('iboxTools', iboxTools)
     .directive('minimalizaSidebar', minimalizaSidebar)
