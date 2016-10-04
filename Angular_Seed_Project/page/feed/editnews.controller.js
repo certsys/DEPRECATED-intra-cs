@@ -32,20 +32,6 @@ function editnews($http, $scope, postService, $state, $timeout, userService, peo
         return convertedDate
     }
 
-    // function changeDateToISO (date) {
-    //     var dia = date.slice(0, 2);
-    //     var mes = date.slice(3, 5);
-    //     var ano = date.slice(6, 10);
-    //     var hora = date.slice(11, 13);
-    //     var horaBrasil = (parseInt(hora) + 3).toString();
-    //     if (parseInt(hora) + 3 < 10)
-    //         horaBrasil = "0" + horaBrasil;
-    //     var minuto = date.slice(14, 16);
-    //     // Exemplo de Date ISO: 2016-07-26T12:03:30Z
-    //     var iso_date = ano + "-" + mes + "-" + dia + "T" + horaBrasil + ":" + minuto + ":00Z";
-    //     return iso_date;
-    // }
-
     $scope.thumbnail = [];
 
     $scope.wasPressed = false;
@@ -72,7 +58,6 @@ function editnews($http, $scope, postService, $state, $timeout, userService, peo
             }
         }
     };
-
 
     $scope.options = {
         text: ""
@@ -108,7 +93,6 @@ function editnews($http, $scope, postService, $state, $timeout, userService, peo
             return $scope.dataOld;
         }
     };
-
 
     $scope.edit = function () {
         var novaData = $scope.verificaFuturaPostagemData();
@@ -173,7 +157,6 @@ function editnews($http, $scope, postService, $state, $timeout, userService, peo
         }
 
     }
-
 }
 
 angular
