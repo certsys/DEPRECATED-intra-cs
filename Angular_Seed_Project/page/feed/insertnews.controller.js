@@ -1,4 +1,5 @@
 function insertnews($scope, $http, $timeout, $state, userService, peopleGroups) {
+    $scope.futuro = false;
     $http({
         url: '/institucional',
         method: "GET",
@@ -53,7 +54,8 @@ function insertnews($scope, $http, $timeout, $state, userService, peopleGroups) 
         var minuto = date.slice(14, 16);
         // Exemplo de Date ISO: 2016-07-26T12:03:30Z
         var iso_date = ano + "-" + mes + "-" + dia + "T" + horaBrasil + ":" + minuto + ":00Z";
-        $scope.selectedDate = new Date(iso_date);
+        return new Date(iso_date);
+        //$scope.selectedDate = new Date(iso_date);
     };
 
     // $scope.$watch('dateHolder', function(newValue, oldValue) {
@@ -80,7 +82,9 @@ function insertnews($scope, $http, $timeout, $state, userService, peopleGroups) 
         var date;
         if ($scope.futuro == true) {
             date = angular.element('#data-postagem').val();
-            $scope.changeDateToISO(date);
+            //$scope.changeDateToISO(date);
+            console.log(date)
+            $scope.selectedDate = $scope.changeDateToISO(date)
         }
         if ($scope.selectedDate <= $scope.today && $scope.futuro == true) {
                 swal({
@@ -92,15 +96,16 @@ function insertnews($scope, $http, $timeout, $state, userService, peopleGroups) 
                     closeOnConfirm: false
                 });
                 return;
-        }
-         else if ($scope.selectedDate >= $scope.today || $scope.futuro == false || angular.isUndefined($scope.futuro)) {
+
+        } else if ($scope.selectedDate >= $scope.today || $scope.futuro == false || angular.isUndefined($scope.futuro)) {
             if (!$scope.wasPressed) {
                 $scope.wasPressed = true;
                 var editions = [];
                 if ($scope.futuro == true) {
                     // console.log("Data futura!!");
                     var date = angular.element('#data-postagem').val();
-                    $scope.changeDateToISO(date);
+                    $scope.selectedDate = $scope.changeDateToISO(date);
+                    console.log($scope.selectedDate)
                     if ($scope.selectedDate >= $scope.today) {
                         var data = {
                             titulo: $scope.titulo
@@ -124,8 +129,7 @@ function insertnews($scope, $http, $timeout, $state, userService, peopleGroups) 
                         });
                         return;
                     }
-                }
-                else {
+                } else {
                     // console.log("Data não futura!!");
                     var data = {
                         titulo: $scope.titulo

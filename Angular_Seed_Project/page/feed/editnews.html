@@ -54,7 +54,28 @@
                         </select>
                         <br>
                         <br>
-                        <br><br>
+                        <br>
+                        <br>
+                        <h2>Data de postagem</h2>
+                        <div >
+                            <div class="col-sm-10">
+                                <div class="input-group date">
+                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                    <input id="data-postagem" type="text" date-time="" data-ng-model="postagem.data"
+                                           format="DD/MM/YYYY HH:mm" view="date" min-view="hours" auto-close="true"
+                                           class="ng-pristine ng-valid ng-scope ng-touched" ng-disabled="!editDateCheckbox">
+                                </div>
+                                <input type="checkbox" class="js-switch"
+                                       ui-switch="{color:'#3DADD0'}" ng-model="editDateCheckbox">
+                            </div>
+                            <br>
+                            <br>
+                            <br>
+                            <br>
+                            <br>
+                            <br>
+                        </div>
+
                         <h2>Enviar por e-mail para toda a CS? <input type="checkbox" class="js-switch"
                                                                      ui-switch="{color:'#3DADD0'}" ng-model="mala"
                                                                      name="Mail"></h2>
