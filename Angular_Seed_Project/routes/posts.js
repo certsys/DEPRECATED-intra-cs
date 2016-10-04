@@ -360,7 +360,7 @@ router.put('/edit/:id', function (req, res, next) {
         data.assinatura = req.body.assinatura;
         data.isDeleted = req.body.isDeleted;
         data.editions.push(Date.now());
-
+        data.data = req.body.data;
 
         data.save(function (err, data) {
             if (err)

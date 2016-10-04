@@ -25,24 +25,26 @@ function editnews($http, $scope, postService, $state, $timeout, userService, peo
     $scope.postagem = postService.getPost();
 
     $scope.postagem.data = convertISOToDate($scope.postagem.data);
+    $scope.dataOld;
     function convertISOToDate (date) {
         var convertedDate = new Date(date);
+        $scope.dataOld = convertedDate;
         return convertedDate
     }
 
-    function changeDateToISO (date) {
-        var dia = date.slice(0, 2);
-        var mes = date.slice(3, 5);
-        var ano = date.slice(6, 10);
-        var hora = date.slice(11, 13);
-        var horaBrasil = (parseInt(hora) + 3).toString();
-        if (parseInt(hora) + 3 < 10)
-            horaBrasil = "0" + horaBrasil;
-        var minuto = date.slice(14, 16);
-        // Exemplo de Date ISO: 2016-07-26T12:03:30Z
-        var iso_date = ano + "-" + mes + "-" + dia + "T" + horaBrasil + ":" + minuto + ":00Z";
-        return new Date(iso_date);
-    }
+    // function changeDateToISO (date) {
+    //     var dia = date.slice(0, 2);
+    //     var mes = date.slice(3, 5);
+    //     var ano = date.slice(6, 10);
+    //     var hora = date.slice(11, 13);
+    //     var horaBrasil = (parseInt(hora) + 3).toString();
+    //     if (parseInt(hora) + 3 < 10)
+    //         horaBrasil = "0" + horaBrasil;
+    //     var minuto = date.slice(14, 16);
+    //     // Exemplo de Date ISO: 2016-07-26T12:03:30Z
+    //     var iso_date = ano + "-" + mes + "-" + dia + "T" + horaBrasil + ":" + minuto + ":00Z";
+    //     return iso_date;
+    // }
 
     $scope.thumbnail = [];
 
@@ -90,15 +92,20 @@ function editnews($http, $scope, postService, $state, $timeout, userService, peo
             var novaDataPostagem = $scope.postagem.data._d || $scope.postagem.data;
             if (novaDataPostagem >= $scope.today) {
                 console.log('ok');
-                return true
+                return novaDataPostagem
             } else {
-                console.log('data errada')
+                swal({
+                    title: "OPS!",
+                    text: "Data anterior a atual, corrija a data de postagem!",
+                    type: "error",
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "Ok",
+                    closeOnConfirm: false
+                });
                 return false;
             }
-
-            var date = angular.element('#data-postagem').val();
-            //$scope.changeDateToISO(date);
-            console.log(date)
+        } else {
+            return $scope.dataOld;
         }
     };
 
@@ -106,13 +113,7 @@ function editnews($http, $scope, postService, $state, $timeout, userService, peo
     $scope.edit = function () {
         var novaData = $scope.verificaFuturaPostagemData();
         if (!novaData) return;
-        novaData = angular.element('#data-postagem').val();
-        novaData = changeDateToISO(novaData);
         console.log(novaData)
-
-
-        console.log("fim");
-        return;
 
         if (!$scope.wasPressed ) {
             $scope.wasPressed = true;
@@ -126,6 +127,7 @@ function editnews($http, $scope, postService, $state, $timeout, userService, peo
                 , texto: $scope.postagem.texto
                 , sendBy: userService.getUser().displayName
                 , assinatura: $scope.postagem.assinatura
+                , data: novaData
                 , isDeleted: false
                 , mala: $scope.mala
             };
