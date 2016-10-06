@@ -153,8 +153,13 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, $locati
                             files: ['js/bower_components/summernote/dist/summernote.css'
                                 , 'js/bower_components/summernote/dist/summernote.js'
                             ]
-                        }
-                        , {
+                        },
+                        {
+                            name: 'datePicker',
+                            files: ['js/plugins/moment/moment.min.js', 'css/plugins/datapicker/angular-datapicker.css',
+                                'js/plugins/datapicker/angular-datepicker.js', 'js/plugins/datapicker/pt-br.js']
+                        },
+                        {
                             files: ['css/plugins/switchery/switchery.css'
                                 , 'js/plugins/switchery/switchery.js']
                         }

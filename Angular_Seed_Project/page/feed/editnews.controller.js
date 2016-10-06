@@ -1,4 +1,6 @@
 function editnews($http, $scope, postService, $state, $timeout, userService, peopleGroups) {
+    $scope.today = new Date();
+    $scope.editDate = false;
     $http({
         url: '/institucional',
         method: "GET",
@@ -11,7 +13,6 @@ function editnews($http, $scope, postService, $state, $timeout, userService, peo
         // console.log(err);
     });
 
-
     if (!(userService.Authenticate().debug || userService.Authenticate().admin || userService.Authenticate().diretores || userService.Authenticate().rh))
         $state.go('feed');
 
@@ -22,6 +23,14 @@ function editnews($http, $scope, postService, $state, $timeout, userService, peo
     $scope.title = "Newsfeed CS - Editar postagem";
 
     $scope.postagem = postService.getPost();
+
+    $scope.postagem.data = convertISOToDate($scope.postagem.data);
+    $scope.dataOld;
+    function convertISOToDate (date) {
+        var convertedDate = new Date(date);
+        $scope.dataOld = convertedDate;
+        return convertedDate
+    }
 
     $scope.thumbnail = [];
 
@@ -50,7 +59,6 @@ function editnews($http, $scope, postService, $state, $timeout, userService, peo
         }
     };
 
-
     $scope.options = {
         text: ""
         , height: 300
@@ -64,9 +72,34 @@ function editnews($http, $scope, postService, $state, $timeout, userService, peo
         ]
     };
 
+    $scope.verificaFuturaPostagemData = function () {
+        if ($scope.editDateCheckbox) {
+            var novaDataPostagem = $scope.postagem.data._d || $scope.postagem.data;
+            if (novaDataPostagem >= $scope.today) {
+                console.log('ok');
+                return novaDataPostagem
+            } else {
+                swal({
+                    title: "OPS!",
+                    text: "Data anterior a atual, corrija a data de postagem!",
+                    type: "error",
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "Ok",
+                    closeOnConfirm: false
+                });
+                return false;
+            }
+        } else {
+            return $scope.dataOld;
+        }
+    };
 
     $scope.edit = function () {
-        if (!$scope.wasPressed) {
+        var novaData = $scope.verificaFuturaPostagemData();
+        if (!novaData) return;
+        console.log(novaData)
+
+        if (!$scope.wasPressed ) {
             $scope.wasPressed = true;
             var imagem = null;
             if (angular.isDefined($scope.thumbnail) && angular.isDefined($scope.thumbnail.dataUrl))
@@ -78,6 +111,7 @@ function editnews($http, $scope, postService, $state, $timeout, userService, peo
                 , texto: $scope.postagem.texto
                 , sendBy: userService.getUser().displayName
                 , assinatura: $scope.postagem.assinatura
+                , data: novaData
                 , isDeleted: false
                 , mala: $scope.mala
             };

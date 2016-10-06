@@ -12,6 +12,7 @@ function perfil_ctrl($scope, contactService, $state, $http, userService) {
     });
 
     $scope.perfil=contactService.getContact();
+    console.log($scope.perfil)
 }
 
 angular

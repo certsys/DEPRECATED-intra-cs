@@ -23,7 +23,7 @@
                     </h5>
                 </div>
                 <div class="ibox-content">
-                    <form class="form-horizontal"><h2>Título</h2>
+                    <div class="form-horizontal"><h2>Título</h2>
                         <input required class="col-sm-12" type="text" ng-model="postagem.titulo" name="Título">
                         <br>
                         <br>
@@ -54,10 +54,32 @@
                         </select>
                         <br>
                         <br>
-                        <br><br>
-                        <h2>Enviar por e-mail para toda a CS? <input type="checkbox" class="js-switch"
+                        <br>
+                        <br>
+                        <div class="col-lg-9"><h2>Data de postagem</h2></div><div class="col-lg-3 pull-right"><input type="checkbox" class="js-switch" ui-switch="{color:'#3DADD0'}" ng-model="editDateCheckbox"></div>
+                        <div >
+                            <div class="col-sm-10">
+                                <div class="input-group date">
+                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                    <input id="data-postagem" type="text" date-time="" data-ng-model="postagem.data"
+                                           format="DD/MM/YYYY HH:mm" view="date" min-view="hours" auto-close="true"
+                                           class="ng-pristine ng-valid ng-scope ng-touched" ng-disabled="!editDateCheckbox">
+                                </div>
+                            </div>
+                            <br>
+                            <br>
+                            <br>
+                            <br>
+                            <br>
+                            <br>
+                        </div>
+
+                        <div class="col-lg-9"><h2>Enviar por e-mail para toda a CS?</h2>
+                        </div>
+                          <div class="col-lg-3 pull-right"> <input type="checkbox" class="pull-right js-switch"
                                                                      ui-switch="{color:'#3DADD0'}" ng-model="mala"
-                                                                     name="Mail"></h2>
+                                                                     name="Mail">
+                          </div>
                         <br>
                         <br>
                         <br>    <input ng-model="postar" ng-disabled="wasPressed" ng-click="edit()" class="col-sm-12 btn btn-primary" type="submit" value="Postar">
