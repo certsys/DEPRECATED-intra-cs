@@ -203,6 +203,10 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, $locati
                         {
                             name: 'pasvaz.bindonce',
                             files: ['js/plugins/bindonce/bindonce.min.js']
+                        },
+                        {
+                            name: 'ngTagsInput',
+                            files: ['js/plugins/ng-tags-input/ng-tags-input.min.js', 'css/plugins/ng-tags-input/ng-tags-input.min.css', 'css/plugins/ng-tags-input/ng-tags-input.bootstrap.min.css']
                         }
                     ]);
                 }

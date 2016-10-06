@@ -21,6 +21,16 @@
                             <option ng-repeat="tool in tools" value="{{tool.name}}">{{tool.name}}</option>
                         </select>
                     </form>
+                    <tags-input template="tag-template" display-property="worktool" type='text'
+                                ng-model='tools_advanced' placeholder='Selecionar Ferramentas'
+                                name="FerramentasPrincipais" style="margin-right:5px " class="col-sm-12">
+                        <auto-complete source="loadTools($query)"
+                                       min-length="0"
+                                       load-on-focus="true"
+                                       load-on-empty="true"
+                                       max-results-to-show="32"
+                                       template="autocomplete-template"></auto-complete>
+                    </tags-input>
                     <!--<ol class="breadcrumb">
                         <li>
                             <a href="index.html">Home</a>
