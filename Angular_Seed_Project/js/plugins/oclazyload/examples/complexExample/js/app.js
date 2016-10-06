@@ -30,7 +30,7 @@ var App = angular.module('app', ['ui.router', 'oc.lazyLoad'])
         parent: 'index',
         resolve: { // Any property in resolve should return a promise and is executed before the view is loaded
           loadOcModal: ['$ocLazyLoad', '$injector', '$rootScope', function($ocLazyLoad, $injector, $rootScope) {
-            // Load 'oc.modal' defined in the config of the provider $ocLazyLoadProvider
+            // Load 'oc.modal' defined in the activeDirectoryConfigurations of the provider $ocLazyLoadProvider
             return $ocLazyLoad.load({
               name: 'oc.modal',
               files: [

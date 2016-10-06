@@ -1,79 +1,8 @@
 var express = require('express');
 var async = require('async');
 var router = express.Router();
-var Group = require('../models/groups');
-var ActiveDirectory = require('activedirectory');
-var jwt = require('jsonwebtoken');
+var Group = require('../../../models/groups');
 
-var config = {
-    url: 'ldap://192.168.129.2:389',
-    baseDN: 'OU=Certsys,DC=certsys,DC=local',
-    username: 'svc_intranet@certsys.local',
-    password: 'dAgAcupU6rA='
-};
-
-var ad = new ActiveDirectory(config);
-var password = 'dAgAcupU6rA=';
-var groupName = 'Certsys';
-
-var GROUPS = [
-    'Administrativo',
-    'Comercial',
-    'Diretores',
-    'Financeiro',
-    'Juridico',
-    'PreVendas',
-    'Técnico',
-    'RH'
-];
-
-
-// router.get('/permission', function (req, res, next) {
-//     var sAMAccountName = req.param("token");
-//     console.log(sAMAccountName);
-//     ad.isUserMemberOf(sAMAccountName, GROUPS[0], function(err, isMember) {
-//         if (err) {
-//             console.log('ERROR: ' + JSON.stringify(err));
-//             return;
-//         }
-//         res.json(JSON.stringify(isMember));
-//     });
-// });
-
-// router.use(function (req, res, next) {
-//
-//     // check header or url parameters or post parameters for token
-//     var token = req.body.token || req.param('token') || req.headers['x-access-token'];
-//
-//     // decode token
-//     if (token) {
-//
-//         // verifies secret and checks exp
-//         jwt.verify(token, 'Cert0104sys', function (err, decoded) {
-//             if (err) {
-//                 return res.status(403).send({
-//                     success: false,
-//                     message: 'Falha de autenticação do Token'
-//                 });
-//             } else {
-//                 // if everything is good, save to request for use in other routes
-//                 req.decoded = decoded;
-//                 next();
-//             }
-//         });
-//
-//     } else {
-//
-//         // if there is no token
-//         // return an error
-//         return res.status(403).send({
-//             success: false,
-//             message: 'No token provided.'
-//         });
-//
-//     }
-//
-// });
 
 router.post('/admins', function (req, res, next) {
     var admins = [];

@@ -1,9 +1,11 @@
 var express = require('express');
 var router = express.Router();
+var Auth = require('../authentication/auth');
+var Debug = require('../../debug');
 
-router.use(function (req, res, next) {
-    global.verificaToken(req, res, next)
-});
+if (!Debug.isDebug()) {
+    router.use(Auth.auth);
+}
 
 router.get('/', function (req, res) {
     res.json(null);

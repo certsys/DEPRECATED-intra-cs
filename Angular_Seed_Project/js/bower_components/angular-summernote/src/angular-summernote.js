@@ -168,7 +168,7 @@ angular.module('summernote', [])
       require: ['summernote', '?ngModel'],
       controller: 'SummernoteController',
       scope: {
-        summernoteConfig: '=config',
+        summernoteConfig: '=activeDirectoryConfigurations',
         editable: '=',
         editor: '=',
         init: '&onInit',
