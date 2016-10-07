@@ -1,29 +1,43 @@
 var express = require('express');
 var router = express.Router();
-var ActiveDirectory = require('activedirectory');
 var jwt = require('jsonwebtoken');
+var ActiveDirectory = require('../maintenance/activeDirectory');
 
+var ad = ActiveDirectory.getActiveDirectory();
 
-var config = {
-    url: 'ldap://192.168.129.2:389',
-    baseDN: 'DC=certsys,DC=local',
-    username: 'svc_intranet@certsys.local',
-    password: 'dAgAcupU6rA='
-}
+exports.auth = function (req, res, next) {
+    // check header or url parameters or post parameters for token
+    var token = req.body.token || req.param('token') || req.headers['x-access-token'];
+    // decode token
+    if (token) {
 
-var ad = new ActiveDirectory(config);
-var username = 'henrique.cavalcante';
-var password = 'dAgAcupU6rA=';
-var groupName = 'Certsys';
-var sAMAccountName = 'henrique.cavalcante';
+        // verifies secret and checks exp
+        jwt.verify(token, 'Cert0104sys', function (err, decoded) {
+            if (err) {
+                return res.status(403).send({
+                    success: false,
+                    message: 'Falha de autenticação do Token'
+                });
+            } else {
+                // if everything is good, save to request for use in other routes
+                req.decoded = decoded;
+                next();
+            }
+        });
 
+    } else {
 
-router.get('/ex', function (req, res, next) {
-    
+        // if there is no token
+        // return an error
+        return res.status(403).send({
+            success: false,
+            message: 'No token provided.'
+        });
 
-});
+    }
+};
 
-router.post('/', function (req, res) {
+exports.createCredentials = function (req, res) {
     ad.authenticate(req.body.username, req.body.password, function (err, auth) {
         // ad.authenticate(username, password, function (err, auth) {
         if (err) {
@@ -57,7 +71,4 @@ router.post('/', function (req, res) {
             res.json({data: 'Falha de autenticação...'});
         }
     });
-});
-
-
-module.exports = router;
+};

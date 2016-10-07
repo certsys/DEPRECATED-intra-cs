@@ -17,11 +17,6 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, $locati
         debug: false
     });
 
-    //    $locationProvider.html5Mode({
-    //      enabled: true//,
-    //    //  requireBase: false
-    //    });
-
     $stateProvider
         .state('feed', {
             url: "/feed"
@@ -58,12 +53,10 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, $locati
                             files: ['css/bootstrap-theme.css',
                                 'css/bootstrap-theme.css.map',
                                 'css/bootstrap-theme.min.css',
-                                'js/pace.min.js',
-                                'js/wow.min.js',
-                                'js/classie.js',
-                                'js/cbpAnimatedHeader.js'
-
-
+                                'js/plugins/pace/pace.min.js',
+                                'js/plugins/wow/wow.min.js',
+                                'js/plugins/classie/classie.js',
+                                'js/plugins/cbpAnimatedHeader/cbpAnimatedHeader.js'
                             ]
                         }
                     ]);

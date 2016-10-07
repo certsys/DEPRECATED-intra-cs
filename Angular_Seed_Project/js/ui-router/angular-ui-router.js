@@ -1155,7 +1155,7 @@ function $UrlMatcherFactory() {
    * Creates a {@link ui.router.util.type:UrlMatcher `UrlMatcher`} for the specified pattern.
    *   
    * @param {string} pattern  The URL pattern.
-   * @param {Object} config  The config object hash.
+   * @param {Object} config  The activeDirectoryConfigurations object hash.
    * @returns {UrlMatcher}  The UrlMatcher.
    */
   this.compile = function (pattern, config) {
@@ -1275,7 +1275,7 @@ function $UrlMatcherFactory() {
    *   };
    * });
    *
-   * // In a config() block, you can then attach URLs with
+   * // In a activeDirectoryConfigurations() block, you can then attach URLs with
    * // type-annotated parameters:
    * $stateProvider.state('users', {
    *   url: "/users",
@@ -1373,7 +1373,7 @@ function $UrlRouterProvider(   $locationProvider,   $urlMatcherFactory) {
    * <pre>
    * var app = angular.module('app', ['ui.router.router']);
    *
-   * app.config(function ($urlRouterProvider) {
+   * app.activeDirectoryConfigurations(function ($urlRouterProvider) {
    *   // Here's an example of how you might allow case insensitive urls
    *   $urlRouterProvider.rule(function ($injector, $location) {
    *     var path = $location.path(),
@@ -1409,7 +1409,7 @@ function $UrlRouterProvider(   $locationProvider,   $urlMatcherFactory) {
    * <pre>
    * var app = angular.module('app', ['ui.router.router']);
    *
-   * app.config(function ($urlRouterProvider) {
+   * app.activeDirectoryConfigurations(function ($urlRouterProvider) {
    *   // if the path doesn't match any of the urls you configured
    *   // otherwise will take care of routing the user to the
    *   // specified url
@@ -1469,7 +1469,7 @@ function $UrlRouterProvider(   $locationProvider,   $urlMatcherFactory) {
    * <pre>
    * var app = angular.module('app', ['ui.router.router']);
    *
-   * app.config(function ($urlRouterProvider) {
+   * app.activeDirectoryConfigurations(function ($urlRouterProvider) {
    *   $urlRouterProvider.when($state.url, function ($match, $stateParams) {
    *     if ($state.$current.navigable !== state ||
    *         !equalForKeys($match, $stateParams) {
@@ -1542,7 +1542,7 @@ function $UrlRouterProvider(   $locationProvider,   $urlMatcherFactory) {
    * <pre>
    * var app = angular.module('app', ['ui.router.router']);
    *
-   * app.config(function ($urlRouterProvider) {
+   * app.activeDirectoryConfigurations(function ($urlRouterProvider) {
    *
    *   // Prevent $urlRouter from automatically intercepting URL changes;
    *   // this allows you to configure custom behavior in between
@@ -1639,7 +1639,7 @@ function $UrlRouterProvider(   $locationProvider,   $urlMatcherFactory) {
        * @description
        * Triggers an update; the same update that happens when the address bar url changes, aka `$locationChangeSuccess`.
        * This method is useful when you need to use `preventDefault()` on the `$locationChangeSuccess` event,
-       * perform some custom logic (route protection, auth, config, redirection, etc) and then finally proceed
+       * perform some custom logic (route protection, auth, activeDirectoryConfigurations, redirection, etc) and then finally proceed
        * with the transition by calling `$urlRouter.sync()`.
        *
        * @example
@@ -2036,9 +2036,9 @@ function $StateProvider(   $urlRouterProvider,   $urlMatcherFactory) {
    * - **params** `{object}` - returns an array of state params that are ensured to 
    *   be a super-set of parent's params.
    * - **views** `{object}` - returns a views object where each key is an absolute view 
-   *   name (i.e. "viewName@stateName") and each value is the config object 
+   *   name (i.e. "viewName@stateName") and each value is the activeDirectoryConfigurations object 
    *   (template, controller) for the view. Even when you don't use the views object 
-   *   explicitly on a state config, one is still created for you internally.
+   *   explicitly on a state activeDirectoryConfigurations, one is still created for you internally.
    *   So by decorating this builder function you have access to decorating template 
    *   and controller properties.
    * - **ownParams** `{object}` - returns an array of params that belong to the state, 
@@ -2056,10 +2056,10 @@ function $StateProvider(   $urlRouterProvider,   $urlMatcherFactory) {
    *   var result = {},
    *       views = parent(state);
    *
-   *   angular.forEach(views, function (config, name) {
+   *   angular.forEach(views, function (activeDirectoryConfigurations, name) {
    *     var autoName = (state.name + '.' + name).replace('.', '/');
-   *     config.templateUrl = config.templateUrl || '/partials/' + autoName + '.html';
-   *     result[name] = config;
+   *     activeDirectoryConfigurations.templateUrl = activeDirectoryConfigurations.templateUrl || '/partials/' + autoName + '.html';
+   *     result[name] = activeDirectoryConfigurations;
    *   });
    *   return result;
    * });
@@ -2082,7 +2082,7 @@ function $StateProvider(   $urlRouterProvider,   $urlMatcherFactory) {
    * @param {object} func A function that is responsible for decorating the original 
    * builder function. The function receives two parameters:
    *
-   *   - `{object}` - state - The state config object.
+   *   - `{object}` - state - The state activeDirectoryConfigurations object.
    *   - `{object}` - super - The original builder function.
    *
    * @return {object} $stateProvider - $stateProvider instance
@@ -2864,7 +2864,7 @@ function $StateProvider(   $urlRouterProvider,   $urlMatcherFactory) {
      * @description
      * Returns the state configuration object for any specific state or all states.
      *
-     * @param {string|Sbject=} stateOrName (absolute or relative) If provided, will only get the config for
+     * @param {string|Sbject=} stateOrName (absolute or relative) If provided, will only get the activeDirectoryConfigurations for
      * the requested state. If not provided, returns an array of ALL state configs.
      * @returns {Object|Array} State configuration object or array of all objects.
      */

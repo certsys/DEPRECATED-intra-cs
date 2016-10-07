@@ -1,6 +1,8 @@
 var express = require('express');
 var router = express.Router();
-var Post = require('../models/posts');
+var Post = require('../../../models/posts');
+var Auth = require('../authentication/auth');
+var Debug = require('../../debug');
 var async = require('async');
 var nodemailer = require('nodemailer');
 var schedule = require('node-schedule');
@@ -225,9 +227,9 @@ router.get('/reschedule', function (req, res) {
     });
 });
 
-router.use(function (req, res, next) {
-    global.verificaToken(req, res, next)
-});
+if (!Debug.isDebug()) {
+    router.use(Auth.auth);
+}
 
 // Pega todos os Posts que não foram deletados e que possuem data anterior à atual
 router.get('/', function (req, res) {
