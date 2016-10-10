@@ -1,6 +1,23 @@
 function gerenciar_curso($scope, $http, userService, fileUpload, $state, universidadeService) {
     $scope.participantes = [];
     $scope.loading = 0;
+    $scope.isTodosDisabled = false;
+    $scope.isInscritosDisabled = false;
+    $scope.isSurveyShown = false;
+    $scope.isSuveryInputDisabled = true
+
+    $http({
+        url: '/contacts',
+        method: "GET",
+        params: {token: userService.getToken()}
+    }).then(function (response) {
+        //your code in case the post succeeds
+        // console.log(response.data.lenght > 0);
+        $scope.todosContatos = response.data;
+    }).catch(function (err) {
+        $state.go('login');
+        // console.log(err);
+    });
 
     $http({
         url: '/contacts/perfil',
@@ -152,6 +169,51 @@ function gerenciar_curso($scope, $http, userService, fileUpload, $state, univers
         minutes = parseInt(minutes*60);
         var hourMinutes = hours + " hora(s) e " + minutes + " minuto(s)";
         return hourMinutes;
+    }
+
+    $scope.todosClick = function (){
+        // if (!$scope.isInscritosDisabled) {
+        //     $scope.isInscritosDisabled = true;
+        //     $scope.isSurveyShown = false;
+        // } else {
+        //     $scope.isInscritosDisabled = false;
+        // }
+        $scope.isSurveyShown = false;
+        var todosContatos = $scope.todosContatos;
+        var todosEmails ="";
+        for (var i = 0 ; i <todosContatos.length ; i++) {
+            todosEmails+= ";" + todosContatos[i].mail;
+        }
+        $scope.contatosMail = todosEmails;
+        console.log(todosEmails)
+
+    }
+
+    $scope.inscritosClick = function () {
+        // if (!$scope.isTodosDisabled) {
+        //     $scope.isTodosDisabled = true;
+        //     $scope.isSurveyShown = true;
+        // } else {
+        //     $scope.isTodosDisabled = false;
+        //     $scope.isSurveyShown = false;
+        // }
+        $scope.isSurveyShown = true;
+        var inscritos = $scope.inscritos;
+        var inscritosEmail = "";
+        for (var i = 0 ; i <inscritos.length ; i++) {
+            inscritosEmail+= ";" + inscritos[i].mail;
+        }
+        $scope.contatosMail = inscritosEmail;
+        console.log(inscritosEmail)
+
+    }
+
+    $scope.includeSurveyClick = function() {
+        if ($scope.isSuveryInputDisabled) {
+            $scope.isSuveryInputDisabled = false;
+        } else {
+            $scope.isSuveryInputDisabled = true;
+        }
     }
 }
 
