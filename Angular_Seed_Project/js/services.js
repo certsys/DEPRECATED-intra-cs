@@ -87,7 +87,8 @@ function userService($sessionStorage, peopleGroups) {
     var RH = [
         'vanessa.assis',
         'bianca.novo',
-        "elizabeth.kurihara"
+        "elizabeth.kurihara",
+        'ivan.zoppetti'
     ];
     // =======
 

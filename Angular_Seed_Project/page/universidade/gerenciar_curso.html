@@ -173,19 +173,9 @@
                                                 </div>
                                             </tab>
                                             <tab heading="Enviar email">
-                                                <h1>enviar email</h1>
-                                                <!--<div class="i-checks"><label> <input type="radio" name="a" value="option1" ng-click="todosClick()" ng-disabled="isTodosDisabled"> <i></i> Enviar para todos </label></div>-->
-                                                <!--<div class="i-checks"><label> <input type="radio" name="a" value="option2" ng-click="inscritosClick()"  ng-disabled="isInscritosDisabled"> <i></i> Enviar para inscritos apenas </label></div>-->
-                                                <!--<div class="i-checks"  ng-show="isSurveyShown" ><label> <input type="checkbox" ng-click="includeSurveyClick()"> <i></i> Incluir link do Survey: </label></div>-->
-                                                <!--<div class="form-group" ng-show="isSurveyShown">-->
-                                                    <!--<div class="col-lg-12"><input type="text" ng-disabled="isSuveryInputDisabled" placeholder="Disabled input here..." class="form-control"></div>-->
-                                                <!--</div>-->
-                                                <!--<div class="m-t-xs btn-group"> <a ng-href="mailto:{{contatosMail}}" class="btn btn-xs btn-white"><i-->
-                                                        <!--class="fa fa-envelope"></i> Prossegir</a> </div>-->
-
-                                                <div class="ibox-content">
-                                                    <div class="form-group"><label class="col-sm-2 control-label">Checkboxes &amp; radios <br/><small class="text-navy">Custom elements</small></label>
-                                                        <div class="col-sm-10">
+                                                <!--<div class="ibox-content">-->
+                                                    <div class="form-group"><label class="col-sm-2 control-label">Destinários do email <br/></label>
+                                                        <div class="col-sm-10 ">
                                                             <div class="i-checks"><label> <input type="radio" name="a" value="option1" ng-click="todosClick()" ng-disabled="isTodosDisabled"> <i></i> Enviar para todos </label></div>
                                                             <div class="i-checks"><label> <input type="radio" name="a" value="option2" ng-click="inscritosClick()"  ng-disabled="isInscritosDisabled"> <i></i> Enviar para inscritos apenas </label></div>
                                                             <div class="i-checks"  ng-show="isSurveyShown" ><label> <input type="checkbox" ng-click="includeSurveyClick()"> <i></i> Incluir link do Survey: </label></div>
@@ -196,12 +186,12 @@
                                                     </div>
                                                     <div class="form-group">
                                                         <div class="col-sm-4 col-sm-offset-2">
-                                                            <button class="btn btn-white" type="submit">Cancel</button><button class="btn btn-primary" type="submit" ><a ng-href="mailto:{{contatosMail}}" class="btn btn-xs btn-white">Save changes</a></button>
+                                                            <!--<button class="btn btn-white" type="submit">Cancel</button>-->
+                                                            <a class="btn btn-block btn-primary compose-mail" ng-show="contatosMail" ng-href="mailto:{{contatosMail}}" >Prosseguir</a>
+                                                            <!--<button class="btn btn-primary" type="submit" ><a ng-href="mailto:{{contatosMail}}" class="btn btn-xs btn-white">Save changes</a></button>-->
                                                         </div>
                                                     </div>
-
-                                                </div>
-
+                                                <!--</div>-->
                                             </tab>
                                         </tabset>
                                     </div>

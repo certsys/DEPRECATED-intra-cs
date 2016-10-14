@@ -190,14 +190,9 @@ function gerenciar_curso($scope, $http, userService, fileUpload, $state, univers
     }
 
     $scope.inscritosClick = function () {
-        // if (!$scope.isTodosDisabled) {
-        //     $scope.isTodosDisabled = true;
-        //     $scope.isSurveyShown = true;
-        // } else {
-        //     $scope.isTodosDisabled = false;
-        //     $scope.isSurveyShown = false;
-        // }
-        $scope.isSurveyShown = true;
+
+        // $scope.isSurveyShown = true;
+        $scope.isSurveyShown = false;
         var inscritos = $scope.inscritos;
         var inscritosEmail = "";
         for (var i = 0 ; i <inscritos.length ; i++) {
@@ -212,7 +207,8 @@ function gerenciar_curso($scope, $http, userService, fileUpload, $state, univers
         if ($scope.isSuveryInputDisabled) {
             $scope.isSuveryInputDisabled = false;
         } else {
-            $scope.isSuveryInputDisabled = true;
+            //$scope.isSuveryInputDisabled = true;
+            $scope.isSuveryInputDisabled = false;
         }
     }
 }
