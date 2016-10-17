@@ -176,8 +176,12 @@
                                                 <!--<div class="ibox-content">-->
                                                     <div class="form-group"><label class="col-sm-2 control-label">Destinários do email <br/></label>
                                                         <div class="col-sm-10 ">
-                                                            <div class="i-checks"><label> <input type="radio" name="a" value="option1" ng-click="todosClick()" ng-disabled="isTodosDisabled"> <i></i> Enviar para todos </label></div>
-                                                            <div class="i-checks"><label> <input type="radio" name="a" value="option2" ng-click="inscritosClick()"  ng-disabled="isInscritosDisabled"> <i></i> Enviar para inscritos apenas </label></div>
+                                                            <div class="i-checks">
+                                                                <label> <input type="radio" name="a" value="option1" ng-click="todosClick()" ng-disabled="isTodosDisabled"> <i></i> Enviar para todos </label>
+                                                            </div>
+                                                            <div class="i-checks">
+                                                                <label> <input type="radio" name="a" value="option2" ng-click="inscritosClick()"  ng-disabled="isInscritosDisabled"> <i></i> Enviar para inscritos apenas </label>
+                                                            </div>
                                                             <div class="i-checks"  ng-show="isSurveyShown" ><label> <input type="checkbox" ng-click="includeSurveyClick()"> <i></i> Incluir link do Survey: </label></div>
                                                         </div>
                                                     </div>

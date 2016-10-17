@@ -172,14 +172,13 @@ function gerenciar_curso($scope, $http, userService, fileUpload, $state, univers
     }
 
     $scope.todosClick = function (){
-        // if (!$scope.isInscritosDisabled) {
-        //     $scope.isInscritosDisabled = true;
-        //     $scope.isSurveyShown = false;
-        // } else {
-        //     $scope.isInscritosDisabled = false;
-        // }
+
         $scope.isSurveyShown = false;
         var todosContatos = $scope.todosContatos;
+        if (!todosContatos) {
+            $scope.contatosMail = false;
+            return;
+        }
         var todosEmails ="";
         for (var i = 0 ; i <todosContatos.length ; i++) {
             todosEmails+= ";" + todosContatos[i].mail;
@@ -191,9 +190,12 @@ function gerenciar_curso($scope, $http, userService, fileUpload, $state, univers
 
     $scope.inscritosClick = function () {
 
-        // $scope.isSurveyShown = true;
         $scope.isSurveyShown = false;
         var inscritos = $scope.inscritos;
+        if (!inscritos) {
+            $scope.contatosMail = false;
+            return;
+        }
         var inscritosEmail = "";
         for (var i = 0 ; i <inscritos.length ; i++) {
             inscritosEmail+= ";" + inscritos[i].mail;
