@@ -6,18 +6,6 @@ function postManager($scope, $http, postService, $state, userService, peopleGrou
     const limitPerLoad = 5;
     var previousResult;
 
-    // $http({
-    //     url: '/posts/all',
-    //     method: "GET",
-    //     params: {token: userService.getToken()}
-    // }).then(function (response) {
-    //     //your code in case the post succeeds
-    //     $scope.feed = response.data;
-    // }).catch(function (err) {
-    //     $state.go('login');
-    //     // console.log(err);
-    // });
-    
     if (!(userService.Authenticate().debug || userService.Authenticate().admin || userService.Authenticate().diretores || userService.Authenticate().rh))
         $state.go('feed');
 

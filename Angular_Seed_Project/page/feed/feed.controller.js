@@ -6,21 +6,6 @@ function feed($scope, $http, $state, $sce, userService) {
     const limitPerLoad = 5;
     var previousResult;
 
-    // $http({
-    //     url: '/posts',
-    //     method: "GET",
-    //     params: {token: userService.getToken(), hello: "HELLLOOOO"}
-    // }).then(function (response) {
-    //     //your code in case the post succeeds
-    //     $scope.feed = response.data;
-    //     console.log($scope.feed)
-    //     $scope.feed.forEach(function(postagem) {
-    //         postagem.texto = $sce.trustAsHtml(postagem.texto);
-    //     });
-    // }).catch(function (err) {
-    //     $state.go('login');
-    // });
-
     var today = new Date();
 
     $scope.isToday = function (date) {
