@@ -35,6 +35,7 @@ function postManager($scope, $http, postService, $state, userService, peopleGrou
 
             var arraySize = limitPerLoad-1;
             for (var i = 0; i < arraySize; i++) {
+                if (!current[i]) return false; // se ja leu todos os posts
                 if (current[i]._id == previous[i]._id) {
                     return false;
                 }
