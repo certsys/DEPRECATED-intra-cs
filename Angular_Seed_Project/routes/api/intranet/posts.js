@@ -233,11 +233,16 @@ if (!Debug.isDebug()) {
 
 // Pega todos os Posts que não foram deletados e que possuem data anterior à atual
 router.get('/', function (req, res) {
+    var skipPosts = Number(req.query.skip);
+    var limitPosts = Number(req.query.limit);
     var data_atual = new Date();
-    Post.find({'isDeleted': false, 'data': {$lte: data_atual}}, function (err, posts) {
+    Post.find({'isDeleted': false }, function (err, posts) {
         if (err) return console.error(err);
         res.json(posts);
     })
+        .sort({'data': -1}) // "-1" means descending, gets posts on descending date order
+        .skip(skipPosts)
+        .limit(limitPosts)
 });
 
 // Pega todos os Posts

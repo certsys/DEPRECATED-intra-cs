@@ -1,18 +1,26 @@
 function feed($scope, $http, $state, $sce, userService) {
-    $http({
-        url: '/posts',
-        method: "GET",
-        params: {token: userService.getToken()}
-    }).then(function (response) {
-        //your code in case the post succeeds
-        $scope.feed = response.data;
-        $scope.feed.forEach(function(postagem) {
-            postagem.texto = $sce.trustAsHtml(postagem.texto);
-        });
-    }).catch(function (err) {
-        $state.go('login');
-        // console.log(err);
-    });
+    $scope.feed =[];
+    $scope.limit = 0;
+    $scope.title = "Newsfeed Certsys";
+    var skip = 0;
+    const skipSum = 5;
+    const limitPerLoad = 5;
+    var previousResult;
+
+    // $http({
+    //     url: '/posts',
+    //     method: "GET",
+    //     params: {token: userService.getToken(), hello: "HELLLOOOO"}
+    // }).then(function (response) {
+    //     //your code in case the post succeeds
+    //     $scope.feed = response.data;
+    //     console.log($scope.feed)
+    //     $scope.feed.forEach(function(postagem) {
+    //         postagem.texto = $sce.trustAsHtml(postagem.texto);
+    //     });
+    // }).catch(function (err) {
+    //     $state.go('login');
+    // });
 
     var today = new Date();
 
@@ -23,14 +31,55 @@ function feed($scope, $http, $state, $sce, userService) {
         if (data < today)
             return true;
         return false;
-    }
-
-
-    $scope.title = "Newsfeed Certsys";
-    $scope.limit = 2;
+    };
 
     $scope.loadMore = function () {
+        $http({
+            url: '/posts',
+            method: "GET",
+            params: {token: userService.getToken(), skip: skip, limit: limitPerLoad}
+        }).then(function (response) {
+            //your code in case the post succeeds
+            var result = response.data;
+            if(!compareResults(result, previousResult)) return;
+            previousResult = result;
+
+            result.forEach(function(postagem) {
+                postagem.texto = $sce.trustAsHtml(postagem.texto);
+            });
+            $scope.feed = $scope.feed.concat(result)
+            $scope.limit = $scope.limit + 5;
+            skip = skip + skipSum;
+
+        }).catch(function (err) {
+            $state.go('login');
+        });
         $scope.limit = $scope.limit + 1;
     };
+
+    // compara busca no database anterior com a atual, se igual é porque o backend retornou mesmo array
+    // entao NAO é adicionado no $scope.feed para nao ter redundancia
+    function compareResults (current, previous) {
+        if (previous == undefined) return true;
+
+        var arraySize = limitPerLoad-1;
+        for (var i = 0; i < arraySize; i++) {
+            if (current[i]._id == previous[i]._id) {
+                return false;
+            }
+        }
+        return true
+    }
+
+    $scope.checkFilteredFeedSize = function() {
+        setTimeout(function () {
+            if ($scope.feed.length == 0) {
+                return true;
+            } else {
+                return false;
+            }
+        }, 2000)
+    }
 };
+
 angular.module('inspinia').controller('feed', feed);
