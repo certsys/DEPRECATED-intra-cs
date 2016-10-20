@@ -23,7 +23,7 @@
             </div>
             <div infinite-scroll="loadMore()" infinite-scroll-distance="1">
                 <div class="wrapper wrapper-content animated fadeInRight" bindonce
-                     ng-repeat="post in filteredFeed = (feed | orderBy:'-data' | filter:search | limitTo:limit)"
+                     ng-repeat="post in filteredFeed = (feed | orderBy:'-data' | filter:search )"
                      ng-if="isToday(post.data)" ng-hide="post.isDeleted">
                     <div class="row">
                         <div class="col-lg-12">

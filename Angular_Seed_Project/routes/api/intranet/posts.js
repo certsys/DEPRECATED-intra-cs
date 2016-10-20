@@ -247,10 +247,15 @@ router.get('/', function (req, res) {
 
 // Pega todos os Posts
 router.get('/all', function (req, res) {
+    var skipPosts = Number(req.query.skip);
+    var limitPosts = Number(req.query.limit);
     Post.find(function (err, posts) {
         if (err) return console.error(err);
         res.json(posts);
     })
+        .sort({'data': -1}) // "-1" means descending, gets posts on descending date order
+        .skip(skipPosts)
+        .limit(limitPosts)
 });
 
 // Recebe um JSON, insere no banco de dados e envia email com os dados

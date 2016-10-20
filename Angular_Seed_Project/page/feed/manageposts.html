@@ -61,7 +61,9 @@
                         </div>
                     </div>
                 </div>
-                <div ng-if="filteredFeed.length === 0"><br><h2 class="text-center">Ops :( Nada foi encontrado!</h2></div>
+                <div ng-if="checkFilteredFeedSize()"><br>
+                    <h2 class="text-center">Ops :( Nada foi encontrado!</h2>
+                </div>
             </div>
             <div ng-include="'views/common/footer.html'"></div>
         </div>

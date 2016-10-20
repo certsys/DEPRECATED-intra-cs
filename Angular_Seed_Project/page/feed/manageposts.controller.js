@@ -1,20 +1,59 @@
 function postManager($scope, $http, postService, $state, userService, peopleGroups) {
-    $http({
-        url: '/posts/all',
-        method: "GET",
-        params: {token: userService.getToken()}
-    }).then(function (response) {
-        //your code in case the post succeeds
-        $scope.feed = response.data;
-    }).catch(function (err) {
-        $state.go('login');
-        // console.log(err);
-    });
+    $scope.feed =[];
+    $scope.title = "Controle dos Posts";
+    var skip = 0;
+    const skipSum = 5;
+    const limitPerLoad = 5;
+    var previousResult;
+
+    // $http({
+    //     url: '/posts/all',
+    //     method: "GET",
+    //     params: {token: userService.getToken()}
+    // }).then(function (response) {
+    //     //your code in case the post succeeds
+    //     $scope.feed = response.data;
+    // }).catch(function (err) {
+    //     $state.go('login');
+    //     // console.log(err);
+    // });
     
     if (!(userService.Authenticate().debug || userService.Authenticate().admin || userService.Authenticate().diretores || userService.Authenticate().rh))
         $state.go('feed');
 
-    $scope.title = "Controle dos Posts";
+    $scope.loadMore = function () {
+        $http({
+            url: '/posts/all',
+            method: "GET",
+            params: {token: userService.getToken(), skip: skip, limit: limitPerLoad}
+        }).then(function (response) {
+            //your code in case the post succeeds
+            //$scope.feed = response.data;
+            var result = response.data;
+            if(!compareResults(result, previousResult)) return;
+            previousResult = result;
+
+            $scope.feed = $scope.feed.concat(result);
+            skip = skip + skipSum;
+        }).catch(function (err) {
+            $state.go('login');
+            // console.log(err);
+        });
+
+        // compara busca no database anterior com a atual, se igual é porque o backend retornou mesmo array
+        // entao NAO é adicionado no $scope.feed para nao ter redundancia
+        function compareResults (current, previous) {
+            if (previous == undefined) return true;
+
+            var arraySize = limitPerLoad-1;
+            for (var i = 0; i < arraySize; i++) {
+                if (current[i]._id == previous[i]._id) {
+                    return false;
+                }
+            }
+            return true
+        }
+    };
 
     $scope.removePost = function (currentPost) {
         swal({
@@ -56,6 +95,16 @@ function postManager($scope, $http, postService, $state, userService, peopleGrou
         if (array.length > 0) return true;
         return false;
     };
+
+    $scope.checkFilteredFeedSize = function() {
+        setTimeout(function () {
+            if ($scope.feed.length == 0) {
+                return true;
+            } else {
+                return false;
+            }
+        }, 2000)
+    }
 
 };
 angular.module('inspinia').controller('postManager', postManager);

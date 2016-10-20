@@ -1,6 +1,5 @@
 function feed($scope, $http, $state, $sce, userService) {
     $scope.feed =[];
-    $scope.limit = 0;
     $scope.title = "Newsfeed Certsys";
     var skip = 0;
     const skipSum = 5;
@@ -41,35 +40,35 @@ function feed($scope, $http, $state, $sce, userService) {
         }).then(function (response) {
             //your code in case the post succeeds
             var result = response.data;
-            if(!compareResults(result, previousResult)) return;
+            console.log(result)
+            if(!compareResults(result, previousResult)) {
+                return
+            }
             previousResult = result;
 
             result.forEach(function(postagem) {
                 postagem.texto = $sce.trustAsHtml(postagem.texto);
             });
-            $scope.feed = $scope.feed.concat(result)
-            $scope.limit = $scope.limit + 5;
+            $scope.feed = $scope.feed.concat(result);
             skip = skip + skipSum;
-
         }).catch(function (err) {
             $state.go('login');
         });
-        $scope.limit = $scope.limit + 1;
-    };
 
-    // compara busca no database anterior com a atual, se igual é porque o backend retornou mesmo array
-    // entao NAO é adicionado no $scope.feed para nao ter redundancia
-    function compareResults (current, previous) {
-        if (previous == undefined) return true;
+        // compara busca no database anterior com a atual, se igual é porque o backend retornou mesmo array
+        // entao NAO é adicionado no $scope.feed para nao ter redundancia
+        function compareResults (current, previous) {
+            if (previous == undefined) return true;
 
-        var arraySize = limitPerLoad-1;
-        for (var i = 0; i < arraySize; i++) {
-            if (current[i]._id == previous[i]._id) {
-                return false;
+            var arraySize = limitPerLoad-1;
+            for (var i = 0; i < arraySize; i++) {
+                if (current[i]._id == previous[i]._id) {
+                    return false;
+                }
             }
+            return true
         }
-        return true
-    }
+    };
 
     $scope.checkFilteredFeedSize = function() {
         setTimeout(function () {
