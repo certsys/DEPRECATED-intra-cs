@@ -80,7 +80,8 @@ function userService($sessionStorage, peopleGroups) {
         'carlos.custodio',
         'herbert.santos',
         'henrique.cavalcante',
-        'marcos.hosoya'
+        'marcos.hosoya',
+        'ivan.zoppetti'
     ];
 
     // temp code refazer posteriormente
