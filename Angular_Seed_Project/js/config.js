@@ -20,7 +20,7 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, $locati
     $stateProvider
         .state('feed', {
             url: "/feed"
-            , templateUrl: "page/feed/feed.html"
+            , templateUrl: "page/feed/feed2.html"
             , data: {
                 pageTitle: 'Feed de Notícias'
             }

@@ -8230,3 +8230,9 @@ body.md-skin {
     margin: 0;
   }
 }
+
+.fixed-image-size {
+  height: 200px;
+  width: 100%;
+  overflow: hidden;
+}
