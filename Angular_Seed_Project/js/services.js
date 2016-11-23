@@ -98,10 +98,10 @@ function userService($sessionStorage, peopleGroups) {
     };
 
     var getUser = function () {
-         return angular.fromJson($sessionStorage.user);
-        // return {
-        //     cn: "Abner Correa Junior"
-        // }
+        //return angular.fromJson($sessionStorage.user);
+        return {
+            cn: "Abner Correa Junior"
+        }
     };
 
     var sendToken = function (newObj) {

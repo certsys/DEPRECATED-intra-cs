@@ -402,6 +402,39 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, $locati
                 }
             }
         })
+        .state('recrutamento', {
+            url: "/recrutamento",
+            templateUrl: "page/recrutamento/recrutamento.html",
+            data: {pageTitle: 'Universidade Certsys'},
+            controller: "recrutamentoCtrl",
+            resolve: {
+                loadPlugin: function ($ocLazyLoad) {
+                    return $ocLazyLoad.load([
+                        {
+                            name: 'pasvaz.bindonce',
+                            files: ['js/plugins/bindonce/bindonce.min.js']
+                        },
+                        {
+                            files: ['css/plugins/iCheck/custom.css', 'js/plugins/iCheck/icheck.min.js']
+                        },
+
+                        {
+                            files: ['js/bower_components/summernote/dist/summernote.css', 'js/bower_components/summernote/dist/summernote.js']
+                        },
+                        {
+                            files: ['css/plugins/switchery/switchery.css', 'js/plugins/switchery/switchery.js']
+                        },
+                        {
+                            files: ['css/plugins/metisMenu/metisMenu.min.css', 'js/plugins/metisMenu/jquery.metisMenu.js']
+                        }
+                        // {
+                        //     files: ['js/bootstrap/ui-bootstrap-tpls-2.1.3.min.js']
+                        // }
+                    ]);
+                }
+            }
+        })
+
 
         // .state('outlook', {
         //     url: "/outlook"
