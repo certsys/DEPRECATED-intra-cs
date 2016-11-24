@@ -7,7 +7,7 @@
 
     <!-- Page wraper -->
     <!-- ng-class with current state name give you the ability to extended customization your view -->
-    <div id="page-wrapper" class="gray-bg {{$state.current.name}}" ng-controller="universidade">
+    <div id="page-wrapper" class="gray-bg {{$state.current.name}}" ng-controller="recrutamentoCtrl">
 
         <!-- Page wrapper -->
 
@@ -29,7 +29,7 @@
                     <h5>Todos os cursos</h5>
 
                     <div class="ibox-tools" ng-if="permissions.instructors">
-                        <a class="btn btn-primary btn-xs" ng-click="open()">Criar Curso</a>
+                        <a class="btn btn-primary btn-xs" ng-click="createJob()">Criar Vaga</a>
                     </div>
 
                 </div>
@@ -53,7 +53,7 @@
                             <div class="input-group"><input type="text" placeholder="Pesquisar cursos..."
                                                             class="input-sm form-control" ng-model="search.nome"> <span
                                     class="input-group-btn">
-				 <button type="button" class="btn btn-sm btn-primary"> Pesquisar!</button> </span></div>
+				            <button type="button" class="btn btn-sm btn-primary"> Pesquisar!</button> </span></div>
                         </div>
                     </div>
 

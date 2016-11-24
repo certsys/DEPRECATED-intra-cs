@@ -3,28 +3,24 @@
  */
 function recrutamentoCtrl($scope, $http, userService, $state, universidadeService, $modal) {
     $http({
-        url: '/cursos',
+        url: '/vagas',
         method: "GET",
         params: {token: userService.getToken()}
     }).then(function (response) {
-        //your code in case the post succeeds
-        // console.log(response);
         $scope.cursos = response.data;
     }).catch(function (err) {
         $state.go('login');
-        // console.log(err);
     });
-    // console.log("GET cursos")
 
-    var INSCRICOES_ABERTAS = "Inscrições Abertas";
-    var INSCRICOES_ENCERRADAS = "Inscrições Encerradas";
-    var ENCERRADO = "Encerrado";
+    const INSCRICOES_ABERTAS = "Inscrições Abertas";
+    const INSCRICOES_ENCERRADAS = "Inscrições Encerradas";
+    const ENCERRADO = "Encerrado";
 
-    $scope.open = function () {
+    $scope.createJob = function () {
 
         var modalInstance = $modal.open({
-            templateUrl: 'page/modais/modalUniversidade.html',
-            controller: ModalInstanceCtrl,
+            templateUrl: 'page/modais/modalRecrutamento.html',
+            controller: modalRecrutamentoCtrl,
             resolve: {
                 getCurso: function () {
                     return undefined;
@@ -231,13 +227,6 @@ function recrutamentoCtrl($scope, $http, userService, $state, universidadeServic
         instructors: userService.Authenticate().instructors
     };
 
-    // $scope.myFilter = function (selectedStatus, cursos) {
-    //     if (!cursos) return;
-    //     console.log(selectedStatus);
-    //     console.log(cursos);
-    //     return cursos
-    // }
-
 }
 
 function cursoStatusFilter () {
@@ -253,7 +242,7 @@ function cursoStatusFilter () {
                     }
                 });
             });
-            //console.log(tempClients)
+
             return filtredCursos;
 
         } else {

@@ -57,6 +57,7 @@ app.use('/posts', routes.api.intranet.posts);
 app.use('/contacts', routes.api.intranet.contacts);
 app.use('/institucional', routes.api.intranet.institucional);
 app.use('/cursos', routes.api.intranet.cursos);
+app.use('/vagas', routes.api.intranet.vagas);
 
 // Maintenance
 app.use('/users', routes.api.maintenance.users);

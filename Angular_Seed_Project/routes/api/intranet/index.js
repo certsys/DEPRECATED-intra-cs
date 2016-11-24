@@ -6,3 +6,4 @@ exports.institucional = require('./institucional');
 exports.kb = require('./kb');
 exports.posts = require('./posts');
 exports.upload = require('./upload');
+exports.vagas = require('./vagas');
