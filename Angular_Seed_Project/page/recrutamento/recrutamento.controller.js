@@ -7,7 +7,7 @@ function recrutamentoCtrl($scope, $http, userService, $state, universidadeServic
         method: "GET",
         params: {token: userService.getToken()}
     }).then(function (response) {
-        $scope.cursos = response.data;
+        $scope.vagas = response.data;
     }).catch(function (err) {
         $state.go('login');
     });
@@ -80,7 +80,7 @@ function recrutamentoCtrl($scope, $http, userService, $state, universidadeServic
         });
     };
 
-    $scope.title = "Universidade Certsys";
+    $scope.title = "Recrutamento Certsys";
 
     $scope.tiposStatus = ["Inscrições Abertas","Inscrições Encerradas","Encerrado"];
 
@@ -97,8 +97,8 @@ function recrutamentoCtrl($scope, $http, userService, $state, universidadeServic
 
     }
 
-    $scope.cursoDeletedFilter= function (curso) {
-        if (curso.isDeleted) {
+    $scope.vagaDeletedFilter= function (vaga) {
+        if (vaga.isDeleted) {
             return false; // curso is deleted, so does NOT show on table
         } else {
             return true;  // curso is NOT deleted, so it is showed on table
@@ -118,18 +118,18 @@ function recrutamentoCtrl($scope, $http, userService, $state, universidadeServic
 
     $scope.buttonDisabled = false;
 
-    $scope.subscribed = function (curso) {
+    $scope.subscribed = function (vaga) {
         var retorno = false;
-        curso.inscritos.forEach(function (inscrito) {
+        vaga.inscritos.forEach(function (inscrito) {
             if (inscrito.sAMAccountName === userService.getUser().sAMAccountName) retorno = true;
 
         });
         return retorno;
     };
 
-    $scope.addSubscription = function (curso) {
+    $scope.addSubscription = function (vaga) {
         $scope.buttonDisabled = true;
-        var index = curso.inscritos.map(function (inscrito) {
+        var index = vaga.inscritos.map(function (inscrito) {
             return inscrito.sAMAccountName;
         }).indexOf(userService.getUser().sAMAccountName);
 
@@ -148,10 +148,10 @@ function recrutamentoCtrl($scope, $http, userService, $state, universidadeServic
                     data_inscricao: new Date().toISOString(),
                     presente: false
                 };
-                curso.inscritos.push(dados);
+                vaga.inscritos.push(dados);
                 $http({
                     method: 'PUT'
-                    , url: '/cursos/addSubscription/' + curso._id
+                    , url: '/vagas/addSubscription/' + vaga._id
                     , data: dados
                     , params: {token: userService.getToken()}
                 }).then(function (response) {
@@ -168,16 +168,16 @@ function recrutamentoCtrl($scope, $http, userService, $state, universidadeServic
         }
     };
 
-    $scope.removeSubscription = function (curso) {
+    $scope.removeSubscription = function (vaga) {
         $scope.buttonDisabled = true;
-        var index = curso.inscritos.map(function (inscrito) {
+        var index = vaga.inscritos.map(function (inscrito) {
             return inscrito.sAMAccountName;
         }).indexOf(userService.getUser().sAMAccountName);
-        if (index > -1) curso.inscritos.splice(index, 1);
+        if (index > -1) vaga.inscritos.splice(index, 1);
         var data = {sAMAccountName: userService.getUser().sAMAccountName};
         $http({
             method: 'PUT'
-            , url: '/cursos/removeSubscription/' + curso._id
+            , url: '/vagas/removeSubscription/' + vaga._id
             , data: data
             , params: {token: userService.getToken()}
         }).then(function (response) {
@@ -188,32 +188,32 @@ function recrutamentoCtrl($scope, $http, userService, $state, universidadeServic
         });
     };
 
-    $scope.status = function (curso) {
+    $scope.status = function (vaga) {
         var data_atual = new Date();
-        var data_limite_inscricao = new Date(curso.data_limite_inscricao);
-        var data_inicio = new Date(curso.data_inicio);
+        var data_limite_inscricao = new Date(vaga.data_limite_inscricao);
+        var data_inicio = new Date(vaga.data_inicio);
         if (data_atual < data_limite_inscricao) {
             $scope.backgroundColor = '#3dadd0';
             $scope.color = '#ffffff';
-            curso.status = INSCRICOES_ABERTAS; //---added here
+            vaga.status = INSCRICOES_ABERTAS; //---added here
             return INSCRICOES_ABERTAS;
         } else if (data_atual > data_inicio) {
             $scope.backgroundColor = 'red';
             $scope.color = '#ffffff';
-            curso.status= ENCERRADO; //---added here
+            vaga.status= ENCERRADO; //---added here
             return ENCERRADO;
         }
         else {
             $scope.backgroundColor = '#d1dade';
             $scope.color = '#676a6c';
-            curso.status = INSCRICOES_ENCERRADAS; //---added here
+            vaga.status = INSCRICOES_ENCERRADAS; //---added here
             return INSCRICOES_ENCERRADAS;
         }
     };
 
-    $scope.allowSubscription = function (curso) {
-        if (curso.inscritos.length >= curso.max_inscritos) return false;
-        else if ($scope.status(curso) !== INSCRICOES_ABERTAS) return false;
+    $scope.allowSubscription = function (vaga) {
+        if (vaga.inscritos.length >= vaga.max_inscritos) return false;
+        else if ($scope.status(vaga) !== INSCRICOES_ABERTAS) return false;
         return true;
     };
 
@@ -229,24 +229,24 @@ function recrutamentoCtrl($scope, $http, userService, $state, universidadeServic
 
 }
 
-function cursoStatusFilter () {
-    return function (cursos, selectedStatus) {
-        if (!cursos || !selectedStatus) return;
+function vagaStatusFilter () {
+    return function (vagas, selectedStatus) {
+        if (!vagas || !selectedStatus) return;
 
-        if (!angular.isUndefined(cursos) && !angular.isUndefined(selectedStatus) && selectedStatus.length > 0) {
-            var filtredCursos = [];
+        if (!angular.isUndefined(vagas) && !angular.isUndefined(selectedStatus) && selectedStatus.length > 0) {
+            var filteredVagas = [];
             angular.forEach(selectedStatus, function (status) {
-                angular.forEach(cursos, function (curso) {
-                    if (angular.equals(curso.status, status)) {
-                        filtredCursos.push(curso);
+                angular.forEach(vagas, function (vaga) {
+                    if (angular.equals(vaga.status, status)) {
+                        filteredVagas.push(vaga);
                     }
                 });
             });
 
-            return filtredCursos;
+            return filteredVagas;
 
         } else {
-            return cursos;
+            return vagas;
         }
     }
 }
@@ -254,7 +254,7 @@ function cursoStatusFilter () {
 angular
     .module('inspinia')
     .controller('recrutamentoCtrl', recrutamentoCtrl)
-    .filter('cursoStatusFilter', cursoStatusFilter);
+    .filter('vagaStatusFilter', vagaStatusFilter);
 
 
 

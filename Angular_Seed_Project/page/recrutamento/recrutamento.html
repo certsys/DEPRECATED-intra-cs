@@ -26,7 +26,7 @@
 
             <div class="ibox">
                 <div class="ibox-title">
-                    <h5>Todos os cursos</h5>
+                    <h5>Todas as vagas</h5>
 
                     <div class="ibox-tools" ng-if="permissions.instructors">
                         <a class="btn btn-primary btn-xs" ng-click="createJob()">Criar Vaga</a>
@@ -50,7 +50,7 @@
                             </ul>
                         </div>
                         <div class="col-md-11">
-                            <div class="input-group"><input type="text" placeholder="Pesquisar cursos..."
+                            <div class="input-group"><input type="text" placeholder="Pesquisar vagas..."
                                                             class="input-sm form-control" ng-model="search.nome"> <span
                                     class="input-group-btn">
 				            <button type="button" class="btn btn-sm btn-primary"> Pesquisar!</button> </span></div>
@@ -61,57 +61,57 @@
 
                         <table class="table table-hover">
                             <tbody>
-                            <tr ng-repeat-start="curso in filtered = ( cursos | orderBy:'-data_inicio' | cursoStatusFilter:selectedStatus | filter: search | filter: cursoDeletedFilter )"  >
+                            <tr ng-repeat-start="vaga in filtered = ( vagas | orderBy:'-data_inicio' | vagaStatusFilter:selectedStatus | filter: search | filter: vagaDeletedFilter )"  >
                                 <td class="project-status" >
                                     <span ng-style="{'background-color': backgroundColor, 'color': color}"
-                                          class="label">{{status(curso)}}</span>
+                                          class="label">{{status(vaga)}}</span>
                                 </td>
                                 <td class="project-title">
-                                    <a ui-sref="project_detail">{{curso.nome}}</a>
+                                    <a ui-sref="project_detail">{{vaga.nome}}</a>
                                     <br/>
-                                    <small>Inscrições abertas até {{curso.data_limite_inscricao | date:'dd/MM/yyyy - HH'}}h{{curso.data_limite_inscricao | date:'mm'}}
+                                    <small>Inscrições abertas até {{vaga.data_limite_inscricao | date:'dd/MM/yyyy - HH'}}h{{vaga.data_limite_inscricao | date:'mm'}}
                                     </small>
                                     <br/>
-                                    <small><b>{{curso.data_inicio | date:'dd/MM/yyyy - HH'}}h{{curso.data_inicio |
-                                        date:'mm'}} às {{curso.data_fim | date:'HH'}}h{{curso.data_fim | date:'mm'}}
+                                    <small><b>{{vaga.data_inicio | date:'dd/MM/yyyy - HH'}}h{{vaga.data_inicio |
+                                        date:'mm'}} às {{vaga.data_fim | date:'HH'}}h{{vaga.data_fim | date:'mm'}}
                                     </b></small>
                                 </td>
                                 <td class="project-completion">
-                                    <small>Pessoas inscritas: {{curso.inscritos.length}}/{{curso.max_inscritos}}</small>
+                                    <small>Pessoas inscritas: {{vaga.inscritos.length}}/{{vaga.max_inscritos}}</small>
                                     <div class="progress progress-mini">
-                                        <div style="width: {{(curso.inscritos.length/curso.max_inscritos)*100}}%;"
+                                        <div style="width: {{(vaga.inscritos.length/vaga.max_inscritos)*100}}%;"
                                              class="progress-bar"></div>
                                     </div>
                                 </td>
                                 <td class="project-actions" ng-if="permissions.instructors">
-                                    <a class="btn btn-primary btn-sm fixed-width" ng-click="edit(curso)"><i
+                                    <a class="btn btn-primary btn-sm fixed-width" ng-click="edit(vaga)"><i
                                             class="fa fa-pencil-square"></i> Editar </a>
                                 </td>
-                                <td class="project-actions" ng-if="!allowSubscription(curso)">
+                                <td class="project-actions" ng-if="!allowSubscription(vaga)">
                                     <a class="btn btn-white btn-sm fixed-width" ng-disabled="true"><i
                                             class="fa fa-times"></i> Encerrado </a>
                                 </td>
-                                <td class="project-actions" ng-if="subscribed(curso) && allowSubscription(curso)">
+                                <td class="project-actions" ng-if="subscribed(vaga) && allowSubscription(vaga)">
                                     <a class="btn btn-primary btn-sm fixed-width" ng-disabled="buttonDisabled"
-                                       ng-click="removeSubscription(curso)"><i class="fa fa-check"></i> Inscrito
+                                       ng-click="removeSubscription(vaga)"><i class="fa fa-check"></i> Inscrito
                                     </a>
                                 </td>
-                                <td class="project-actions" ng-if="!subscribed(curso) && allowSubscription(curso)">
+                                <td class="project-actions" ng-if="!subscribed(vaga) && allowSubscription(vaga)">
                                     <a class="btn btn-white btn-sm fixed-width" ng-disabled="buttonDisabled"
-                                       ng-click="addSubscription(curso)"><i class="fa fa-pencil"></i> Inscrever </a>
+                                       ng-click="addSubscription(vaga)"><i class="fa fa-pencil"></i> Inscrever </a>
                                 </td>
                                 <td class="project-actions">
-                                    <a ng-if="curso.expanded" ng-click="curso.expanded = false">
+                                    <a ng-if="vaga.expanded" ng-click="vaga.expanded = false">
                                         <i class="fa fa-chevron-up"></i> </a>
-                                    <a ng-if="!curso.expanded" ng-click="curso.expanded = true">
+                                    <a ng-if="!vaga.expanded" ng-click="vaga.expanded = true">
                                         <i class="fa fa-chevron-down"></i> </a>
                                 </td>
                             </tr>
-                            <tr ng-if="curso.expanded" ng-repeat-end="" class="animated fadeInRight">
+                            <tr ng-if="vaga.expanded" ng-repeat-end="" class="animated fadeInRight">
                                 <td colspan="4">
                                     <small><b>Descrição</b></small>
                                     <br>
-                                    <smal>{{curso.descricao}}</smal>
+                                    <smal>{{vaga.descricao}}</smal>
                                 </td>
                                 <td colspan="4">
 
