@@ -57,7 +57,8 @@ function config($translateProvider) {
             DEMO: 'Internationalization (sometimes shortened to \"I18N , meaning \"I - eighteen letters -N\") is the process of planning and implementing products and services so that they can easily be adapted to specific local languages and cultures, a process called localization . The internationalization process is sometimes called translation or localization enablement .',
             INSTITUTIONAL: 'Institucional',
             KNOWLEDGEBASE: 'Base de Conhecimento',
-            INSERTCONTACT: 'Inserir Contato'
+            INSERTCONTACT: 'Inserir Contato',
+            RECRUTAMENTO: 'Recrutamento Interno'
 
         })
 

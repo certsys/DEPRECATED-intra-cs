@@ -1,47 +1,45 @@
 /**
  * Created by marcos on 24/11/16.
  */
-function modalRecrutamentoCtrl($scope, $modalInstance, $http, userService, getCurso, universidadeService, $state) {
+function modalRecrutamentoCtrl($scope, $modalInstance, $http, userService, getVaga, recrutamentoService, $state) {
 
     $http({
         url: '/contacts',
         method: "GET",
         params: {token: userService.getToken()}
     }).then(function (response) {
-        //your code in case the post succeeds
         $scope.contatos = response.data;
     }).catch(function (err) {
-        // console.log(err);
+        console.log(err);
     });
 
-    universidadeService.sendSalvou(false);
+    recrutamentoService.sendSalvou(false);
     $scope.editar = false;
     // Se o modal vier com dados pré cadastrados
-    if (angular.isDefined(getCurso)) {
+    if (angular.isDefined(getVaga)) {
         $scope.editar = true;
         $http({
             url: '/contacts/perfil',
             method: "GET",
-            params: {token: userService.getToken(), mail: getCurso.instrutor.sAMAccountName}
+            params: {token: userService.getToken()}
         }).then(function (response) {
             //your code in case the post succeeds
-            // console.log(response.data.lenght > 0);
-            $scope.titulo = getCurso.nome;
-            $scope.descricao = getCurso.descricao;
-            $scope.local = getCurso.local;
-            $scope.minInscritos = getCurso.min_inscritos;
-            $scope.maxInscritos = getCurso.max_inscritos;
-            var data_inicio = new Date(getCurso.data_inicio);
-            var data_fim = new Date(getCurso.data_fim);
-            $scope.diaInicio = data_inicio;
-            $scope.horarioInicio = data_inicio.getHours() + ":" + data_inicio.getMinutes();
-            $scope.horarioFim = data_fim.getHours() + ":" + data_fim.getMinutes();
-            $scope.dataLimiteInscricao = new Date(getCurso.data_limite_inscricao);
-            $scope.selected = response.data[0];
+            $scope.titulo = getVaga.nome;
+            $scope.descricao = getVaga.descricao;
+            $scope.local = getVaga.local;
+            $scope.minInscritos = getVaga.min_inscritos;
+            $scope.maxInscritos = getVaga.max_inscritos;
+            // var data_inicio = new Date(getVaga.data_inicio);
+            // var data_fim = new Date(getVaga.data_fim);
+            // $scope.diaInicio = data_inicio;
+            // $scope.horarioInicio = data_inicio.getHours() + ":" + data_inicio.getMinutes();
+            // $scope.horarioFim = data_fim.getHours() + ":" + data_fim.getMinutes();
+            $scope.dataLimiteInscricao = new Date(getVaga.data_limite_inscricao);
+            // $scope.selected = response.data[0];
         }).catch(function (err) {
             // console.log(err);
         });
-        //     instrutor: instrutor,
+
     } else {
         $scope.minInscritos = 0;
         $scope.maxInscritos = 0;
@@ -62,8 +60,8 @@ function modalRecrutamentoCtrl($scope, $modalInstance, $http, userService, getCu
     };
 
     $scope.gerenciar = function () {
-        if (angular.isDefined(getCurso)) {
-            universidadeService.sendCurso(getCurso);
+        if (angular.isDefined(getVaga)) {
+            recrutamentoService.sendVaga(getVaga);
             $state.go('universidade_manage');
             $modalInstance.close();
 
@@ -71,7 +69,7 @@ function modalRecrutamentoCtrl($scope, $modalInstance, $http, userService, getCu
     };
 
     $scope.isCreated = function () {
-        return (angular.isDefined(getCurso));
+        return (angular.isDefined(getVaga));
     };
 
     var criarDatas = function (date, horarioInicio, horarioFim) {
@@ -99,27 +97,26 @@ function modalRecrutamentoCtrl($scope, $modalInstance, $http, userService, getCu
 
     $scope.salvar = function () {
 
-        if (angular.isUndefined($scope.selected)) return;
-        var sAMAccountName = $scope.selected.mail.substring(0, $scope.selected.mail.indexOf('@'));
-        var instrutor = {
-            _id: $scope.selected._id,
-            sAMAccountName: sAMAccountName
-        };
-
-        criarDatas(angular.element('#data-inicio').val(), $scope.horarioInicio, $scope.horarioFim);
+        //if (angular.isUndefined($scope.selected)) return;
+        //var sAMAccountName = $scope.selected.mail.substring(0, $scope.selected.mail.indexOf('@'));
+        // var instrutor = {
+        //     _id: $scope.selected._id,
+        //     sAMAccountName: sAMAccountName
+        // };
+       // criarDatas(angular.element('#data-inicio').val(), $scope.horarioInicio, $scope.horarioFim);
         criarDataLimiteInscricao(angular.element('#data-limite-inscricao').val());
 
         var data = {
             nome: $scope.titulo,
             descricao: $scope.descricao,
             local: $scope.local,
-            data_inicio: $scope.dataInicial,
-            data_fim: $scope.dataFinal,
+            // data_inicio: $scope.dataInicial,
+            // data_fim: $scope.dataFinal,
             data_limite_inscricao: $scope.dataLimiteInscricao,
             min_inscritos: $scope.minInscritos,
             max_inscritos: $scope.maxInscritos,
             created_by: userService.getUser().sAMAccountName,
-            instrutor: instrutor,
+            // instrutor: instrutor,
             carga_horaria: $scope.cargaHoraria
         };
 
@@ -127,58 +124,50 @@ function modalRecrutamentoCtrl($scope, $modalInstance, $http, userService, getCu
         if ($scope.editar) {
             $http({
                 method: 'PUT'
-                , url: '/cursos/edit/' + getCurso._id
+                , url: '/vagas/edit/' + getVaga._id
                 , data: data
                 , params: {token: userService.getToken()}
             }).then(function (response) {
-                    //your code in case the post succeeds
-                    // console.log(response);
                     swal({
                         title: "Sucesso!",
                         text: "Seu curso foi editado com sucesso!",
                         type: "success"
                     });
 
-                    universidadeService.sendSalvou(true);
+                    recrutamentoService.sendSalvou(true);
                     $modalInstance.close();
                     setTimeout(function () {
-                        // after 1500ms, reloads the page to refresh the courses table
                         location.reload()
                     }, 1000);
 
                 }
             )
                 .catch(function (err) {
-                    //your code in case your post fails
-                    // console.log(err);
+                    console.log(err);
                 });
         } else {
             $http({
                 method: 'POST'
-                , url: '/cursos'
+                , url: '/vagas'
                 , data: data
                 , params: {token: userService.getToken()}
             }).then(function (response) {
-                    //your code in case the post succeeds
-                    // console.log(response);
                     swal({
                         title: "Sucesso!",
                         text: "Seu curso foi criado com sucesso!",
                         type: "success"
                     });
 
-                    universidadeService.sendSalvou(true);
+                    recrutamentoService.sendSalvou(true);
                     $modalInstance.close();
                     setTimeout(function () {
-                        // after 1500ms, reloads the page to refresh the courses table
                         location.reload()
                     }, 1000);
 
                 }
             )
                 .catch(function (err) {
-                    //your code in case your post fails
-                    // console.log(err);
+                    console.log(err);
                 });
         }
     };
@@ -194,10 +183,9 @@ function modalRecrutamentoCtrl($scope, $modalInstance, $http, userService, getCu
             confirmButtonText: "Deletar!",
             closeOnConfirm: false
         }, function () {
-            // console.log(getCurso);
             $http({
                 method: 'DELETE'
-                , url: '/cursos/remove/' + getCurso._id
+                , url: '/vagas/remove/' + getVaga._id
                 , params: {token: userService.getToken()}
             }).then(function (response) {
                 swal({
@@ -206,22 +194,32 @@ function modalRecrutamentoCtrl($scope, $modalInstance, $http, userService, getCu
                     type: "success",
                     showConfirmButton: false
                 });
-                //$modalInstance.dismiss('cancel');
                 setTimeout(function () {
-                    // after 1500ms, reloads the page to refresh the courses table
                     location.reload()
                 }, 1000);
 
-                // console.log(response);
             }).catch(function (err) {
-                //your code in case your post fails
-                // console.log(err);
+                console.log(err);
             });
         });
     };
+
+    $scope.options = {
+        text: ""
+        , height: 300
+        , toolbar: [
+            ['style', ['style', 'bold', 'italic', 'underline', 'clear']]
+            , ['color', ['color']]
+            , ['para', ['ul', 'ol', 'paragraph']]
+            , ['table', ['table']]
+            , ['insert', ['link', 'hr']]
+            , ['view', ['fullscreen', 'codeview']]
+        ]
+    };
+
 
 }
 
 angular
     .module('inspinia')
-    .controller('modalRecrutamentoCtrl', ['getCurso', modalRecrutamentoCtrl]);
+    .controller('modalRecrutamentoCtrl', ['getVaga', modalRecrutamentoCtrl]);

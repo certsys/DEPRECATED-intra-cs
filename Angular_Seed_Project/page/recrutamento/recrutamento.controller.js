@@ -1,7 +1,7 @@
 /**
  * Created by Hosoya on 23/11/16.
  */
-function recrutamentoCtrl($scope, $http, userService, $state, universidadeService, $modal) {
+function recrutamentoCtrl($scope, $http, userService, $state, recrutamentoService, $modal) {
     $http({
         url: '/vagas',
         method: "GET",
@@ -22,7 +22,7 @@ function recrutamentoCtrl($scope, $http, userService, $state, universidadeServic
             templateUrl: 'page/modais/modalRecrutamento.html',
             controller: modalRecrutamentoCtrl,
             resolve: {
-                getCurso: function () {
+                getVaga: function () {
                     return undefined;
                 },
                 loadPlugin: function ($ocLazyLoad) {
@@ -31,6 +31,9 @@ function recrutamentoCtrl($scope, $http, userService, $state, universidadeServic
                             name: 'datePicker',
                             files: ['js/plugins/moment/moment.min.js', 'css/plugins/datapicker/angular-datapicker.css',
                                 'js/plugins/datapicker/angular-datepicker.js']
+                        },
+                        {
+                            files: ['js/bower_components/summernote/dist/summernote.css', 'js/bower_components/summernote/dist/summernote.js']
                         },
                         {
                             name: 'pasvaz.bindonce',
@@ -48,14 +51,14 @@ function recrutamentoCtrl($scope, $http, userService, $state, universidadeServic
         });
     };
 
-    $scope.edit = function (curso) {
+    $scope.edit = function (vaga) {
 
         var modalInstance = $modal.open({
-            templateUrl: 'page/modais/modalUniversidade.html',
-            controller: ModalInstanceCtrl,
+            templateUrl: 'page/modais/modalRecrutamento.html',
+            controller: modalRecrutamentoCtrl,
             resolve: {
-                getCurso: function () {
-                    return curso;
+                getVaga: function () {
+                    return vaga;
                 },
                 loadPlugin: function ($ocLazyLoad) {
                     return $ocLazyLoad.load([
@@ -63,6 +66,9 @@ function recrutamentoCtrl($scope, $http, userService, $state, universidadeServic
                             name: 'datePicker',
                             files: ['js/plugins/moment/moment.min.js', 'css/plugins/datapicker/angular-datapicker.css',
                                 'js/plugins/datapicker/angular-datepicker.js']
+                        },
+                        {
+                            files: ['js/bower_components/summernote/dist/summernote.css', 'js/bower_components/summernote/dist/summernote.js']
                         },
                         {
                             name: 'pasvaz.bindonce',
@@ -99,9 +105,9 @@ function recrutamentoCtrl($scope, $http, userService, $state, universidadeServic
 
     $scope.vagaDeletedFilter= function (vaga) {
         if (vaga.isDeleted) {
-            return false; // curso is deleted, so does NOT show on table
+            return false; // vaga is deleted, so does NOT show on table
         } else {
-            return true;  // curso is NOT deleted, so it is showed on table
+            return true;  // vaga is NOT deleted, so it is showed on table
         }
     };
 

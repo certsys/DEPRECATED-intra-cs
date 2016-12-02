@@ -417,7 +417,6 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, $locati
                         {
                             files: ['css/plugins/iCheck/custom.css', 'js/plugins/iCheck/icheck.min.js']
                         },
-
                         {
                             files: ['js/bower_components/summernote/dist/summernote.css', 'js/bower_components/summernote/dist/summernote.js']
                         },

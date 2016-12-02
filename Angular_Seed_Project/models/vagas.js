@@ -16,14 +16,6 @@ var vagaSchema = new mongoose.Schema({
         type: String,
         required: false
     },
-    data_inicio: {
-        type: Date,
-        required: true
-    },
-    data_fim: {
-        type: Date,
-        required: true
-    },
     data_limite_inscricao: {
         type: Date,
         required: true
@@ -32,9 +24,18 @@ var vagaSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
-    max_inscritos: Number,
-    created_by: String,
-    carga_horaria: Number,
+    max_inscritos: {
+        type: Number,
+        required: false
+    },
+    created_by: {
+        type: String,
+        required: false
+    },
+    carga_horaria: {
+        type: Number,
+        required: false
+    },
     data_criacao: {
         type: Date,
         default: Date.now

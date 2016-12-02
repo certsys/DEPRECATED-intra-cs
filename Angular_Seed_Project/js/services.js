@@ -65,6 +65,36 @@ function universidadeService($sessionStorage) {
 
 };
 
+function recrutamentoService($sessionStorage) {
+
+    var salvou = false;
+
+    var sendVaga = function (newObj) {
+        $sessionStorage.vaga = angular.toJson(newObj);
+    };
+
+    var getVaga = function () {
+        return angular.fromJson($sessionStorage.vaga);
+    };
+
+    var sendSalvou = function (newObj) {
+        salvou = newObj;
+    };
+
+    var getSalvou = function () {
+        return salvou;
+    };
+
+
+    return {
+        sendVaga: sendVaga,
+        getVaga: getVaga,
+        sendSalvou: sendSalvou,
+        getSalvou: getSalvou
+    };
+
+};
+
 function userService($sessionStorage, peopleGroups) {
 
     var DEV = [
@@ -263,6 +293,7 @@ angular
     .service('contactService', contactService)
     .service('postService', postService)
     .service('universidadeService', universidadeService)
+    .service('recrutamentoService', recrutamentoService)
     .service('userService', userService)
     .service('peopleGroups', peopleGroups)
     .service('fileUpload', fileUpload)
