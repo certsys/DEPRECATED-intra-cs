@@ -235,12 +235,17 @@ if (!Debug.isDebug()) {
 router.get('/', function (req, res) {
     var skipPosts = Number(req.query.skip);
     var limitPosts = Number(req.query.limit);
-    var data_atual = new Date();
-    Post.find({'isDeleted': false }, function (err, posts) {
-        if (err) return console.error(err);
-        res.json(posts);
+    var data_atual = new Date(Date.now()).toISOString();
+    Post.find(
+        {
+            'isDeleted': false,
+            'data': {'$lte': data_atual}
+        },
+        function (err, posts) {
+            if (err) return console.error(err);
+            res.json(posts);
     })
-        .sort({'data': -1}) // "-1" means descending, gets posts on descending date order
+        .sort({'data': -1 }) // "-1" means descending, gets posts on descending date order
         .skip(skipPosts)
         .limit(limitPosts)
 });

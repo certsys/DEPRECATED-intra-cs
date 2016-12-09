@@ -23,7 +23,6 @@ function feed($scope, $http, $state, $sce, userService) {
             method: "GET",
             params: {token: userService.getToken(), skip: skip, limit: limitPerLoad}
         }).then(function (response) {
-            //your code in case the post succeeds
             var result = response.data;
             console.log(result)
             if(!compareResults(result, previousResult)) {
@@ -41,7 +40,7 @@ function feed($scope, $http, $state, $sce, userService) {
         });
 
         // compara busca no database anterior com a atual, se igual é porque o backend retornou mesmo array
-        // entao NAO é adicionado no $scope.feed para nao ter redundancia
+        // entao NAO é adicionado no $scope.feed para nao ter repeticao
         function compareResults (current, previous) {
             if (previous == undefined) return true;
 
