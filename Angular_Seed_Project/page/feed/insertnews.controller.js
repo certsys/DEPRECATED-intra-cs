@@ -1,5 +1,16 @@
 function insertnews($scope, $http, $timeout, $state, userService, peopleGroups) {
     $scope.futuro = false;
+    $scope.assinaturas = [
+            "Financeiro",
+            "Recursos Humanos",
+            "Recursos Humanos - Certificações",
+            "Recursos Humanos - Treinamentos",
+            "Recursos Humanos - Colaboradores",
+            "Recursos Humanos - Aniversário",
+            "Recursos Humanos - Eventos",
+            "Recursos Humanos - Parcerias"
+        ];
+
     $http({
         url: '/institucional',
         method: "GET",
@@ -8,7 +19,6 @@ function insertnews($scope, $http, $timeout, $state, userService, peopleGroups) 
         //your code in case the post succeeds
     }).catch(function (err) {
         $state.go('login');
-        // console.log(err);
     });
 
 
@@ -82,8 +92,6 @@ function insertnews($scope, $http, $timeout, $state, userService, peopleGroups) 
         var date;
         if ($scope.futuro == true) {
             date = angular.element('#data-postagem').val();
-            //$scope.changeDateToISO(date);
-            console.log(date)
             $scope.selectedDate = $scope.changeDateToISO(date)
         }
         if ($scope.selectedDate <= $scope.today && $scope.futuro == true) {
@@ -102,7 +110,6 @@ function insertnews($scope, $http, $timeout, $state, userService, peopleGroups) 
                 $scope.wasPressed = true;
                 var editions = [];
                 if ($scope.futuro == true) {
-                    // console.log("Data futura!!");
                     var date = angular.element('#data-postagem').val();
                     $scope.selectedDate = $scope.changeDateToISO(date);
                     console.log($scope.selectedDate)
