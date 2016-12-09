@@ -149,37 +149,26 @@ function insertnews($scope, $http, $timeout, $state, userService, peopleGroups) 
                     };
                 }
                 var output = angular.toJson(data);
-                //
-                var status;
                 $http({
                     method: 'POST'
                     , url: '/posts'
                     , data: output
                     , params: {token: userService.getToken()}
                 }).then(function (response) {
-                        //your code in case the post succeeds
-                        // console.log(response);
-                        status = response.data.status;
-
+                        var status = response.data.status;
                         swal({
                             title: "Sucesso!",
                             text: "Seu post foi inserido com sucesso!",
                             type: "success"
                         });
                         $state.go('manageposts');
-
-                    }
-                )
+                    })
                     .catch(function (err) {
-                        //your code in case your post fails
-                        // console.log(err);
+                        console.log(err);
                     });
-
-
             }
         }
     }
 }
-
 
 angular.module('inspinia').controller('insertnews', insertnews);
