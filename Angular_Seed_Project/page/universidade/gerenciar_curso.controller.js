@@ -11,8 +11,6 @@ function gerenciar_curso($scope, $http, userService, fileUpload, $state, univers
         method: "GET",
         params: {token: userService.getToken()}
     }).then(function (response) {
-        //your code in case the post succeeds
-        // console.log(response.data.lenght > 0);
         $scope.todosContatos = response.data;
     }).catch(function (err) {
         $state.go('login');
@@ -24,8 +22,6 @@ function gerenciar_curso($scope, $http, userService, fileUpload, $state, univers
         method: "GET",
         params: {token: userService.getToken(), mail: universidadeService.getCurso().instrutor.sAMAccountName}
     }).then(function (response) {
-        //your code in case the post succeeds
-        // console.log(response.data.lenght > 0);
         $scope.instrutor = response.data[0];
         if(response.data != null && response.data.length > 0) {
         } else {

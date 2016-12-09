@@ -433,6 +433,29 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, $locati
                 }
             }
         })
+        .state('recrutamento_manage', {
+            url: "/recrutamento/gerenciar_recrutamento",
+            templateUrl: "page/recrutamento/gerenciar_recrutamento.html",
+            data: {pageTitle: 'Gerenciar Vaga | Recrutamento Certsys'},
+            controller: "gerenciar_recrutamentoCtrl",
+            resolve: {
+                loadPlugin: function ($ocLazyLoad) {
+                    return $ocLazyLoad.load([
+                        {
+                            files: ['css/plugins/iCheck/custom.css', 'js/plugins/iCheck/icheck.min.js']
+                        },
+
+                        {
+                            files: ['js/bower_components/summernote/dist/summernote.css', 'js/bower_components/summernote/dist/summernote.js'
+                            ]
+                        },
+                        {
+                            files: ['css/plugins/switchery/switchery.css', 'js/plugins/switchery/switchery.js']
+                        }
+                    ]);
+                }
+            }
+        })
 
 
         // .state('outlook', {

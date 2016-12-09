@@ -62,7 +62,7 @@ function modalRecrutamentoCtrl($scope, $modalInstance, $http, userService, getVa
     $scope.gerenciar = function () {
         if (angular.isDefined(getVaga)) {
             recrutamentoService.sendVaga(getVaga);
-            $state.go('universidade_manage');
+            $state.go('recrutamento_manage');
             $modalInstance.close();
 
         }
