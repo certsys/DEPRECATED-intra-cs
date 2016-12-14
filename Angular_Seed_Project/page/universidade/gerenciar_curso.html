@@ -131,67 +131,17 @@
                                                                 {{curso.descricao}}
                                                             </h3>
                                                         </div>
-
-
-                                                        <!--<div class="row">-->
-                                                            <!--<div class="col-lg-12">-->
-                                                                <!--<div ng-repeat="file in curso.arquivos"-->
-                                                                     <!--class="file-box">-->
-                                                                    <!--<div class="file">-->
-                                                                        <!--<a href="">-->
-                                                                            <!--<span class="corner"></span>-->
-                                                                            <!--<div class="icon">-->
-                                                                                <!--<i class="fa fa-file"></i>-->
-                                                                            <!--</div>-->
-                                                                            <!--<div class="file-name">-->
-                                                                                <!--{{file.nome}}-->
-                                                                                <!--<br/>-->
-                                                                                <!--<small>Adicionado: Jan 11, 2016</small>-->
-                                                                            <!--</div>-->
-                                                                        <!--</a>-->
-                                                                    <!--</div>-->
-                                                                <!--</div>-->
-                                                            <!--</div>-->
-                                                        <!--</div>-->
-
-                                                        <!--<div class="row">-->
-                                                            <!--<div class="col-lg-12">-->
-                                                                <!--<form>-->
-                                                                    <!--<div>-->
-                                                                        <!--<input type="file" file-model="myFile" ng-click="pressionado()" />-->
-                                                                        <!--<div ng-if="apertei">-->
-                                                                            <!--<br>-->
-                                                                            <!--<button class="btn btn-lg btn-primary"-->
-                                                                                    <!--ng-click="uploadFile()">Enviar Arquivo-->
-                                                                            <!--</button>-->
-                                                                        <!--</div>-->
-                                                                    <!--</div>-->
-                                                                <!--</form>-->
-                                                            <!--</div>-->
-                                                        <!--</div>-->
                                                     </div>
                                                 </div>
                                             </tab>
-                                            <tab heading="Enviar email">
-                                                <!--<div class="ibox-content">-->
-                                                    <div class="form-group"><label class="col-sm-2 control-label">Destinários do email <br/></label>
-                                                        <div class="col-sm-10 ">
-                                                            <div class="i-checks"><label> <input type="radio" name="a" value="option1" ng-click="todosClick()" ng-disabled="isTodosDisabled"> <i></i> Enviar para todos </label></div>
-                                                            <div class="i-checks"><label> <input type="radio" name="a" value="option2" ng-click="inscritosClick()"  ng-disabled="isInscritosDisabled"> <i></i> Enviar para inscritos apenas </label></div>
-                                                            <div class="i-checks"  ng-show="isSurveyShown" ><label> <input type="checkbox" ng-click="includeSurveyClick()"> <i></i> Incluir link do Survey: </label></div>
+                                            <tab heading="Enviar email" ng-click="allSubscribersList()">
+                                                    <div class="form-group"><label class="col-sm-2 control-label">Enviar email para todos os inscritos<br/></label>
+                                                        <div class="col-sm-10 col-lg-10" >
+                                                            <div class="col-sm-5">
+                                                                <a class="btn btn-block btn-primary compose-mail" ng-href="mailto:{{contatosMail}}">Prosseguir</a>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                    <div class="form-group" ng-show="isSurveyShown">
-                                                        <div class="col-lg-12"><input type="text" ng-disabled="isSuveryInputDisabled" placeholder="Link do Survey..." class="form-control" ng-required="required"></div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <div class="col-sm-4 col-sm-offset-2">
-                                                            <!--<button class="btn btn-white" type="submit">Cancel</button>-->
-                                                            <a class="btn btn-block btn-primary compose-mail" ng-show="contatosMail" ng-href="mailto:{{contatosMail}}" >Prosseguir</a>
-                                                            <!--<button class="btn btn-primary" type="submit" ><a ng-href="mailto:{{contatosMail}}" class="btn btn-xs btn-white">Save changes</a></button>-->
-                                                        </div>
-                                                    </div>
-                                                <!--</div>-->
                                             </tab>
                                         </tabset>
                                     </div>

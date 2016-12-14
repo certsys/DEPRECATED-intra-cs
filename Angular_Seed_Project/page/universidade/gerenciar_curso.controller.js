@@ -11,8 +11,6 @@ function gerenciar_curso($scope, $http, userService, fileUpload, $state, univers
         method: "GET",
         params: {token: userService.getToken()}
     }).then(function (response) {
-        //your code in case the post succeeds
-        // console.log(response.data.lenght > 0);
         $scope.todosContatos = response.data;
     }).catch(function (err) {
         $state.go('login');
@@ -50,6 +48,8 @@ function gerenciar_curso($scope, $http, userService, fileUpload, $state, univers
         // console.log(err);
     });
 
+
+
     $scope.curso = universidadeService.getCurso();
     var dados = [];
 
@@ -70,41 +70,6 @@ function gerenciar_curso($scope, $http, userService, fileUpload, $state, univers
         if(inscrito.presente) $scope.presentes++;
     });
 
-    $scope.uploadFile = function () {
-        var file = $scope.myFile;
-
-        // console.log('file is ');
-        // console.dir(file);
-
-        // var uploadUrl = "/cursos/uploadfile";
-        // fileUpload.uploadFileToUrl(file, uploadUrl);
-    };
-
-    //download de arquivos
-    $scope.downloadFile = function (filename, cursoId) {
-        $http.post('/cursos/download', {filename: filename, cursoId: cursoId})
-            .then(function (response) {
-
-            }).catch(function (err) {
-            // console.log(err)
-        })
-    };
-
-// 	$scope.uploadFile = function(){
-//  	$scope.fileSelected = function(files) {
-//      if (files && files.length) {
-//         $scope.file = files[0];
-//      }
-//      $upload.upload({
-//        url: '/cursos/uploadfile', //node.js route
-//        file: $scope.file
-//      })
-//      .success(function(data) {
-//        console.log(data, 'uploaded');
-//       });
-//     };
-// };
-//     console.log($scope.curso);
     $scope.apertei = false;
 
     $scope.pressionado = function () {
@@ -171,45 +136,13 @@ function gerenciar_curso($scope, $http, userService, fileUpload, $state, univers
         return hourMinutes;
     }
 
-    $scope.todosClick = function (){
-        // if (!$scope.isInscritosDisabled) {
-        //     $scope.isInscritosDisabled = true;
-        //     $scope.isSurveyShown = false;
-        // } else {
-        //     $scope.isInscritosDisabled = false;
-        // }
-        $scope.isSurveyShown = false;
-        var todosContatos = $scope.todosContatos;
-        var todosEmails ="";
-        for (var i = 0 ; i <todosContatos.length ; i++) {
-            todosEmails+= ";" + todosContatos[i].mail;
-        }
-        $scope.contatosMail = todosEmails;
-        console.log(todosEmails)
-
-    }
-
-    $scope.inscritosClick = function () {
-
-        // $scope.isSurveyShown = true;
-        $scope.isSurveyShown = false;
+    $scope.allSubscribersList = function (){
         var inscritos = $scope.inscritos;
         var inscritosEmail = "";
         for (var i = 0 ; i <inscritos.length ; i++) {
             inscritosEmail+= ";" + inscritos[i].mail;
         }
         $scope.contatosMail = inscritosEmail;
-        console.log(inscritosEmail)
-
-    }
-
-    $scope.includeSurveyClick = function() {
-        if ($scope.isSuveryInputDisabled) {
-            $scope.isSuveryInputDisabled = false;
-        } else {
-            //$scope.isSuveryInputDisabled = true;
-            $scope.isSuveryInputDisabled = false;
-        }
     }
 }
 
