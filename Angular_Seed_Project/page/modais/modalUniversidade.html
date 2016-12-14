@@ -5,21 +5,21 @@
         <small class="font-bold">Universidade Certsys fortalece as bases acadêmicas e técnicas.</small>
     </div>
     <div class="modal-body">
-        <form method="get" class="form-horizontal">
+        <form name="cursoForm" ng-submit="cursoForm.$validate && salvar()" class="form-horizontal">
             <div class="col-sm-12 text-center"><h3>Dados Gerais do Curso</h3></div>
             <div class="form-group"><label class="col-sm-2 control-label">Título:</label>
                 <div class="col-sm-10"><input type="text" ng-model="titulo" placeholder="Ferramenta e nível da aula..."
-                                              class="form-control">
+                                              class="form-control" required>
                 </div>
             </div>
 
             <div class="form-group"><label class="col-sm-2 control-label">Descrição:</label>
-                <div class="col-sm-10"><input type="text" ng-model="descricao" placeholder="Diretrizes gerais..." class="form-control">
+                <div class="col-sm-10"><input type="text" ng-model="descricao" placeholder="Diretrizes gerais..." class="form-control" required>
                 </div>
             </div>
 
             <div class="form-group"><label class="col-sm-2 control-label">Local:</label>
-                <div class="col-sm-10"><input type="text" ng-model="local" placeholder="Defina o local do curso..." class="form-control">
+                <div class="col-sm-10"><input type="text" ng-model="local" placeholder="Defina o local do curso..." class="form-control" required>
                 </div>
             </div>
 
@@ -34,12 +34,12 @@
                     <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                     <input id="data-inicio" watch-direct-changes="true" type="text" date-time="diaInicio" data-ng-model="diaInicio"
                            format="DD/MM/YYYY" view="date" min-view="date" auto-close="true"
-                           class="ng-pristine ng-valid ng-scope ng-touched form-control">
+                           class="ng-pristine ng-valid ng-scope ng-touched form-control" required>
                     <!--<input type="text" class="form-control" data-ng-model="programado.checkOut" name="programado" date-time required min="{{ today | date: 'yyyy-MM-dd' }}" view="date" auto-close="true" min-view="date" format="DD/MM/YYYY">-->
                 </div>
 
                 <div class="col-sm-2 input-group-2 date">
-                    <input ng-model="horarioInicio" type="text" clock-picker class="form-control">
+                    <input ng-model="horarioInicio" type="text" clock-picker class="form-control" required>
                     <!--<input type="text" class="form-control" data-ng-model="programado.checkOut" name="programado" date-time required min="{{ today | date: 'yyyy-MM-dd' }}" view="date" auto-close="true" min-view="date" format="DD/MM/YYYY">-->
                 </div>
 
@@ -47,7 +47,7 @@
 
                 <div class="col-sm-2 input-group-2 date">
                     <input ng-model="horarioFim" type="text" clock-picker
-                           class="form-control">
+                           class="form-control" required>
                     <!--<input type="text" class="form-control" data-ng-model="programado.checkOut" name="programado" date-time required min="{{ today | date: 'yyyy-MM-dd' }}" view="date" auto-close="true" min-view="date" format="DD/MM/YYYY">-->
                 </div>
 
@@ -57,7 +57,7 @@
                     <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                     <input id="data-limite-inscricao" type="text" date-time="" data-ng-model="dataLimiteInscricao"
                            format="DD/MM/YYYY HH:mm" view="date" min-view="hours" auto-close="true"
-                           class="ng-pristine ng-valid ng-scope ng-touched form-control">
+                           class="ng-pristine ng-valid ng-scope ng-touched form-control" required>
                     <!--<input type="text" class="form-control" data-ng-model="programado.checkOut" name="programado" date-time required min="{{ today | date: 'yyyy-MM-dd' }}" view="date" auto-close="true" min-view="date" format="DD/MM/YYYY">-->
                 </div>
             </div>
@@ -66,14 +66,14 @@
             <div class="col-sm-12 text-center"><h3>Mínimo e Máximo de Alunos</h3></div>
             <div class="form-group"><label class="col-sm-2 control-label">Mín:</label>
                 <div class="col-sm-10">
-                    <h-number value="minInscritos" min="2" step="1"
+                    <h-number value="minInscritos" min="1" step="1"
                               change="onChangeMinimo()"></h-number>
                 </div>
 
             </div>
             <div class="form-group"><label class="col-sm-2 control-label">Max:</label>
                 <div class="col-sm-10">
-                    <h-number value="maxInscritos" min="2" step="1"
+                    <h-number value="maxInscritos" min="1" step="1"
                               change="onChangeMaximo()"></h-number>
                 </div>
             </div>
@@ -82,7 +82,7 @@
             <div class="form-group"><label class="col-sm-2 control-label">Instrutor:</label>
                 <div class="col-sm-10">
                     <input type="text" placeholder="Quem irá ministrar..." class="form-control" ng-model="selected"
-                           typeahead="contato as (contato.nome) for contato in contatos | filter:{nome: $viewValue}"/>
+                           typeahead="contato as (contato.nome) for contato in contatos | filter:{nome: $viewValue}" required/>
                 </div>
             </div>
 
@@ -95,7 +95,8 @@
         <button type="button" class="btn btn-white" ng-click="cancel()"><i class="fa fa-times"></i> Fechar </button>
         <button type="button" class="btn btn-danger" ng-show="isCreated()" ng-click="remove()"><i class="fa fa-trash"></i> Remover Curso </button>
         <button type="button" class="btn btn-primary" ng-show="isCreated()" ng-click="gerenciar()"><i class="fa fa-pencil"></i> Gerenciar Curso </button>
-        <button type="button" class="btn btn-success" ng-click="salvar()"><i class="fa fa-floppy-o"></i> Salvar Curso </button>
+        <!--<button type="submit" class="btn btn-success" ng-click="salvar()"><i class="fa fa-floppy-o"></i> Salvar Curso </button>-->
+        <button type="submit" class="btn btn-success" ng-click="salvar()"><i class="fa fa-floppy-o"></i> Salvar Curso </button>
     </div>
 </div>
 

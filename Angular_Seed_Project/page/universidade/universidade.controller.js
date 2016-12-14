@@ -213,7 +213,7 @@ function universidade($scope, $http, userService, $state, universidadeService, $
     };
 
     $scope.allowSubscription = function (curso) {
-        if (curso.inscritos.length >= curso.max_inscritos) return false;
+        if (curso.inscritos.length > curso.max_inscritos) return false;
         else if ($scope.status(curso) !== INSCRICOES_ABERTAS) return false;
         return true;
     };
@@ -227,14 +227,6 @@ function universidade($scope, $http, userService, $state, universidadeService, $
         tecnico: userService.Authenticate().tecnico,
         instructors: userService.Authenticate().instructors
     };
-
-    // $scope.myFilter = function (selectedStatus, cursos) {
-    //     if (!cursos) return;
-    //     console.log(selectedStatus);
-    //     console.log(cursos);
-    //     return cursos
-    // }
-
 }
 
 function cursoStatusFilter () {
@@ -250,7 +242,6 @@ function cursoStatusFilter () {
                     }
                 });
             });
-            //console.log(tempClients)
             return filtredCursos;
 
         } else {

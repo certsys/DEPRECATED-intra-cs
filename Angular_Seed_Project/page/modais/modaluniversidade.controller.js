@@ -21,8 +21,7 @@ function ModalInstanceCtrl($scope, $modalInstance, $http, userService, getCurso,
             method: "GET",
             params: {token: userService.getToken(), mail: getCurso.instrutor.sAMAccountName}
         }).then(function (response) {
-            //your code in case the post succeeds
-            // console.log(response.data.lenght > 0);
+
             $scope.titulo = getCurso.nome;
             $scope.descricao = getCurso.descricao;
             $scope.local = getCurso.local;
@@ -35,6 +34,7 @@ function ModalInstanceCtrl($scope, $modalInstance, $http, userService, getCurso,
             $scope.horarioFim = data_fim.getHours() + ":" + data_fim.getMinutes();
             $scope.dataLimiteInscricao = new Date(getCurso.data_limite_inscricao);
             $scope.selected = response.data[0];
+
         }).catch(function (err) {
             // console.log(err);
         });
@@ -120,6 +120,7 @@ function ModalInstanceCtrl($scope, $modalInstance, $http, userService, getCurso,
             carga_horaria: $scope.cargaHoraria
         };
 
+        console.log($scope.data_inicio, $scope.dataLimiteInscricao)
 
         if ($scope.editar) {
             $http({
@@ -128,8 +129,6 @@ function ModalInstanceCtrl($scope, $modalInstance, $http, userService, getCurso,
                 , data: data
                 , params: {token: userService.getToken()}
             }).then(function (response) {
-                    //your code in case the post succeeds
-                    // console.log(response);
                     swal({
                         title: "Sucesso!",
                         text: "Seu curso foi editado com sucesso!",
@@ -139,16 +138,14 @@ function ModalInstanceCtrl($scope, $modalInstance, $http, userService, getCurso,
                     universidadeService.sendSalvou(true);
                     $modalInstance.close();
                     setTimeout(function () {
-                        // after 1500ms, reloads the page to refresh the courses table
                         location.reload()
                     }, 1000);
-
                 }
             )
                 .catch(function (err) {
-                    //your code in case your post fails
-                    // console.log(err);
+                    console.log(err);
                 });
+
         } else {
             $http({
                 method: 'POST'
@@ -170,12 +167,10 @@ function ModalInstanceCtrl($scope, $modalInstance, $http, userService, getCurso,
                         // after 1500ms, reloads the page to refresh the courses table
                         location.reload()
                     }, 1000);
-
                 }
             )
                 .catch(function (err) {
-                    //your code in case your post fails
-                    // console.log(err);
+                    console.log(err);
                 });
         }
     };

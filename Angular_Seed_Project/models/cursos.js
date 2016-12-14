@@ -1,14 +1,38 @@
 var mongoose = require('mongoose');
 
 var cursoSchema = new mongoose.Schema({
-    nome: String,
-    descricao: String,
-    local: String,
-    data_inicio: Date,
-    data_fim: Date,
-    data_limite_inscricao: Date,
-    min_inscritos: Number,
-    max_inscritos: Number,
+    nome: {
+        type: String,
+        required: true
+    },
+    descricao: {
+        type: String,
+        required: true
+    },
+    local: {
+        type: String,
+        required: true
+    },
+    data_inicio: {
+        type: Date,
+        required: true
+    },
+    data_fim: {
+        type: Date,
+        required: false
+    },
+    data_limite_inscricao: {
+        type: Date,
+        required: true
+    },
+    min_inscritos: {
+        type: Number,
+        required: true
+    },
+    max_inscritos: {
+        type: Number,
+        required: false
+    },
     created_by: String,
     instrutor: Object,
     carga_horaria: Number,
