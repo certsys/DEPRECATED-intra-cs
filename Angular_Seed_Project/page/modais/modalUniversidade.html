@@ -5,98 +5,122 @@
         <small class="font-bold">Universidade Certsys fortalece as bases acadêmicas e técnicas.</small>
     </div>
     <div class="modal-body">
-        <form name="cursoForm" ng-submit="cursoForm.$validate && salvar()" class="form-horizontal">
+        <form name="cursoForm" novalidate ng-submit="salvar(cursoForm.$valid)" class="form-horizontal">
             <div class="col-sm-12 text-center"><h3>Dados Gerais do Curso</h3></div>
-            <div class="form-group"><label class="col-sm-2 control-label">Título:</label>
-                <div class="col-sm-10"><input type="text" ng-model="titulo" placeholder="Ferramenta e nível da aula..."
-                                              class="form-control" required>
+            <div class="form-group" ng-class="{ 'has-error' : cursoForm.titulo.$invalid && !cursoForm.titulo.$pristine }"><label class="col-sm-2 control-label">Título:</label>
+                <div class="col-sm-10">
+                    <input name="titulo" type="text" ng-model="titulo" placeholder="Ferramenta e nível da aula..."
+                                              class="form-control" required/>
+                    <p ng-show="cursoForm.titulo.$invalid && !cursoForm.titulo.$pristine" class="help-block">Título necessário!</p>
                 </div>
             </div>
 
-            <div class="form-group"><label class="col-sm-2 control-label">Descrição:</label>
-                <div class="col-sm-10"><input type="text" ng-model="descricao" placeholder="Diretrizes gerais..." class="form-control" required>
+            <div class="form-group" ng-class="{ 'has-error' : cursoForm.descricao.$invalid && !cursoForm.descricao.$pristine }"><label class="col-sm-2 control-label">Descrição:</label>
+                <div class="col-sm-10">
+                    <input name="descricao" type="text" ng-model="descricao" placeholder="Diretrizes gerais..." class="form-control" required>
+                    <p ng-show="cursoForm.descricao.$invalid && !cursoForm.descricao.$pristine" class="help-block">Descrição necessária!</p>
                 </div>
             </div>
 
-            <div class="form-group"><label class="col-sm-2 control-label">Local:</label>
-                <div class="col-sm-10"><input type="text" ng-model="local" placeholder="Defina o local do curso..." class="form-control" required>
+            <div class="form-group" ng-class="{ 'has-error' : cursoForm.local.$invalid && !cursoForm.local.$pristine }"><label class="col-sm-2 control-label">Local:</label>
+                <div class="col-sm-10">
+                    <input name="local" type="text" ng-model="local" placeholder="Defina o local do curso..." class="form-control" required>
+                    <p ng-show="cursoForm.local.$invalid && !cursoForm.local.$pristine" class="help-block">Local necessário!</p>
                 </div>
             </div>
 
             <div class="hr-line-dashed"></div>
 
+            <div class="col-sm-12 col-lg-12 text-center"><h3>Limite de Incrição e Data do Curso</h3></div>
+
+            <div class="form-group" ng-class="{ 'has-error' : cursoForm.limiteInscricao.$invalid && !cursoForm.limiteInscricao.$pristine }"><label class="col-sm-2 col-lg-2 control-label">Limite:</label>
+                <div class="col-sm-10 col-lg-10 " >
+                    <div class="input-group-2 date">
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                        <input name="limiteInscricao" id="data-limite-inscricao" type="text" date-time="" data-ng-model="dataLimiteInscricao"
+                               format="DD/MM/YYYY HH:mm" view="date" min-view="hours" auto-close="true"
+                               class="ng-pristine ng-valid ng-scope ng-touched form-control" required>
+                    </div>
+                    <p ng-show="cursoForm.limiteInscricao.$invalid && !cursoForm.limiteInscricao.$pristine" class="help-block">Data Limite necessária!</p>
+                </div>
+            </div>
+
+            <div class="form-group" ng-class="{ 'has-error' : cursoForm.diaInicio.$invalid && !cursoForm.diaInicio.$pristine }">
+                <label class="col-sm-2 col-lg-2 control-label">Data:</label>
+                <div class="col-sm-10 col-lg-10" >
+                    <div class="input-group-2 date">
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                        <input name="diaInicio" id="data-inicio" watch-direct-changes="true" type="text" date-time="diaInicio" data-ng-model="diaInicio"
+                               format="DD/MM/YYYY" view="date" min-view="date" auto-close="true"
+                               class="ng-pristine ng-valid ng-scope ng-touched form-control" required />
+                    </div>
+                    <p ng-show="cursoForm.diaInicio.$invalid && !cursoForm.diaInicio.$pristine" class="help-block">Data do Curso necessária!</p>
+                </div>
+            </div>
 
             <div class="form-group">
-                <div class="col-sm-12 text-center"><h3>Limite de Incrições e Data do Curso</h3></div>
+                <label class="col-sm-2 control-label">Horário:</label>
 
-                <label class="col-sm-2 control-label">Data:</label>
-                <div class="col-sm-4 input-group-2 date">
-                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                    <input id="data-inicio" watch-direct-changes="true" type="text" date-time="diaInicio" data-ng-model="diaInicio"
-                           format="DD/MM/YYYY" view="date" min-view="date" auto-close="true"
-                           class="ng-pristine ng-valid ng-scope ng-touched form-control" required>
-                    <!--<input type="text" class="form-control" data-ng-model="programado.checkOut" name="programado" date-time required min="{{ today | date: 'yyyy-MM-dd' }}" view="date" auto-close="true" min-view="date" format="DD/MM/YYYY">-->
+                <div ng-class="{ 'has-error' : cursoForm.horaInicio.$invalid && !cursoForm.horaInicio.$pristine }">
+                    <label class="col-sm-1 control-label"> Início </label>
+                    <div class="col-sm-4">
+                        <div class="input-group-2 date">
+                            <span class="input-group-addon"><i class="fa fa-clock-o" aria-hidden="true"></i></span>
+                            <input name="horaInicio" ng-model="horarioInicio" type="text" clock-picker class="form-control" required />
+                        </div>
+                        <p ng-show="cursoForm.horaInicio.$invalid && !cursoForm.horaInicio.$pristine" class="help-block">Horário de início necessário!</p>
+                    </div>
                 </div>
 
-                <div class="col-sm-2 input-group-2 date">
-                    <input ng-model="horarioInicio" type="text" clock-picker class="form-control" required>
-                    <!--<input type="text" class="form-control" data-ng-model="programado.checkOut" name="programado" date-time required min="{{ today | date: 'yyyy-MM-dd' }}" view="date" auto-close="true" min-view="date" format="DD/MM/YYYY">-->
-                </div>
-
-                <label class="col-sm-2 control-label"> às </label>
-
-                <div class="col-sm-2 input-group-2 date">
-                    <input ng-model="horarioFim" type="text" clock-picker
-                           class="form-control" required>
-                    <!--<input type="text" class="form-control" data-ng-model="programado.checkOut" name="programado" date-time required min="{{ today | date: 'yyyy-MM-dd' }}" view="date" auto-close="true" min-view="date" format="DD/MM/YYYY">-->
-                </div>
-
-            </div>
-            <div class="form-group"><label class="col-sm-2 control-label">Limite:</label>
-                <div class="col-sm-10 input-group-2 date">
-                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                    <input id="data-limite-inscricao" type="text" date-time="" data-ng-model="dataLimiteInscricao"
-                           format="DD/MM/YYYY HH:mm" view="date" min-view="hours" auto-close="true"
-                           class="ng-pristine ng-valid ng-scope ng-touched form-control" required>
-                    <!--<input type="text" class="form-control" data-ng-model="programado.checkOut" name="programado" date-time required min="{{ today | date: 'yyyy-MM-dd' }}" view="date" auto-close="true" min-view="date" format="DD/MM/YYYY">-->
+                <div ng-class="{ 'has-error' : cursoForm.horaFim.$invalid && !cursoForm.horaFim.$pristine }">
+                    <label class="col-sm-1 control-label"> Fim </label>
+                    <div class="col-sm-4">
+                        <div class="input-group-2 date">
+                            <span class="input-group-addon"><i class="fa fa-clock-o" aria-hidden="true"></i></span>
+                            <input name="horaFim" ng-model="horarioFim" type="text" clock-picker class="form-control" required />
+                        </div>
+                        <p ng-show="cursoForm.horaFim.$invalid && !cursoForm.horaFim.$pristine" class="help-block">Horário de fim necessário!</p>
+                    </div>
                 </div>
             </div>
 
             <div class="hr-line-dashed"></div>
+
             <div class="col-sm-12 text-center"><h3>Mínimo e Máximo de Alunos</h3></div>
-            <div class="form-group"><label class="col-sm-2 control-label">Mín:</label>
-                <div class="col-sm-10">
-                    <h-number value="minInscritos" min="1" step="1"
-                              change="onChangeMinimo()"></h-number>
-                </div>
 
-            </div>
-            <div class="form-group"><label class="col-sm-2 control-label">Max:</label>
-                <div class="col-sm-10">
-                    <h-number value="maxInscritos" min="1" step="1"
-                              change="onChangeMaximo()"></h-number>
+            <div class="form-group" ng-class="{ 'has-error' : cursoForm.minInscritos.$invalid && !cursoForm.minInscritos.$pristine }"><label class="col-sm-2 control-label">Min:</label>
+                <div class="col-sm-10" >
+                    <input name="minInscritos" type="number" min="1" class="form-control" ng-change="onChangeMinimo()" ng-model="minInscritos" required/>
+                    <p ng-show="cursoForm.minInscritos.$invalid && !cursoForm.minInscritos.$pristine" class="help-block">Minímo de inscritos necessário!</p>
                 </div>
             </div>
+            <div class="form-group" ng-class="{ 'has-error' : cursoForm.maxInscritos.$invalid && !cursoForm.maxInscritos.$pristine }"><label class="col-sm-2 control-label">Max:</label>
+                <div class="col-sm-10" >
+                    <input name="maxInscritos" type="number" min="1" class="form-control" ng-change="onChangeMaximo()" ng-model="maxInscritos" required/>
+                    <p ng-show="cursoForm.maxInscritos.$invalid && !cursoForm.maxInscritos.$pristine" class="help-block">Máximo de inscritos necessário!</p>
+                </div>
+            </div>
+
             <div class="hr-line-dashed"></div>
-            <div class="col-sm-12 text-center"><h3>Escolha Alguém</h3></div>
-            <div class="form-group"><label class="col-sm-2 control-label">Instrutor:</label>
-                <div class="col-sm-10">
-                    <input type="text" placeholder="Quem irá ministrar..." class="form-control" ng-model="selected"
+
+            <div class="col-sm-12 text-center"><h3>Instrutor do curso</h3></div>
+
+            <div class="form-group" ng-class="{ 'has-error' : cursoForm.instrutor.$invalid && !cursoForm.instrutor.$pristine }"><label class="col-sm-2 control-label">Instrutor:</label>
+                <div class="col-sm-10" >
+                    <input name="instrutor" type="text" placeholder="Quem irá ministrar..." class="form-control" ng-model="selected"
                            typeahead="contato as (contato.nome) for contato in contatos | filter:{nome: $viewValue}" required/>
+                    <p ng-show="cursoForm.instrutor.$invalid && !cursoForm.instrutor.$pristine" class="help-block">Nome do instrutor necessário!</p>
                 </div>
             </div>
 
-
             <div class="hr-line-dashed"></div>
 
+            <button type="button" class="btn btn-white" ng-click="cancel()"><i class="fa fa-times"></i> Fechar </button>
+            <button type="button" class="btn btn-danger" ng-show="isCreated()" ng-click="remove()"><i class="fa fa-trash"></i> Remover Curso </button>
+            <button type="button" class="btn btn-primary" ng-show="isCreated()" ng-click="gerenciar()"><i class="fa fa-pencil"></i> Gerenciar Curso </button>
+            <button type="submit" class="btn btn-success"><i class="fa fa-floppy-o"></i> Salvar Curso </button>
         </form>
     </div>
-    <div class="modal-footer">
-        <button type="button" class="btn btn-white" ng-click="cancel()"><i class="fa fa-times"></i> Fechar </button>
-        <button type="button" class="btn btn-danger" ng-show="isCreated()" ng-click="remove()"><i class="fa fa-trash"></i> Remover Curso </button>
-        <button type="button" class="btn btn-primary" ng-show="isCreated()" ng-click="gerenciar()"><i class="fa fa-pencil"></i> Gerenciar Curso </button>
-        <!--<button type="submit" class="btn btn-success" ng-click="salvar()"><i class="fa fa-floppy-o"></i> Salvar Curso </button>-->
-        <button type="submit" class="btn btn-success" ng-click="salvar()"><i class="fa fa-floppy-o"></i> Salvar Curso </button>
-    </div>
+
 </div>
 

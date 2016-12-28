@@ -13,7 +13,6 @@ function ModalInstanceCtrl($scope, $modalInstance, $http, userService, getCurso,
 
     universidadeService.sendSalvou(false);
     $scope.editar = false;
-    // Se o modal vier com dados pré cadastrados
     if (angular.isDefined(getCurso)) {
         $scope.editar = true;
         $http({
@@ -21,7 +20,6 @@ function ModalInstanceCtrl($scope, $modalInstance, $http, userService, getCurso,
             method: "GET",
             params: {token: userService.getToken(), mail: getCurso.instrutor.sAMAccountName}
         }).then(function (response) {
-
             $scope.titulo = getCurso.nome;
             $scope.descricao = getCurso.descricao;
             $scope.local = getCurso.local;
@@ -34,24 +32,24 @@ function ModalInstanceCtrl($scope, $modalInstance, $http, userService, getCurso,
             $scope.horarioFim = data_fim.getHours() + ":" + data_fim.getMinutes();
             $scope.dataLimiteInscricao = new Date(getCurso.data_limite_inscricao);
             $scope.selected = response.data[0];
-
         }).catch(function (err) {
-            // console.log(err);
+
         });
-        //     instrutor: instrutor,
     } else {
-        $scope.minInscritos = 0;
-        $scope.maxInscritos = 0;
+        $scope.minInscritos = 1;
+        $scope.maxInscritos = 1;
         $scope.diaInicio = new Date();
     }
 
-
     $scope.onChangeMinimo = function () {
         if ($scope.minInscritos > $scope.maxInscritos) $scope.maxInscritos = $scope.minInscritos;
+        if ($scope.minInscritos == undefined) $scope.minInscritos = undefined;
+        console.log($scope.minInscritos)
     };
 
     $scope.onChangeMaximo = function () {
         if ($scope.minInscritos > $scope.maxInscritos) $scope.minInscritos = $scope.maxInscritos;
+        if ($scope.maxInscritos == undefined) $scope.maxInscritos = undefined;
     };
 
     $scope.cancel = function () {
@@ -63,7 +61,6 @@ function ModalInstanceCtrl($scope, $modalInstance, $http, userService, getCurso,
             universidadeService.sendCurso(getCurso);
             $state.go('universidade_manage');
             $modalInstance.close();
-
         }
     };
 
@@ -94,7 +91,18 @@ function ModalInstanceCtrl($scope, $modalInstance, $http, userService, getCurso,
         $scope.dataLimiteInscricao = new Date(ano, mes - 1, dia, hora, minuto);
     };
 
-    $scope.salvar = function () {
+    $scope.salvar = function (isvalid) {
+        if (!isvalid) {
+            console.log('preenchimento inválido')
+            swal({
+                title: "Ops!",
+                text: "Algum campo não foi preenchido corretamente.",
+                type: "error",
+                showConfirmButton: true
+            });
+            return
+        }
+        console.log('preenchimento válido')
 
         if (angular.isUndefined($scope.selected)) return;
         var sAMAccountName = $scope.selected.mail.substring(0, $scope.selected.mail.indexOf('@'));
@@ -119,8 +127,6 @@ function ModalInstanceCtrl($scope, $modalInstance, $http, userService, getCurso,
             instrutor: instrutor,
             carga_horaria: $scope.cargaHoraria
         };
-
-        console.log($scope.data_inicio, $scope.dataLimiteInscricao)
 
         if ($scope.editar) {
             $http({
@@ -176,7 +182,6 @@ function ModalInstanceCtrl($scope, $modalInstance, $http, userService, getCurso,
     };
 
     $scope.remove = function () {
-
         swal({
             title: "Você tem certeza?",
             text: "Você não poderá recuperar esse curso!",
