@@ -41,16 +41,9 @@
                         <br>
                         <h2>Assinatura</h2>
                         <br>
-                        <select required name="Assinatura" ng-model="postagem.assinatura" value="Assinatura"
-                                class="col-sm-12">
+                        <select required name="Assinatura" ng-model="assinatura" class="col-sm-12">
                             <option value="">Assinatura</option>
-                            <option value="Recursos Humanos - Certificações">Recursos Humanos - Certificações</option>
-                            <option value="Recursos Humanos - Treinamentos">Recursos Humanos - Treinamentos</option>
-                            <option value="Recursos Humanos - Colaboradores">Recursos Humanos - Colaboradores</option>
-                            <option value="Recursos Humanos - Aniversário">Recursos Humanos - Aniversário</option>
-                            <option value="Recursos Humanos - Eventos">Recursos Humanos - Eventos</option>
-                            <option value="Recursos Humanos - Parcerias">Recursos Humanos - Parcerias</option>
-                            <option value="Financeiro">Financeiro</option>
+                            <option ng-repeat="assinatura in assinaturas | orderBy ">{{assinatura}}</option>
                         </select>
                         <br>
                         <br>

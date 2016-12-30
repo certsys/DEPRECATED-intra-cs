@@ -1,5 +1,15 @@
 function editnews($http, $scope, postService, $state, $timeout, userService, peopleGroups) {
     $scope.today = new Date();
+    $scope.assinaturas = [
+        "Financeiro",
+        "Recursos Humanos",
+        "Recursos Humanos - Certificações",
+        "Recursos Humanos - Treinamentos",
+        "Recursos Humanos - Colaboradores",
+        "Recursos Humanos - Aniversário",
+        "Recursos Humanos - Eventos",
+        "Recursos Humanos - Parcerias"
+    ];
     $scope.editDate = false;
     $http({
         url: '/institucional',
